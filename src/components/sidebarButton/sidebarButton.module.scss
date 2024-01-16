@@ -1,0 +1,60 @@
+.sidebarButton {
+    &__container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        min-height: 44px;
+        margin: 0 0 4px;
+        background-color: transparent;
+        vertical-align: middle;
+        border-radius: 8px;
+        padding: 4px 8px 4px 12px;
+        cursor: pointer;
+        transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+        &[data-active='0'] {
+            background-color: transparent;
+            color: rgb(145, 158, 171);
+
+            &:hover {
+                background-color: rgba(145, 158, 171, 0.08);
+            }
+        }
+
+        &[data-active='1'] {
+            background-color: rgba(7, 141, 238, 0.08);
+            color: rgb(104, 205, 249);
+
+            &:hover {
+                background-color: rgba(7, 141, 238, 0.16);
+            }
+        }
+
+        &__svg {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            margin-right: 16px;
+        }
+
+        &__textContainer {
+            flex: 1 1 auto;
+            min-width: 0px;
+
+            &__text {
+                width: 100%;
+                max-width: 100%;
+                display: block;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                line-height: 1.57143;
+                font-size: 0.875rem;
+                font-family: 'Public Sans', sans-serif;
+                font-weight: 600;
+                text-transform: capitalize;
+            }
+        }
+    }
+}

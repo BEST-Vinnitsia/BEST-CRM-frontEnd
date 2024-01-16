@@ -1,0 +1,17 @@
+.circleButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    color: rgb(145, 158, 171);
+    background-color: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+    &:hover {
+        background-color: rgba(145, 158, 171, 0.08);
+    }
+}
