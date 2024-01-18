@@ -9,13 +9,16 @@ import {
     PATH_MEMBER,
     PATH_MEMBERSHIP,
 } from '../routes/paths.routes';
-import { useWindowSize } from '../hooks/useWindowSize';
 import { CircleButton, MobileSidebar, PopupMenu, SidebarButton, UserButton } from '../components';
 import { SvgLogo, SvgMenu, SvgUser } from '../assets/svg';
-import { useOutsideClick } from '../hooks/useOutsideClick';
+import { utilsActions } from '../redux/actions/utilsActions';
+import { useWindowSize } from '../hooks/useWindowSize';
 
 export default function MainLayout() {
     const windowSize = useWindowSize(300);
+    utilsActions.updateWindowSize(windowSize);
+    // const windowSize = useSelector((state: IStore) => state.utils.windowSize);
+
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const userButtonRef = useRef<HTMLButtonElement>(null);
@@ -30,7 +33,9 @@ export default function MainLayout() {
                 <header className={style['mainLayout__header']}>
                     <div className={style['mainLayout__header__container']}>
                         <>
-                            {windowSize.width < 992 && <CircleButton onClick={openSidebar} svg={<SvgMenu />} />}
+                            {windowSize.width < 992 && (
+                                <CircleButton onClick={openSidebar} svg={<SvgMenu />} />
+                            )}
                             {windowSize.width >= 992 && (
                                 <span className={style['mainLayout__header__container__logo']}>
                                     <SvgLogo />
@@ -43,7 +48,12 @@ export default function MainLayout() {
                                 onClick={() => setMenuOpen((prev) => !prev)}
                                 svg={<SvgUser />}
                             />
-                            <PopupMenu depRef={userButtonRef} onClose={() => setMenuOpen(false)} open={menuOpen} />
+                            <PopupMenu
+                                depRef={userButtonRef}
+                                onClose={() => setMenuOpen(false)}
+                                open={menuOpen}
+                                windowSize={windowSize}
+                            />
                         </>
                     </div>
                 </header>
@@ -89,7 +99,7 @@ export default function MainLayout() {
                 {/*  */}
 
                 {/*  */}
-                <MobileSidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen}>
+                <MobileSidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} windowSize={windowSize}>
                     <SidebarButton path={PATH_HOME.ROOT} svg={<SvgMenu />} title="home" onClick={openSidebar} />
                     <SidebarButton path={PATH_MEMBER.LIST} svg={<SvgMenu />} title="members" onClick={openSidebar} />
                     <SidebarButton path={PATH_BOARD.LIST} svg={<SvgMenu />} title="board" onClick={openSidebar} />

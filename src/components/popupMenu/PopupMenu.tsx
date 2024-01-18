@@ -2,12 +2,15 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import { createPortal } from 'react-dom';
 import style from './popupMenu.module.scss';
-import { useWindowSize } from '../../hooks/useWindowSize';
 
 interface IProps {
     open: boolean;
     onClose: () => void;
     depRef?: React.RefObject<HTMLElement>;
+    windowSize: {
+        width: number;
+        height: number;
+    };
 }
 
 interface ITargetPosition {
@@ -19,10 +22,9 @@ interface ITargetPosition {
 
 const portal: HTMLElement | null = document.getElementById('portal-menu');
 
-export default function PopupMenu({ onClose, open, depRef }: IProps) {
+export default function PopupMenu({ onClose, open, depRef, windowSize }: IProps) {
     const [triggerPosition, setTriggerPosition] = useState<ITargetPosition>();
     const menuRef = useRef<HTMLDivElement>(null);
-    const windowSize = useWindowSize(300);
 
     useOutsideClick({
         elementRef: menuRef,
