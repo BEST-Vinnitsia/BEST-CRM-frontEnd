@@ -1,0 +1,26 @@
+.popupContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+
+    &__content {
+        z-index: 10;
+    }
+
+    &__bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: rgba(22, 28, 36, 0.8);
+        backdrop-filter: blur(4px);
+        z-index: 5;
+    }
+}
