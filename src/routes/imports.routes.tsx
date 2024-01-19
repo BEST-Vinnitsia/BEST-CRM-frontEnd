@@ -21,7 +21,7 @@ const Loadable = (Component: ComponentType) => {
         // }
 
         return (
-            <Suspense fallback={<Loader />}>
+            <Suspense /* fallback={<Loader />} */>
                 <Component {...props} />
             </Suspense>
         );
