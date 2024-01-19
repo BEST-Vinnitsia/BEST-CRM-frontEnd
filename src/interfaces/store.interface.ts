@@ -3,15 +3,24 @@ export interface IStore {
     utils: IUtilsStore;
 }
 
+//
+//
+//
+
 export interface IUserStore {
     name: string | null;
 }
 
 export interface IUtilsStore {
-    windowSize: IUtilsStoreWindowSize | null;
     isLoading: boolean;
+    isLoadingApp: boolean;
+    windowSize: IUtilsStoreWindowSize | null;
     message: IUtilsStoreMessage[];
 }
+
+//
+//
+//
 
 interface IUtilsStoreWindowSize {
     width: number;
@@ -19,6 +28,7 @@ interface IUtilsStoreWindowSize {
 }
 
 interface IUtilsStoreMessage {
+    id: string;
     code: number;
     message: string;
 }
