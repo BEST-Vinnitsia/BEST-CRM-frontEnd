@@ -4,7 +4,7 @@ import style from './popupWrapper.module.scss';
 export default function PopupWrapper() {
     return (
         <div className={style['popupWrapper']}>
-            <div></div>
+            <div>This is popup lore</div>
         </div>
     );
 }
