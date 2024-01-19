@@ -20,10 +20,10 @@ export default function SnackbarContainer() {
                 if (i < 5) {
                     return (
                         <Snackbar
-                            key={`${i}`}
+                            key={item.id}
                             message={item.message}
                             code={item.code}
-                            onClose={() => utilsActions.deleteMessage(i)}
+                            onClose={() => utilsActions.deleteMessage(item.id)}
                         />
                     );
                 }

@@ -1,9 +1,8 @@
 .snackbarContainer {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
-
-    z-index: 5;
+    bottom: 0px;
+    right: 8px;
+    z-index: 15;
 
     &__alert {
         display: flex;

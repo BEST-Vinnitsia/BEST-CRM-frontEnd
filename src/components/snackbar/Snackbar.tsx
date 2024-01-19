@@ -9,38 +9,21 @@ interface IProps {
 }
 
 export default function Snackbar({ message, code, onClose }: IProps) {
-    const snackbarRef = useRef<HTMLDivElement>(null);
+    const timerRef = useRef<NodeJS.Timeout>();
+
+    const startTimer = () => {
+        timerRef.current = setTimeout(() => {
+            onClose();
+        }, 1000 * 3);
+    };
+
+    const clearTimer = () => {
+        clearTimeout(timerRef.current);
+    };
 
     useEffect(() => {
-        let timer: NodeJS.Timeout;
-
-        const handleMouseEnter = () => {
-            clearTimeout(timer);
-        };
-
-        const handleMouseLeave = () => {
-            timer = setTimeout(() => {
-                onClose();
-            }, 1000 * 3);
-        };
-
-        handleMouseLeave();
-
-        const snackbarElement = snackbarRef.current;
-        if (snackbarElement) {
-            snackbarElement.addEventListener('mouseenter', handleMouseEnter);
-            snackbarElement.addEventListener('mouseleave', handleMouseLeave);
-        }
-
-        return () => {
-            clearTimeout(timer);
-
-            if (snackbarElement) {
-                snackbarElement.removeEventListener('mouseenter', handleMouseEnter);
-                snackbarElement.removeEventListener('mouseleave', handleMouseLeave);
-            }
-        };
-    }, [onClose, snackbarRef.current]);
+        startTimer();
+    }, []);
 
     const setSvg = () => {
         if (code === 0) return <SvgInfo />;
@@ -51,7 +34,7 @@ export default function Snackbar({ message, code, onClose }: IProps) {
     };
 
     return (
-        <div ref={snackbarRef} className={style['snackbarContainer__alert']}>
+        <div className={style['snackbarContainer__alert']} onMouseLeave={startTimer} onMouseEnter={clearTimer}>
             <div className={style['snackbarContainer__alert__svgBlock']} data-code={`${code}`}>
                 <span className={style['snackbarContainer__alert__svgBlock__container']}>
                     <span className={style['snackbarContainer__alert__svgBlock__container__svg']}>{setSvg()}</span>
