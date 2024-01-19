@@ -9,6 +9,7 @@ import { store } from './redux/store';
 import { BrowserRouter } from 'react-router-dom';
 // App component
 import App from './App';
+import { SnackbarContainer } from './components';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -16,6 +17,7 @@ root.render(
         <ReduxProvider store={store}>
             <BrowserRouter>
                 <App />
+                <SnackbarContainer />
             </BrowserRouter>
         </ReduxProvider>
     </React.StrictMode>,

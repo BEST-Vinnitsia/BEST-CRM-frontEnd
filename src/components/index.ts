@@ -7,3 +7,4 @@ export { default as UserButton } from './userButton/UserButton';
 export { default as PopupMenu } from './popupMenu/PopupMenu';
 export { default as PopupContainer } from './popupContainer/PopupContainer';
 export { default as PopupWrapper } from './popupWrapper/PopupWrapper';
+export { default as SnackbarContainer } from './snackbar/SnackbarContainer';

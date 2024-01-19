@@ -8,10 +8,17 @@ export interface IUserStore {
 }
 
 export interface IUtilsStore {
-    windowSize: {
-        width: number;
-        height: number;
-    } | null;
+    windowSize: IUtilsStoreWindowSize | null;
     isLoading: boolean;
-    error: null;
+    message: IUtilsStoreMessage[];
+}
+
+interface IUtilsStoreWindowSize {
+    width: number;
+    height: number;
+}
+
+interface IUtilsStoreMessage {
+    code: number;
+    message: string;
 }

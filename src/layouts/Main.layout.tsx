@@ -17,7 +17,6 @@ import { useWindowSize } from '../hooks/useWindowSize';
 export default function MainLayout() {
     const windowSize = useWindowSize(300);
     utilsActions.updateWindowSize(windowSize);
-    // const windowSize = useSelector((state: IStore) => state.utils.windowSize);
 
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
@@ -33,9 +32,7 @@ export default function MainLayout() {
                 <header className={style['mainLayout__header']}>
                     <div className={style['mainLayout__header__container']}>
                         <>
-                            {windowSize.width < 992 && (
-                                <CircleButton onClick={openSidebar} svg={<SvgMenu />} />
-                            )}
+                            {windowSize.width < 992 && <CircleButton onClick={openSidebar} svg={<SvgMenu />} />}
                             {windowSize.width >= 992 && (
                                 <span className={style['mainLayout__header__container__logo']}>
                                     <SvgLogo />
