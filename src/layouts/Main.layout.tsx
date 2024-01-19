@@ -59,37 +59,12 @@ export default function MainLayout() {
                 <aside className={style['mainLayout__aside']}>
                     {windowSize.width >= 992 && (
                         <nav className={style['mainLayout__aside__container']}>
-                            <SidebarButton path={PATH_HOME.ROOT} svg={<SvgMenu />} title="home" onClick={openSidebar} />
-                            <SidebarButton
-                                path={PATH_MEMBER.LIST}
-                                svg={<SvgMenu />}
-                                title="members"
-                                onClick={openSidebar}
-                            />
-                            <SidebarButton
-                                path={PATH_BOARD.LIST}
-                                svg={<SvgMenu />}
-                                title="board"
-                                onClick={openSidebar}
-                            />
-                            <SidebarButton
-                                path={PATH_COORDINATOR.LIST}
-                                svg={<SvgMenu />}
-                                title="coordinator"
-                                onClick={openSidebar}
-                            />
-                            <SidebarButton
-                                path={PATH_COMMITTEE.LIST}
-                                svg={<SvgMenu />}
-                                title="committees"
-                                onClick={openSidebar}
-                            />
-                            <SidebarButton
-                                path={PATH_MEMBERSHIP.LIST}
-                                svg={<SvgMenu />}
-                                title="membership"
-                                onClick={openSidebar}
-                            />
+                            <SidebarButton path={PATH_HOME.ROOT} svg={<SvgMenu />} title="home" />
+                            <SidebarButton path={PATH_MEMBER.LIST} svg={<SvgMenu />} title="members" />
+                            <SidebarButton path={PATH_BOARD.LIST} svg={<SvgMenu />} title="board" />
+                            <SidebarButton path={PATH_COORDINATOR.LIST} svg={<SvgMenu />} title="coordinator" />
+                            <SidebarButton path={PATH_COMMITTEE.LIST} svg={<SvgMenu />} title="committees" />
+                            <SidebarButton path={PATH_MEMBERSHIP.LIST} svg={<SvgMenu />} title="membership" />
                         </nav>
                     )}
                 </aside>

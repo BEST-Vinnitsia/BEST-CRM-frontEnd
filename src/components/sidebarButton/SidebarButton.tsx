@@ -7,7 +7,7 @@ interface IProps {
     svg: React.ReactNode;
     title: string;
     path: string;
-    onClick: () => void;
+    onClick?: () => void;
 }
 
 export default function SidebarButton(props: IProps) {
@@ -16,7 +16,10 @@ export default function SidebarButton(props: IProps) {
 
     const redirect = () => {
         navigate(props.path);
-        props.onClick();
+        
+        if (props.onClick) {
+            props.onClick();
+        }
     };
 
     return (

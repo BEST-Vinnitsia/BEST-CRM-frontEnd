@@ -16,9 +16,19 @@ export default function SnackbarContainer() {
 
     return createPortal(
         <div className={style['snackbarContainer']}>
-            {messageList.map((item, i) => (
-                <Snackbar key={i} message={item.message} status={0} onClose={() => utilsActions.deleteMessage(i)} />
-            ))}
+            {messageList.map((item, i) => {
+                if (i < 5) {
+                    return (
+                        <Snackbar
+                            key={`${i}`}
+                            message={item.message}
+                            code={item.code}
+                            onClose={() => utilsActions.deleteMessage(i)}
+                        />
+                    );
+                }
+                return null;
+            })}
         </div>,
         portal,
     );
