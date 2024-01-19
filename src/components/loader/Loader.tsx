@@ -1,7 +1,21 @@
-import React from 'react'
+import React from 'react';
+import style from './loader.module.scss';
+import { useSelector } from '../../redux/store';
+import { IStore } from '../../interfaces/store.interface';
 
 export default function Loader() {
-  return (
-    <></>
-  )
+    const isLoading = useSelector((state: IStore) => state.utils.isLoading);
+
+    if (!isLoading) return <></>;
+
+    return (
+        <div className={style['LoaderDefault-Container']}>
+            <div className={style.LoaderDefault}>
+                <span className={style.loader}>
+                    <span className={style.firstLine} />
+                    <span className={style.secondLine} />
+                </span>
+            </div>
+        </div>
+    );
 }
