@@ -10,3 +10,7 @@ export { ReactComponent as SvgSuccess } from './success.svg';
 export { ReactComponent as SvgInfo } from './info.svg';
 
 export { ReactComponent as SvgClose } from './close.svg';
+
+// Logo
+export { ReactComponent as SvgBESTLogo } from './bestLogo.svg';
+export { ReactComponent as SvgVinny } from './vinny.svg';
