@@ -22,7 +22,7 @@ export default function SnackbarContainer() {
                         <Snackbar
                             key={item.id}
                             message={item.message}
-                            code={item.code}
+                            status={item.status}
                             onClose={() => utilsActions.deleteMessage(item.id)}
                         />
                     );

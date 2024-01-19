@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { utilsActions } from '../redux/actions/utilsActions';
 
 export default function CommitteePage() {
-    const [count, setCount] = useState(0);
-
     const test = () => {
-        const random = Math.trunc(Math.random() * (4 - 0) + 0);
-
-        utilsActions.addMessage({ code: random, message: `${count}` });
-        setCount(count + 1);
+        utilsActions.addMessage({ status: 'error', message: `${1}` });
+        // utilsActions.addMessage({ status: 'info', message: `${2}` });
+        // utilsActions.addMessage({ status: 'success', message: `${3}` });
+        // utilsActions.addMessage({ status: 'warn', message: `${4}` });
     };
 
     return (

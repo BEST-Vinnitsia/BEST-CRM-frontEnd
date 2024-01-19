@@ -27,8 +27,8 @@ interface IUtilsStoreWindowSize {
     height: number;
 }
 
-interface IUtilsStoreMessage {
+export interface IUtilsStoreMessage {
     id: string;
-    code: number;
+    status: 'info' | 'success' | 'warn' | 'error';
     message: string;
 }

@@ -1,6 +1,9 @@
 import { dispatch } from '../store';
 import slice from '../slices/utilsSlice';
 import { uuid } from '../../utils/uuid';
+import { IUtilsStoreMessage } from '../../interfaces/store.interface';
+
+interface IAddMessage extends Pick<IUtilsStoreMessage, 'message' | 'status'> {}
 
 class UtilsActions {
     // loading
@@ -19,11 +22,11 @@ class UtilsActions {
     }
 
     // message
-    public addMessage(message: { code: number; message: string }) {
+    public addMessage(message: IAddMessage) {
         dispatch(
             slice.actions.addMessage({
                 id: uuid.generate(),
-                code: message.code,
+                status: message.status,
                 message: message.message,
             }),
         );
