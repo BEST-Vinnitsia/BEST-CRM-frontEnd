@@ -4,9 +4,9 @@ import { utilsActions } from '../redux/actions/utilsActions';
 export default function CommitteePage() {
     const test = () => {
         utilsActions.addMessage({ status: 'error', message: `${1}` });
-        // utilsActions.addMessage({ status: 'info', message: `${2}` });
-        // utilsActions.addMessage({ status: 'success', message: `${3}` });
-        // utilsActions.addMessage({ status: 'warn', message: `${4}` });
+        utilsActions.addMessage({ status: 'info', message: `${2}` });
+        utilsActions.addMessage({ status: 'success', message: `${3}` });
+        utilsActions.addMessage({ status: 'warn', message: `${4}` });
     };
 
     return (

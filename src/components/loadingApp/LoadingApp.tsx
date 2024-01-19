@@ -13,7 +13,7 @@ export default function LoadingApp() {
 
         const timer = setTimeout(() => {
             utilsActions.loadingApp(true);
-        }, 0);
+        }, 3000);
 
         return () => {
             clearTimeout(timer);

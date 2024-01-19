@@ -14,6 +14,7 @@ import { CircleButton, Loader, LoadingApp, MobileSidebar, PopupMenu, SidebarButt
 import { SvgLogo, SvgMenu, SvgUser } from '../assets/svg';
 import { utilsActions } from '../redux/actions/utilsActions';
 import { useWindowSize } from '../hooks/useWindowSize';
+import UserImg from '../assets/img/avatar_25.jpg';
 
 export default function MainLayout() {
     const windowSize = useWindowSize(300);
@@ -67,8 +68,10 @@ export default function MainLayout() {
                         <>
                             <UserButton
                                 buttonRef={userButtonRef}
+                                active={menuOpen}
                                 onClick={() => setMenuOpen((prev) => !prev)}
-                                svg={<SvgUser />}
+                                // svg={<SvgUser />}
+                                img={UserImg}
                             />
                             <PopupMenu
                                 depRef={userButtonRef}
