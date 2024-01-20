@@ -16,3 +16,4 @@ export { default as TableRow } from './table/TableRow';
 
 // scroll
 export { default as ScrollY } from './scroll/ScrollY';
+export { default as ScrollX } from './scroll/ScrollX';
