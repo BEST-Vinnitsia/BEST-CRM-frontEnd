@@ -88,11 +88,11 @@ export default function MainLayout() {
                     {windowSize.width >= 992 && (
                         <nav className={style['mainLayout__aside__container']}>
                             <SidebarButton path={PATH_HOME.ROOT} svg={<SvgMenu />} title="home" />
-                            <SidebarButton path={PATH_MEMBER.LIST} svg={<SvgMenu />} title="members" />
-                            <SidebarButton path={PATH_BOARD.LIST} svg={<SvgMenu />} title="board" />
-                            <SidebarButton path={PATH_COORDINATOR.LIST} svg={<SvgMenu />} title="coordinator" />
-                            <SidebarButton path={PATH_COMMITTEE.LIST} svg={<SvgMenu />} title="committees" />
-                            <SidebarButton path={PATH_MEMBERSHIP.LIST} svg={<SvgMenu />} title="membership" />
+                            <SidebarButton path={PATH_MEMBER.ROOT} svg={<SvgMenu />} title="members" />
+                            <SidebarButton path={PATH_BOARD.ROOT} svg={<SvgMenu />} title="board" />
+                            <SidebarButton path={PATH_COORDINATOR.ROOT} svg={<SvgMenu />} title="coordinator" />
+                            <SidebarButton path={PATH_COMMITTEE.ROOT} svg={<SvgMenu />} title="committees" />
+                            <SidebarButton path={PATH_MEMBERSHIP.ROOT} svg={<SvgMenu />} title="membership" />
                             <SidebarButton path={PATH_ERROR[404]} svg={<SvgMenu />} title="404" />
                             <SidebarButton path={PATH_ERROR[403]} svg={<SvgMenu />} title="403" />
                             <SidebarButton path={PATH_ERROR[500]} svg={<SvgMenu />} title="500" />
@@ -104,22 +104,22 @@ export default function MainLayout() {
                 {/*  */}
                 <MobileSidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} windowSize={windowSize}>
                     <SidebarButton path={PATH_HOME.ROOT} svg={<SvgMenu />} title="home" onClick={openSidebar} />
-                    <SidebarButton path={PATH_MEMBER.LIST} svg={<SvgMenu />} title="members" onClick={openSidebar} />
-                    <SidebarButton path={PATH_BOARD.LIST} svg={<SvgMenu />} title="board" onClick={openSidebar} />
+                    <SidebarButton path={PATH_MEMBER.ROOT} svg={<SvgMenu />} title="members" onClick={openSidebar} />
+                    <SidebarButton path={PATH_BOARD.ROOT} svg={<SvgMenu />} title="board" onClick={openSidebar} />
                     <SidebarButton
-                        path={PATH_COORDINATOR.LIST}
+                        path={PATH_COORDINATOR.ROOT}
                         svg={<SvgMenu />}
                         title="coordinator"
                         onClick={openSidebar}
                     />
                     <SidebarButton
-                        path={PATH_COMMITTEE.LIST}
+                        path={PATH_COMMITTEE.ROOT}
                         svg={<SvgMenu />}
                         title="committees"
                         onClick={openSidebar}
                     />
                     <SidebarButton
-                        path={PATH_MEMBERSHIP.LIST}
+                        path={PATH_MEMBERSHIP.ROOT}
                         svg={<SvgMenu />}
                         title="membership"
                         onClick={openSidebar}

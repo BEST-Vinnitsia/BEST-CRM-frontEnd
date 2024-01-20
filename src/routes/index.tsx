@@ -60,37 +60,40 @@ export default function Router() {
         {
             path: PATH_BOARD.ROOT,
             element: <MainLayout />,
-            children: [{ path: 'list', element: <BoardPage /> }],
+            children: [
+                { path: '', element: <BoardPage /> },
+                { path: 'create', element: <></> },
+            ],
         },
 
         {
             path: PATH_COORDINATOR.ROOT,
             element: <MainLayout />,
-            children: [{ path: 'list', element: <CoordinatorPage /> }],
+            children: [{ path: '', element: <CoordinatorPage /> }],
         },
 
         {
             path: PATH_COMMITTEE.ROOT,
             element: <MainLayout />,
-            children: [{ path: 'list', element: <CommitteePage /> }],
+            children: [{ path: '', element: <CommitteePage /> }],
         },
 
         {
             path: PATH_MEETING.ROOT,
             element: <MainLayout />,
-            children: [{ path: 'list', element: <MeetingPage /> }],
+            children: [{ path: '', element: <MeetingPage /> }],
         },
 
         {
             path: PATH_MEMBER.ROOT,
             element: <MainLayout />,
-            children: [{ path: 'list', element: <MemberPage /> }],
+            children: [{ path: '', element: <MemberPage /> }],
         },
 
         {
             path: PATH_MEMBERSHIP.ROOT,
             element: <MainLayout />,
-            children: [{ path: 'list', element: <MembershipPage /> }],
+            children: [{ path: '', element: <MembershipPage /> }],
         },
 
         // Error routes
