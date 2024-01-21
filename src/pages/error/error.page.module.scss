@@ -1,4 +1,13 @@
 .errorPage {
+    $item1-color: rgba(255, 63, 109, 0.5);
+    $item2-color: #ff3f6d;
+    $codeError-border-color: #611427;
+    $codeError-first-bg-color: #7d1b33;
+    $codeError-second-bg-color: #ff3f6d;
+    $title-shadow-color: rgba(255, 255, 255, 0.2);
+    $title-first-bg-color: #feb8c9;
+    $title-second-bg-color: #fff;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,7 +29,7 @@
         max-height: 100dvh;
         flex-shrink: 0;
         border-radius: 675px;
-        background: rgba(255, 63, 109, 0.5);
+        background: $item1-color;
         z-index: 1;
     }
 
@@ -35,7 +44,7 @@
         max-height: 100dvh;
         flex-shrink: 0;
         border-radius: 324px;
-        background: #ff3f6d;
+        background: $item2-color;
         z-index: 1;
     }
 
@@ -67,7 +76,7 @@
             align-items: flex-start;
             gap: 8px;
             border-radius: 16px;
-            border: 2px solid #611427;
+            border: 2px solid $codeError-border-color;
             margin-bottom: 8px;
             z-index: 15;
             /* font */
@@ -75,7 +84,7 @@
             font-style: normal;
             font-weight: 700;
             line-height: normal;
-            background: linear-gradient(90deg, #7d1b33 0.27%, #ff3f6d 100.27%);
+            background: linear-gradient(90deg, $codeError-first-bg-color 0.27%, $codeError-second-bg-color 100.27%);
             background-clip: text;
 
             -webkit-background-clip: text;
@@ -83,12 +92,16 @@
         }
 
         &__title {
-            background: radial-gradient(56.46% 112.28% at 50% -12.28%, #feb8c9 0%, #fff 100%);
+            background: radial-gradient(
+                56.46% 112.28% at 50% -12.28%,
+                $title-first-bg-color 0%,
+                $title-second-bg-color 100%
+            );
             background-clip: text;
             margin-bottom: 16px;
             z-index: 15;
             /* font */
-            text-shadow: 0px 0px 30px rgba(255, 255, 255, 0.2);
+            text-shadow: 0px 0px 30px $title-shadow-color;
             font-size: 2.5rem;
             font-style: normal;
             font-weight: 700;
@@ -110,6 +123,123 @@
             font-style: normal;
             font-weight: 400;
             line-height: normal;
+        }
+    }
+
+    &[data-code='403'] {
+        $item1-color: rgba(108, 63, 255, 0.5);
+        $item2-color: #553fff;
+        $codeError-border-color: #1d1461;
+        $codeError-first-bg-color: #1b1e7d;
+        $codeError-second-bg-color: #493fff;
+        $title-shadow-color: rgba(255, 255, 255, 0.2);
+        $title-first-bg-color: #c5b8fe;
+        $title-second-bg-color: #ffffff;
+
+        .errorPage__item_1 {
+            background: $item1-color;
+        }
+
+        .errorPage__item_2 {
+            background: $item2-color;
+        }
+
+        .errorPage__container {
+            .errorPage__container__codeError {
+                border: 2px solid $codeError-border-color;
+                background: linear-gradient(90deg, $codeError-first-bg-color 0.27%, $codeError-second-bg-color 100.27%);
+
+                -webkit-background-clip: text;
+            }
+
+            .errorPage__container__title {
+                background: radial-gradient(
+                    56.46% 112.28% at 50% -12.28%,
+                    $title-first-bg-color 0%,
+                    $title-second-bg-color 100%
+                );
+                text-shadow: 0px 0px 30px $title-shadow-color;
+
+                -webkit-background-clip: text;
+            }
+        }
+    }
+
+    &[data-code='404'] {
+        $item1-color: rgba(255, 63, 109, 0.5);
+        $item2-color: #ff3f6d;
+        $codeError-border-color: #611427;
+        $codeError-first-bg-color: #7d1b33;
+        $codeError-second-bg-color: #ff3f6d;
+        $title-shadow-color: rgba(255, 255, 255, 0.2);
+        $title-first-bg-color: #feb8c9;
+        $title-second-bg-color: #fff;
+
+        .errorPage__item_1 {
+            background: $item1-color;
+        }
+
+        .errorPage__item_2 {
+            background: $item2-color;
+        }
+
+        .errorPage__container {
+            .errorPage__container__codeError {
+                border: 2px solid $codeError-border-color;
+                background: linear-gradient(90deg, $codeError-first-bg-color 0.27%, $codeError-second-bg-color 100.27%);
+
+                -webkit-background-clip: text;
+            }
+
+            .errorPage__container__title {
+                background: radial-gradient(
+                    56.46% 112.28% at 50% -12.28%,
+                    $title-first-bg-color 0%,
+                    $title-second-bg-color 100%
+                );
+                text-shadow: 0px 0px 30px $title-shadow-color;
+
+                -webkit-background-clip: text;
+            }
+        }
+    }
+
+    &[data-code='500'] {
+        $item1-color: rgba(255, 188, 63, 0.5);
+        $item2-color: #ffaf3f;
+        $codeError-border-color: #614314;
+        $codeError-first-bg-color: #7d541b;
+        $codeError-second-bg-color: #ffb93f;
+        $title-shadow-color: rgba(255, 255, 255, 0.2);
+        $title-first-bg-color: #fef0b8;
+        $title-second-bg-color: #fff;
+
+        .errorPage__item_1 {
+            background: $item1-color;
+        }
+
+        .errorPage__item_2 {
+            background: $item2-color;
+        }
+
+        .errorPage__container {
+            .errorPage__container__codeError {
+                border: 2px solid $codeError-border-color;
+                background: linear-gradient(90deg, $codeError-first-bg-color 0.27%, $codeError-second-bg-color 100.27%);
+
+                -webkit-background-clip: text;
+            }
+
+            .errorPage__container__title {
+                background: radial-gradient(
+                    56.46% 112.28% at 50% -12.28%,
+                    $title-first-bg-color 0%,
+                    $title-second-bg-color 100%
+                );
+                text-shadow: 0px 0px 30px $title-shadow-color;
+
+                -webkit-background-clip: text;
+            }
         }
     }
 }

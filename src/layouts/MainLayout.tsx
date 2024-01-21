@@ -10,7 +10,18 @@ import {
     PATH_MEMBER,
     PATH_MEMBERSHIP,
 } from '../routes/paths';
-import { CircleButton, Loader, PreLoader, Menu, SidebarButton, UserButton, MobileSidebar } from '../components';
+import {
+    CircleButton,
+    Loader,
+    PreLoader,
+    Menu,
+    SidebarButton,
+    UserButton,
+    MobileSidebar,
+    MenuText,
+    MenuSplit,
+    MenuButton,
+} from '../components';
 import { SvgLogo, SvgMenu, SvgUser } from '../assets/svg';
 import { utilsActions } from '../redux/actions/utilsActions';
 import { useWindowSize } from '../hooks/useWindowSize';
@@ -29,6 +40,10 @@ export default function MainLayout() {
 
     const openSidebar = () => {
         setSidebarOpen((prev) => !prev);
+    };
+
+    const openMenu = () => {
+        setMenuOpen((prev) => !prev);
     };
 
     return (
@@ -50,16 +65,19 @@ export default function MainLayout() {
                             <UserButton
                                 buttonRef={userButtonRef}
                                 active={menuOpen}
-                                onClick={() => setMenuOpen((prev) => !prev)}
+                                onClick={openMenu}
                                 // svg={<SvgUser />}
                                 img={UserImg}
                             />
-                            <Menu
-                                depRef={userButtonRef}
-                                onClose={() => setMenuOpen(false)}
-                                open={menuOpen}
-                                windowSize={windowSize}
-                            />
+                            <Menu depRef={userButtonRef} onClose={openMenu} open={menuOpen} windowSize={windowSize}>
+                                <MenuText title="user name" subTitle="user email" />
+                                <MenuSplit />
+                                <MenuButton title="Profile" onClick={openMenu} />
+                                <MenuButton title="Settings" onClick={openMenu} />
+                                <MenuButton title="Theme" onClick={openMenu} />
+                                <MenuSplit />
+                                <MenuButton title="Logout" color="red" onClick={openMenu} />
+                            </Menu>
                         </>
                     </div>
                 </header>
