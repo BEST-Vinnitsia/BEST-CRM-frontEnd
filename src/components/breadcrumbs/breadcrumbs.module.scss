@@ -54,11 +54,20 @@
                     &[data-here='1'] {
                         color: rgb(145, 158, 171);
                     }
+
+                    &:hover {
+                        &[data-here='0'] {
+                            text-decoration: underline;
+                        }
+                        &[data-here='1'] {
+                            text-decoration: none;
+                        }
+                    }
                 }
             }
         }
     }
 
-    &__insertContainer {
-    }
+    /* &__insertContainer {
+    } */
 }

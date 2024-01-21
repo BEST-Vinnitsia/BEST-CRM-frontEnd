@@ -6,14 +6,16 @@ import { SvgClose } from '../assets/svg';
 export default function MembershipPage() {
     return (
         <>
-            <BreadcrumbsContainer
-                path={[
-                    { url: PATH_MEMBERSHIP.ROOT, title: 'membership' },
-                    { url: PATH_MEMBERSHIP.LIST, title: 'list' },
-                ]}
-            >
-                <Button svg={<SvgClose />} title="test" />
-            </BreadcrumbsContainer>
+            <div className='px-4 py-3'>
+                <BreadcrumbsContainer
+                    path={[
+                        { url: PATH_MEMBERSHIP.ROOT, title: 'membership' },
+                        { url: PATH_MEMBERSHIP.LIST, title: 'list' },
+                    ]}
+                >
+                    <Button svg={<SvgClose />} title="test" />
+                </BreadcrumbsContainer>
+            </div>
         </>
     );
 }
