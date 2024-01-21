@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import style from './loadingApp.module.scss';
 import { SvgBESTLogo, SvgVinny } from '../../assets/svg';
 import { useSelector } from '../../redux/store';
-import { IStore } from '../../interfaces/store.interface';
+import { IStore } from '../../interfaces/store';
 import { utilsActions } from '../../redux/actions/utilsActions';
 
 export default function LoadingApp() {

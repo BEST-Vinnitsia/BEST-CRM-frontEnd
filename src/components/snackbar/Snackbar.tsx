@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import style from './snackbar.module.scss';
 import { SvgClose, SvgError, SvgInfo, SvgSuccess, SvgWarn } from '../../assets/svg';
-import { IUtilsStoreMessage } from '../../interfaces/store.interface';
+import { IUtilsStoreMessage } from '../../interfaces/store';
 
 interface IProps extends Pick<IUtilsStoreMessage, 'message' | 'status'> {
     onClose: () => void;

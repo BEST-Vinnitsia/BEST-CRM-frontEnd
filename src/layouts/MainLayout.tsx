@@ -9,11 +9,11 @@ import {
     PATH_HOME,
     PATH_MEMBER,
     PATH_MEMBERSHIP,
-} from '../routes/paths.routes';
+} from '../routes/paths';
 import { CircleButton, Loader, LoadingApp, MobileSidebar, PopupMenu, SidebarButton, UserButton } from '../components';
 import { SvgLogo, SvgMenu, SvgUser } from '../assets/svg';
 import { utilsActions } from '../redux/actions/utilsActions';
-import { useWindowSize } from '../hooks/useWindowSize.hook';
+import { useWindowSize } from '../hooks/useWindowSize';
 import UserImg from '../assets/img/avatar_25.jpg';
 
 export default function MainLayout() {
