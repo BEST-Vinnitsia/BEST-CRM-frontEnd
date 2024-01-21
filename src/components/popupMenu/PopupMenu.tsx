@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { useOutsideClick } from '../../hooks/useOutsideClick';
+import { useOutsideClick } from '../../hooks/useOutsideClick.hook';
 import { createPortal } from 'react-dom';
 import style from './popupMenu.module.scss';
 
