@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import style from './menu.module.scss';
 
 interface IProps {
+    children: React.ReactNode;
     open: boolean;
     onClose: () => void;
     depRef?: React.RefObject<HTMLElement>;
@@ -22,7 +23,7 @@ interface ITargetPosition {
 
 const portal: HTMLElement | null = document.getElementById('portal-menu');
 
-export default function Menu({ onClose, open, depRef, windowSize }: IProps) {
+export default function Menu({ children, onClose, open, depRef, windowSize }: IProps) {
     const [triggerPosition, setTriggerPosition] = useState<ITargetPosition>();
     const menuRef = useRef<HTMLDivElement>(null);
 
@@ -49,7 +50,6 @@ export default function Menu({ onClose, open, depRef, windowSize }: IProps) {
                 <div
                     ref={menuRef}
                     className={style['menu']}
-                    // data-active={open ? '1' : '0'}
                     style={{
                         top: triggerPosition.bottom + 10,
                         left: triggerPosition.left - 200 + 20 + 14 * Math.sqrt(2) + 14 / 2,
@@ -57,17 +57,7 @@ export default function Menu({ onClose, open, depRef, windowSize }: IProps) {
                 >
                     <span className={style['menu__arrow']} />
 
-                    <div className={style['menu__userInfoContainer']}>
-                        <h6>User name</h6>
-                        <p>user email</p>
-                    </div>
-
-                    <hr />
-
-                    <li>
-                        Logout
-                        <span />
-                    </li>
+                    {children}
                 </div>
             )}
         </>,

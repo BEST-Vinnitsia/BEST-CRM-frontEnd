@@ -6,7 +6,7 @@ export default function BoardPage() {
 
     return (
         <>
-            <button onClick={() => setPopup((prev) => !prev)} className='p-4 bg-black'>Open popup</button>
+            <button onClick={() => setPopup((prev) => !prev)} className='p-4 bg-black rounded-lg m-4'>Open popup</button>
 
             <PopupContainer onClose={() => setPopup((prev) => !prev)} isOpen={popup}>
                 <PopupWrapper></PopupWrapper>

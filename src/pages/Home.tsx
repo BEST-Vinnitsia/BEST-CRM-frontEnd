@@ -15,7 +15,7 @@ export default function HomePage() {
 
     return (
         <>
-            <button onClick={handler}>loading</button>
+            <button onClick={handler} className='p-2 m-4 bg-cyan-800 rounded-lg'>loading</button>
         </>
     );
 }

@@ -3,7 +3,7 @@ import style from './circleButton.module.scss';
 
 interface IProps {
     svg: React.ReactNode;
-    onClick: () => void;
+    onClick?: () => void;
 }
 
 export default function CircleButton(props: IProps) {
