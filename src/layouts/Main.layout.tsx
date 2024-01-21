@@ -18,37 +18,18 @@ import UserImg from '../assets/img/avatar_25.jpg';
 
 export default function MainLayout() {
     const windowSize = useWindowSize(300);
-    utilsActions.updateWindowSize(windowSize);
 
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const userButtonRef = useRef<HTMLButtonElement>(null);
 
+    useEffect(() => {
+        utilsActions.updateWindowSize(windowSize);
+    }, [windowSize]);
+
     const openSidebar = () => {
         setSidebarOpen((prev) => !prev);
     };
-
-    // useEffect(() => {
-    //     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-    //     const handleColorSchemeChange = (event: any) => {
-    //         utilsActions.addMessage({
-    //             code: 1,
-    //             message: `Color scheme changed:', ${event.matches ? 'dark' : 'light'}`,
-    //         });
-
-    //         console.log(event.matches);
-
-    //     };
-
-    //     mediaQuery.addEventListener('change', handleColorSchemeChange);
-
-    //     handleColorSchemeChange(mediaQuery);
-
-    //     return () => {
-    //         mediaQuery.removeEventListener('change', handleColorSchemeChange);
-    //     };
-    // }, []);
 
     return (
         <>
