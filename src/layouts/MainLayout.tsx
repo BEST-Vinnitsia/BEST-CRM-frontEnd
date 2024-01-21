@@ -10,7 +10,7 @@ import {
     PATH_MEMBER,
     PATH_MEMBERSHIP,
 } from '../routes/paths';
-import { CircleButton, Loader, LoadingApp, MobileSidebar, PopupMenu, SidebarButton, UserButton } from '../components';
+import { CircleButton, Loader, PreLoader, Menu, SidebarButton, UserButton, MobileSidebar } from '../components';
 import { SvgLogo, SvgMenu, SvgUser } from '../assets/svg';
 import { utilsActions } from '../redux/actions/utilsActions';
 import { useWindowSize } from '../hooks/useWindowSize';
@@ -33,7 +33,7 @@ export default function MainLayout() {
 
     return (
         <>
-            <LoadingApp />
+            <PreLoader />
 
             <div className={style['mainLayout']}>
                 <header className={style['mainLayout__header']}>
@@ -54,7 +54,7 @@ export default function MainLayout() {
                                 // svg={<SvgUser />}
                                 img={UserImg}
                             />
-                            <PopupMenu
+                            <Menu
                                 depRef={userButtonRef}
                                 onClose={() => setMenuOpen(false)}
                                 open={menuOpen}
