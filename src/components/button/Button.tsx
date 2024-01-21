@@ -4,7 +4,7 @@ import style from './button.module.scss';
 interface IProps {
     title: string;
     svg: React.ReactNode;
-    onClick: () => void;
+    onClick?: () => void;
 }
 
 export default function Button(props: IProps) {

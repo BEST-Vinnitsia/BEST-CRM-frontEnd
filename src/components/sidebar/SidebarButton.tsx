@@ -23,9 +23,13 @@ export default function SidebarButton(props: IProps) {
 
     const checkPath = () => {
         const regex = new RegExp(`^\\${props.path}`);
-        const match = regex.test(location.pathname);
+        const regex2 = new RegExp(`^\\${props.path}[0-9a-zA-Z]`);
 
-        return match;
+        const match = regex.test(location.pathname);
+        const match2 = regex2.test(location.pathname);
+
+        if (match === true && match2 === false) return true;
+        return false;
     };
 
     return (

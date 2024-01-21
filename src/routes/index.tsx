@@ -93,7 +93,10 @@ export default function Router() {
         {
             path: PATH_MEMBERSHIP.ROOT,
             element: <MainLayout />,
-            children: [{ path: '', element: <MembershipPage /> }],
+            children: [
+                { path: '', element: <MembershipPage /> },
+                { path: 'list', element: <MembershipPage /> },
+            ],
         },
 
         // Error routes

@@ -1,0 +1,41 @@
+.menuButton {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    user-select: none;
+
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: calc(100% - 16px);
+    /* min-height: 48px; */
+    min-height: auto;
+    padding: 6px 8px;
+    margin: 8px;
+    border-radius: 6px;
+    background-color: transparent;
+    outline: 0px;
+    border: 0px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba(145, 158, 171, 0.08);
+    }
+
+    &__title {
+        color: rgb(255, 255, 255);
+        white-space: nowrap;
+        line-height: 1.57143;
+        font-size: 0.875rem;
+        font-family: 'Public Sans', sans-serif;
+        font-weight: 700;
+
+        appearance: none;
+
+        &[data-color='red'] {
+            color: rgb(255, 86, 48);
+        }
+    }
+}
