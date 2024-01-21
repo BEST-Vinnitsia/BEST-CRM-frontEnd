@@ -1,7 +1,7 @@
 import { dispatch } from '../store';
 import slice from '../slices/utilsSlice';
 import { uuid } from '../../utils/uuid';
-import { IUtilsStoreMessage } from '../../interfaces/store.interface';
+import { IUtilsStoreMessage } from '../../interfaces/store';
 
 interface IAddMessage extends Pick<IUtilsStoreMessage, 'message' | 'status'> {}
 

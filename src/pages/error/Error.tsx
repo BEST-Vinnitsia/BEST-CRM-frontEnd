@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './error.page.module.scss';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
-import { PATH_ERROR, PATH_HOME } from '../../routes/paths.routes';
+import { PATH_ERROR, PATH_HOME } from '../../routes/paths';
 import { SvgArrow } from '../../assets/svg';
 import { Button } from '../../components';
 
