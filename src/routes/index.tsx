@@ -9,7 +9,7 @@ import {
     PATH_MEETING,
     PATH_MEMBER,
     PATH_MEMBERSHIP,
-} from './paths.routes';
+} from './paths';
 
 // Guard
 // import AuthGuard from '../guards/auth.guard';
@@ -31,7 +31,7 @@ import {
 
     // Error
     ErrorPage,
-} from './imports.routes';
+} from './imports';
 // import { Claims } from '../config/claims';
 
 export default function Router() {
