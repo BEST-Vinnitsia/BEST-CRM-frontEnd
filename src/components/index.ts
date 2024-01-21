@@ -1,7 +1,13 @@
 export { default as SnackbarContainer } from './snackbar/SnackbarContainer';
 
+// breadcrumbs
+export { default as BreadcrumbsContainer } from './breadcrumbs/BreadcrumbsContainer';
+
 // menu
 export { default as Menu } from './menu/Menu';
+export { default as MenuButton } from './menu/MenuButton';
+export { default as MenuSplit } from './menu/MenuSplit';
+export { default as MenuText } from './menu/MenuText';
 
 // button
 export { default as Button } from './button/Button';

@@ -11,7 +11,7 @@ export default function CommitteePage() {
 
     return (
         <>
-            <button onClick={test} className="p-3 bg-slate-500">
+            <button onClick={test} className="p-3 bg-slate-500 rounded-lg m-4">
                 Add message
             </button>
         </>

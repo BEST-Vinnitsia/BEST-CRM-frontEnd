@@ -1,9 +1,4 @@
 .menu {
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: -moz-none;
-    -o-user-select: none;
-    user-select: none;
     z-index: 5;
 
     position: absolute;
@@ -17,15 +12,6 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 2px 0px, rgba(0, 0, 0, 0.24) -20px 20px 40px -4px;
     border-radius: 10px;
     overflow: inherit;
-    // margin-left: 6px;
-
-    // &[data-active='0'] {
-    //     background-color: transparent;
-    // }
-
-    // &[data-active='1'] {
-    //     background-color: #fff;
-    // }
 
     &__arrow {
         width: 14px;
@@ -39,83 +25,5 @@
         top: -6.5px;
         transform: rotate(135deg);
         right: 20px;
-    }
-
-    &__userInfoContainer {
-        padding: 16px 16px 12px;
-
-        h6 {
-            margin: 0px;
-            font-weight: 600;
-            line-height: 1.57143;
-            font-size: 0.875rem;
-            font-family: 'Public Sans', sans-serif;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        p {
-            margin: 0px;
-            line-height: 1.57143;
-            font-size: 0.875rem;
-            font-family: 'Public Sans', sans-serif;
-            font-weight: 400;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            color: rgb(145, 158, 171);
-        }
-    }
-
-    hr {
-        margin: 0px;
-        border-width: 0px 0px thin;
-        border-color: rgba(145, 158, 171, 0.2);
-        border-style: dashed;
-    }
-
-    li {
-        -webkit-tap-highlight-color: transparent;
-        background-color: transparent;
-        outline: 0px;
-        border: 0px;
-        cursor: pointer;
-        user-select: none;
-        vertical-align: middle;
-        appearance: none;
-        display: flex;
-        -webkit-box-pack: start;
-        justify-content: flex-start;
-        -webkit-box-align: center;
-        align-items: center;
-        position: relative;
-        text-decoration: none;
-        min-height: 48px;
-        box-sizing: border-box;
-        white-space: nowrap;
-        line-height: 1.57143;
-        font-size: 0.875rem;
-        font-family: 'Public Sans', sans-serif;
-        padding: 6px 8px;
-        border-radius: 6px;
-        margin: 8px;
-        font-weight: 700;
-        color: rgb(255, 86, 48);
-
-        min-height: auto;
-
-        &:hover {
-            background-color: rgba(145, 158, 171, 0.08);
-        }
-
-        span {
-            overflow: hidden;
-            pointer-events: none;
-            position: absolute;
-            z-index: 0;
-            inset: 0px;
-            border-radius: inherit;
-        }
     }
 }

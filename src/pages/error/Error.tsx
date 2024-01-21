@@ -32,7 +32,7 @@ export default function ErrorPage() {
     if (codeString !== '403' && codeString !== '404' && codeString !== '500') return <Navigate to={PATH_ERROR[404]} />;
 
     return (
-        <div className={style['errorPage']}>
+        <div className={style['errorPage']} data-code={codeString}>
             <div className={style['errorPage__item_1']} />
             <div className={style['errorPage__item_2']} />
             <div className={style['errorPage__blur']} />
