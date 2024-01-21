@@ -1,7 +1,7 @@
 import { dispatch } from '../store';
 import slice from '../slices/userSlice';
 
-import { IUserStore } from '../../interfaces/store.interface';
+import { IUserStore } from '../../interfaces/store';
 
 class UserActions {
     myAccount({ name }: IUserStore) {

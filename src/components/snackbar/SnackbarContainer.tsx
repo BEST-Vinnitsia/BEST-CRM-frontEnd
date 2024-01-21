@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './snackbar.module.scss';
 import { useSelector } from '../../redux/store';
-import { IStore } from '../../interfaces/store.interface';
+import { IStore } from '../../interfaces/store';
 import { createPortal } from 'react-dom';
 import Snackbar from './Snackbar';
 import { utilsActions } from '../../redux/actions/utilsActions';

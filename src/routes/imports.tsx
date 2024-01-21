@@ -37,16 +37,16 @@ const Loadable = (Component: ComponentType) => {
 // ----------------------------------------------------------------------
 
 // Layouts
-export const MainLayout = Loadable(lazy(() => import('../layouts/Main.layout')));
+export const MainLayout = Loadable(lazy(() => import('../layouts/MainLayout')));
 
 // Home
-export const HomePage = Loadable(lazy(() => import('../pages/Home.page')));
-export const BoardPage = Loadable(lazy(() => import('../pages/Board.page')));
-export const CommitteePage = Loadable(lazy(() => import('../pages/Committee.page')));
-export const CoordinatorPage = Loadable(lazy(() => import('../pages/Coordinator.page')));
-export const MeetingPage = Loadable(lazy(() => import('../pages/Meeting.page')));
-export const MemberPage = Loadable(lazy(() => import('../pages/Member.page')));
-export const MembershipPage = Loadable(lazy(() => import('../pages/Membership.page')));
+export const HomePage = Loadable(lazy(() => import('../pages/Home')));
+export const BoardPage = Loadable(lazy(() => import('../pages/Board')));
+export const CommitteePage = Loadable(lazy(() => import('../pages/Committee')));
+export const CoordinatorPage = Loadable(lazy(() => import('../pages/Coordinator')));
+export const MeetingPage = Loadable(lazy(() => import('../pages/Meeting')));
+export const MemberPage = Loadable(lazy(() => import('../pages/Member')));
+export const MembershipPage = Loadable(lazy(() => import('../pages/Membership')));
 
 // Error
-export const ErrorPage = Loadable(lazy(() => import('../pages/error/Error.page')));
+export const ErrorPage = Loadable(lazy(() => import('../pages/error/Error')));

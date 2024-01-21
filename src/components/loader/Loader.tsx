@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './loader.module.scss';
 import { useSelector } from '../../redux/store';
-import { IStore } from '../../interfaces/store.interface';
+import { IStore } from '../../interfaces/store';
 
 export default function Loader() {
     const isLoading = useSelector((state: IStore) => state.utils.isLoading);

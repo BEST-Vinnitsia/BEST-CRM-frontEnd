@@ -1,5 +1,5 @@
 import axiosImport from 'axios';
-import { API } from '../constants/api.constant';
+import { API } from '../constants/api';
 
 // const logout = async () => {
 //   userActions.logout();

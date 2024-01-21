@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { useOutsideClick } from '../../hooks/useOutsideClick.hook';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 import { createPortal } from 'react-dom';
-import style from './popupMenu.module.scss';
+import style from './menu.module.scss';
 
 interface IProps {
     open: boolean;
@@ -22,7 +22,7 @@ interface ITargetPosition {
 
 const portal: HTMLElement | null = document.getElementById('portal-menu');
 
-export default function PopupMenu({ onClose, open, depRef, windowSize }: IProps) {
+export default function Menu({ onClose, open, depRef, windowSize }: IProps) {
     const [triggerPosition, setTriggerPosition] = useState<ITargetPosition>();
     const menuRef = useRef<HTMLDivElement>(null);
 
@@ -48,16 +48,16 @@ export default function PopupMenu({ onClose, open, depRef, windowSize }: IProps)
             {triggerPosition && (
                 <div
                     ref={menuRef}
-                    className={style['popupMenu']}
+                    className={style['menu']}
                     // data-active={open ? '1' : '0'}
                     style={{
                         top: triggerPosition.bottom + 10,
                         left: triggerPosition.left - 200 + 20 + 14 * Math.sqrt(2) + 14 / 2,
                     }}
                 >
-                    <span className={style['popupMenu__arrow']} />
+                    <span className={style['menu__arrow']} />
 
-                    <div className={style['popupMenu__userInfoContainer']}>
+                    <div className={style['menu__userInfoContainer']}>
                         <h6>User name</h6>
                         <p>user email</p>
                     </div>
