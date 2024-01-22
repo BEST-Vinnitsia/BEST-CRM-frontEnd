@@ -1,20 +1,29 @@
 import React, { useState } from 'react';
-import Input from '../../components/input/Input';
+import { Input, Button, LongButton } from '../../components';
 import { useInput } from '../../hooks/useInput';
 import { useForm } from '../../hooks/useForm';
-import { Button } from '../../components';
+import { Regex } from '../../constants/regex';
 
 export default function LoginPage() {
-    const form = useForm([
-        useInput({ name: 'login', regExp: /[a-z]/, required: true }),
-        useInput({ name: 'password', regExp: /[a-z]/, required: true }),
+    const [form, valid] = useForm([
+        useInput({ name: 'login', regExp: Regex.user.login, required: true, exampleData: 'example@email.com' }),
+        useInput({ name: 'password', regExp: Regex.user.password, required: true, exampleData: 'P@ssword1234' }),
     ]);
+
+    const submit = () => {
+        if (!valid) return;
+        console.log(12323132);
+    };
 
     return (
         <>
-            <Input placeholder="login" hook={form.login} />
-            <Input placeholder="password" hook={form.password} />
-            <Button title="Login" />
+            <div className="flex w-full mt-40 justify-center items-center">
+                <div className="block max-w-md min-w-80 w-full px-2">
+                    <Input placeholder="Login" hook={form.login} />
+                    <Input placeholder="Password" hook={form.password} />
+                    <LongButton title="Login" onClick={submit} disable={!valid} />
+                </div>
+            </div>
         </>
     );
 }

@@ -8,14 +8,19 @@ interface IProps {
     exampleData?: string;
 }
 
-export const useInput = ({ name, required, regExp, exampleData }: IProps): IInputHookRes => {
+export const useInput = ({ name, required = false, regExp, exampleData }: IProps): IInputHookRes => {
     const [value, setValue] = useState('');
-    const [visited, setVisited] = useState(false);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState(true);
     const [errorText, setErrorText] = useState('');
 
     useEffect(() => {
-        if (required && visited) {
+        if (!required && !regExp) {
+            setError(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (required) {
             if (value === '' || value.trim() === '') {
                 setError(true);
                 setErrorText('this field is required');
@@ -25,7 +30,7 @@ export const useInput = ({ name, required, regExp, exampleData }: IProps): IInpu
             }
         }
 
-        if (regExp && visited) {
+        if (regExp) {
             if (!regExp.test(value)) {
                 setError(true);
 
@@ -39,17 +44,16 @@ export const useInput = ({ name, required, regExp, exampleData }: IProps): IInpu
                 setErrorText('');
             }
         }
-    }, [value, visited]);
+    }, [value]);
 
     return {
         name,
+        required,
 
         value,
         setValue,
 
         error,
         errorText,
-
-        setVisited,
     };
 };

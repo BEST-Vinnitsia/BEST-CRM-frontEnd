@@ -1,10 +1,10 @@
 export interface IInputHookRes {
     name: string;
+    required: boolean;
     value: string;
     error: boolean;
     errorText: string;
     setValue: (data: string) => void;
-    setVisited: (data: boolean) => void;
 }
 
 export interface IInputProps extends IInputMainProps {
@@ -18,9 +18,7 @@ export interface IInputHookProps {
 
 interface IInputMainProps {
     value: string;
-    name: string;
     errorText: string;
     error: boolean;
     setValue: (data: string) => void;
-    setVisited: (data: boolean) => void;
 }
