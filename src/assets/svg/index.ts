@@ -14,3 +14,7 @@ export { ReactComponent as SvgClose } from './close.svg';
 // Logo
 export { ReactComponent as SvgBESTLogo } from './bestLogo.svg';
 export { ReactComponent as SvgVinny } from './vinny.svg';
+
+// Password
+export { ReactComponent as SvgHiddenPassword } from './hiddenPassword.svg';
+export { ReactComponent as SvgVisiblePassword } from './visiblePassword.svg';

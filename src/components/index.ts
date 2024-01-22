@@ -2,6 +2,7 @@ export { default as SnackbarContainer } from './snackbar/SnackbarContainer';
 
 // input
 export { default as Input } from './input/Input';
+export { default as InputPassword } from './input/InputPassword';
 
 // breadcrumbs
 export { default as BreadcrumbsContainer } from './breadcrumbs/BreadcrumbsContainer';
