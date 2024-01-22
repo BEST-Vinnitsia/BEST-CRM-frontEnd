@@ -18,3 +18,6 @@ export { ReactComponent as SvgVinny } from './vinny.svg';
 // Password
 export { ReactComponent as SvgHiddenPassword } from './hiddenPassword.svg';
 export { ReactComponent as SvgVisiblePassword } from './visiblePassword.svg';
+
+// loading
+export { ReactComponent as SvgCircle } from './circle.svg';
