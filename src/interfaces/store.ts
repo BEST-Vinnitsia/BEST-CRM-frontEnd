@@ -9,6 +9,8 @@ export interface IStore {
 
 export interface IUserStore {
     name: string | null;
+    token: IUserStoreToken;
+    claims: string[];
 }
 
 export interface IUtilsStore {
@@ -21,6 +23,15 @@ export interface IUtilsStore {
 //
 //
 //
+
+/* ----------------  user  ---------------- */
+
+interface IUserStoreToken {
+    access: string | null;
+    refresh: string | null;
+}
+
+/* ----------------  utils  ---------------- */
 
 interface IUtilsStoreWindowSize {
     width: number;

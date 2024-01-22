@@ -31,18 +31,18 @@ export default function MemberPage() {
 
     return (
         <>
-            <div className="px-4 py-3">
-                <BreadcrumbsContainer
-                    path={[
-                        { url: PATH_MEMBERSHIP.ROOT, title: 'membership' },
-                        { url: PATH_MEMBERSHIP.LIST, title: 'list' },
-                    ]}
-                >
-                    <Button svg={<SvgClose />} title="test" />
-                </BreadcrumbsContainer>
-            </div>
-
             <ScrollY>
+                <div className="px-4 py-3">
+                    <BreadcrumbsContainer
+                        path={[
+                            { url: PATH_MEMBERSHIP.ROOT, title: 'membership' },
+                            { url: PATH_MEMBERSHIP.LIST, title: 'list' },
+                        ]}
+                    >
+                        <Button svg={<SvgClose />} title="test" />
+                    </BreadcrumbsContainer>
+                </div>
+
                 <TableContainer
                     head={[
                         { size: '50', title: '1' },

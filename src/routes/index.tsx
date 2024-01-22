@@ -12,15 +12,16 @@ import {
 } from './paths';
 
 // Guard
-// import AuthGuard from '../guards/auth.guard';
-// import GuestGuard from '../guards/guest.guard';
+import { AuthGuard, ClaimGuard, GuestGuard } from '../guards';
 
 // Imports
 import {
     // Layout
     MainLayout,
+    AuthLayout,
 
-    // Home
+    // Pages
+    LoginPage,
     HomePage,
     BoardPage,
     CommitteePage,
@@ -36,19 +37,19 @@ import {
 
 export default function Router() {
     return useRoutes([
-        // Auth routes
-        // {
-        //   path: 'auth',
-        //   element: (
-        //     <GuestGuard>
-        //       <AuthLayout />
-        //     </GuestGuard>
-        //   ),
-        //   children: [
-        //     { path: 'login', element: <LoginPage /> },
-        //     { path: 'registration', element: <RegistrationPage /> },
-        //   ],
-        // },
+        // Auth
+        {
+            path: 'auth',
+            element: (
+                <GuestGuard>
+                    <AuthLayout />
+                </GuestGuard>
+            ),
+            children: [
+                { path: 'login', element: <LoginPage /> },
+                { path: 'reset-password', element: <></> },
+            ],
+        },
 
         // Home
         {

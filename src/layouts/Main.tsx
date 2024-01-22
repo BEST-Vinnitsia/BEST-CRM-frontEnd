@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import style from './main.layout.module.scss';
+import style from './main.module.scss';
 import {
     PATH_BOARD,
     PATH_COMMITTEE,

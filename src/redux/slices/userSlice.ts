@@ -3,6 +3,11 @@ import { IUserStore } from '../../interfaces/store';
 
 const initialState: IUserStore = {
     name: null,
+    claims: [],
+    token: {
+        access: null,
+        refresh: null,
+    },
 };
 
 const slice = createSlice({
