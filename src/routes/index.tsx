@@ -54,13 +54,21 @@ export default function Router() {
         // Home
         {
             path: '',
-            element: <MainLayout />,
+            element: (
+                <AuthGuard>
+                    <MainLayout />
+                </AuthGuard>
+            ),
             children: [{ path: PATH_HOME.ROOT, element: <HomePage /> }],
         },
 
         {
             path: PATH_BOARD.ROOT,
-            element: <MainLayout />,
+            element: (
+                <AuthGuard>
+                    <MainLayout />
+                </AuthGuard>
+            ),
             children: [
                 { path: '', element: <BoardPage /> },
                 { path: 'create', element: <></> },
@@ -69,31 +77,51 @@ export default function Router() {
 
         {
             path: PATH_COORDINATOR.ROOT,
-            element: <MainLayout />,
+            element: (
+                <AuthGuard>
+                    <MainLayout />
+                </AuthGuard>
+            ),
             children: [{ path: '', element: <CoordinatorPage /> }],
         },
 
         {
             path: PATH_COMMITTEE.ROOT,
-            element: <MainLayout />,
+            element: (
+                <AuthGuard>
+                    <MainLayout />
+                </AuthGuard>
+            ),
             children: [{ path: '', element: <CommitteePage /> }],
         },
 
         {
             path: PATH_MEETING.ROOT,
-            element: <MainLayout />,
+            element: (
+                <AuthGuard>
+                    <MainLayout />
+                </AuthGuard>
+            ),
             children: [{ path: '', element: <MeetingPage /> }],
         },
 
         {
             path: PATH_MEMBER.ROOT,
-            element: <MainLayout />,
+            element: (
+                <AuthGuard>
+                    <MainLayout />
+                </AuthGuard>
+            ),
             children: [{ path: '', element: <MemberPage /> }],
         },
 
         {
             path: PATH_MEMBERSHIP.ROOT,
-            element: <MainLayout />,
+            element: (
+                <AuthGuard>
+                    <MainLayout />
+                </AuthGuard>
+            ),
             children: [
                 { path: '', element: <MembershipPage /> },
                 { path: 'list', element: <MembershipPage /> },

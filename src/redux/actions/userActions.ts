@@ -1,11 +1,28 @@
 import { dispatch } from '../store';
 import slice from '../slices/userSlice';
 
-import { IUserStore } from '../../interfaces/store';
-
 class UserActions {
-    myAccount({ name }: IUserStore) {
-        dispatch(slice.actions.setUserName(name));
+    // token
+    setAccessToken(accessToken: string) {
+        dispatch(slice.actions.setAccessToken(accessToken));
+    }
+
+    setRefreshToken(refreshToken: string) {
+        dispatch(slice.actions.setRefreshToken(refreshToken));
+    }
+
+    //
+    setName(name: string) {
+        dispatch(slice.actions.setName(name));
+    }
+
+    setClaims(claims: string[]) {
+        dispatch(slice.actions.setClaims(claims));
+    }
+
+    //
+    logout() {
+        dispatch(slice.actions.logout());
     }
 }
 

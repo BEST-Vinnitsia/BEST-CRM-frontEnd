@@ -13,7 +13,7 @@ export default function Snackbar({ message, status, onClose }: IProps) {
     const startTimer = () => {
         timerRef.current = setTimeout(() => {
             onClose();
-        }, 1000 * 3);
+        }, 1000 * 10);
     };
 
     const clearTimer = () => {

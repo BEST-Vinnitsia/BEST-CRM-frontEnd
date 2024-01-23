@@ -26,7 +26,7 @@ export interface IUtilsStore {
 
 /* ----------------  user  ---------------- */
 
-interface IUserStoreToken {
+export interface IUserStoreToken {
     access: string | null;
     refresh: string | null;
 }

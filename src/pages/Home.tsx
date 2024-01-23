@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from '../redux/store';
 import { IStore } from '../interfaces/store';
 import { utilsActions } from '../redux/actions/utilsActions';
+import { userActions } from '../redux/actions/userActions';
 
 export default function HomePage() {
     // const isLoading = useSelector((state: IStore) => state.utils.isLoading);
@@ -15,7 +16,26 @@ export default function HomePage() {
 
     return (
         <>
-            <button onClick={handler} className='p-2 m-4 bg-cyan-800 rounded-lg'>loading</button>
+            <button onClick={handler} className="p-2 m-4 bg-cyan-800 rounded-lg">
+                loading
+            </button>
+            <button
+                onClick={() => userActions.setAccessToken(new Date().toISOString())}
+                className="p-2 m-4 bg-cyan-800 rounded-lg"
+            >
+                access
+            </button>
+
+            <button
+                onClick={() => userActions.setRefreshToken(new Date().toISOString())}
+                className="p-2 m-4 bg-cyan-800 rounded-lg"
+            >
+                refresh
+            </button>
+
+            <button onClick={() => userActions.logout()} className="p-2 m-4 bg-cyan-800 rounded-lg">
+                delete
+            </button>
         </>
     );
 }

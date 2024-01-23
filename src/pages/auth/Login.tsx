@@ -3,6 +3,12 @@ import { Input, Button, LongButton, InputPassword } from '../../components';
 import { useInput } from '../../hooks/useInput';
 import { useForm } from '../../hooks/useForm';
 import { Regex } from '../../constants/regex';
+import { authService } from '../../services/auth';
+import { userActions } from '../../redux/actions/userActions';
+import { session } from '../../auth/session';
+import { checkErrorType } from '../../utils/errorType';
+import { delay } from '../../utils/delay';
+import { utilsActions } from '../../redux/actions/utilsActions';
 
 export default function LoginPage() {
     const [loading, setLoading] = useState(false);
@@ -11,9 +17,23 @@ export default function LoginPage() {
         useInput({ name: 'password', regExp: Regex.user.password, required: true, exampleData: 'P@ssword1234' }),
     ]);
 
-    const submit = () => {
-        if (!valid) return;
-        setLoading((prev) => !prev);
+    const submit = async () => {
+        try {
+            if (!valid) return;
+            setLoading((prev) => !prev);
+            const res = await authService.login({ email: form.login.value, password: form.password.value });
+
+            userActions.setAccessToken(res.access);
+            userActions.setRefreshToken(res.refresh);
+
+            session.restoreSession(res);
+        } catch (error) {
+            if (!checkErrorType(error)) return;
+            await delay(1000);
+            setLoading((prev) => !prev);
+            utilsActions.addMessage({ message: error.message, status: 'error' });
+            console.warn(error);
+        }
     };
 
     return (
