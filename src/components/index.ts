@@ -1,4 +1,4 @@
-export { default as SnackbarContainer } from './snackbar/SnackbarContainer';
+export { default as Snackbar } from './snackbar/Snackbar';
 
 // input
 export { default as Input } from './input/Input';

@@ -9,7 +9,7 @@ import { store } from './redux/store';
 import { BrowserRouter } from 'react-router-dom';
 // App component
 import App from './App';
-import { SnackbarContainer } from './components';
+import { Snackbar } from './components';
 import AuthContainer from './auth/AuthContainer';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
@@ -19,7 +19,7 @@ root.render(
             <AuthContainer>
                 <BrowserRouter>
                     <App />
-                    <SnackbarContainer />
+                    <Snackbar />
                 </BrowserRouter>
             </AuthContainer>
         </ReduxProvider>
