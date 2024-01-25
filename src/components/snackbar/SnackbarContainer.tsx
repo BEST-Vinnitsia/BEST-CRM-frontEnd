@@ -5,8 +5,18 @@ import { IStore } from '../../interfaces/store';
 import { createPortal } from 'react-dom';
 import Snackbar from './Snackbar';
 import { utilsActions } from '../../redux/actions/utilsActions';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const portal = document.getElementById('portal-popup-alert');
+
+const transition = { type: 'spring', stiffness: 500, damping: 50, mass: 1 };
+
+const animations = {
+    initial: { translateX: '110%' },
+    animate: { translateX: 0 },
+    exit: { translateX: '110%' },
+    transition,
+};
 
 export default function SnackbarContainer() {
     const messageList = useSelector((state: IStore) => state.utils.message);
@@ -15,21 +25,26 @@ export default function SnackbarContainer() {
     if (!messageList) return <></>;
 
     return createPortal(
-        <div className={style['snackbarContainer']}>
-            {messageList.map((item, i) => {
-                if (i < 5) {
-                    return (
-                        <Snackbar
-                            key={item.id}
-                            message={item.message}
-                            status={item.status}
-                            onClose={() => utilsActions.deleteMessage(item.id)}
-                        />
-                    );
-                }
-                return null;
-            })}
-        </div>,
+        <AnimatePresence>
+            {messageList.length !== 0 && (
+                <motion.div className={style['snackbar']} {...animations}>
+                    {/*  */}
+                    <AnimatePresence>
+                        {messageList.slice(0, 5).map((item) => (
+                            <Snackbar
+                                key={item.id}
+                                message={item.message}
+                                status={item.status}
+                                onClose={() => {
+                                    utilsActions.deleteMessage(item.id);
+                                }}
+                            />
+                        ))}
+                    </AnimatePresence>
+                    {/*  */}
+                </motion.div>
+            )}
+        </AnimatePresence>,
         portal,
     );
 }

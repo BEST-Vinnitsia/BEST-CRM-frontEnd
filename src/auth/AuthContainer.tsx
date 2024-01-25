@@ -11,7 +11,9 @@ export default function AuthContainer({ children }: IProps) {
     const userTokens = useSelector((state: IStore) => state.user.token);
 
     const initialize = useCallback((tokens: IUserStoreToken) => {
-        session.restoreSession(tokens);
+        // session.restoreSession(tokens);
+        console.warn('AUTH IS DISABLE. To enable go src > auth > AuthContainer.tsx and uncomment 14th line');
+        
     }, []);
 
     useEffect(() => {

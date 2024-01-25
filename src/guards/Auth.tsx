@@ -11,7 +11,7 @@ interface IProps {
 export default function AuthGuard({ children }: IProps) {
     const accessToken = useSelector((state: IStore) => state.user.token.access);
 
-    if (!accessToken) return <Navigate to={PATH_AUTH.LOGIN} />;
+    // if (!accessToken) return <Navigate to={PATH_AUTH.LOGIN} />;
 
     return <>{children}</>;
 }

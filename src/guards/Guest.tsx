@@ -11,7 +11,7 @@ interface IProps {
 export default function GuestGuard({ children }: IProps) {
     const accessToken = useSelector((state: IStore) => state.user.token.access);
 
-    if (accessToken) return <Navigate to={PATH_HOME.ROOT} />;
+    // if (accessToken) return <Navigate to={PATH_HOME.ROOT} />;
 
     return <>{children}</>;
 }

@@ -32,7 +32,6 @@ export default function LoginPage() {
             await delay(1000);
             setLoading((prev) => !prev);
             utilsActions.addMessage({ message: error.message, status: 'error' });
-            console.warn(error);
         }
     };
 
