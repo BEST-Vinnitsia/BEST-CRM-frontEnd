@@ -6,7 +6,7 @@ import { SvgClose } from '../assets/svg';
 export default function MembershipPage() {
     return (
         <>
-            <div className='px-4 py-3'>
+            <div className="px-4 py-3">
                 <BreadcrumbsContainer
                     path={[
                         { url: PATH_MEMBERSHIP.ROOT, title: 'membership' },

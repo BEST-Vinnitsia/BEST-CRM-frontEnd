@@ -7,6 +7,7 @@ import {
     PATH_COORDINATOR,
     PATH_ERROR,
     PATH_HOME,
+    PATH_MEETING,
     PATH_MEMBER,
     PATH_MEMBERSHIP,
 } from '../routes/paths';
@@ -92,6 +93,7 @@ export default function MainLayout() {
                             <SidebarButton path={PATH_COORDINATOR.ROOT} svg={<SvgMenu />} title="coordinator" />
                             <SidebarButton path={PATH_COMMITTEE.ROOT} svg={<SvgMenu />} title="committees" />
                             <SidebarButton path={PATH_MEMBERSHIP.ROOT} svg={<SvgMenu />} title="membership" />
+                            <SidebarButton path={PATH_MEETING.ROOT} svg={<SvgMenu />} title="meeting" />
                             <SidebarButton path={PATH_ERROR[404]} svg={<SvgMenu />} title="404" />
                             <SidebarButton path={PATH_ERROR[403]} svg={<SvgMenu />} title="403" />
                             <SidebarButton path={PATH_ERROR[500]} svg={<SvgMenu />} title="500" />
