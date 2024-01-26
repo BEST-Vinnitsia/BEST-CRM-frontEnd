@@ -52,5 +52,10 @@ export const MeetingPage = Loadable(lazy(() => import('../pages/Meeting')));
 export const MemberPage = Loadable(lazy(() => import('../pages/Member')));
 export const MembershipPage = Loadable(lazy(() => import('../pages/Membership')));
 
+// Board and coordinators
+export const BoardAndCoordinatorsListPage = Loadable(lazy(() => import('../pages/boardAndCoordinators/List')));
+export const BoardAndCoordinatorsViewPage = Loadable(lazy(() => import('../pages/boardAndCoordinators/View')));
+export const BoardAndCoordinatorsEditPage = Loadable(lazy(() => import('../pages/boardAndCoordinators/Edit')));
+
 // Error
 export const ErrorPage = Loadable(lazy(() => import('../pages/error/Error')));

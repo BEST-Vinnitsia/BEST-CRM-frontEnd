@@ -2,9 +2,8 @@ import React, { useRef, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import style from './main.module.scss';
 import {
-    PATH_BOARD,
+    PATH_BaC,
     PATH_COMMITTEE,
-    PATH_COORDINATOR,
     PATH_ERROR,
     PATH_HOME,
     PATH_MEETING,
@@ -89,8 +88,7 @@ export default function MainLayout() {
                         <nav className={style['mainLayout__aside__container']}>
                             <SidebarButton path={PATH_HOME.ROOT} svg={<SvgMenu />} title="home" />
                             <SidebarButton path={PATH_MEMBER.ROOT} svg={<SvgMenu />} title="members" />
-                            <SidebarButton path={PATH_BOARD.ROOT} svg={<SvgMenu />} title="board" />
-                            <SidebarButton path={PATH_COORDINATOR.ROOT} svg={<SvgMenu />} title="coordinator" />
+                            <SidebarButton path={PATH_BaC.ROOT} svg={<SvgMenu />} title="board & coordinators" />
                             <SidebarButton path={PATH_COMMITTEE.ROOT} svg={<SvgMenu />} title="committees" />
                             <SidebarButton path={PATH_MEMBERSHIP.ROOT} svg={<SvgMenu />} title="membership" />
                             <SidebarButton path={PATH_MEETING.ROOT} svg={<SvgMenu />} title="meeting" />
@@ -106,11 +104,10 @@ export default function MainLayout() {
                 <MobileSidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} windowSize={windowSize}>
                     <SidebarButton path={PATH_HOME.ROOT} svg={<SvgMenu />} title="home" onClick={openSidebar} />
                     <SidebarButton path={PATH_MEMBER.ROOT} svg={<SvgMenu />} title="members" onClick={openSidebar} />
-                    <SidebarButton path={PATH_BOARD.ROOT} svg={<SvgMenu />} title="board" onClick={openSidebar} />
                     <SidebarButton
-                        path={PATH_COORDINATOR.ROOT}
+                        path={PATH_BaC.ROOT}
                         svg={<SvgMenu />}
-                        title="coordinator"
+                        title="board & coordinators"
                         onClick={openSidebar}
                     />
                     <SidebarButton

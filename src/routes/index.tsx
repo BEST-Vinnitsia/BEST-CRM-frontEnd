@@ -1,15 +1,6 @@
 import React from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
-import {
-    PATH_BOARD,
-    PATH_COMMITTEE,
-    PATH_COORDINATOR,
-    PATH_ERROR,
-    PATH_HOME,
-    PATH_MEETING,
-    PATH_MEMBER,
-    PATH_MEMBERSHIP,
-} from './paths';
+import { PATH_BaC, PATH_COMMITTEE, PATH_ERROR, PATH_HOME, PATH_MEETING, PATH_MEMBER, PATH_MEMBERSHIP } from './paths';
 
 // Guard
 import { AuthGuard, ClaimGuard, GuestGuard } from '../guards';
@@ -29,6 +20,9 @@ import {
     MeetingPage,
     MemberPage,
     MembershipPage,
+    BoardAndCoordinatorsEditPage,
+    BoardAndCoordinatorsListPage,
+    BoardAndCoordinatorsViewPage,
 
     // Error
     ErrorPage,
@@ -63,26 +57,18 @@ export default function Router() {
         },
 
         {
-            path: PATH_BOARD.ROOT,
+            path: PATH_BaC.ROOT,
             element: (
                 <AuthGuard>
                     <MainLayout />
                 </AuthGuard>
             ),
             children: [
-                { path: '', element: <BoardPage /> },
-                { path: 'create', element: <></> },
+                { path: '', element: <BoardAndCoordinatorsListPage /> },
+                { path: 'create', element: <BoardAndCoordinatorsEditPage /> },
+                { path: 'edit', element: <BoardAndCoordinatorsEditPage /> },
+                { path: 'view', element: <BoardAndCoordinatorsViewPage /> },
             ],
-        },
-
-        {
-            path: PATH_COORDINATOR.ROOT,
-            element: (
-                <AuthGuard>
-                    <MainLayout />
-                </AuthGuard>
-            ),
-            children: [{ path: '', element: <CoordinatorPage /> }],
         },
 
         {
