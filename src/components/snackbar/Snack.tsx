@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import style from './snackbar.module.scss';
 import { SvgClose, SvgError, SvgInfo, SvgSuccess, SvgWarn } from '../../assets/svg';
-import { IUtilsStoreMessage } from '../../interfaces/store';
+import { IUtilsStoreMessage } from '../../interfaces/redux/store';
 import { joinStyle } from '../../utils/joinClassName';
 import { motion } from 'framer-motion';
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { useSelector } from '../redux/store';
-import { IStore, IUserStoreToken } from '../interfaces/store';
+import { IStore, IUserStoreToken } from '../interfaces/redux/store';
 import { session } from './session';
 
 interface IProps {

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IUserStore } from '../../interfaces/store';
+import { IUserStore } from '../../interfaces/redux/store';
 
 const initialState: IUserStore = {
     name: null,

@@ -1,4 +1,4 @@
-import { IError } from '../interfaces/error';
+import { IError } from '../interfaces/services/error';
 
 export const setErrorType = (obj: any) => {
     if (obj && typeof obj === 'object') {

@@ -1,9 +1,9 @@
 import axios from '../utils/axios';
 import { userActions } from '../redux/actions/userActions';
-import { IUserStoreToken } from '../interfaces/store';
+import { IUserStoreToken } from '../interfaces/redux/store';
 import { authService } from '../services/auth';
 import { jwtDecode } from 'jwt-decode';
-import { IToken } from '../interfaces/token';
+import { IToken } from '../interfaces/auth/token';
 
 class Session {
     private accessToken: string | null;
@@ -22,8 +22,8 @@ class Session {
         const newAccess = await authService.refresh();
         delete axios.defaults.headers.common.Authorization;
 
-        userActions.setAccessToken(newAccess);
-        return newAccess;
+        userActions.setAccessToken(newAccess.access);
+        return newAccess.access;
     }
 
     //
@@ -39,9 +39,9 @@ class Session {
             this.setTimer();
         } else {
             const newToken = await this.updateAccessToken(refresh);
-            this.accessToken = newToken.access;
+            this.accessToken = newToken;
             this.refreshToken = refresh;
-            axios.defaults.headers.common.Authorization = newToken.access;
+            axios.defaults.headers.common.Authorization = newToken;
             this.setTimer();
         }
     }

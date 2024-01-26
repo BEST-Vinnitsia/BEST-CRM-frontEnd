@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './loader.module.scss';
 import { useSelector } from '../../redux/store';
-import { IStore } from '../../interfaces/store';
+import { IStore } from '../../interfaces/redux/store';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const transition = { type: 'spring', stiffness: 500, damping: 50, mass: 1 };

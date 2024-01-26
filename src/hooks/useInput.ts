@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { IInputHookRes } from '../interfaces/input';
+import { IInputHookRes } from '../interfaces/components/input';
 
 interface IProps {
     name: string;

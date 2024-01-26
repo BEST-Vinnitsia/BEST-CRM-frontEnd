@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import style from './preLoader.module.scss';
 import { SvgBESTLogo, SvgVinny } from '../../assets/svg';
 import { useSelector } from '../../redux/store';
-import { IStore } from '../../interfaces/store';
+import { IStore } from '../../interfaces/redux/store';
 import { utilsActions } from '../../redux/actions/utilsActions';
 import { AnimatePresence, motion } from 'framer-motion';
 

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IUtilsStore } from '../../interfaces/store';
+import { IUtilsStore } from '../../interfaces/redux/store';
 
 const initialState: IUtilsStore = {
     isLoading: false,

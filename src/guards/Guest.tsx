@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from '../redux/store';
-import { IStore } from '../interfaces/store';
+import { IStore } from '../interfaces/redux/store';
 import { Navigate } from 'react-router-dom';
 import { PATH_HOME } from '../routes/paths';
 

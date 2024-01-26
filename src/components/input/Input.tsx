@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import style from './input.module.scss';
-import { IInputHookProps, IInputProps } from '../../interfaces/input';
+import { IInputHookProps, IInputProps } from '../../interfaces/components/input';
 
 type InputProps = IInputProps | IInputHookProps;
 

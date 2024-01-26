@@ -1,5 +1,6 @@
 import axios from '../utils/axios';
 import { API } from '../constants/api';
+import { ILogin, ILoginRes, IRefresh } from '../interfaces/services/auth';
 
 class AuthService {
     root: string;
@@ -13,8 +14,8 @@ class AuthService {
     }
 
     //
-    login = (data: any) => {
-        return new Promise<any>((resolve, reject) => {
+    login = (data: ILogin) => {
+        return new Promise<ILoginRes>((resolve, reject) => {
             axios
                 .post(this.path('login'), data)
                 .then((response) => response.data && resolve(response.data))
@@ -24,7 +25,7 @@ class AuthService {
 
     //
     refresh = () => {
-        return new Promise<any>((resolve, reject) => {
+        return new Promise<IRefresh>((resolve, reject) => {
             axios
                 .post(this.path('refresh'))
                 .then((response) => response.data && resolve(response.data))

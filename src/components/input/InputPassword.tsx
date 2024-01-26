@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import style from './inputPassword.module.scss';
-import { IInputHookProps, IInputProps } from '../../interfaces/input';
+import { IInputHookProps, IInputProps } from '../../interfaces/components/input';
 import CircleButton from '../button/CircleButton';
 import { SvgHiddenPassword, SvgVisiblePassword } from '../../assets/svg';
 
