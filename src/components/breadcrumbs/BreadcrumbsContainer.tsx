@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 interface IProps {
     path: IPath[];
+    title: string;
     children?: React.ReactNode;
 }
 
@@ -14,12 +15,13 @@ interface IPath {
 
 const listContainerStyle = 'breadcrumbsContainer__textContainer__breadcrumbs__listContainer';
 
-export default function BreadcrumbsContainer({ children, path }: IProps) {
+export default function BreadcrumbsContainer({ children, path, title }: IProps) {
     const navigate = useNavigate();
+
     return (
         <div className={style['breadcrumbsContainer']}>
             <div className={style['breadcrumbsContainer__textContainer']}>
-                <h1 className={style['breadcrumbsContainer__textContainer__pageTitle']}>Title</h1>
+                <h1 className={style['breadcrumbsContainer__textContainer__pageTitle']}>{title}</h1>
 
                 <nav className={style['breadcrumbsContainer__textContainer__breadcrumbs']}>
                     <ol className={style[listContainerStyle]}>

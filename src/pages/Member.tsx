@@ -34,6 +34,7 @@ export default function MemberPage() {
             <ScrollY>
                 <div className="px-4 py-3">
                     <BreadcrumbsContainer
+                        title=""
                         path={[
                             { url: PATH_MEMBERSHIP.ROOT, title: 'membership' },
                             { url: PATH_MEMBERSHIP.LIST, title: 'list' },

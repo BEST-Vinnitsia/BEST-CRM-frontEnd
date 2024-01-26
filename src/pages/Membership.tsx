@@ -8,6 +8,7 @@ export default function MembershipPage() {
         <>
             <div className="px-4 py-3">
                 <BreadcrumbsContainer
+                    title=""
                     path={[
                         { url: PATH_MEMBERSHIP.ROOT, title: 'membership' },
                         { url: PATH_MEMBERSHIP.LIST, title: 'list' },
