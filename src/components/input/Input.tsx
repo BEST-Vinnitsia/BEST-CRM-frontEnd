@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import style from './input.module.scss';
 import { IInputHookProps, IInputProps } from '../../interfaces/components/input';
+import { joinStyle } from '../../utils/joinClassName';
 
 export default function Input(props: IInputProps | IInputHookProps) {
     const [focus, setFocus] = useState(false);
@@ -28,16 +29,17 @@ export default function Input(props: IInputProps | IInputHookProps) {
 
     return (
         <div
-            className={style['input']}
-            data-error={visited && error ? '1' : '0'}
-            data-focus={focus ? '1' : '0'}
-            data-change={value !== '' ? '1' : '0'}
+            className={joinStyle(
+                style['input'],
+                style[`input--error-${visited && error}`],
+                style[`input--focus-${focus}`],
+                style[`input--change-${value !== ''}`],
+            )}
         >
             <label className={style['input__label']}>{placeholder}</label>
 
             <div className={style['input__container']}>
                 <input
-                    className={style['input__container__input']}
                     type="text"
                     onFocus={onFocusHandler}
                     onBlur={onBlurHandler}
@@ -46,9 +48,9 @@ export default function Input(props: IInputProps | IInputHookProps) {
                     autoComplete="off"
                 />
 
-                <fieldset className={style['input__container__fieldset']}>
-                    <legend className={style['input__container__fieldset__legend']}>
-                        <span className={style['input__container__fieldset__legend__placeholder']}>{placeholder}</span>
+                <fieldset>
+                    <legend>
+                        <span>{placeholder}</span>
                     </legend>
                 </fieldset>
             </div>

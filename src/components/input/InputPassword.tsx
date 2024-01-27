@@ -3,6 +3,7 @@ import style from './inputPassword.module.scss';
 import { IInputHookProps, IInputProps } from '../../interfaces/components/input';
 import CircleButton from '../button/CircleButton';
 import { SvgHiddenPassword, SvgVisiblePassword } from '../../assets/svg';
+import { joinStyle } from '../../utils/joinClassName';
 
 type InputProps = IInputProps | IInputHookProps;
 
@@ -37,16 +38,17 @@ export default function InputPassword(props: InputProps) {
 
     return (
         <div
-            className={style['inputPassword']}
-            data-error={visited && error ? '1' : '0'}
-            data-focus={focus ? '1' : '0'}
-            data-change={value !== '' ? '1' : '0'}
+            className={joinStyle(
+                style['inputPassword'],
+                style[`inputPassword--error-${visited && error}`],
+                style[`inputPassword--focus-${focus}`],
+                style[`inputPassword--change-${value !== ''}`],
+            )}
         >
             <label className={style['inputPassword__label']}>{placeholder}</label>
 
             <div className={style['inputPassword__container']}>
                 <input
-                    className={style['inputPassword__container__input']}
                     type={visible ? 'text' : 'password'}
                     onFocus={onFocusHandler}
                     onBlur={onBlurHandler}
@@ -55,18 +57,16 @@ export default function InputPassword(props: InputProps) {
                     autoComplete="off"
                 />
 
-                <div className={style['inputPassword__container__button']}>
+                <div className={style['inputPassword__container-button']}>
                     <CircleButton
                         svg={visible ? <SvgVisiblePassword /> : <SvgHiddenPassword />}
                         onClick={visibleHandler}
                     />
                 </div>
 
-                <fieldset className={style['inputPassword__container__fieldset']}>
-                    <legend className={style['inputPassword__container__fieldset__legend']}>
-                        <span className={style['inputPassword__container__fieldset__legend__placeholder']}>
-                            {placeholder}
-                        </span>
+                <fieldset>
+                    <legend>
+                        <span>{placeholder}</span>
                     </legend>
                 </fieldset>
             </div>
