@@ -32,15 +32,15 @@ export default function ErrorPage() {
     if (codeString !== '403' && codeString !== '404' && codeString !== '500') return <Navigate to={PATH_ERROR[404]} />;
 
     return (
-        <div className={joinStyle(style['error-page'], style[`error-page--${code}`])} data-code={codeString}>
-            <div className={style['error-page__item-1']} />
-            <div className={style['error-page__item-2']} />
-            <div className={style['error-page__blur']} />
+        <div className={joinStyle(style['errorPage'], style[`errorPage--${code}`])} data-code={codeString}>
+            <div className={style['errorPage__item1']} />
+            <div className={style['errorPage__item2']} />
+            <div className={style['errorPage__blur']} />
 
-            <div className={style['error-container']}>
-                <div className={style['error-container__code-error']}>{codeString}</div>
-                <div className={style['error-container__title']}>{text[codeString].title}</div>
-                <div className={style['error-container__description']}>{text[codeString].description}</div>
+            <div className={style['errorPage__container']}>
+                <div className={style['errorPage__container-codeError']}>{codeString}</div>
+                <div className={style['errorPage__container-title']}>{text[codeString].title}</div>
+                <div className={style['errorPage__container-description']}>{text[codeString].description}</div>
 
                 <Button onClick={() => navigate(PATH_HOME.ROOT)} svg={<SvgArrow />} title="To home" />
             </div>

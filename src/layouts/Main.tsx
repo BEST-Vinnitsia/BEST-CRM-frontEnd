@@ -52,11 +52,11 @@ export default function MainLayout() {
 
             <div className={style['mainLayout']}>
                 <header className={style['mainLayout__header']}>
-                    <div className={style['mainLayout__header__container']}>
+                    <div className={style['mainLayout__header-container']}>
                         <>
                             {windowSize.width < 992 && <CircleButton onClick={openSidebar} svg={<SvgMenu />} />}
                             {windowSize.width >= 992 && (
-                                <span className={style['mainLayout__header__container__logo']}>
+                                <span className={style['mainLayout__header-container-logo']}>
                                     <SvgLogo />
                                 </span>
                             )}
@@ -85,7 +85,7 @@ export default function MainLayout() {
                 {/*  */}
                 <aside className={style['mainLayout__aside']}>
                     {windowSize.width >= 992 && (
-                        <nav className={style['mainLayout__aside__container']}>
+                        <nav className={style['mainLayout__aside-container']}>
                             <SidebarButton path={PATH_HOME.ROOT} svg={<SvgMenu />} title="home" />
                             <SidebarButton path={PATH_MEMBER.ROOT} svg={<SvgMenu />} title="members" />
                             <SidebarButton path={PATH_BaC.ROOT} svg={<SvgMenu />} title="board & coordinators" />

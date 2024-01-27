@@ -7,8 +7,8 @@ export default function AuthLayout() {
     return (
         <div className={style['authLayout']}>
             <header className={style['authLayout__header']}>
-                <div className={style['authLayout__header__container']}>
-                    <span className={style['authLayout__header__container__logo']}>
+                <div className={style['authLayout__header-container']}>
+                    <span className={style['authLayout__header-container-logo']}>
                         <SvgLogo />
                     </span>
                 </div>

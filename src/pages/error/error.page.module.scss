@@ -1,4 +1,4 @@
-.error-page {
+.errorPage {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,7 +9,7 @@
     overflow: hidden;
     z-index: 1;
 
-    &__item-1 {
+    &__item1 {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -23,7 +23,7 @@
         z-index: 1;
     }
 
-    &__item-2 {
+    &__item2 {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -50,7 +50,7 @@
         z-index: 5;
     }
 
-    .error-container {
+    &__container {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -59,7 +59,7 @@
         padding: 5px;
         z-index: 10;
 
-        &__code-error {
+        &-codeError {
             display: inline-flex;
             padding: 8px 16px;
             align-items: flex-start;
@@ -75,7 +75,7 @@
             background-clip: text;
         }
 
-        &__title {
+        &-title {
             background-clip: text;
             margin-bottom: 16px;
             z-index: 15;
@@ -88,7 +88,7 @@
             text-align: center;
         }
 
-        &__description {
+        &-description {
             margin-bottom: 64px;
             z-index: 15;
             font-family: 'SF-Pro', sans-serif;
@@ -106,19 +106,19 @@
 //
 //
 
-.error-page--403 {
-    .error-page__item-1 {
+.errorPage--403 {
+    .errorPage__item1 {
         $bg-color: #ff3f6d;
         background: $bg-color;
     }
 
-    .error-page__item-2 {
+    .errorPage__item2 {
         $bg-color: rgba(255, 63, 109, 0.5);
         background: $bg-color;
     }
 
-    .error-container {
-        &__code-error {
+    .errorPage__container {
+        &-codeError {
             $first-bg-color: #7d1b33;
             $second-bg-color: #ff3f6d;
             $border-color: #611427;
@@ -129,7 +129,7 @@
             -webkit-text-fill-color: transparent;
         }
 
-        &__title {
+        &-title {
             $shadow-color: rgba(255, 255, 255, 0.2);
             $first-bg-color: #feb8c9;
             $second-bg-color: #ffffff;
@@ -142,19 +142,19 @@
     }
 }
 
-.error-page--404 {
-    .error-page__item-1 {
+.errorPage--404 {
+    .errorPage__item1 {
         $bg-color: rgba(255, 188, 63, 0.5);
         background: $bg-color;
     }
 
-    .error-page__item-2 {
+    .errorPage__item2 {
         $bg-color: #ffaf3f;
         background: $bg-color;
     }
 
-    .error-container {
-        &__code-error {
+    .errorPage__container {
+        &-codeError {
             $border-color: #614314;
             $second-bg-color: #ffb93f;
             $first-bg-color: #7d541b;
@@ -165,7 +165,7 @@
             -webkit-text-fill-color: transparent;
         }
 
-        &__title {
+        &-title {
             $shadow-color: rgba(255, 255, 255, 0.2);
             $first-bg-color: #fef0b8;
             $second-bg-color: #ffffff;
@@ -178,19 +178,19 @@
     }
 }
 
-.error-page--500 {
-    .error-page__item-1 {
+.errorPage--500 {
+    .errorPage__item1 {
         $bg-color: rgba(108, 63, 255, 0.5);
         background: $bg-color;
     }
 
-    .error-page__item-2 {
+    .errorPage__item2 {
         $bg-color: #553fff;
         background: $bg-color;
     }
 
-    .error-container {
-        &__code-error {
+    .errorPage__container {
+        &-codeError {
             $border-color: #1d1461;
             $second-bg-color: #493fff;
             $first-bg-color: #1b1e7d;
@@ -201,7 +201,7 @@
             -webkit-text-fill-color: transparent;
         }
 
-        &__title {
+        &-title {
             $shadow-color: rgba(255, 255, 255, 0.2);
             $first-bg-color: #c5b8fe;
             $second-bg-color: #ffffff;
