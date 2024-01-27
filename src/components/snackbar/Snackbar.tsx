@@ -1,56 +1,50 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import style from './snackbar.module.scss';
-import { SvgClose, SvgError, SvgInfo, SvgSuccess, SvgWarn } from '../../assets/svg';
-import { IUtilsStoreMessage } from '../../interfaces/store';
+import { useSelector } from '../../redux/store';
+import { IStore } from '../../interfaces/redux/store';
+import { createPortal } from 'react-dom';
+import Snack from './Snack';
+import { utilsActions } from '../../redux/actions/utilsActions';
+import { AnimatePresence, motion } from 'framer-motion';
 
-interface IProps extends Pick<IUtilsStoreMessage, 'message' | 'status'> {
-    onClose: () => void;
-}
+const portal = document.getElementById('portal-popup-alert');
 
-export default function Snackbar({ message, status, onClose }: IProps) {
-    const timerRef = useRef<NodeJS.Timeout>();
+const transition = { type: 'spring', stiffness: 500, damping: 50, mass: 1 };
 
-    const startTimer = () => {
-        timerRef.current = setTimeout(() => {
-            onClose();
-        }, 1000 * 3);
-    };
+const animations = {
+    initial: { translateX: '110%' },
+    animate: { translateX: 0 },
+    exit: { translateX: '110%' },
+    transition,
+};
 
-    const clearTimer = () => {
-        clearTimeout(timerRef.current);
-    };
+export default function Snackbar() {
+    const messageList = useSelector((state: IStore) => state.utils.message);
 
-    useEffect(() => {
-        startTimer();
+    if (!portal) return <></>;
+    if (!messageList) return <></>;
 
-        return () => {
-            clearTimer();
-        };
-    }, []);
-
-    const setSvg = () => {
-        if (status === 'info') return <SvgInfo />;
-        if (status === 'success') return <SvgSuccess />;
-        if (status === 'warn') return <SvgWarn />;
-        if (status === 'error') return <SvgError />;
-        return <></>;
-    };
-
-    return (
-        <div className={style['snackbarContainer__alert']} onMouseLeave={startTimer} onMouseEnter={clearTimer}>
-            <div className={style['snackbarContainer__alert__svgBlock']} data-code={`${status}`}>
-                <span className={style['snackbarContainer__alert__svgBlock__container']}>
-                    <span className={style['snackbarContainer__alert__svgBlock__container__svg']}>{setSvg()}</span>
-                </span>
-            </div>
-            <span className={style['snackbarContainer__alert__message']}>{message}</span>
-            <div className={style['snackbarContainer__alert__buttonBlock']}>
-                <button className={style['snackbarContainer__alert__buttonBlock__button']} onClick={onClose}>
-                    <span className={style['snackbarContainer__alert__buttonBlock__button__svg']}>
-                        <SvgClose />
-                    </span>
-                </button>
-            </div>
-        </div>
+    return createPortal(
+        <AnimatePresence>
+            {messageList.length !== 0 && (
+                <motion.div className={style['snackbar']} {...animations}>
+                    {/*  */}
+                    <AnimatePresence>
+                        {messageList.slice(0, 5).map((item) => (
+                            <Snack
+                                key={item.id}
+                                message={item.message}
+                                status={item.status}
+                                onClose={() => {
+                                    utilsActions.deleteMessage(item.id);
+                                }}
+                            />
+                        ))}
+                    </AnimatePresence>
+                    {/*  */}
+                </motion.div>
+            )}
+        </AnimatePresence>,
+        portal,
     );
 }

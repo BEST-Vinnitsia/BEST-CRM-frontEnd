@@ -1,9 +1,11 @@
 import React from 'react';
 import style from './breadcrumbs.module.scss';
 import { useNavigate } from 'react-router-dom';
+import { joinStyle } from '../../utils/joinClassName';
 
 interface IProps {
     path: IPath[];
+    title: string;
     children?: React.ReactNode;
 }
 
@@ -12,34 +14,36 @@ interface IPath {
     title: string;
 }
 
-const listContainerStyle = 'breadcrumbsContainer__textContainer__breadcrumbs__listContainer';
-
-export default function BreadcrumbsContainer({ children, path }: IProps) {
+export default function BreadcrumbsContainer({ children, path, title }: IProps) {
     const navigate = useNavigate();
-    return (
-        <div className={style['breadcrumbsContainer']}>
-            <div className={style['breadcrumbsContainer__textContainer']}>
-                <h1 className={style['breadcrumbsContainer__textContainer__pageTitle']}>Title</h1>
 
-                <nav className={style['breadcrumbsContainer__textContainer__breadcrumbs']}>
-                    <ol className={style[listContainerStyle]}>
+    return (
+        <div className={style['breadcrumbs']}>
+            <div className={style['breadcrumbs__textBlock']}>
+                <h1 className={style['breadcrumbs__textBlock-title']}>{title}</h1>
+
+                <nav className={style['breadcrumbs__textBlock-breadcrumb']}>
+                    <ol className={style['breadcrumbs__textBlock-breadcrumb-listBlock']}>
                         {path.map((item, i) => {
                             return (
                                 <React.Fragment key={i}>
-                                    {i !== 0 && <li className={style[`${listContainerStyle}__list`]}>/</li>}
-                                    {path.length - 1 === i ? (
-                                        <li className={style[`${listContainerStyle}__rout`]} data-here="1">
-                                            {item.title}
-                                        </li>
-                                    ) : (
-                                        <li
-                                            className={style[`${listContainerStyle}__rout`]}
-                                            data-here="0"
-                                            onClick={() => navigate(item.url)}
-                                        >
-                                            {item.title}
-                                        </li>
+                                    {i !== 0 && (
+                                        <li className={style['breadcrumbs__textBlock-breadcrumb-listBlock-list']}>/</li>
                                     )}
+
+                                    <li
+                                        onClick={() => path.length - 1 !== i && navigate(item.url)}
+                                        className={joinStyle(
+                                            style['breadcrumbs__textBlock-breadcrumb-listBlock-rout'],
+                                            style[
+                                                `breadcrumbs__textBlock-breadcrumb-listBlock-rout--${
+                                                    path.length - 1 === i ? 'disable' : 'active'
+                                                }`
+                                            ],
+                                        )}
+                                    >
+                                        {item.title}
+                                    </li>
                                 </React.Fragment>
                             );
                         })}
@@ -47,7 +51,7 @@ export default function BreadcrumbsContainer({ children, path }: IProps) {
                 </nav>
             </div>
 
-            <div className={style['breadcrumbsContainer__insertContainer']}>{children}</div>
+            <div>{children}</div>
         </div>
     );
 }

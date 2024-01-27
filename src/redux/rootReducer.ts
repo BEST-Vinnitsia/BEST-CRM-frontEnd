@@ -19,7 +19,7 @@ const userPersistConfig = {
     key: 'user',
     storage,
     keyPrefix: 'redux-',
-    whitelist: ['name'],
+    whitelist: ['name', 'claims', 'token'],
 };
 
 const rootReducer = combineReducers({

@@ -1,0 +1,42 @@
+.table__body-cell {
+    display: table-cell;
+    padding: 16px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    .table__text {
+        display: block;
+        vertical-align: top;
+        text-align: left;
+        line-height: 1.57143;
+        font-size: 0.875rem;
+        font-family: 'SF-Pro', sans-serif;
+        font-weight: 400;
+        color: rgb(255, 255, 255);
+        white-space: nowrap;
+
+        &--cascade {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .table__text-cascade-text {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .table__text-cascade-subtext {
+            color: rgb(99, 115, 129);
+
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        &--wrap {
+            white-space: normal;
+        }
+    }
+}

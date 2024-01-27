@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './userButton.module.scss';
+import { joinStyle } from '../../utils/joinClassName';
 
 interface IProps {
     svg?: React.ReactNode;
@@ -13,12 +14,16 @@ export default function UserButton({ img, svg, active, onClick, buttonRef }: IPr
     if (!img && !svg) return <></>;
 
     return (
-        <button ref={buttonRef} className={style['userButton']} onClick={onClick} data-active={active ? '1' : '0'}>
+        <button
+            ref={buttonRef}
+            onClick={onClick}
+            className={joinStyle(style['userButton'], style[`userButton--active-${active}`])}
+        >
             <div className={style['userButton__container']}>
                 {img ? (
-                    <img src={img} alt="" className={style['userButton__container__img']} />
+                    <img src={img} alt="" className={style['userButton__container-img']} />
                 ) : (
-                    <span className={style['userButton__container__svg']}>{svg && svg}</span>
+                    <span className={style['userButton__container-svg']}>{svg && svg}</span>
                 )}
             </div>
         </button>
