@@ -1,6 +1,7 @@
 import React from 'react';
 import style from './longButton.module.scss';
-import { SvgCircle, SvgClose } from '../../assets/svg';
+import { SvgCircle } from '../../assets/svg';
+import { joinStyle } from '../../utils/joinClassName';
 
 interface IProps {
     title: string;
@@ -12,16 +13,16 @@ interface IProps {
 export default function LongButton({ title, onClick, disable = false, loading = false }: IProps) {
     return (
         <button
-            className={style['longButton']}
-            data-disable={disable ? '1' : '0'}
-            data-loading={loading ? '1' : '0'}
             onClick={onClick}
+            className={joinStyle(
+                style['longButton'],
+                style[`longButton--disable-${disable}`],
+                style[`longButton--loading-${loading}`],
+            )}
         >
             {loading ? (
                 <span className={style['longButton__loading']}>
-                    <span className={style['longButton__loading__spinner']}>
-                        <SvgCircle />
-                    </span>
+                    <SvgCircle />
                 </span>
             ) : (
                 <span className={style['longButton__title']}>{title}</span>

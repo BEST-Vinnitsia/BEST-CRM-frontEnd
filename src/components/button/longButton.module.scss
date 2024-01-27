@@ -1,4 +1,10 @@
 .longButton {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    user-select: none;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,7 +13,6 @@
     border-radius: 8px;
     border: 2px solid rgba(35, 35, 35, 0.7);
     background-color: #fff;
-    cursor: pointer;
 
     &__loading {
         position: absolute;
@@ -16,61 +21,25 @@
         left: 50%;
         transform: translate(-50%);
         color: rgba(145, 158, 171, 0.8);
-
-        &__spinner {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            animation: 1.4s linear 0s infinite normal none running animation-rotate;
-
-            svg {
-                display: block;
-
-                circle {
-                    stroke: currentcolor;
-                    stroke-dasharray: 80px, 200px;
-                    stroke-dashoffset: 0;
-                    animation: 1.4s ease-in-out 0s infinite normal none running animation-circle;
-                }
-            }
-        }
     }
 
     &__title {
         color: #000;
         font-size: 1rem;
     }
+}
 
-    &[data-disable='1'] {
-        background-color: rgba(61, 61, 61, 0.9);
-        cursor: not-allowed;
-    }
+// disable
+.longButton--disable-true {
+    background-color: rgba(61, 61, 61, 0.9);
+    cursor: not-allowed;
+}
 
-    &[data-loading='1'] {
-        background-color: rgb(91, 91, 91);
-    }
+.longButton--disable-false {
+    cursor: pointer;
+}
 
-    @keyframes animation-rotate {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-
-    @keyframes animation-circle {
-        0% {
-            stroke-dasharray: 1px, 200px;
-            stroke-dashoffset: 0;
-        }
-        50% {
-            stroke-dasharray: 100px, 200px;
-            stroke-dashoffset: -15px;
-        }
-        100% {
-            stroke-dasharray: 100px, 200px;
-            stroke-dashoffset: -125px;
-        }
-    }
+// loading
+.longButton--loading-true {
+    background-color: rgb(91, 91, 91);
 }

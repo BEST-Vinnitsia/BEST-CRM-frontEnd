@@ -9,7 +9,7 @@ interface IProps {
 export default function CircleButton(props: IProps) {
     return (
         <button className={style['circleButton']} onClick={props.onClick}>
-            <div className={style['circleButton__container']}>{props.svg}</div>
+            <div className={style['circleButton__svg']}>{props.svg}</div>
         </button>
     );
 }
