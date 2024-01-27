@@ -1,6 +1,15 @@
 import React from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
-import { PATH_BaC, PATH_COMMITTEE, PATH_ERROR, PATH_HOME, PATH_MEETING, PATH_MEMBER, PATH_MEMBERSHIP } from './paths';
+import {
+    PATH_AUTH,
+    PATH_BaC,
+    PATH_COMMITTEE,
+    PATH_ERROR,
+    PATH_HOME,
+    PATH_MEETING,
+    PATH_MEMBER,
+    PATH_MEMBERSHIP,
+} from './paths';
 
 // Guard
 import { AuthGuard, ClaimGuard, GuestGuard } from '../guards';
@@ -33,15 +42,15 @@ export default function Router() {
     return useRoutes([
         // Auth
         {
-            path: 'auth',
+            path: PATH_AUTH.ROOT,
             element: (
                 <GuestGuard>
                     <AuthLayout />
                 </GuestGuard>
             ),
             children: [
-                { path: 'login', element: <LoginPage /> },
-                { path: 'reset-password', element: <></> },
+                { path: PATH_AUTH.LOGIN, element: <LoginPage /> },
+                { path: PATH_AUTH.RESET, element: <></> },
             ],
         },
 
@@ -56,6 +65,7 @@ export default function Router() {
             children: [{ path: PATH_HOME.ROOT, element: <HomePage /> }],
         },
 
+        // Board and coordinators
         {
             path: PATH_BaC.ROOT,
             element: (
@@ -64,13 +74,14 @@ export default function Router() {
                 </AuthGuard>
             ),
             children: [
-                { path: '', element: <BoardAndCoordinatorsListPage /> },
-                { path: 'create', element: <BoardAndCoordinatorsEditPage /> },
-                { path: 'edit', element: <BoardAndCoordinatorsEditPage /> },
-                { path: 'view', element: <BoardAndCoordinatorsViewPage /> },
+                { path: PATH_BaC.LIST, element: <BoardAndCoordinatorsListPage /> },
+                { path: PATH_BaC.CREATE, element: <BoardAndCoordinatorsEditPage /> },
+                { path: PATH_BaC.EDIT, element: <BoardAndCoordinatorsEditPage /> },
+                { path: PATH_BaC.VIEW, element: <BoardAndCoordinatorsViewPage /> },
             ],
         },
 
+        // Committee
         {
             path: PATH_COMMITTEE.ROOT,
             element: (
@@ -78,9 +89,10 @@ export default function Router() {
                     <MainLayout />
                 </AuthGuard>
             ),
-            children: [{ path: '', element: <CommitteePage /> }],
+            children: [{ path: PATH_COMMITTEE.ROOT, element: <CommitteePage /> }],
         },
 
+        // Meeting
         {
             path: PATH_MEETING.ROOT,
             element: (
@@ -88,9 +100,10 @@ export default function Router() {
                     <MainLayout />
                 </AuthGuard>
             ),
-            children: [{ path: '', element: <MeetingPage /> }],
+            children: [{ path: PATH_MEETING.ROOT, element: <MeetingPage /> }],
         },
 
+        // Member
         {
             path: PATH_MEMBER.ROOT,
             element: (
@@ -98,9 +111,10 @@ export default function Router() {
                     <MainLayout />
                 </AuthGuard>
             ),
-            children: [{ path: '', element: <MemberPage /> }],
+            children: [{ path: PATH_MEMBER.ROOT, element: <MemberPage /> }],
         },
 
+        // Membership
         {
             path: PATH_MEMBERSHIP.ROOT,
             element: (
@@ -108,10 +122,7 @@ export default function Router() {
                     <MainLayout />
                 </AuthGuard>
             ),
-            children: [
-                { path: '', element: <MembershipPage /> },
-                { path: 'list', element: <MembershipPage /> },
-            ],
+            children: [{ path: PATH_MEMBERSHIP.ROOT, element: <MembershipPage /> }],
         },
 
         // Error routes

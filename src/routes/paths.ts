@@ -9,6 +9,7 @@ const member = (root: string) => ({
 
 const boardAndCoordinators = (root: string) => ({
     ROOT: `${root}`,
+    LIST: `${root}`,
     CREATE: `${root}/create`,
     EDIT: `${root}/edit`,
     VIEW: `${root}/view`,
@@ -34,8 +35,9 @@ const account = (root: string) => ({
 });
 
 const auth = (root: string) => ({
+    ROOT: `${root}`,
     LOGIN: `${root}/login`,
-    REGISTRATION: `${root}/registration`,
+    RESET: `${root}/reset-password`,
 });
 
 const error = (root: string) => ({
