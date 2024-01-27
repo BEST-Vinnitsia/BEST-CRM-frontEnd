@@ -7,14 +7,12 @@ const member = (root: string) => ({
     LIST: `${root}/list`,
 });
 
-const board = (root: string) => ({
+const boardAndCoordinators = (root: string) => ({
     ROOT: `${root}`,
-    LIST: `${root}/list`,
-});
-
-const coordinator = (root: string) => ({
-    ROOT: `${root}`,
-    LIST: `${root}/list`,
+    LIST: `${root}`,
+    CREATE: `${root}/create`,
+    EDIT: `${root}/edit`,
+    VIEW: `${root}/view`,
 });
 
 const committee = (root: string) => ({
@@ -37,8 +35,9 @@ const account = (root: string) => ({
 });
 
 const auth = (root: string) => ({
+    ROOT: `${root}`,
     LOGIN: `${root}/login`,
-    REGISTRATION: `${root}/registration`,
+    RESET: `${root}/reset-password`,
 });
 
 const error = (root: string) => ({
@@ -49,8 +48,7 @@ const error = (root: string) => ({
 
 export const PATH_HOME = home('/home');
 export const PATH_MEMBER = member('/member');
-export const PATH_BOARD = board('/board');
-export const PATH_COORDINATOR = coordinator('/coordinator');
+export const PATH_BaC = boardAndCoordinators('/boardAndCoordinators');
 export const PATH_COMMITTEE = committee('/committee');
 export const PATH_MEMBERSHIP = membership('/membership');
 export const PATH_MEETING = meeting('/meeting');

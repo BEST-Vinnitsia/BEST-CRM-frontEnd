@@ -1,4 +1,8 @@
-export { default as SnackbarContainer } from './snackbar/SnackbarContainer';
+export { default as Snackbar } from './snackbar/Snackbar';
+
+// input
+export { default as Input } from './input/Input';
+export { default as InputPassword } from './input/InputPassword';
 
 // breadcrumbs
 export { default as BreadcrumbsContainer } from './breadcrumbs/BreadcrumbsContainer';
@@ -13,6 +17,7 @@ export { default as MenuText } from './menu/MenuText';
 export { default as Button } from './button/Button';
 export { default as UserButton } from './button/UserButton';
 export { default as CircleButton } from './button/CircleButton';
+export { default as LongButton } from './button/LongButton';
 
 // loader
 export { default as Loader } from './loader/Loader';

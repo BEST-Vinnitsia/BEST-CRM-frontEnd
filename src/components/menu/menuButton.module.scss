@@ -25,17 +25,19 @@
     }
 
     &__title {
-        color: rgb(255, 255, 255);
         white-space: nowrap;
         line-height: 1.57143;
         font-size: 0.875rem;
-        font-family: 'Public Sans', sans-serif;
+        font-family: 'SF-Pro', sans-serif;
         font-weight: 700;
-
         appearance: none;
+    }
 
-        &[data-color='red'] {
-            color: rgb(255, 86, 48);
-        }
+    &__title--white {
+        color: rgb(255, 255, 255);
+    }
+
+    &__title--red {
+        color: rgb(255, 86, 48);
     }
 }

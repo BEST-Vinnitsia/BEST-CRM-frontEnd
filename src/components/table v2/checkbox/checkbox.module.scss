@@ -1,0 +1,67 @@
+.table__body-cell {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    user-select: none;
+
+    display: table-cell;
+    width: 44px;
+    min-height: 44px;
+    height: 100%;
+    padding: 0px 0px 0px 8px;
+    vertical-align: middle;
+}
+
+.table__head-cell {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    user-select: none;
+
+    display: table-cell;
+    width: 44px;
+    min-height: 44px;
+    height: 100%;
+    padding: 0px 0px 0px 8px;
+    vertical-align: middle;
+    border-bottom: 1px dashed rgb(46, 50, 54);
+    background-color: rgba(145, 158, 171, 0.12);
+}
+
+//
+//
+//
+
+.checkbox {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    margin: 0px;
+    border-radius: 50%;
+    border: 0px;
+    background-color: transparent;
+    outline: 0px;
+    cursor: pointer;
+
+    &__svg-container {
+        display: block;
+        width: 20px;
+        height: 20px;
+
+        &--active {
+            color: rgb(7, 141, 238);
+        }
+
+        &--inactive {
+            color: rgb(145, 158, 171);
+        }
+    }
+
+    &:hover {
+        background-color: rgba(7, 141, 238, 0.08);
+    }
+}

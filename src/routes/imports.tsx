@@ -37,7 +37,11 @@ const Loadable = (Component: ComponentType) => {
 // ----------------------------------------------------------------------
 
 // Layouts
-export const MainLayout = Loadable(lazy(() => import('../layouts/MainLayout')));
+export const MainLayout = Loadable(lazy(() => import('../layouts/Main')));
+export const AuthLayout = Loadable(lazy(() => import('../layouts/Auth')));
+
+// Auth
+export const LoginPage = Loadable(lazy(() => import('../pages/auth/Login')));
 
 // Home
 export const HomePage = Loadable(lazy(() => import('../pages/Home')));
@@ -47,6 +51,11 @@ export const CoordinatorPage = Loadable(lazy(() => import('../pages/Coordinator'
 export const MeetingPage = Loadable(lazy(() => import('../pages/Meeting')));
 export const MemberPage = Loadable(lazy(() => import('../pages/Member')));
 export const MembershipPage = Loadable(lazy(() => import('../pages/Membership')));
+
+// Board and coordinators
+export const BoardAndCoordinatorsListPage = Loadable(lazy(() => import('../pages/boardAndCoordinators/List')));
+export const BoardAndCoordinatorsViewPage = Loadable(lazy(() => import('../pages/boardAndCoordinators/View')));
+export const BoardAndCoordinatorsEditPage = Loadable(lazy(() => import('../pages/boardAndCoordinators/Edit')));
 
 // Error
 export const ErrorPage = Loadable(lazy(() => import('../pages/error/Error')));
