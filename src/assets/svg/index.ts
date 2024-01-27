@@ -21,3 +21,7 @@ export { ReactComponent as SvgVisiblePassword } from './visiblePassword.svg';
 
 // loading
 export { ReactComponent as SvgCircle } from './circle.svg';
+
+export { ReactComponent as SvgCheckboxInactive } from './checkboxInactive.svg';
+export { ReactComponent as SvgCheckboxActive } from './checkboxActive.svg';
+export { ReactComponent as SvgCheckboxClear } from './checkboxClear.svg';

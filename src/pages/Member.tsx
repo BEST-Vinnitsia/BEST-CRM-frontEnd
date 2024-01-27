@@ -2,26 +2,11 @@ import React, { useEffect } from 'react';
 import style from '../styles/style.module.scss';
 import { TableRow, TableContainer, ScrollY, BreadcrumbsContainer, Button } from '../components';
 import { SvgClose } from '../assets/svg';
-import { PATH_MEMBERSHIP } from '../routes/paths';
+import { PATH_MEMBER, PATH_MEMBERSHIP } from '../routes/paths';
 import { utilsActions } from '../redux/actions/utilsActions';
+import Table from '../components/table v2/table';
 
-const test = [
-    [
-        { title: 'asdasd' },
-        { title: 'asdasd' },
-        { title: 'asdasd' },
-        { title: 'asdasd' },
-        { title: 'asdasd' },
-        { title: 'asdasd' },
-        { title: 'asdasd' },
-        { title: 'asdasd' },
-        { title: 'asdasd' },
-        { title: 'asdasd' },
-    ],
-];
 export default function MemberPage() {
-    const repeatedArray = Array.from({ length: 15 }, () => [...test[0]]);
-
     useEffect(() => {
         utilsActions.loading(true);
         setTimeout(() => {
@@ -32,36 +17,19 @@ export default function MemberPage() {
     return (
         <>
             <ScrollY>
-                <div className="px-4 py-3">
+                <div className="p-2">
                     <BreadcrumbsContainer
-                        title=""
+                        title="Members"
                         path={[
-                            { url: PATH_MEMBERSHIP.ROOT, title: 'membership' },
-                            { url: PATH_MEMBERSHIP.LIST, title: 'list' },
+                            { url: PATH_MEMBER.ROOT, title: 'member' },
+                            { url: PATH_MEMBER.LIST, title: 'list' },
                         ]}
                     >
-                        <Button svg={<SvgClose />} title="test" />
+                        <Button title="Add member" />
                     </BreadcrumbsContainer>
                 </div>
 
-                <TableContainer
-                    head={[
-                        { size: '50', title: '1' },
-                        { size: '100', title: '2' },
-                        { size: '150', title: '3' },
-                        { size: '200', title: '4' },
-                        { size: '100', title: '5' },
-                        { size: '100', title: '6' },
-                        { size: '100', title: '7' },
-                        { size: '100', title: '8' },
-                        { size: '100', title: '9' },
-                        { size: '100', title: '10' },
-                    ]}
-                >
-                    {repeatedArray.map((item, i) => (
-                        <TableRow key={i} titleList={item} />
-                    ))}
-                </TableContainer>
+                <Table />
             </ScrollY>
         </>
     );

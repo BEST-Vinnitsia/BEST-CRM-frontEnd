@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './tableTab.module.scss';
+import style from './tab.module.scss';
 import { joinStyle } from '../../../utils/joinClassName';
 
 interface IProps {
@@ -10,7 +10,7 @@ interface IProps {
     onClick?: () => void;
 }
 
-export default function TableTab({ label, title, status = false, color = 'white', onClick }: IProps) {
+export default function Tab({ label, title, status = false, color = 'white', onClick }: IProps) {
     return (
         <button
             className={joinStyle(
