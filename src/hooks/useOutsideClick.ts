@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 
-interface IPrps {
+interface IProps {
     elementRef: React.RefObject<HTMLElement>;
     triggerRef?: React.RefObject<HTMLElement>;
     handler: () => void;
     enable?: boolean;
 }
 
-export const useOutsideClick = ({ elementRef, triggerRef, handler, enable = true }: IPrps) => {
+export const useOutsideClick = ({ elementRef, triggerRef, handler, enable = true }: IProps) => {
     useEffect(() => {
         if (!enable) return;
 

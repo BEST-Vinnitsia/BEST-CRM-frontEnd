@@ -1,9 +1,9 @@
 import React from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 import {
-    PATH_BOARD,
+    PATH_AUTH,
+    PATH_BaC,
     PATH_COMMITTEE,
-    PATH_COORDINATOR,
     PATH_ERROR,
     PATH_HOME,
     PATH_MEETING,
@@ -12,15 +12,16 @@ import {
 } from './paths';
 
 // Guard
-// import AuthGuard from '../guards/auth.guard';
-// import GuestGuard from '../guards/guest.guard';
+import { AuthGuard, ClaimGuard, GuestGuard } from '../guards';
 
 // Imports
 import {
     // Layout
     MainLayout,
+    AuthLayout,
 
-    // Home
+    // Pages
+    LoginPage,
     HomePage,
     BoardPage,
     CommitteePage,
@@ -28,6 +29,9 @@ import {
     MeetingPage,
     MemberPage,
     MembershipPage,
+    BoardAndCoordinatorsEditPage,
+    BoardAndCoordinatorsListPage,
+    BoardAndCoordinatorsViewPage,
 
     // Error
     ErrorPage,
@@ -36,67 +40,89 @@ import {
 
 export default function Router() {
     return useRoutes([
-        // Auth routes
-        // {
-        //   path: 'auth',
-        //   element: (
-        //     <GuestGuard>
-        //       <AuthLayout />
-        //     </GuestGuard>
-        //   ),
-        //   children: [
-        //     { path: 'login', element: <LoginPage /> },
-        //     { path: 'registration', element: <RegistrationPage /> },
-        //   ],
-        // },
+        // Auth
+        {
+            path: PATH_AUTH.ROOT,
+            element: (
+                <GuestGuard>
+                    <AuthLayout />
+                </GuestGuard>
+            ),
+            children: [
+                { path: PATH_AUTH.LOGIN, element: <LoginPage /> },
+                { path: PATH_AUTH.RESET, element: <></> },
+            ],
+        },
 
         // Home
         {
             path: '',
-            element: <MainLayout />,
+            element: (
+                <AuthGuard>
+                    <MainLayout />
+                </AuthGuard>
+            ),
             children: [{ path: PATH_HOME.ROOT, element: <HomePage /> }],
         },
 
+        // Board and coordinators
         {
-            path: PATH_BOARD.ROOT,
-            element: <MainLayout />,
+            path: PATH_BaC.ROOT,
+            element: (
+                <AuthGuard>
+                    <MainLayout />
+                </AuthGuard>
+            ),
             children: [
-                { path: '', element: <BoardPage /> },
-                { path: 'create', element: <></> },
+                { path: PATH_BaC.LIST, element: <BoardAndCoordinatorsListPage /> },
+                { path: PATH_BaC.CREATE, element: <BoardAndCoordinatorsEditPage /> },
+                { path: PATH_BaC.EDIT, element: <BoardAndCoordinatorsEditPage /> },
+                { path: PATH_BaC.VIEW, element: <BoardAndCoordinatorsViewPage /> },
             ],
         },
 
-        {
-            path: PATH_COORDINATOR.ROOT,
-            element: <MainLayout />,
-            children: [{ path: '', element: <CoordinatorPage /> }],
-        },
-
+        // Committee
         {
             path: PATH_COMMITTEE.ROOT,
-            element: <MainLayout />,
-            children: [{ path: '', element: <CommitteePage /> }],
+            element: (
+                <AuthGuard>
+                    <MainLayout />
+                </AuthGuard>
+            ),
+            children: [{ path: PATH_COMMITTEE.ROOT, element: <CommitteePage /> }],
         },
 
+        // Meeting
         {
             path: PATH_MEETING.ROOT,
-            element: <MainLayout />,
-            children: [{ path: '', element: <MeetingPage /> }],
+            element: (
+                <AuthGuard>
+                    <MainLayout />
+                </AuthGuard>
+            ),
+            children: [{ path: PATH_MEETING.ROOT, element: <MeetingPage /> }],
         },
 
+        // Member
         {
             path: PATH_MEMBER.ROOT,
-            element: <MainLayout />,
-            children: [{ path: '', element: <MemberPage /> }],
+            element: (
+                <AuthGuard>
+                    <MainLayout />
+                </AuthGuard>
+            ),
+            children: [{ path: PATH_MEMBER.ROOT, element: <MemberPage /> }],
         },
 
+        // Membership
         {
             path: PATH_MEMBERSHIP.ROOT,
-            element: <MainLayout />,
-            children: [
-                { path: '', element: <MembershipPage /> },
-                { path: 'list', element: <MembershipPage /> },
-            ],
+            element: (
+                <AuthGuard>
+                    <MainLayout />
+                </AuthGuard>
+            ),
+            children: [{ path: PATH_MEMBERSHIP.ROOT, element: <MembershipPage /> }],
         },
 
         // Error routes

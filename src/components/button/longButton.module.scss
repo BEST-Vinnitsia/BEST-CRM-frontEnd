@@ -1,0 +1,45 @@
+.longButton {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    user-select: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 50px;
+    border-radius: 8px;
+    border: 2px solid rgba(35, 35, 35, 0.7);
+    background-color: #fff;
+
+    &__loading {
+        position: absolute;
+        visibility: visible;
+        display: flex;
+        left: 50%;
+        transform: translate(-50%);
+        color: rgba(145, 158, 171, 0.8);
+    }
+
+    &__title {
+        color: #000;
+        font-size: 1rem;
+    }
+}
+
+// disable
+.longButton--disable-true {
+    background-color: rgba(61, 61, 61, 0.9);
+    cursor: not-allowed;
+}
+
+.longButton--disable-false {
+    cursor: pointer;
+}
+
+// loading
+.longButton--loading-true {
+    background-color: rgb(91, 91, 91);
+}

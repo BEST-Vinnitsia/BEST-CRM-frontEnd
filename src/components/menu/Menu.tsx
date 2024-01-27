@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import { createPortal } from 'react-dom';
 import style from './menu.module.scss';
+import { AnimatePresence, motion } from 'framer-motion';
 
 interface IProps {
     children: React.ReactNode;
@@ -23,6 +24,15 @@ interface ITargetPosition {
 
 const portal: HTMLElement | null = document.getElementById('portal-menu');
 
+const transition = { type: 'spring', stiffness: 500, damping: 50, mass: 1 };
+
+const animations = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+    transition,
+};
+
 export default function Menu({ children, onClose, open, depRef, windowSize }: IProps) {
     const [triggerPosition, setTriggerPosition] = useState<ITargetPosition>();
     const menuRef = useRef<HTMLDivElement>(null);
@@ -42,25 +52,25 @@ export default function Menu({ children, onClose, open, depRef, windowSize }: IP
     }, [depRef, open, windowSize]);
 
     if (!portal) return <></>;
-    if (!open) return <></>;
 
     return createPortal(
-        <>
-            {triggerPosition && (
-                <div
+        <AnimatePresence>
+            {triggerPosition && open && (
+                <motion.div
                     ref={menuRef}
                     className={style['menu']}
                     style={{
                         top: triggerPosition.bottom + 10,
                         left: triggerPosition.left - 200 + 20 + 14 * Math.sqrt(2) + 14 / 2,
                     }}
+                    {...animations}
                 >
                     <span className={style['menu__arrow']} />
 
                     {children}
-                </div>
+                </motion.div>
             )}
-        </>,
+        </AnimatePresence>,
         portal,
     );
 }

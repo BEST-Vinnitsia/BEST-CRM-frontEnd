@@ -4,7 +4,7 @@
     -moz-user-select: -moz-none;
     -o-user-select: none;
     user-select: none;
-    
+
     &__container {
         display: flex;
         justify-content: flex-start;
@@ -19,36 +19,18 @@
         cursor: pointer;
         transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 
-        &[data-active='0'] {
-            background-color: transparent;
-            color: rgb(145, 158, 171);
-
-            &:hover {
-                background-color: rgba(145, 158, 171, 0.08);
-            }
-        }
-
-        &[data-active='1'] {
-            background-color: rgba(7, 141, 238, 0.08);
-            color: rgb(104, 205, 249);
-
-            &:hover {
-                background-color: rgba(7, 141, 238, 0.16);
-            }
-        }
-
-        &__svg {
+        &-svg {
             flex-shrink: 0;
             width: 24px;
             height: 24px;
             margin-right: 16px;
         }
 
-        &__textContainer {
+        &-textContainer {
             flex: 1 1 auto;
             min-width: 0px;
 
-            &__text {
+            &-text {
                 width: 100%;
                 max-width: 100%;
                 display: block;
@@ -57,10 +39,32 @@
                 text-overflow: ellipsis;
                 line-height: 1.57143;
                 font-size: 0.875rem;
-                font-family: 'Public Sans', sans-serif;
-                font-weight: 600;
+                font-family: 'SF-Pro', sans-serif;
+                font-weight: 500;
                 text-transform: capitalize;
             }
+        }
+    }
+}
+
+.sidebarButton--active-true {
+    .sidebarButton__container {
+        background-color: rgba(7, 141, 238, 0.08);
+        color: rgb(104, 205, 249);
+
+        &:hover {
+            background-color: rgba(7, 141, 238, 0.16);
+        }
+    }
+}
+
+.sidebarButton--active-false {
+    .sidebarButton__container {
+        background-color: transparent;
+        color: rgb(145, 158, 171);
+
+        &:hover {
+            background-color: rgba(145, 158, 171, 0.08);
         }
     }
 }

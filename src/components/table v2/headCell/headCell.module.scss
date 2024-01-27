@@ -1,0 +1,21 @@
+.head-cell {
+    // width: 0;
+    line-height: 1.5rem;
+    font-family: 'SF-Pro', sans-serif;
+    display: table-cell;
+    vertical-align: inherit;
+    border-bottom: 1px dashed rgb(46, 50, 54);
+    text-align: left;
+    padding: 16px;
+    font-size: 14px;
+    color: rgb(145, 158, 171);
+    font-weight: 600;
+    background-color: rgba(145, 158, 171, 0.12);
+}
+
+.head-empty-cell {
+    display: table-cell;
+    vertical-align: inherit;
+    border-bottom: 1px dashed rgb(46, 50, 54);
+    background-color: rgba(145, 158, 171, 0.12);
+}

@@ -9,16 +9,19 @@ import { store } from './redux/store';
 import { BrowserRouter } from 'react-router-dom';
 // App component
 import App from './App';
-import { SnackbarContainer } from './components';
+import { Snackbar } from './components';
+import AuthContainer from './auth/AuthContainer';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
     <React.StrictMode>
         <ReduxProvider store={store}>
-            <BrowserRouter>
-                <App />
-                <SnackbarContainer />
-            </BrowserRouter>
+            <AuthContainer>
+                <BrowserRouter>
+                    <App />
+                    <Snackbar />
+                </BrowserRouter>
+            </AuthContainer>
         </ReduxProvider>
     </React.StrictMode>
 );
