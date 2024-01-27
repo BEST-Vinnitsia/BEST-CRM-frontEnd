@@ -1,18 +1,17 @@
 import React from 'react';
 import style from './menuButton.module.scss';
+import { joinStyle } from '../../utils/joinClassName';
 
 interface IProps {
     title: string;
-    color?: 'red';
+    color?: 'red' | 'while';
     onClick?: () => void;
 }
 
-export default function MenuButton({ title, color, onClick }: IProps) {
+export default function MenuButton({ title, color = 'while', onClick }: IProps) {
     return (
         <button className={style['menuButton']} onClick={onClick}>
-            <span className={style['menuButton__title']} data-color={color}>
-                {title}
-            </span>
+            <span className={joinStyle(style['menuButton__title'], style[`menuButton__title--${color}`])}>{title}</span>
         </button>
     );
 }

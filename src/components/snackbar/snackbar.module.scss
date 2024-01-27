@@ -5,127 +5,126 @@
     display: flex;
     flex-direction: column;
     z-index: 15;
+}
 
-    .snack {
-        display: flex;
-        align-items: center;
-        width: 290px;
-        min-height: 52px;
-        padding: 4px 16px 4px 4px;
-        margin-top: 0px;
-        margin-bottom: 8px;
-        background-color: rgb(33, 43, 54);
+.snack {
+    display: flex;
+    align-items: center;
+    width: 290px;
+    min-height: 52px;
+    padding: 4px 16px 4px 4px;
+    margin-top: 0px;
+    margin-bottom: 8px;
+    background-color: rgb(33, 43, 54);
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 8px 16px 0px;
+    // pointer-events: none;
+
+    &__svgBlock {
+        width: 44px;
+        height: 44px;
+        margin-right: 12px;
         border-radius: 8px;
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 8px 16px 0px;
-        // pointer-events: none;
-        
 
-        &__svgBlock {
+        &-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 44px;
             height: 44px;
-            margin-right: 12px;
-            border-radius: 8px;
 
-            &__container {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 44px;
-                height: 44px;
-
-                &__svg {
-                    display: block;
-                    width: 24px;
-                    height: 24px;
-                }
+            &-svg {
+                display: block;
+                width: 24px;
+                height: 24px;
             }
         }
+    }
 
-        &__message {
-            display: block;
-            width: 100%;
-        }
+    &__message {
+        display: block;
+        width: 100%;
+    }
 
-        &__buttonBlock {
+    &__buttonBlock {
+        display: flex;
+        align-items: center;
+        height: 24px;
+        padding-left: 16px;
+        margin-right: -8px;
+
+        &-button {
             display: flex;
             align-items: center;
-            height: 24px;
-            padding-left: 16px;
-            margin-right: -8px;
+            justify-content: center;
+            background-color: transparent;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 50%;
+            color: rgb(145, 158, 171);
+            transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+            padding: 4px;
 
-            &__button {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background-color: transparent;
-                cursor: pointer;
-                user-select: none;
-                border-radius: 50%;
-                color: rgb(145, 158, 171);
-                transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-                padding: 4px;
+            &:hover {
+                background-color: rgba(145, 158, 171, 0.08);
+            }
 
-                &:hover {
-                    background-color: rgba(145, 158, 171, 0.08);
-                }
-
-                &__svg {
-                    display: block;
-                    width: 16px;
-                    height: 16px;
-                }
+            &-svg {
+                display: block;
+                width: 16px;
+                height: 16px;
             }
         }
+    }
+}
 
-        /*  */
-        /*  */
-        /*  */
+/*  */
+/*  */
+/*  */
 
-        &-info {
-            .snack__svgBlock {
-                background-color: rgb(0, 184, 217, 0.16);
+.snack--info {
+    .snack__svgBlock {
+        background-color: rgb(0, 184, 217, 0.16);
 
-                &__container {
-                    &__svg {
-                        color: rgb(0, 184, 217);
-                    }
-                }
+        &-container {
+            &-svg {
+                color: rgb(0, 184, 217);
             }
         }
+    }
+}
 
-        &-success {
-            .snack__svgBlock {
-                background-color: rgb(34, 197, 94, 0.16);
+.snack--success {
+    .snack__svgBlock {
+        background-color: rgb(34, 197, 94, 0.16);
 
-                &__container {
-                    &__svg {
-                        color: rgb(34, 197, 94);
-                    }
-                }
+        &-container {
+            &-svg {
+                color: rgb(34, 197, 94);
             }
         }
+    }
+}
 
-        &-warn {
-            .snack__svgBlock {
-                background-color: rgb(255, 171, 0, 0.16);
+.snack--warn {
+    .snack__svgBlock {
+        background-color: rgb(255, 171, 0, 0.16);
 
-                &__container {
-                    &__svg {
-                        color: rgb(255, 171, 0);
-                    }
-                }
+        &-container {
+            &-svg {
+                color: rgb(255, 171, 0);
             }
         }
+    }
+}
 
-        &-error {
-            .snack__svgBlock {
-                background-color: rgb(255, 86, 48, 0.16);
+.snack--error {
+    .snack__svgBlock {
+        background-color: rgb(255, 86, 48, 0.16);
 
-                &__container {
-                    &__svg {
-                        color: rgb(255, 86, 48);
-                    }
-                }
+        &-container {
+            &-svg {
+                color: rgb(255, 86, 48);
             }
         }
     }

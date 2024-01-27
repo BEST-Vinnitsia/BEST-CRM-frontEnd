@@ -1,6 +1,7 @@
 import React from 'react';
 import style from './sidebarButton.module.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { joinStyle } from '../../utils/joinClassName';
 
 interface IProps {
     svg: React.ReactNode;
@@ -33,11 +34,14 @@ export default function SidebarButton(props: IProps) {
     };
 
     return (
-        <a className={style['sidebarButton']} onClick={redirect}>
-            <div className={style['sidebarButton__container']} data-active={checkPath() ? '1' : '0'}>
-                <span className={style['sidebarButton__container__svg']}>{props.svg}</span>
-                <span className={style['sidebarButton__container__textContainer']}>
-                    <span className={style['sidebarButton__container__textContainer__text']}>{props.title}</span>
+        <a
+            className={joinStyle(style['sidebarButton'], style[`sidebarButton--active-${checkPath()}`])}
+            onClick={redirect}
+        >
+            <div className={style['sidebarButton__container']}>
+                <span className={style['sidebarButton__container-svg']}>{props.svg}</span>
+                <span className={style['sidebarButton__container-textContainer']}>
+                    <span className={style['sidebarButton__container-textContainer-text']}>{props.title}</span>
                 </span>
             </div>
         </a>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import style from './mobileSidebar.module.scss';
+import { joinStyle } from '../../utils/joinClassName';
 
 interface IProps {
     isOpen: boolean;
@@ -44,13 +45,13 @@ export default function MobileSidebar({ isOpen, setIsOpen, windowSize, children 
         <>
             {(windowSize.width < 992 || sidebarDelay) && (
                 <>
-                    <aside className={style['mobileSidebar__asideMobile']} data-open={isOpen ? '1' : '0'}>
-                        <nav className={style['mobileSidebar__asideMobile__container']}>{children}</nav>
+                    <aside className={joinStyle(style['mobileSidebar'], style[`mobileSidebar--open-${isOpen}`])}>
+                        <nav className={style['mobileSidebar__container']}>{children}</nav>
                     </aside>
 
                     {/*  */}
 
-                    {isOpen && <div className={style['mobileSidebar__bg']} onClick={closeSidebar} />}
+                    {isOpen && <div className={style['mobileSidebar-bg']} onClick={closeSidebar} />}
                 </>
             )}
         </>,

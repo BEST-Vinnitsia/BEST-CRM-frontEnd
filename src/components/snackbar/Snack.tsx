@@ -51,19 +51,19 @@ export default function Snack({ message, status, onClose }: IProps) {
     return (
         <motion.div
             {...animations}
-            className={joinStyle(style['snack'], style[`snack-${status}`])}
+            className={joinStyle(style['snack'], style[`snack--${status}`])}
             onMouseLeave={startTimer}
             onMouseEnter={clearTimer}
         >
             <div className={style['snack__svgBlock']}>
-                <span className={style['snack__svgBlock__container']}>
-                    <span className={style['snack__svgBlock__container__svg']}>{setSvg()}</span>
+                <span className={style['snack__svgBlock-container']}>
+                    <span className={style['snack__svgBlock-container-svg']}>{setSvg()}</span>
                 </span>
             </div>
             <span className={style['snack__message']}>{message}</span>
             <div className={style['snack__buttonBlock']}>
-                <button className={style['snack__buttonBlock__button']} onClick={onClose}>
-                    <span className={style['snack__buttonBlock__button__svg']}>
+                <button className={style['snack__buttonBlock-button']} onClick={onClose}>
+                    <span className={style['snack__buttonBlock-button-svg']}>
                         <SvgClose />
                     </span>
                 </button>

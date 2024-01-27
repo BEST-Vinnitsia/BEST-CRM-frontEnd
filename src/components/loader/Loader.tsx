@@ -19,11 +19,11 @@ export default function Loader() {
     return (
         <AnimatePresence>
             {isLoading && (
-                <motion.div className={style['LoaderDefault-Container']} {...animations}>
-                    <div className={style.LoaderDefault}>
-                        <span className={style.loader}>
-                            <span className={style.firstLine} />
-                            <span className={style.secondLine} />
+                <motion.div className={style['loader']} {...animations}>
+                    <div className={style['loader__box']}>
+                        <span className={style['loader__box-lineBox']}>
+                            <span className={style['loader__box-lineBox-firstLine']} />
+                            <span className={style['loader__box-lineBox-secondLine']} />
                         </span>
                     </div>
                 </motion.div>
