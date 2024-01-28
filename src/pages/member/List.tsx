@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { BreadcrumbsContainer, Button, ScrollY } from '../../components';
-import { PATH_BaC, PATH_MEMBER } from '../../routes/paths';
+import { PATH_MEMBER } from '../../routes/paths';
 import { utilsActions } from '../../redux/actions/utilsActions';
 import Table from '../../components/table v2/table';
-import { PageNames } from '../../constants/pageNames';
+import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
 
 const pathMap = [
-    { url: PATH_MEMBER.ROOT, title: PageNames.pages.member },
-    { url: PATH_MEMBER.LIST, title: PageNames.global.list },
+    { url: PATH_MEMBER.ROOT, title: pageNames.pages.member },
+    { url: PATH_MEMBER.LIST, title: pageNames.global.list },
 ];
 
 export default function MemberListPage() {

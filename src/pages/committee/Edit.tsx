@@ -2,16 +2,16 @@ import React from 'react';
 import { BreadcrumbsContainer, Button } from '../../components';
 import { PATH_COMMITTEE } from '../../routes/paths';
 import { useNavigate, useParams } from 'react-router-dom';
-import { PageNames } from '../../constants/pageNames';
+import { pageNames } from '../../constants';
 
 const pathMapEdit = [
-    { url: PATH_COMMITTEE.ROOT, title: PageNames.pages.committee },
-    { url: PATH_COMMITTEE.EDIT, title: PageNames.global.edit },
+    { url: PATH_COMMITTEE.ROOT, title: pageNames.pages.committee },
+    { url: PATH_COMMITTEE.EDIT, title: pageNames.global.edit },
 ];
 
 const pathMapCreate = [
-    { url: PATH_COMMITTEE.ROOT, title: PageNames.pages.committee },
-    { url: PATH_COMMITTEE.CREATE, title: PageNames.global.create },
+    { url: PATH_COMMITTEE.ROOT, title: pageNames.pages.committee },
+    { url: PATH_COMMITTEE.CREATE, title: pageNames.global.create },
 ];
 
 export default function CommitteeEditPage() {

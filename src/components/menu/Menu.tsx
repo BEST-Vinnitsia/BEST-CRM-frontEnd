@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { useOutsideClick } from '../../hooks/useOutsideClick';
+import { useOutsideClick } from '../../hooks';
 import { createPortal } from 'react-dom';
 import style from './menu.module.scss';
 import { AnimatePresence, motion } from 'framer-motion';

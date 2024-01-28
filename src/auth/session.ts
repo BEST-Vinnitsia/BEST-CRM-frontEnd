@@ -1,4 +1,4 @@
-import axios from '../utils/axios';
+import { axios } from '../utils';
 import { userActions } from '../redux/actions/userActions';
 import { IUserStoreToken } from '../interfaces/redux/store';
 import { authService } from '../services/auth';

@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
 import { BreadcrumbsContainer, Button, ScrollY } from '../../components';
 import { PATH_EVENT } from '../../routes/paths';
-import { utilsActions } from '../../redux/actions/utilsActions';
-import Table from '../../components/table v2/table';
-import { PageNames } from '../../constants/pageNames';
+import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
 
 const pathMap = [
-    { url: PATH_EVENT.ROOT, title: PageNames.pages.event },
-    { url: PATH_EVENT.DETAILS, title: PageNames.global.details },
+    { url: PATH_EVENT.ROOT, title: pageNames.pages.event },
+    { url: PATH_EVENT.DETAILS, title: pageNames.global.details },
 ];
 
 export default function EventDetailPage() {

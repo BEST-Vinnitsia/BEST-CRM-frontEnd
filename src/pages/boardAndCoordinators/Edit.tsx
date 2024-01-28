@@ -2,16 +2,16 @@ import React from 'react';
 import { BreadcrumbsContainer, Button } from '../../components';
 import { PATH_BaC } from '../../routes/paths';
 import { useNavigate, useParams } from 'react-router-dom';
-import { PageNames } from '../../constants/pageNames';
+import { pageNames } from '../../constants';
 
 const pathMapEdit = [
-    { url: PATH_BaC.ROOT, title: PageNames.pages.BaC },
-    { url: PATH_BaC.EDIT, title: PageNames.global.edit },
+    { url: PATH_BaC.ROOT, title: pageNames.pages.BaC },
+    { url: PATH_BaC.EDIT, title: pageNames.global.edit },
 ];
 
 const pathMapCreate = [
-    { url: PATH_BaC.ROOT, title: PageNames.pages.BaC },
-    { url: PATH_BaC.CREATE, title: PageNames.global.create },
+    { url: PATH_BaC.ROOT, title: pageNames.pages.BaC },
+    { url: PATH_BaC.CREATE, title: pageNames.global.create },
 ];
 
 export default function BoardAndCoordinatorsEditPage() {

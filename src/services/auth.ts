@@ -1,5 +1,5 @@
-import axios from '../utils/axios';
-import { API } from '../constants/api';
+import { axios } from '../utils';
+import { API } from '../constants';
 import { ILogin, ILoginRes, IRefresh } from '../interfaces/services/auth';
 
 class AuthService {

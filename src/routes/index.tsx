@@ -18,8 +18,8 @@ import { AuthGuard, ClaimGuard, GuestGuard } from '../guards';
 // Imports
 import {
     // Layout
-    MainLayout,
-    AuthLayout,
+    DashboardLayout,
+    AuthorizationLayout,
 
     //
     // PAGES
@@ -67,7 +67,7 @@ export default function Router() {
             path: PATH_AUTH.ROOT,
             element: (
                 <GuestGuard>
-                    <AuthLayout />
+                    <AuthorizationLayout />
                 </GuestGuard>
             ),
             children: [{ path: PATH_AUTH.LOGIN, element: <LoginPage /> }],
@@ -78,7 +78,7 @@ export default function Router() {
             path: PATH_DASHBOARD.ROOT,
             element: (
                 <AuthGuard>
-                    <MainLayout />
+                    <DashboardLayout />
                 </AuthGuard>
             ),
             children: [{ path: PATH_DASHBOARD.ROOT, element: <DashboardPage /> }],
@@ -89,7 +89,7 @@ export default function Router() {
             path: PATH_BaC.ROOT,
             element: (
                 <AuthGuard>
-                    <MainLayout />
+                    <DashboardLayout />
                 </AuthGuard>
             ),
             children: [
@@ -105,7 +105,7 @@ export default function Router() {
             path: PATH_COMMITTEE.ROOT,
             element: (
                 <AuthGuard>
-                    <MainLayout />
+                    <DashboardLayout />
                 </AuthGuard>
             ),
             children: [
@@ -121,7 +121,7 @@ export default function Router() {
             path: PATH_MEMBER.ROOT,
             element: (
                 <AuthGuard>
-                    <MainLayout />
+                    <DashboardLayout />
                 </AuthGuard>
             ),
             children: [
@@ -137,7 +137,7 @@ export default function Router() {
             path: PATH_MEMBERSHIP.ROOT,
             element: (
                 <AuthGuard>
-                    <MainLayout />
+                    <DashboardLayout />
                 </AuthGuard>
             ),
             children: [
@@ -153,7 +153,7 @@ export default function Router() {
             path: PATH_EVENT.ROOT,
             element: (
                 <AuthGuard>
-                    <MainLayout />
+                    <DashboardLayout />
                 </AuthGuard>
             ),
             children: [

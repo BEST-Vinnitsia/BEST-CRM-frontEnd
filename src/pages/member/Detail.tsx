@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { BreadcrumbsContainer, Button, PopupContainer, PopupWrapper } from '../../components';
 import { PATH_MEMBER } from '../../routes/paths';
 import { utilsActions } from '../../redux/actions/utilsActions';
-import { PageNames } from '../../constants/pageNames';
+import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
 
 const pathMap = [
-    { url: PATH_MEMBER.ROOT, title: PageNames.pages.member },
-    { url: PATH_MEMBER.DETAILS, title: PageNames.global.details },
+    { url: PATH_MEMBER.ROOT, title: pageNames.pages.member },
+    { url: PATH_MEMBER.DETAILS, title: pageNames.global.details },
 ];
 
 export default function MemberDetailPage() {

@@ -37,8 +37,8 @@ const Loadable = (Component: ComponentType) => {
 // ----------------------------------------------------------------------
 
 // Layouts
-export const MainLayout = Loadable(lazy(() => import('../layouts/Main')));
-export const AuthLayout = Loadable(lazy(() => import('../layouts/Auth')));
+export const DashboardLayout = Loadable(lazy(() => import('../layouts/dashboard/Dashboard')));
+export const AuthorizationLayout = Loadable(lazy(() => import('../layouts/authorization/Authorization')));
 
 //
 // PAGES

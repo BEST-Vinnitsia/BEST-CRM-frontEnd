@@ -1,9 +1,9 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import style from './auth.module.scss';
-import { SvgLogo } from '../assets/svg';
+import style from './authorization.module.scss';
+import { SvgLogo } from '../../assets/svg';
 
-export default function AuthLayout() {
+export default function AuthorizationLayout() {
     return (
         <div className={style['authLayout']}>
             <header className={style['authLayout__header']}>

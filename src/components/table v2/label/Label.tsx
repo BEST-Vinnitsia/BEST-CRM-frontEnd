@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './label.module.scss';
-import { joinStyle } from '../../../utils/joinClassName';
+import { joinStyle } from '../../../utils/';
 
 interface IProps {
     title: string;

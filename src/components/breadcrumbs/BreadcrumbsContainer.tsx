@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './breadcrumbs.module.scss';
 import { useNavigate } from 'react-router-dom';
-import { joinStyle } from '../../utils/joinClassName';
+import { joinStyle } from '../../utils/';
 
 interface IProps {
     path: IPath[];

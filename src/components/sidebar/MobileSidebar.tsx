@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import style from './mobileSidebar.module.scss';
-import { joinStyle } from '../../utils/joinClassName';
+import { joinStyle } from '../../utils/';
 
 interface IProps {
     isOpen: boolean;

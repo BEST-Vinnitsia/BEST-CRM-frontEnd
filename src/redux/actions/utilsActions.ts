@@ -1,6 +1,6 @@
 import { dispatch } from '../store';
 import slice from '../slices/utilsSlice';
-import { uuid } from '../../utils/uuid';
+import { uuid } from '../../utils';
 import { IUtilsStoreMessage } from '../../interfaces/redux/store';
 
 interface IAddMessage extends Pick<IUtilsStoreMessage, 'message' | 'status'> {}

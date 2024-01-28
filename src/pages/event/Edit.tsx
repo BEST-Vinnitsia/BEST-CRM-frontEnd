@@ -2,16 +2,16 @@ import React from 'react';
 import { BreadcrumbsContainer, Button } from '../../components';
 import { PATH_EVENT } from '../../routes/paths';
 import { useNavigate, useParams } from 'react-router-dom';
-import { PageNames } from '../../constants/pageNames';
+import { pageNames } from '../../constants';
 
 const pathMapEdit = [
-    { url: PATH_EVENT.ROOT, title: PageNames.pages.event },
-    { url: PATH_EVENT.EDIT, title: PageNames.global.edit },
+    { url: PATH_EVENT.ROOT, title: pageNames.pages.event },
+    { url: PATH_EVENT.EDIT, title: pageNames.global.edit },
 ];
 
 const pathMapCreate = [
-    { url: PATH_EVENT.ROOT, title: PageNames.pages.event },
-    { url: PATH_EVENT.CREATE, title: PageNames.global.create },
+    { url: PATH_EVENT.ROOT, title: pageNames.pages.event },
+    { url: PATH_EVENT.CREATE, title: pageNames.global.create },
 ];
 
 export default function EventEditPage() {

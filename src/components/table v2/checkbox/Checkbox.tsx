@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './checkbox.module.scss';
 import { SvgCheckboxActive, SvgCheckboxClear, SvgCheckboxInactive } from '../../../assets/svg';
-import { joinStyle } from '../../../utils/joinClassName';
+import { joinStyle } from '../../../utils/';
 
 interface IPropsBody {
     active?: boolean;

@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { BreadcrumbsContainer, Button, PopupContainer, PopupWrapper } from '../../components';
 import { PATH_COMMITTEE } from '../../routes/paths';
 import { utilsActions } from '../../redux/actions/utilsActions';
-import { PageNames } from '../../constants/pageNames';
+import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
 
 const pathMap = [
-    { url: PATH_COMMITTEE.ROOT, title: PageNames.pages.committee },
-    { url: PATH_COMMITTEE.LIST, title: PageNames.global.list },
+    { url: PATH_COMMITTEE.ROOT, title: pageNames.pages.committee },
+    { url: PATH_COMMITTEE.LIST, title: pageNames.global.list },
 ];
 
 export default function CommitteeListPage() {

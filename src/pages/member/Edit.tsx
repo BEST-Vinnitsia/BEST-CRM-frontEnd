@@ -2,16 +2,16 @@ import React from 'react';
 import { BreadcrumbsContainer, Button } from '../../components';
 import { PATH_MEMBER } from '../../routes/paths';
 import { useNavigate, useParams } from 'react-router-dom';
-import { PageNames } from '../../constants/pageNames';
+import { pageNames } from '../../constants';
 
 const pathMapEdit = [
-    { url: PATH_MEMBER.ROOT, title: PageNames.pages.member },
-    { url: PATH_MEMBER.EDIT, title: PageNames.global.edit },
+    { url: PATH_MEMBER.ROOT, title: pageNames.pages.member },
+    { url: PATH_MEMBER.EDIT, title: pageNames.global.edit },
 ];
 
 const pathMapCreate = [
-    { url: PATH_MEMBER.ROOT, title: PageNames.pages.member },
-    { url: PATH_MEMBER.CREATE, title: PageNames.global.create },
+    { url: PATH_MEMBER.ROOT, title: pageNames.pages.member },
+    { url: PATH_MEMBER.CREATE, title: pageNames.global.create },
 ];
 
 export default function MemberEditPage() {

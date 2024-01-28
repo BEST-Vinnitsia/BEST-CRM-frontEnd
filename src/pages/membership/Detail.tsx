@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
 import { BreadcrumbsContainer, Button, ScrollY } from '../../components';
-import { PATH_BaC, PATH_MEMBER, PATH_MEMBERSHIP } from '../../routes/paths';
-import { utilsActions } from '../../redux/actions/utilsActions';
-import Table from '../../components/table v2/table';
-import { PageNames } from '../../constants/pageNames';
+import { PATH_MEMBERSHIP } from '../../routes/paths';
+import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
 
 const pathMap = [
-    { url: PATH_MEMBERSHIP.ROOT, title: PageNames.pages.membership },
-    { url: PATH_MEMBERSHIP.DETAILS, title: PageNames.global.details },
+    { url: PATH_MEMBERSHIP.ROOT, title: pageNames.pages.membership },
+    { url: PATH_MEMBERSHIP.DETAILS, title: pageNames.global.details },
 ];
 
 export default function MembershipDetailPage() {

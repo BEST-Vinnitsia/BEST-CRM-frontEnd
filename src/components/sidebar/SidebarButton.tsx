@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './sidebarButton.module.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { joinStyle } from '../../utils/joinClassName';
+import { joinStyle } from '../../utils/';
 
 interface IProps {
     svg: React.ReactNode;

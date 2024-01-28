@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import style from './table.module.scss';
-import { joinStyle } from '../../utils/joinClassName';
+import { joinStyle } from '../../utils/';
 import TabContainer from './tab/TabContainer';
 import TableTab from './tab/Tab';
 import { SvgCheckboxInactive, SvgCheckboxActive } from '../../assets/svg';
@@ -11,7 +11,7 @@ import ScrollX from '../scroll/ScrollX';
 import Label from './label/Label';
 import LabelContainer from './label/LabelContainer';
 import Input from '../input/Input';
-import { useInput } from '../../hooks/useInput';
+import { useInput } from '../../hooks';
 
 interface ITabList {
     name: string;

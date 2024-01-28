@@ -1,12 +1,12 @@
 import React from 'react';
 import { BreadcrumbsContainer, Button, Select } from '../../components';
 import { PATH_MEMBERSHIP } from '../../routes/paths';
-import { PageNames } from '../../constants/pageNames';
+import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
 
 const pathMap = [
-    { url: PATH_MEMBERSHIP.ROOT, title: PageNames.pages.membership },
-    { url: PATH_MEMBERSHIP.LIST, title: PageNames.global.list },
+    { url: PATH_MEMBERSHIP.ROOT, title: pageNames.pages.membership },
+    { url: PATH_MEMBERSHIP.LIST, title: pageNames.global.list },
 ];
 
 export default function MembershipListPage() {

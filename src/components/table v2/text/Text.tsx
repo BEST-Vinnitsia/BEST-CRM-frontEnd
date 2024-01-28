@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './text.module.scss';
-import { joinStyle } from '../../../utils/joinClassName';
+import { joinStyle } from '../../../utils/';
 
 interface IProps {
     text: string;

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import style from './main.module.scss';
-import { PATH_BaC, PATH_COMMITTEE, PATH_DASHBOARD, PATH_EVENT, PATH_MEMBER, PATH_MEMBERSHIP } from '../routes/paths';
+import style from './dashboard.module.scss';
+import { PATH_BaC, PATH_COMMITTEE, PATH_DASHBOARD, PATH_EVENT, PATH_MEMBER, PATH_MEMBERSHIP } from '../../routes/paths';
 import {
     CircleButton,
     Loader,
@@ -13,7 +13,7 @@ import {
     MenuText,
     MenuSplit,
     MenuButton,
-} from '../components';
+} from '../../components';
 import {
     SvgBoardAndCoordinatorsSidebar,
     SvgCommitteeSidebar,
@@ -23,12 +23,12 @@ import {
     SvgMembershipSidebar,
     SvgMenu,
     SvgUserSidebar,
-} from '../assets/svg';
-import { utilsActions } from '../redux/actions/utilsActions';
-import { useWindowSize } from '../hooks/useWindowSize';
-import UserImg from '../assets/img/avatar_25.jpg';
+} from '../../assets/svg';
+import { utilsActions } from '../../redux/actions/utilsActions';
+import { useWindowSize } from '../../hooks';
+import { UserAvatar } from '../../assets/img';
 
-export default function MainLayout() {
+export default function DashboardLayout() {
     const windowSize = useWindowSize(300);
 
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -68,7 +68,7 @@ export default function MainLayout() {
                                 active={menuOpen}
                                 onClick={openMenu}
                                 // svg={<SvgUser />}
-                                img={UserImg}
+                                img={UserAvatar}
                             />
                             <Menu depRef={userButtonRef} onClose={openMenu} open={menuOpen} windowSize={windowSize}>
                                 <MenuText title="user name" subTitle="user email" />

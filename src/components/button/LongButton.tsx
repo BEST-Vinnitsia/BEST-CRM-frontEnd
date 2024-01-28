@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './longButton.module.scss';
 import { SvgCircle } from '../../assets/svg';
-import { joinStyle } from '../../utils/joinClassName';
+import { joinStyle } from '../../utils/';
 
 interface IProps {
     title: string;

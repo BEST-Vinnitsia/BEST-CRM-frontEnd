@@ -4,7 +4,7 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { PATH_ERROR, PATH_DASHBOARD } from '../../routes/paths';
 import { SvgArrow } from '../../assets/svg';
 import { Button } from '../../components';
-import { joinStyle } from '../../utils/joinClassName';
+import { joinStyle } from '../../utils/';
 
 const text = {
     403: {

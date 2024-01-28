@@ -1,12 +1,12 @@
 import React from 'react';
 import { PATH_EVENT } from '../../routes/paths';
-import { PageNames } from '../../constants/pageNames';
+import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
 import { BreadcrumbsContainer, Button } from '../../components';
 
 const pathMap = [
-    { url: PATH_EVENT.ROOT, title: PageNames.pages.event },
-    { url: PATH_EVENT.LIST, title: PageNames.global.list },
+    { url: PATH_EVENT.ROOT, title: pageNames.pages.event },
+    { url: PATH_EVENT.LIST, title: pageNames.global.list },
 ];
 
 export default function EventListPage() {

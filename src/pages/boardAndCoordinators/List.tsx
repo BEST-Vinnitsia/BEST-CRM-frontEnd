@@ -2,11 +2,11 @@ import React from 'react';
 import { PATH_BaC } from '../../routes/paths';
 import { BreadcrumbsContainer, Button, ScrollY, TableContainer, TableRow } from '../../components';
 import { useNavigate } from 'react-router-dom';
-import { PageNames } from '../../constants/pageNames';
+import { pageNames } from '../../constants';
 
 const pathMap = [
-    { url: PATH_BaC.ROOT, title: PageNames.pages.BaC },
-    { url: PATH_BaC.LIST, title: PageNames.global.list },
+    { url: PATH_BaC.ROOT, title: pageNames.pages.BaC },
+    { url: PATH_BaC.LIST, title: pageNames.global.list },
 ];
 
 export default function BoardAndCoordinatorsListPage() {

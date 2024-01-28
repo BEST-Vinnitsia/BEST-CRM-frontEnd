@@ -1,4 +1,4 @@
-export const PageNames = {
+export const pageNames = {
     pages: {
         dashboard: 'Dashboard',
         BaC: 'Board & coordinators',

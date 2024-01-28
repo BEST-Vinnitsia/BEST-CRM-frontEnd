@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import style from './select.module.scss';
-import { joinStyle } from '../../utils/joinClassName';
+import { joinStyle } from '../../utils/';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useOutsideClick } from '../../hooks/useOutsideClick';
+import { useOutsideClick } from '../../hooks';
 import CircleButton from '../button/CircleButton';
 import { SvgArrowBottom, SvgArrowTop } from '../../assets/svg';
 

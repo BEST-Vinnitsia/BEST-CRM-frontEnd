@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { BreadcrumbsContainer, Button, PopupContainer, PopupWrapper } from '../../components';
 import { PATH_BaC } from '../../routes/paths';
-import { PageNames } from '../../constants/pageNames';
+import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
 
 const pathMap = [
-    { url: PATH_BaC.ROOT, title: PageNames.pages.BaC },
-    { url: PATH_BaC.DETAILS, title: PageNames.global.details },
+    { url: PATH_BaC.ROOT, title: pageNames.pages.BaC },
+    { url: PATH_BaC.DETAILS, title: pageNames.global.details },
 ];
 
 export default function BoardAndCoordinatorsDetailPage() {

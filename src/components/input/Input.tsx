@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import style from './input.module.scss';
 import { IInputHookProps, IInputProps } from '../../interfaces/components/input';
-import { joinStyle } from '../../utils/joinClassName';
+import { joinStyle } from '../../utils/';
 
 export default function Input(props: IInputProps | IInputHookProps) {
     const [focus, setFocus] = useState(false);
