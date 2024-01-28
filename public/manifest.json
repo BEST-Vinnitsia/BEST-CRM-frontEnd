@@ -3,17 +3,27 @@
     "name": "BEST CRM System",
     "icons": [
         {
-            "src": "img/favicon.ico",
-            "sizes": "64x64 32x32 24x24 16x16",
+            "src": "img/favicon.svg",
+            "sizes": "24x24 16x16",
             "type": "image/x-icon"
         },
         {
-            "src": "img/BEST logo.png",
+            "src": "img/logo32.png",
+            "type": "image/png",
+            "sizes": "32x32"
+        },
+        {
+            "src": "img/logo64.png",
+            "type": "image/png",
+            "sizes": "64x64"
+        },
+        {
+            "src": "img/logo192.png",
             "type": "image/png",
             "sizes": "192x192"
         },
         {
-            "src": "img/BEST logo.png",
+            "src": "img/logo512.png",
             "type": "image/png",
             "sizes": "512x512"
         }
