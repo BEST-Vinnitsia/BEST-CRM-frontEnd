@@ -4,7 +4,7 @@ import { joinStyle } from '../../utils/joinClassName';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import CircleButton from '../button/CircleButton';
-import { SvgArrowBottom, SvgArrowTop, SvgHiddenPassword, SvgVisiblePassword } from '../../assets/svg';
+import { SvgArrowBottom, SvgArrowTop } from '../../assets/svg';
 
 const transition = { type: 'spring', stiffness: 500, damping: 50, mass: 1 };
 
