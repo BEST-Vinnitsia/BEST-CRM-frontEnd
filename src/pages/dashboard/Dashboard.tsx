@@ -1,10 +1,10 @@
 import React from 'react';
-import { useSelector } from '../redux/store';
-import { IStore } from '../interfaces/redux/store';
-import { utilsActions } from '../redux/actions/utilsActions';
-import { userActions } from '../redux/actions/userActions';
+import { useSelector } from '../../redux/store';
+import { IStore } from '../../interfaces/redux/store';
+import { utilsActions } from '../../redux/actions/utilsActions';
+import { userActions } from '../../redux/actions/userActions';
 
-export default function HomePage() {
+export default function DashboardPage() {
     // const isLoading = useSelector((state: IStore) => state.utils.isLoading);
 
     const handler = () => {

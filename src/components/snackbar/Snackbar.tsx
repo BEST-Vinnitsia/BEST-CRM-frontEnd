@@ -5,18 +5,9 @@ import { IStore } from '../../interfaces/redux/store';
 import { createPortal } from 'react-dom';
 import Snack from './Snack';
 import { utilsActions } from '../../redux/actions/utilsActions';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
 const portal = document.getElementById('portal-popup-alert');
-
-const transition = { type: 'spring', stiffness: 500, damping: 50, mass: 1 };
-
-const animations = {
-    initial: { translateX: '110%' },
-    animate: { translateX: 0 },
-    exit: { translateX: '110%' },
-    transition,
-};
 
 export default function Snackbar() {
     const messageList = useSelector((state: IStore) => state.utils.message);
@@ -25,9 +16,9 @@ export default function Snackbar() {
     if (!messageList) return <></>;
 
     return createPortal(
-        <AnimatePresence>
+        <>
             {messageList.length !== 0 && (
-                <motion.div className={style['snackbar']} {...animations}>
+                <div className={style['snackbar']}>
                     {/*  */}
                     <AnimatePresence>
                         {messageList.slice(0, 5).map((item) => (
@@ -42,9 +33,9 @@ export default function Snackbar() {
                         ))}
                     </AnimatePresence>
                     {/*  */}
-                </motion.div>
+                </div>
             )}
-        </AnimatePresence>,
+        </>,
         portal,
     );
 }

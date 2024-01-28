@@ -1,15 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import style from './main.module.scss';
-import {
-    PATH_BaC,
-    PATH_COMMITTEE,
-    PATH_ERROR,
-    PATH_HOME,
-    PATH_MEETING,
-    PATH_MEMBER,
-    PATH_MEMBERSHIP,
-} from '../routes/paths';
+import { PATH_BaC, PATH_COMMITTEE, PATH_DASHBOARD, PATH_EVENT, PATH_MEMBER, PATH_MEMBERSHIP } from '../routes/paths';
 import {
     CircleButton,
     Loader,
@@ -22,7 +14,16 @@ import {
     MenuSplit,
     MenuButton,
 } from '../components';
-import { SvgLogo, SvgMenu, SvgUser } from '../assets/svg';
+import {
+    SvgBoardAndCoordinatorsSidebar,
+    SvgCommitteeSidebar,
+    SvgEventSidebar,
+    SvgHomeSidebar,
+    SvgLogo,
+    SvgMembershipSidebar,
+    SvgMenu,
+    SvgUserSidebar,
+} from '../assets/svg';
 import { utilsActions } from '../redux/actions/utilsActions';
 import { useWindowSize } from '../hooks/useWindowSize';
 import UserImg from '../assets/img/avatar_25.jpg';
@@ -86,15 +87,24 @@ export default function MainLayout() {
                 <aside className={style['mainLayout__aside']}>
                     {windowSize.width >= 992 && (
                         <nav className={style['mainLayout__aside-container']}>
-                            <SidebarButton path={PATH_HOME.ROOT} svg={<SvgMenu />} title="home" />
-                            <SidebarButton path={PATH_MEMBER.ROOT} svg={<SvgMenu />} title="members" />
-                            <SidebarButton path={PATH_BaC.ROOT} svg={<SvgMenu />} title="board & coordinators" />
-                            <SidebarButton path={PATH_COMMITTEE.ROOT} svg={<SvgMenu />} title="committees" />
-                            <SidebarButton path={PATH_MEMBERSHIP.ROOT} svg={<SvgMenu />} title="membership" />
-                            <SidebarButton path={PATH_MEETING.ROOT} svg={<SvgMenu />} title="meeting" />
-                            <SidebarButton path={PATH_ERROR[404]} svg={<SvgMenu />} title="404" />
-                            <SidebarButton path={PATH_ERROR[403]} svg={<SvgMenu />} title="403" />
-                            <SidebarButton path={PATH_ERROR[500]} svg={<SvgMenu />} title="500" />
+                            <SidebarButton path={PATH_DASHBOARD.ROOT} svg={<SvgHomeSidebar />} title="dashboard" />
+                            <SidebarButton
+                                path={PATH_BaC.ROOT}
+                                svg={<SvgBoardAndCoordinatorsSidebar />}
+                                title="board & coordinators"
+                            />
+                            <SidebarButton
+                                path={PATH_COMMITTEE.ROOT}
+                                svg={<SvgCommitteeSidebar />}
+                                title="committees"
+                            />
+                            <SidebarButton path={PATH_MEMBER.ROOT} svg={<SvgUserSidebar />} title="members" />
+                            <SidebarButton
+                                path={PATH_MEMBERSHIP.ROOT}
+                                svg={<SvgMembershipSidebar />}
+                                title="membership"
+                            />
+                            <SidebarButton path={PATH_EVENT.ROOT} svg={<SvgEventSidebar />} title="Events" />
                         </nav>
                     )}
                 </aside>
@@ -102,24 +112,40 @@ export default function MainLayout() {
 
                 {/*  */}
                 <MobileSidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} windowSize={windowSize}>
-                    <SidebarButton path={PATH_HOME.ROOT} svg={<SvgMenu />} title="home" onClick={openSidebar} />
-                    <SidebarButton path={PATH_MEMBER.ROOT} svg={<SvgMenu />} title="members" onClick={openSidebar} />
+                    <SidebarButton
+                        path={PATH_DASHBOARD.ROOT}
+                        svg={<SvgHomeSidebar />}
+                        title="Dashboard"
+                        onClick={openSidebar}
+                    />
                     <SidebarButton
                         path={PATH_BaC.ROOT}
-                        svg={<SvgMenu />}
-                        title="board & coordinators"
+                        svg={<SvgBoardAndCoordinatorsSidebar />}
+                        title="Board & coordinators"
                         onClick={openSidebar}
                     />
                     <SidebarButton
                         path={PATH_COMMITTEE.ROOT}
-                        svg={<SvgMenu />}
-                        title="committees"
+                        svg={<SvgCommitteeSidebar />}
+                        title="Committees"
+                        onClick={openSidebar}
+                    />
+                    <SidebarButton
+                        path={PATH_MEMBER.ROOT}
+                        svg={<SvgUserSidebar />}
+                        title="Members"
                         onClick={openSidebar}
                     />
                     <SidebarButton
                         path={PATH_MEMBERSHIP.ROOT}
-                        svg={<SvgMenu />}
-                        title="membership"
+                        svg={<SvgMembershipSidebar />}
+                        title="Membership"
+                        onClick={openSidebar}
+                    />
+                    <SidebarButton
+                        path={PATH_EVENT.ROOT}
+                        svg={<SvgEventSidebar />}
+                        title="Events"
                         onClick={openSidebar}
                     />
                 </MobileSidebar>

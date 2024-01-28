@@ -1,18 +1,19 @@
 import React from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 import {
+    PATH_DASHBOARD,
     PATH_AUTH,
     PATH_BaC,
     PATH_COMMITTEE,
     PATH_ERROR,
-    PATH_HOME,
-    PATH_MEETING,
     PATH_MEMBER,
     PATH_MEMBERSHIP,
+    PATH_EVENT,
 } from './paths';
 
 // Guard
 import { AuthGuard, ClaimGuard, GuestGuard } from '../guards';
+// import { Claims } from '../config/claims';
 
 // Imports
 import {
@@ -20,23 +21,44 @@ import {
     MainLayout,
     AuthLayout,
 
-    // Pages
+    //
+    // PAGES
+    //
+
+    // Auth
     LoginPage,
-    HomePage,
-    BoardPage,
-    CommitteePage,
-    CoordinatorPage,
-    MeetingPage,
-    MemberPage,
-    MembershipPage,
+
+    // Dashboard
+    DashboardPage,
+
+    // Board and coordinators
     BoardAndCoordinatorsEditPage,
     BoardAndCoordinatorsListPage,
-    BoardAndCoordinatorsViewPage,
+    BoardAndCoordinatorsDetailPage,
+
+    // Committee
+    CommitteeDetailPage,
+    CommitteeEditPage,
+    CommitteeListPage,
+
+    // Membership
+    MemberListPage,
+    MemberDetailPage,
+    MemberEditPage,
+
+    // Membership
+    MembershipListPage,
+    MembershipDetailPage,
+    MembershipEditPage,
+
+    // Event
+    EventListPage,
+    EventDetailPage,
+    EventEditPage,
 
     // Error
     ErrorPage,
 } from './imports';
-// import { Claims } from '../config/claims';
 
 export default function Router() {
     return useRoutes([
@@ -48,21 +70,18 @@ export default function Router() {
                     <AuthLayout />
                 </GuestGuard>
             ),
-            children: [
-                { path: PATH_AUTH.LOGIN, element: <LoginPage /> },
-                { path: PATH_AUTH.RESET, element: <></> },
-            ],
+            children: [{ path: PATH_AUTH.LOGIN, element: <LoginPage /> }],
         },
 
-        // Home
+        // Dashboard
         {
-            path: '',
+            path: PATH_DASHBOARD.ROOT,
             element: (
                 <AuthGuard>
                     <MainLayout />
                 </AuthGuard>
             ),
-            children: [{ path: PATH_HOME.ROOT, element: <HomePage /> }],
+            children: [{ path: PATH_DASHBOARD.ROOT, element: <DashboardPage /> }],
         },
 
         // Board and coordinators
@@ -76,8 +95,8 @@ export default function Router() {
             children: [
                 { path: PATH_BaC.LIST, element: <BoardAndCoordinatorsListPage /> },
                 { path: PATH_BaC.CREATE, element: <BoardAndCoordinatorsEditPage /> },
-                { path: PATH_BaC.EDIT, element: <BoardAndCoordinatorsEditPage /> },
-                { path: PATH_BaC.VIEW, element: <BoardAndCoordinatorsViewPage /> },
+                { path: `${PATH_BaC.EDIT}/:id`, element: <BoardAndCoordinatorsEditPage /> },
+                { path: `${PATH_BaC.DETAILS}/:id`, element: <BoardAndCoordinatorsDetailPage /> },
             ],
         },
 
@@ -89,18 +108,12 @@ export default function Router() {
                     <MainLayout />
                 </AuthGuard>
             ),
-            children: [{ path: PATH_COMMITTEE.ROOT, element: <CommitteePage /> }],
-        },
-
-        // Meeting
-        {
-            path: PATH_MEETING.ROOT,
-            element: (
-                <AuthGuard>
-                    <MainLayout />
-                </AuthGuard>
-            ),
-            children: [{ path: PATH_MEETING.ROOT, element: <MeetingPage /> }],
+            children: [
+                { path: PATH_COMMITTEE.LIST, element: <CommitteeListPage /> },
+                { path: PATH_COMMITTEE.CREATE, element: <CommitteeEditPage /> },
+                { path: `${PATH_COMMITTEE.EDIT}/:id`, element: <CommitteeEditPage /> },
+                { path: `${PATH_COMMITTEE.DETAILS}/:id`, element: <CommitteeDetailPage /> },
+            ],
         },
 
         // Member
@@ -111,7 +124,12 @@ export default function Router() {
                     <MainLayout />
                 </AuthGuard>
             ),
-            children: [{ path: PATH_MEMBER.ROOT, element: <MemberPage /> }],
+            children: [
+                { path: PATH_MEMBER.LIST, element: <MemberListPage /> },
+                { path: PATH_MEMBER.CREATE, element: <MemberEditPage /> },
+                { path: `${PATH_MEMBER.EDIT}/:id`, element: <MemberEditPage /> },
+                { path: `${PATH_MEMBER.DETAILS}/:id`, element: <MemberListPage /> },
+            ],
         },
 
         // Membership
@@ -122,14 +140,35 @@ export default function Router() {
                     <MainLayout />
                 </AuthGuard>
             ),
-            children: [{ path: PATH_MEMBERSHIP.ROOT, element: <MembershipPage /> }],
+            children: [
+                { path: PATH_MEMBERSHIP.LIST, element: <MembershipListPage /> },
+                { path: PATH_MEMBERSHIP.CREATE, element: <MembershipEditPage /> },
+                { path: `${PATH_MEMBERSHIP.EDIT}/:id`, element: <MembershipEditPage /> },
+                { path: `${PATH_MEMBERSHIP.DETAILS}/:id`, element: <MembershipDetailPage /> },
+            ],
+        },
+
+        // Event
+        {
+            path: PATH_EVENT.ROOT,
+            element: (
+                <AuthGuard>
+                    <MainLayout />
+                </AuthGuard>
+            ),
+            children: [
+                { path: PATH_EVENT.LIST, element: <EventListPage /> },
+                { path: PATH_EVENT.CREATE, element: <EventEditPage /> },
+                { path: `${PATH_EVENT.EDIT}/:id`, element: <EventEditPage /> },
+                { path: `${PATH_EVENT.DETAILS}/:id`, element: <EventDetailPage /> },
+            ],
         },
 
         // Error routes
         { path: 'error/:code', element: <ErrorPage /> },
 
         // Other routes
-        { path: '/', element: <Navigate to={PATH_HOME.ROOT} replace /> },
+        { path: '/', element: <Navigate to={PATH_DASHBOARD.ROOT} replace /> },
         { path: '*', element: <Navigate to={PATH_ERROR[404]} replace /> },
     ]);
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './error.page.module.scss';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
-import { PATH_ERROR, PATH_HOME } from '../../routes/paths';
+import { PATH_ERROR, PATH_DASHBOARD } from '../../routes/paths';
 import { SvgArrow } from '../../assets/svg';
 import { Button } from '../../components';
 import { joinStyle } from '../../utils/joinClassName';
@@ -26,7 +26,7 @@ export default function ErrorPage() {
     const { code } = useParams();
     const navigate = useNavigate();
 
-    if (!code) return <Navigate to={PATH_HOME.ROOT} />;
+    if (!code) return <Navigate to={PATH_DASHBOARD.ROOT} />;
     const codeString = code as '403' | '404' | '500';
 
     if (codeString !== '403' && codeString !== '404' && codeString !== '500') return <Navigate to={PATH_ERROR[404]} />;
@@ -42,7 +42,7 @@ export default function ErrorPage() {
                 <div className={style['errorPage__container-title']}>{text[codeString].title}</div>
                 <div className={style['errorPage__container-description']}>{text[codeString].description}</div>
 
-                <Button onClick={() => navigate(PATH_HOME.ROOT)} svg={<SvgArrow />} title="To home" />
+                <Button onClick={() => navigate(PATH_DASHBOARD.ROOT)} svg={<SvgArrow />} title="To home" />
             </div>
         </div>
     );

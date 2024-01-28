@@ -1,64 +1,53 @@
 .breadcrumbs {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    user-select: none;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
 
-    &__textBlock {
-        &-title {
-            font-size: 1.25rem;
-            margin: 0px 0px 8px;
-            font-weight: 700;
-            line-height: 1.5;
-            font-size: 1.25rem;
-            font-family: 'SF-Pro', sans-serif;
-        }
+    &__breadcrumb {
+        margin: 0px;
+        line-height: 1.5;
+        font-size: 1rem;
+        font-family: 'SF-Pro', sans-serif;
+        font-weight: 400;
+        color: rgb(145, 158, 171);
 
-        &-breadcrumb {
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: -moz-none;
-            -o-user-select: none;
-            user-select: none;
-
+        &-listBlock {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            padding: 0px;
             margin: 0px;
-            line-height: 1.5;
-            font-size: 1rem;
-            font-family: 'SF-Pro', sans-serif;
-            font-weight: 400;
-            color: rgb(145, 158, 171);
+            list-style: none;
 
-            &-listBlock {
+            &-list {
                 display: flex;
-                flex-wrap: wrap;
-                align-items: center;
-                padding: 0px;
-                margin: 0px;
-                list-style: none;
+                margin-left: 16px;
+                margin-right: 16px;
+            }
 
-                &-list {
-                    display: flex;
-                    margin-left: 16px;
-                    margin-right: 16px;
+            &-rout {
+                display: inline-flex;
+                margin: 2px 0px;
+            }
+
+            &-rout--visiting-false {
+                color: #fff;
+                cursor: pointer;
+
+                &:hover {
+                    text-decoration: underline;
                 }
+            }
 
-                &-rout {
-                    display: inline-flex;
-                    margin: 2px 0px;
-                }
-
-                &-rout--active {
-                    color: #fff;
-                    cursor: pointer;
-
-                    &:hover {
-                        text-decoration: underline;
-                    }
-                }
-
-                &-rout--disable {
-                    color: rgb(145, 158, 171);
-                }
+            &-rout--true {
+                color: rgb(145, 158, 171);
             }
         }
     }
