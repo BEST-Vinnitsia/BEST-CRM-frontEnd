@@ -11,6 +11,10 @@ export { ReactComponent as SvgInfo } from './alerts/info.svg';
 
 // arrows
 export { ReactComponent as SvgArrow } from './arrows/arrow.svg';
+export { ReactComponent as SvgArrowRight } from './arrows/arrowRight.svg';
+export { ReactComponent as SvgArrowLeft } from './arrows/arrowLeft.svg';
+export { ReactComponent as SvgArrowTop } from './arrows/arrowTop.svg';
+export { ReactComponent as SvgArrowBottom } from './arrows/arrowBottom.svg';
 
 // checkbox
 export { ReactComponent as SvgCheckboxInactive } from './checkbox/checkboxInactive.svg';

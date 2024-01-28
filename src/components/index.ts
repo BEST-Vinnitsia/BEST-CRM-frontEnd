@@ -3,6 +3,7 @@ export { default as Snackbar } from './snackbar/Snackbar';
 // input
 export { default as Input } from './input/Input';
 export { default as InputPassword } from './input/InputPassword';
+export { default as Select } from './input/Select';
 
 // breadcrumbs
 export { default as BreadcrumbsContainer } from './breadcrumbs/BreadcrumbsContainer';

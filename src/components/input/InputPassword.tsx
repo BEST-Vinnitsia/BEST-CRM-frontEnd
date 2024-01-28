@@ -5,9 +5,7 @@ import CircleButton from '../button/CircleButton';
 import { SvgHiddenPassword, SvgVisiblePassword } from '../../assets/svg';
 import { joinStyle } from '../../utils/joinClassName';
 
-type InputProps = IInputProps | IInputHookProps;
-
-export default function InputPassword(props: InputProps) {
+export default function InputPassword(props: IInputProps | IInputHookProps) {
     const [focus, setFocus] = useState(false);
     const [visited, setVisited] = useState(false);
     const [visible, setVisible] = useState(false);

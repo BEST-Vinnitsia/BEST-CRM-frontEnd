@@ -1,5 +1,5 @@
 import React from 'react';
-import { BreadcrumbsContainer, Button } from '../components';
+import { BreadcrumbsContainer, Button, Select } from '../components';
 import { PATH_MEMBERSHIP } from '../routes/paths';
 import { SvgClose } from '../assets/svg';
 
@@ -16,6 +16,10 @@ export default function MembershipPage() {
                 >
                     <Button svg={<SvgClose />} title="test" />
                 </BreadcrumbsContainer>
+            </div>
+
+            <div className="px-4 py-3">
+                <Select />
             </div>
         </>
     );
