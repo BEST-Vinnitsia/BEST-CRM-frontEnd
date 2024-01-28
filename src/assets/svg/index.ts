@@ -36,3 +36,10 @@ export { ReactComponent as SvgClose } from './close.svg';
 //
 //
 //
+
+export { ReactComponent as SvgUserSidebar } from './sidebar svg/user.svg';
+export { ReactComponent as SvgCommitteeSidebar } from './sidebar svg/committee.svg';
+export { ReactComponent as SvgEventSidebar } from './sidebar svg/event.svg';
+export { ReactComponent as SvgHomeSidebar } from './sidebar svg/home.svg';
+export { ReactComponent as SvgMembershipSidebar } from './sidebar svg/membership.svg';
+export { ReactComponent as SvgBoardAndCoordinatorsSidebar } from './sidebar svg/boardAndCoordinators.svg';
