@@ -1,153 +1,70 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import style from './dashboard.module.scss';
+import { Loader, PreLoader, SidebarButton } from '../../components';
+import { DesktopSidebar, Header, MobileSidebar } from '../../modules';
+import { UtilsProvider } from '../../contexts';
 import { PATH_BaC, PATH_COMMITTEE, PATH_DASHBOARD, PATH_EVENT, PATH_MEMBER, PATH_MEMBERSHIP } from '../../routes/paths';
-import {
-    CircleButton,
-    Loader,
-    PreLoader,
-    Menu,
-    SidebarButton,
-    UserButton,
-    MobileSidebar,
-    MenuText,
-    MenuSplit,
-    MenuButton,
-} from '../../components';
+import { pageNames } from '../../constants';
 import {
     SvgBoardAndCoordinatorsSidebar,
     SvgCommitteeSidebar,
     SvgEventSidebar,
     SvgHomeSidebar,
-    SvgLogo,
     SvgMembershipSidebar,
-    SvgMenu,
     SvgUserSidebar,
 } from '../../assets/svg';
-import { utilsActions } from '../../redux/actions/utilsActions';
-import { useWindowSize } from '../../hooks';
-import { UserAvatar } from '../../assets/img';
 
 export default function DashboardLayout() {
-    const windowSize = useWindowSize(300);
-
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [menuOpen, setMenuOpen] = useState(false);
-    const userButtonRef = useRef<HTMLButtonElement>(null);
 
-    useEffect(() => {
-        utilsActions.updateWindowSize(windowSize);
-    }, [windowSize]);
+    const sidebarButtons = [
+        { title: pageNames.pages.dashboard, path: PATH_DASHBOARD.ROOT, svg: <SvgHomeSidebar /> },
+        { title: pageNames.pages.BaC, path: PATH_BaC.ROOT, svg: <SvgBoardAndCoordinatorsSidebar /> },
+        { title: pageNames.pages.committee, path: PATH_COMMITTEE.ROOT, svg: <SvgCommitteeSidebar /> },
+        { title: pageNames.pages.event, path: PATH_EVENT.ROOT, svg: <SvgEventSidebar /> },
+        { title: pageNames.pages.member, path: PATH_MEMBER.ROOT, svg: <SvgUserSidebar /> },
+        { title: pageNames.pages.membership, path: PATH_MEMBERSHIP.ROOT, svg: <SvgMembershipSidebar /> },
+    ];
 
     const openSidebar = () => {
         setSidebarOpen((prev) => !prev);
     };
 
-    const openMenu = () => {
-        setMenuOpen((prev) => !prev);
-    };
-
     return (
-        <>
+        <UtilsProvider>
             <PreLoader />
 
             <div className={style['mainLayout']}>
-                <header className={style['mainLayout__header']}>
-                    <div className={style['mainLayout__header-container']}>
-                        <>
-                            {windowSize.width < 992 && <CircleButton onClick={openSidebar} svg={<SvgMenu />} />}
-                            {windowSize.width >= 992 && (
-                                <span className={style['mainLayout__header-container-logo']}>
-                                    <SvgLogo />
-                                </span>
-                            )}
-                        </>
-                        <>
-                            <UserButton
-                                buttonRef={userButtonRef}
-                                active={menuOpen}
-                                onClick={openMenu}
-                                // svg={<SvgUser />}
-                                img={UserAvatar}
-                            />
-                            <Menu depRef={userButtonRef} onClose={openMenu} open={menuOpen} windowSize={windowSize}>
-                                <MenuText title="user name" subTitle="user email" />
-                                <MenuSplit />
-                                <MenuButton title="Profile" onClick={openMenu} />
-                                <MenuButton title="Settings" onClick={openMenu} />
-                                <MenuButton title="Theme" onClick={openMenu} />
-                                <MenuSplit />
-                                <MenuButton title="Logout" color="red" onClick={openMenu} />
-                            </Menu>
-                        </>
-                    </div>
-                </header>
+                <div className={style['mainLayout__headerContainer']}>
+                    <Header openSidebar={openSidebar} />
+                </div>
 
                 {/*  */}
-                <aside className={style['mainLayout__aside']}>
-                    {windowSize.width >= 992 && (
-                        <nav className={style['mainLayout__aside-container']}>
-                            <SidebarButton path={PATH_DASHBOARD.ROOT} svg={<SvgHomeSidebar />} title="dashboard" />
+                <div className={style['mainLayout__asideContainer']}>
+                    <DesktopSidebar>
+                        {sidebarButtons.map((item, i) => (
                             <SidebarButton
-                                path={PATH_BaC.ROOT}
-                                svg={<SvgBoardAndCoordinatorsSidebar />}
-                                title="board & coordinators"
+                                key={i}
+                                path={item.path}
+                                svg={item.svg}
+                                title={item.title}
+                                onClick={openSidebar}
                             />
-                            <SidebarButton
-                                path={PATH_COMMITTEE.ROOT}
-                                svg={<SvgCommitteeSidebar />}
-                                title="committees"
-                            />
-                            <SidebarButton path={PATH_MEMBER.ROOT} svg={<SvgUserSidebar />} title="members" />
-                            <SidebarButton
-                                path={PATH_MEMBERSHIP.ROOT}
-                                svg={<SvgMembershipSidebar />}
-                                title="membership"
-                            />
-                            <SidebarButton path={PATH_EVENT.ROOT} svg={<SvgEventSidebar />} title="Events" />
-                        </nav>
-                    )}
-                </aside>
-                {/*  */}
+                        ))}
+                    </DesktopSidebar>
+                </div>
 
-                {/*  */}
-                <MobileSidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} windowSize={windowSize}>
-                    <SidebarButton
-                        path={PATH_DASHBOARD.ROOT}
-                        svg={<SvgHomeSidebar />}
-                        title="Dashboard"
-                        onClick={openSidebar}
-                    />
-                    <SidebarButton
-                        path={PATH_BaC.ROOT}
-                        svg={<SvgBoardAndCoordinatorsSidebar />}
-                        title="Board & coordinators"
-                        onClick={openSidebar}
-                    />
-                    <SidebarButton
-                        path={PATH_COMMITTEE.ROOT}
-                        svg={<SvgCommitteeSidebar />}
-                        title="Committees"
-                        onClick={openSidebar}
-                    />
-                    <SidebarButton
-                        path={PATH_MEMBER.ROOT}
-                        svg={<SvgUserSidebar />}
-                        title="Members"
-                        onClick={openSidebar}
-                    />
-                    <SidebarButton
-                        path={PATH_MEMBERSHIP.ROOT}
-                        svg={<SvgMembershipSidebar />}
-                        title="Membership"
-                        onClick={openSidebar}
-                    />
-                    <SidebarButton
-                        path={PATH_EVENT.ROOT}
-                        svg={<SvgEventSidebar />}
-                        title="Events"
-                        onClick={openSidebar}
-                    />
+                <MobileSidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen}>
+                    {sidebarButtons.map((item, i) => (
+                        <SidebarButton
+                            key={i}
+                            path={item.path}
+                            svg={item.svg}
+                            title={item.title}
+                            onClick={openSidebar}
+                        />
+                    ))}
                 </MobileSidebar>
                 {/*  */}
 
@@ -156,6 +73,6 @@ export default function DashboardLayout() {
                     <Loader />
                 </main>
             </div>
-        </>
+        </UtilsProvider>
     );
 }
