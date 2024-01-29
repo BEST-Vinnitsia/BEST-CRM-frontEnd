@@ -24,32 +24,30 @@ export default function Header({ openSidebar }: IProps) {
 
     return (
         <header className={style['header']}>
-            <>
-                {windowSize.width < 992 && <CircleButton onClick={openSidebar} svg={<SvgMenu />} />}
-                {windowSize.width >= 992 && (
-                    <span className={style['header__logo']}>
-                        <SvgLogo />
-                    </span>
-                )}
-            </>
-            <>
-                <UserButton
-                    buttonRef={userButtonRef}
-                    active={menuOpen}
-                    onClick={openMenu}
-                    // svg={<SvgUser />}
-                    img={UserAvatar}
-                />
-                <Menu depRef={userButtonRef} onClose={openMenu} open={menuOpen} windowSize={windowSize}>
-                    <MenuText title="user name" subTitle="user email" />
-                    <MenuSplit />
-                    <MenuButton title="Profile" onClick={openMenu} />
-                    <MenuButton title="Settings" onClick={openMenu} />
-                    <MenuButton title="Theme" onClick={openMenu} />
-                    <MenuSplit />
-                    <MenuButton title="Logout" color="red" onClick={openMenu} />
-                </Menu>
-            </>
+            {windowSize.width < 992 && <CircleButton onClick={openSidebar} svg={<SvgMenu />} />}
+            {windowSize.width >= 992 && (
+                <span className={style['header__logo']}>
+                    <SvgLogo />
+                </span>
+            )}
+
+            <UserButton
+                elementRef={userButtonRef}
+                active={menuOpen}
+                onClick={openMenu}
+                // svg={<SvgUser />}
+                img={UserAvatar}
+            />
+
+            <Menu depRef={userButtonRef} onClose={openMenu} open={menuOpen} windowSize={windowSize}>
+                <MenuText title="user name" subTitle="user email" />
+                <MenuSplit />
+                <MenuButton title="Profile" onClick={openMenu} />
+                <MenuButton title="Settings" onClick={openMenu} />
+                <MenuButton title="Theme" onClick={openMenu} />
+                <MenuSplit />
+                <MenuButton title="Logout" color="red" onClick={openMenu} />
+            </Menu>
         </header>
     );
 }

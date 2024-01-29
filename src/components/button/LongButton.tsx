@@ -8,11 +8,13 @@ interface IProps {
     onClick?: () => void;
     disable?: boolean;
     loading?: boolean;
+    elementRef?: React.LegacyRef<HTMLButtonElement>;
 }
 
-export default function LongButton({ title, onClick, disable = false, loading = false }: IProps) {
+export default function LongButton({ title, onClick, disable = false, loading = false, elementRef }: IProps) {
     return (
         <button
+            ref={elementRef}
             onClick={onClick}
             className={joinStyle(
                 style['longButton'],

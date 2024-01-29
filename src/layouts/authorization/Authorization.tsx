@@ -5,16 +5,16 @@ import { SvgLogo } from '../../assets/svg';
 
 export default function AuthorizationLayout() {
     return (
-        <div className={style['authLayout']}>
-            <header className={style['authLayout__header']}>
-                <div className={style['authLayout__header-container']}>
-                    <span className={style['authLayout__header-container-logo']}>
+        <div className={style['authorization']}>
+            <header className={style['authorization__header']}>
+                <div className={style['authorization__header-container']}>
+                    <span className={style['authorization__header-container-logo']}>
                         <SvgLogo />
                     </span>
                 </div>
             </header>
 
-            <main className={style['authLayout__main']}>
+            <main className={style['authorization__main']}>
                 <Outlet />
             </main>
         </div>
