@@ -4,11 +4,10 @@
     -moz-user-select: -moz-none;
     -o-user-select: none;
     user-select: none;
-    
+
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 16px;
     gap: 8px;
     border-radius: 8px;
     border: 1px solid rgba(147, 147, 147, 0.2);
@@ -17,16 +16,15 @@
 
     &__title {
         color: #fff;
-        font-size: 16px;
         font-style: normal;
-        font-weight: 500;
+        font-weight: 400;
         line-height: normal;
     }
 
     &__svg {
         display: flex;
-        width: 15px;
-        height: 13px;
+        width: 16px;
+        height: 16px;
         flex-direction: column;
         justify-content: center;
         color: #fff;
@@ -38,5 +36,29 @@
 
     &:hover {
         background: rgba(91, 91, 91, 0.39);
+    }
+}
+
+.button--small {
+    padding: 6px 12px;
+
+    .button__title {
+        font-size: 0.875rem;
+    }
+}
+
+.button--medium {
+    padding: 8px 14px;
+
+    .button__title {
+        font-size: 0.875rem;
+    }
+}
+
+.button--large {
+    padding: 10px 16px;
+
+    .button__title {
+        font-size:1rem;
     }
 }

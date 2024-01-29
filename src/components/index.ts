@@ -20,6 +20,7 @@ export { default as UserButton } from './button/UserButton';
 export { default as CircleButton } from './button/CircleButton';
 export { default as LongButton } from './button/LongButton';
 export { default as SidebarButton } from './button/SidebarButton';
+export { default as SelectButton } from './button/SelectButton';
 
 // loader
 export { default as Loader } from './loader/Loader';

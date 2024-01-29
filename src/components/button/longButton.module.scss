@@ -5,34 +5,82 @@
     -o-user-select: none;
     user-select: none;
 
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    min-height: 50px;
     border-radius: 8px;
     border: 2px solid rgba(35, 35, 35, 0.7);
-    background-color: #fff;
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 
     &__loading {
         position: absolute;
-        visibility: visible;
-        display: flex;
+        top: 50%;
         left: 50%;
-        transform: translate(-50%);
+        display: flex;
         color: rgba(145, 158, 171, 0.8);
+        transform: translate(-50%, -50%);
+        visibility: visible;
     }
 
     &__title {
-        color: #000;
         font-size: 1rem;
+    }
+}
+
+// size
+.longButton--size-small {
+    min-height: 36px;
+}
+
+.longButton--size-medium {
+    min-height: 40px;
+}
+
+.longButton--size-large {
+    min-height: 44px;
+}
+
+// color
+.longButton--color-light {
+    background-color: #fff;
+
+    .longButton__title {
+        color: #000;
+    }
+
+    &:hover {
+        background-color: #9d9d9d;
+    }
+}
+
+.longButton--color-dark {
+    background-color: #434343;
+
+    .longButton__title {
+        color: #ffffff;
+    }
+
+    &:hover {
+        background-color: #343434;
     }
 }
 
 // disable
 .longButton--disable-true {
-    background-color: rgba(61, 61, 61, 0.9);
+    $disable-bg-color: rgba(61, 61, 61, 0.9);
+
+    background-color: $disable-bg-color;
     cursor: not-allowed;
+
+    .longButton__title {
+        color: #bababa;
+    }
+
+    &:hover {
+        background-color: $disable-bg-color;
+    }
 }
 
 .longButton--disable-false {
@@ -41,5 +89,15 @@
 
 // loading
 .longButton--loading-true {
-    background-color: rgb(91, 91, 91);
+    $loading-bg-color: rgb(91, 91, 91);
+    
+    background-color: $loading-bg-color;
+
+    .longButton__title {
+        color: #bababa;
+    }
+
+    &:hover {
+        background-color: $loading-bg-color;
+    }
 }
