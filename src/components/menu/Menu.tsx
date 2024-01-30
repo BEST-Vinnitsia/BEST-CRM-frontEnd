@@ -3,16 +3,13 @@ import { useOutsideClick } from '../../hooks';
 import { createPortal } from 'react-dom';
 import style from './menu.module.scss';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useUtilsContext } from '../../contexts';
 
 interface IProps {
     children: React.ReactNode;
     open: boolean;
     onClose: () => void;
     depRef?: React.RefObject<HTMLElement>;
-    windowSize: {
-        width: number;
-        height: number;
-    };
 }
 
 interface ITargetPosition {
@@ -33,7 +30,9 @@ const animations = {
     transition,
 };
 
-export default function Menu({ children, onClose, open, depRef, windowSize }: IProps) {
+export default function Menu({ children, onClose, open, depRef }: IProps) {
+    const utilsContext = useUtilsContext();
+
     const [triggerPosition, setTriggerPosition] = useState<ITargetPosition>();
     const menuRef = useRef<HTMLDivElement>(null);
 
@@ -49,9 +48,10 @@ export default function Menu({ children, onClose, open, depRef, windowSize }: IP
         if (!depRef) return;
 
         setTriggerPosition(depRef?.current?.getBoundingClientRect());
-    }, [depRef, open, windowSize]);
+    }, [depRef, open, utilsContext?.windowSize]);
 
     if (!portal) return <></>;
+    if (!utilsContext) return <></>;
 
     return createPortal(
         <AnimatePresence>

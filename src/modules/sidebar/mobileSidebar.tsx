@@ -34,7 +34,7 @@ export default function MobileSidebar({ children, isOpen, setIsOpen }: IProps) {
         if (windowSize.width < 992 && !sidebarDelay) {
             setSidebarDelay(true);
         }
-    }, [utilsContext]);
+    }, [utilsContext?.windowSize]);
 
     const closeSidebar = () => {
         setIsOpen(false);

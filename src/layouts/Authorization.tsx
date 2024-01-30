@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import style from './authorization.module.scss';
-import { SvgLogo } from '../../assets/svg';
+import { SvgLogo } from '../assets/svg';
 
 export default function AuthorizationLayout() {
     return (

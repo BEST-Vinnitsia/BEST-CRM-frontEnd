@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import style from './dashboard.module.scss';
-import { Loader, PreLoader, SidebarButton } from '../../components';
-import { DesktopSidebar, Header, MobileSidebar } from '../../modules';
-import { UtilsProvider } from '../../contexts';
-import { sidebarConfig } from '../../routes/sidebarConfig';
+import { Loader, PreLoader, SidebarButton } from '../components';
+import { DesktopSidebar, Header, MobileSidebar } from '../modules';
+import { UtilsProvider } from '../contexts';
+import { sidebarConfig } from '../routes/sidebarConfig';
 
 export default function DashboardLayout() {
     const [sidebarOpen, setSidebarOpen] = useState(false);

@@ -1,18 +1,19 @@
-export { default as Snackbar } from './snackbar/Snackbar';
-
 // input
 export { default as Input } from './input/Input';
 export { default as InputPassword } from './input/InputPassword';
 export { default as Select } from './input/Select';
 
-// breadcrumbs
-export { default as BreadcrumbsContainer } from './breadcrumbs/BreadcrumbsContainer';
+// text
+export { default as Text } from './text/Text';
 
-// menu
+// line
+export { default as Line } from './line/Line';
+
+// containers
 export { default as Menu } from './menu/Menu';
-export { default as MenuButton } from './menu/MenuButton';
-export { default as MenuSplit } from './menu/MenuSplit';
-export { default as MenuText } from './menu/MenuText';
+export { default as BreadcrumbsContainer } from './breadcrumbs/BreadcrumbsContainer';
+export { default as PopupContainer } from './popup/PopupContainer';
+export { default as PopupWrapper } from './popup/PopupWrapper';
 
 // button
 export { default as Button } from './button/Button';
@@ -26,14 +27,13 @@ export { default as SelectButton } from './button/SelectButton';
 export { default as Loader } from './loader/Loader';
 export { default as PreLoader } from './loader/PreLoader';
 
-// popup
-export { default as PopupContainer } from './popup/PopupContainer';
-export { default as PopupWrapper } from './popup/PopupWrapper';
+// scroll
+export { default as ScrollY } from './scroll/ScrollY';
+export { default as ScrollX } from './scroll/ScrollX';
 
 // table
 export { default as TableContainer } from './table/TableContainer';
 export { default as TableRow } from './table/TableRow';
 
-// scroll
-export { default as ScrollY } from './scroll/ScrollY';
-export { default as ScrollX } from './scroll/ScrollX';
+// other
+export { default as Snackbar } from './snackbar/Snackbar';
