@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BreadcrumbsContainer, Button, PopupContainer, PopupWrapper } from '../../components';
+import { BreadcrumbsContainer, Button } from '../../components';
 import { PATH_MEMBER } from '../../routes/paths';
 import { utilsActions } from '../../redux/actions/utilsActions';
 import { pageNames } from '../../constants';

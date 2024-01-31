@@ -4,8 +4,6 @@ import {
     Button,
     CircleButton,
     LongButton,
-    PopupContainer,
-    PopupWrapper,
     ScrollY,
     SelectButton,
 } from '../../components';

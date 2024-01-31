@@ -12,8 +12,7 @@ export { default as Line } from './line/Line';
 // containers
 export { default as Menu } from './menu/Menu';
 export { default as BreadcrumbsContainer } from './breadcrumbs/BreadcrumbsContainer';
-export { default as PopupContainer } from './popup/PopupContainer';
-export { default as PopupWrapper } from './popup/PopupWrapper';
+export { default as Popup } from './popup/Popup';
 
 // button
 export { default as Button } from './button/Button';

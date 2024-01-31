@@ -17,7 +17,7 @@ export default function Text({
     color = 'white',
     type = 'span',
     width = 'normal',
-    space = 'nowrap',
+    space = 'wrap',
     fontFamily = 'pro',
     horizon = 'start',
 }: IProps) {

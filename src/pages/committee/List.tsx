@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BreadcrumbsContainer, Button, PopupContainer, PopupWrapper } from '../../components';
+import { BreadcrumbsContainer, Button, Popup, ScrollY, Text } from '../../components';
 import { PATH_COMMITTEE } from '../../routes/paths';
 import { utilsActions } from '../../redux/actions/utilsActions';
 import { pageNames } from '../../constants';
@@ -48,9 +48,33 @@ export default function CommitteeListPage() {
                 popup
             </button>
 
-            <PopupContainer isOpen={openPopup} onClose={() => setOpenPopup(false)}>
-                <PopupWrapper />
-            </PopupContainer>
+            <Popup isOpen={openPopup} onClose={() => setOpenPopup(false)} sx={{ maxH: 'calc(100dvh - 20px)' }}>
+                <ScrollY sx={{ maxH: 'calc(100dvh - 20px)' }}>
+                    <Text text="Demo" type={'h4'} width={'bold'} />
+                    <Text
+                        type={'span'}
+                        width={'lite'}
+                        color={'gray'}
+                        text={`asdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
+                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
+                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
+                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
+                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
+                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
+                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
+                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
+                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
+                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
+                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
+                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
+                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
+                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
+                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
+                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
+                        `}
+                    />
+                </ScrollY>
+            </Popup>
         </>
     );
 }

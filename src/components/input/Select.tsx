@@ -5,15 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useOutsideClick } from '../../hooks';
 import CircleButton from '../button/CircleButton';
 import { SvgArrowBottom, SvgArrowTop } from '../../assets/svg';
-
-const transition = { type: 'spring', stiffness: 500, damping: 50, mass: 1 };
-
-const animations = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    exit: { opacity: 0 },
-    transition,
-};
+import { animationOpacity } from '../../styles/animationConfig';
 
 export default function Select() {
     const [focus, setFocus] = useState(false);
@@ -91,7 +83,7 @@ export default function Select() {
                             <motion.div
                                 ref={selectMenuRef}
                                 className={style['select__wrapper-selectContainer']}
-                                {...animations}
+                                {...animationOpacity}
                             >
                                 <button className={style['select__wrapper-selectContainer-button']}>asd</button>
                                 <button className={style['select__wrapper-selectContainer-button']}>asd</button>

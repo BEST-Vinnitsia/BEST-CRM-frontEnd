@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BreadcrumbsContainer, Button, PopupContainer, PopupWrapper, Text } from '../../components';
+import { BreadcrumbsContainer, Button, Text } from '../../components';
 import { PATH_COMMITTEE } from '../../routes/paths';
 import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';

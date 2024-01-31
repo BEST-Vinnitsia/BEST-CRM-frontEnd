@@ -26,13 +26,7 @@ export default function DashboardLayout() {
                 <div className={style['dashboard__asideContainer']}>
                     <DesktopSidebar>
                         {sidebarConfig.map((item, i) => (
-                            <SidebarButton
-                                key={i}
-                                path={item.path}
-                                svg={item.svg}
-                                title={item.title}
-                                onClick={openSidebar}
-                            />
+                            <SidebarButton key={i} path={item.path} svg={item.svg} title={item.title} />
                         ))}
                     </DesktopSidebar>
                 </div>

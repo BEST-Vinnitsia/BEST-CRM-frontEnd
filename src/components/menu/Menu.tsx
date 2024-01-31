@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import style from './menu.module.scss';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useUtilsContext } from '../../contexts';
+import { animationOpacity } from '../../styles/animationConfig';
 
 interface IProps {
     children: React.ReactNode;
@@ -20,15 +21,6 @@ interface ITargetPosition {
 }
 
 const portal: HTMLElement | null = document.getElementById('portal-menu');
-
-const transition = { type: 'spring', stiffness: 500, damping: 50, mass: 1 };
-
-const animations = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    exit: { opacity: 0 },
-    transition,
-};
 
 export default function Menu({ children, onClose, open, depRef }: IProps) {
     const utilsContext = useUtilsContext();
@@ -63,7 +55,7 @@ export default function Menu({ children, onClose, open, depRef }: IProps) {
                         top: triggerPosition.bottom + 10,
                         left: triggerPosition.left - 200 + 20 + 14 * Math.sqrt(2) + 14 / 2,
                     }}
-                    {...animations}
+                    {...animationOpacity}
                 >
                     <span className={style['menu__arrow']} />
 
