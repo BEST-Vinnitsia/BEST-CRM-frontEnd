@@ -11,15 +11,28 @@ import { utilsActions } from '../../redux/actions/utilsActions';
 export default function LoginPage() {
     const [loading, setLoading] = useState(false);
     const [form, valid] = useForm([
-        useInput({ name: 'login', regExp: regex.user.login, required: true, exampleData: 'example@email.com' }),
-        useInput({ name: 'password', regExp: regex.user.password, required: true, exampleData: 'P@ssword1234' }),
+        useInput({
+            name: 'login',
+            regExp: regex.user.login,
+            required: true,
+            exampleData: 'example@email.com',
+        }),
+        useInput({
+            name: 'password',
+            regExp: regex.user.password,
+            required: true,
+            exampleData: 'P@ssword1234',
+        }),
     ]);
 
     const submit = async () => {
         try {
             if (!valid) return;
             setLoading((prev) => !prev);
-            const res = await authService.login({ email: form.login.value, password: form.password.value });
+            const res = await authService.login({
+                email: form.login.value,
+                password: form.password.value,
+            });
 
             userActions.setAccessToken(res.access);
             userActions.setRefreshToken(res.refresh);

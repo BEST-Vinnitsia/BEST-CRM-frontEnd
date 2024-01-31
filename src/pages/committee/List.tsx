@@ -17,7 +17,10 @@ export default function CommitteeListPage() {
     const [openPopup, setOpenPopup] = useState(false);
 
     const test = () => {
-        utilsActions.addMessage({ status: count % 2 === 0 ? 'error' : 'success', message: `${count}` });
+        utilsActions.addMessage({
+            status: count % 2 === 0 ? 'error' : 'success',
+            message: `${count}`,
+        });
         // utilsActions.addMessage({ status: 'info', message: `${2}` });
         // utilsActions.addMessage({ status: 'success', message: `${3}` });
         // utilsActions.addMessage({ status: 'warn', message: `${4}` });

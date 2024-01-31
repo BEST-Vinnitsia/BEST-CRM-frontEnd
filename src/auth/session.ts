@@ -61,7 +61,10 @@ class Session {
         const sessionTime = this.getExpTime(this.accessToken);
 
         this.expireTimer = setTimeout(() => {
-            this.restoreSession({ access: this.accessToken, refresh: this.refreshToken });
+            this.restoreSession({
+                access: this.accessToken,
+                refresh: this.refreshToken,
+            });
         }, sessionTime);
     }
 

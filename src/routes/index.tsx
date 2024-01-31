@@ -95,8 +95,14 @@ export default function Router() {
             children: [
                 { path: PATH_BaC.LIST, element: <BoardAndCoordinatorsListPage /> },
                 { path: PATH_BaC.CREATE, element: <BoardAndCoordinatorsEditPage /> },
-                { path: `${PATH_BaC.EDIT}/:id`, element: <BoardAndCoordinatorsEditPage /> },
-                { path: `${PATH_BaC.DETAILS}/:id`, element: <BoardAndCoordinatorsDetailPage /> },
+                {
+                    path: `${PATH_BaC.EDIT}/:id`,
+                    element: <BoardAndCoordinatorsEditPage />,
+                },
+                {
+                    path: `${PATH_BaC.DETAILS}/:id`,
+                    element: <BoardAndCoordinatorsDetailPage />,
+                },
             ],
         },
 
@@ -112,7 +118,10 @@ export default function Router() {
                 { path: PATH_COMMITTEE.LIST, element: <CommitteeListPage /> },
                 { path: PATH_COMMITTEE.CREATE, element: <CommitteeEditPage /> },
                 { path: `${PATH_COMMITTEE.EDIT}/:id`, element: <CommitteeEditPage /> },
-                { path: `${PATH_COMMITTEE.DETAILS}/:id`, element: <CommitteeDetailPage /> },
+                {
+                    path: `${PATH_COMMITTEE.DETAILS}/:id`,
+                    element: <CommitteeDetailPage />,
+                },
             ],
         },
 
@@ -143,8 +152,14 @@ export default function Router() {
             children: [
                 { path: PATH_MEMBERSHIP.LIST, element: <MembershipListPage /> },
                 { path: PATH_MEMBERSHIP.CREATE, element: <MembershipEditPage /> },
-                { path: `${PATH_MEMBERSHIP.EDIT}/:id`, element: <MembershipEditPage /> },
-                { path: `${PATH_MEMBERSHIP.DETAILS}/:id`, element: <MembershipDetailPage /> },
+                {
+                    path: `${PATH_MEMBERSHIP.EDIT}/:id`,
+                    element: <MembershipEditPage />,
+                },
+                {
+                    path: `${PATH_MEMBERSHIP.DETAILS}/:id`,
+                    element: <MembershipDetailPage />,
+                },
             ],
         },
 

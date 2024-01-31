@@ -1,5 +1,4 @@
 import React, { Suspense, lazy, ComponentType } from 'react';
-import { Loader } from '../components';
 // import ClaimsGuard from '../guards/claim.guard';
 
 interface iLoadable {
