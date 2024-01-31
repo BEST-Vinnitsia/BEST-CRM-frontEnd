@@ -49,7 +49,7 @@ export default function CommitteeListPage() {
             </button>
 
             <Popup isOpen={openPopup} onClose={() => setOpenPopup(false)} sx={{ maxH: 'calc(100dvh - 20px)' }}>
-                <ScrollY sx={{ maxH: 'calc(100dvh - 20px)' }}>
+                <ScrollY sx={{ maxH: 'calc(100dvh - 20px)', p: '8px' }}>
                     <Text text="Demo" type={'h4'} width={'bold'} />
                     <Text
                         type={'span'}

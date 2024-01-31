@@ -22,6 +22,13 @@ export default function ScrollY({ children, sx }: IProps) {
     const [scrollStartPosition, setScrollStartPosition] = useState<number>(0);
     const [initialContentScrollTop, setInitialContentScrollTop] = useState<number>(0);
 
+    sx = {
+        h: sx && sx.h ? sx.h : undefined,
+        maxH: sx && sx.maxH ? sx.maxH : undefined,
+        minH: sx && sx.minH ? sx.minH : undefined,
+        p: sx && sx.p ? sx.p : undefined,
+    };
+
     function handleResize() {
         if (scrollTrackRef.current && contentRef.current) {
             const trackSize = scrollTrackRef.current.clientHeight;
@@ -53,6 +60,7 @@ export default function ScrollY({ children, sx }: IProps) {
     useEffect(() => {
         if (contentRef.current) {
             const content = contentRef.current;
+
             observer.current = new ResizeObserver(() => {
                 handleResize();
             });
@@ -69,25 +77,30 @@ export default function ScrollY({ children, sx }: IProps) {
     function handleThumbMousedown(e: React.MouseEvent<HTMLDivElement>) {
         e.preventDefault();
         e.stopPropagation();
+
         setScrollStartPosition(e.clientY);
+
         if (contentRef.current) setInitialContentScrollTop(contentRef.current.scrollTop);
         setIsDragging(true);
     }
 
-    function handleThumbMouseup(e: MouseEvent) {
+    const handleThumbMouseup = (e: MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
+
         if (isDragging) {
             setIsDragging(false);
         }
-    }
+    };
 
-    function handleThumbMousemove(e: MouseEvent) {
+    const handleThumbMousemove = (e: MouseEvent) => {
         if (contentRef.current) {
-            e.preventDefault();
+            // e.preventDefault();
             e.stopPropagation();
+
             if (isDragging) {
-                const { scrollHeight: contentScrollHeight, clientHeight: contentClientHeight } = contentRef.current;
+                const contentClientHeight = contentRef.current.clientHeight;
+                const contentScrollHeight = contentRef.current.clientHeight;
 
                 const deltaY = (e.clientY - scrollStartPosition) * (contentClientHeight / thumbHeight);
 
@@ -99,11 +112,12 @@ export default function ScrollY({ children, sx }: IProps) {
                 contentRef.current.scrollTop = newScrollTop;
             }
         }
-    }
+    };
 
     useEffect(() => {
         document.addEventListener('mousemove', handleThumbMousemove);
         document.addEventListener('mouseup', handleThumbMouseup);
+
         return () => {
             document.removeEventListener('mousemove', handleThumbMousemove);
             document.removeEventListener('mouseup', handleThumbMouseup);
@@ -113,8 +127,10 @@ export default function ScrollY({ children, sx }: IProps) {
     function handleTrackClick(e: React.MouseEvent<HTMLDivElement>) {
         e.preventDefault();
         e.stopPropagation();
-        const { current: track } = scrollTrackRef;
-        const { current: content } = contentRef;
+
+        const track = scrollTrackRef.current;
+        const content = contentRef.current;
+
         if (track && content) {
             const { clientY } = e;
             const target = e.target as HTMLDivElement;
@@ -123,6 +139,7 @@ export default function ScrollY({ children, sx }: IProps) {
             const thumbOffset = -(thumbHeight / 2);
             const clickRatio = (clientY - trackTop + thumbOffset) / track.clientHeight;
             const scrollAmount = Math.floor(clickRatio * content.scrollHeight);
+
             content.scrollTo({
                 top: scrollAmount,
                 behavior: 'smooth',
@@ -130,20 +147,20 @@ export default function ScrollY({ children, sx }: IProps) {
         }
     }
 
-    function handleScrollButton(direction: 'up' | 'down') {
-        const { current: content } = contentRef;
-        if (content) {
-            const scrollAmount = direction === 'down' ? 200 : -200;
-            content.scrollBy({ top: scrollAmount, behavior: 'smooth' });
-        }
-    }
+    // const handleScrollButton = (direction: 'up' | 'down') => {
+    //     const content = contentRef.current;
+    //
+    //     if (content) {
+    //         const scrollAmount = direction === 'down' ? 200 : -200;
+    //         content.scrollBy({ top: scrollAmount, behavior: 'smooth' });
+    //     }
+    // }
 
     return (
         <div className={style['scrollY-container']}>
             <div
                 ref={contentRef}
                 className={style['scrollY-container__content']}
-                id="custom-scrollbars-content"
                 style={{ height: sx?.h, maxHeight: sx?.maxH, minHeight: sx?.minH, padding: sx?.p }}
             >
                 {children}
@@ -151,11 +168,7 @@ export default function ScrollY({ children, sx }: IProps) {
 
             <div className={style['scrollY-container__scrollbar']}>
                 {/*<button></button>*/}
-                <div
-                    className={style['scrollY-container__scrollbar-trackAndThumb']}
-                    role="scrollbar"
-                    aria-controls="custom-scrollbars-content"
-                >
+                <div className={style['scrollY-container__scrollbar-trackAndThumb']}>
                     <div
                         ref={scrollTrackRef}
                         className={style['scrollY-container__scrollbar-trackAndThumb-track']}
