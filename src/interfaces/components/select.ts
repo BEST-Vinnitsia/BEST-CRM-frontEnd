@@ -1,16 +1,20 @@
-export interface IInputHookProps {
+export interface ISelectHookProps {
     placeholder: string;
-    hookProps: IInputMainProps;
+    hookProps: ISelectMainProps;
+    data: {
+        id: string;
+        name: string;
+    }[];
 }
 
-interface IInputMainProps {
+interface ISelectMainProps {
     value: string;
     errorText: string;
     error: boolean;
     setValue: (data: string) => void;
 }
 
-export interface IInputHookRes {
+export interface ISelectHookRes {
     name: string;
     required: boolean;
     value: string;

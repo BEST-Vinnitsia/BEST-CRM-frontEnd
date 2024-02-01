@@ -50,8 +50,8 @@ export default function LoginPage() {
         <>
             <div className="flex w-full mt-40 justify-center items-center">
                 <div className="block max-w-md min-w-80 w-full px-2">
-                    <Input placeholder="Login" hook={form.login} />
-                    <InputPassword placeholder="Password" hook={form.password} />
+                    <Input placeholder="Login" hookProps={form.login} />
+                    <InputPassword placeholder="Password" hookProps={form.password} />
                     <LongButton title="Login" onClick={submit} disable={!valid} loading={loading} />
                 </div>
             </div>
