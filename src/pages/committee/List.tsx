@@ -49,28 +49,28 @@ export default function CommitteeListPage() {
             </button>
 
             <Popup isOpen={openPopup} onClose={() => setOpenPopup(false)} sx={{ maxH: 'calc(100dvh - 20px)' }}>
-                <ScrollY sx={{ maxH: 'calc(100dvh - 20px)', p: '8px' }}>
+                <ScrollY sx={{ p: '8px' }}>
                     <Text text="Demo" type={'h4'} width={'bold'} />
                     <Text
                         type={'span'}
                         width={'lite'}
                         color={'gray'}
-                        text={`asdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
-                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
-                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
-                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
-                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
-                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
-                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
-                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
-                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
-                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
-                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
-                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
-                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
-                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
-                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
-                        gdshjkasdhG Khgkh gakshdgkajhsdg kahjsgd kajhsgd kajhgsd jahsgd kjha 
+                        text={`asdhG Khgkh ga ksh dgka jh sdg  ka hjs gd k aj hs gd k aj hgsd ja sgd kjha 
+                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
+                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
+                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
+                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
+                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
+                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
+                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
+                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
+                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
+                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
+                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
+                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
+                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
+                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
+                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
                         `}
                     />
                 </ScrollY>

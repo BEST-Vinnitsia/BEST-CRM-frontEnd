@@ -9,9 +9,10 @@
     align-items: center;
 
     &__content {
-        display: block;
-        margin-left: 10px;
-        margin-right: 10px;
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
         background-color: rgb(33, 43, 54);
         border-radius: 16px;
         z-index: 10;
