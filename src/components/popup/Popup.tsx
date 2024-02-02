@@ -19,7 +19,7 @@ interface IProps {
     };
 }
 
-const portal = document.getElementById('portal-popup');
+const portal = document.getElementById('portal');
 
 const Popup = ({ children, onClose, isOpen, sx }: IProps) => {
     if (!portal) return <></>;

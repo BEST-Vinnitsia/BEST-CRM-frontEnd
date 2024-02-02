@@ -7,7 +7,7 @@ import Snack from './Snack';
 import { utilsActions } from '../../redux/actions/utilsActions';
 import { AnimatePresence } from 'framer-motion';
 
-const portal = document.getElementById('portal-popup-alert');
+const portal = document.getElementById('portal');
 
 export default function Snackbar() {
     const messageList = useSelector((state: IStore) => state.utils.message);

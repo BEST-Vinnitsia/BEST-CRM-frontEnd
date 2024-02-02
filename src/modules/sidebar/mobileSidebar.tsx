@@ -10,7 +10,7 @@ interface IProps {
     children?: React.ReactNode;
 }
 
-const portal: HTMLElement | null = document.getElementById('portal-mobile-sidebar');
+const portal: HTMLElement | null = document.getElementById('portal');
 
 export default function MobileSidebar({ children, isOpen, setIsOpen }: IProps) {
     const utilsContext = useUtilsContext();

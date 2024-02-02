@@ -20,7 +20,7 @@ interface ITargetPosition {
     right: number;
 }
 
-const portal: HTMLElement | null = document.getElementById('portal-menu');
+const portal: HTMLElement | null = document.getElementById('portal');
 
 export default function Menu({ children, onClose, open, depRef }: IProps) {
     const utilsContext = useUtilsContext();

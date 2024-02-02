@@ -17,7 +17,7 @@ interface ITargetPosition {
     width: number;
 }
 
-const portal = document.getElementById('portal-popup');
+const portal = document.getElementById('portal');
 
 export default function Select({ placeholder, hookProps, data }: ISelectHookProps) {
     const { value, setValue, error } = hookProps;
