@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './label.module.scss';
-import { joinStyle } from '../../../utils/';
+import { joinStyle } from '../../utils';
 
 interface IProps {
     title: string;
@@ -8,5 +8,5 @@ interface IProps {
 }
 
 export default function Label({ title, color = 'green' }: IProps) {
-    return <span className={joinStyle(style['status__text'], style[`status__text--${color}`])}>{title}</span>;
+    return <span className={joinStyle(style['label'], style[`label--${color}`])}>{title}</span>;
 }

@@ -17,9 +17,9 @@ export { ReactComponent as SvgArrowTop } from './arrows/arrowTop.svg';
 export { ReactComponent as SvgArrowBottom } from './arrows/arrowBottom.svg';
 
 // checkbox
-export { ReactComponent as SvgCheckboxInactive } from './checkbox/checkboxInactive.svg';
-export { ReactComponent as SvgCheckboxActive } from './checkbox/checkboxActive.svg';
-export { ReactComponent as SvgCheckboxClear } from './checkbox/checkboxClear.svg';
+export { ReactComponent as SvgCheckboxInactive } from './checkbox/inactive.svg';
+export { ReactComponent as SvgCheckboxActive } from './checkbox/active.svg';
+export { ReactComponent as SvgCheckboxClear } from './checkbox/clear.svg';
 
 // loaders
 export { default as SvgCircle } from './loaders/SvgCircle';

@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './tab.module.scss';
-import { joinStyle } from '../../../utils/';
+import { joinStyle } from '../../../utils';
 
 interface IProps {
     title: string;

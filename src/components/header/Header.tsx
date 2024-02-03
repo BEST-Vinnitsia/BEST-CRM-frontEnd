@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import style from './header.module.scss';
-import { CircleButton, Line, Menu, SelectButton, Text, UserButton } from '../../components';
+import { CircleButton, Line, Menu, SelectButton, Text, UserButton } from '../index';
 import { SvgLogo, SvgMenu } from '../../assets/svg';
 import { UserAvatar } from '../../assets/img';
 import { useUtilsContext } from '../../contexts';

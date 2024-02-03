@@ -9,6 +9,10 @@ export { default as Text } from './text/Text';
 // line
 export { default as Line } from './line/Line';
 
+// label
+export { default as Label } from './labels/Label';
+
+
 // containers
 export { default as Menu } from './menu/Menu';
 export { default as BreadcrumbsContainer } from './breadcrumbs/BreadcrumbsContainer';
@@ -30,9 +34,31 @@ export { default as PreLoader } from './loader/PreLoader';
 export { default as ScrollY } from './scroll/ScrollY';
 export { default as ScrollX } from './scroll/ScrollX';
 
+//
 // table
-export { default as TableContainer } from './table/TableContainer';
-export { default as TableRow } from './table/TableRow';
+//
+
+export { default as Table } from './table/table';
+/* head */
+export { default as THead } from './table/THead';
+export { default as TRHead } from './table/TRHead';
+export { default as TH } from './table/TH';
+/* body */
+export { default as TBody } from './table/TBody';
+export { default as TRBody } from './table/TRBody';
+export { default as TD } from './table/TD';
+
+
+//
+// containers or modules
+//
+
+// header
+export { default as Header } from './header/Header';
+
+// sidebar
+export { default as DesktopSidebar } from './sidebar/desktopSidebar';
+export { default as MobileSidebar } from './sidebar/mobileSidebar';
 
 // other
 export { default as Snackbar } from './snackbar/Snackbar';
