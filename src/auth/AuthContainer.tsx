@@ -13,7 +13,6 @@ export default function AuthContainer({ children }: IProps) {
     const initialize = useCallback((tokens: IUserStoreToken) => {
         // session.restoreSession(tokens);
         console.warn('AUTH IS DISABLE. To enable go src > auth > AuthContainer.tsx and uncomment 14th line');
-        
     }, []);
 
     useEffect(() => {

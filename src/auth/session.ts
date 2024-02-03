@@ -1,4 +1,4 @@
-import axios from '../utils/axios';
+import { axios } from '../utils';
 import { userActions } from '../redux/actions/userActions';
 import { IUserStoreToken } from '../interfaces/redux/store';
 import { authService } from '../services/auth';
@@ -61,7 +61,10 @@ class Session {
         const sessionTime = this.getExpTime(this.accessToken);
 
         this.expireTimer = setTimeout(() => {
-            this.restoreSession({ access: this.accessToken, refresh: this.refreshToken });
+            this.restoreSession({
+                access: this.accessToken,
+                refresh: this.refreshToken,
+            });
         }, sessionTime);
     }
 

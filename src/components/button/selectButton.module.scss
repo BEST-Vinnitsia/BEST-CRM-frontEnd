@@ -1,0 +1,73 @@
+.selectButton {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    user-select: none;
+
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    width: calc(100% - 16px);
+    min-height: auto;
+    padding: 6px 8px;
+    margin: 8px;
+    border-radius: 6px;
+    outline: 0px;
+    border: 0px;
+    cursor: pointer;
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+    &__svg {
+        display: flex;
+        width: 20px;
+        height: 20px;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    &__title {
+        white-space: nowrap;
+        line-height: 1.57143;
+        font-size: 0.875rem;
+        font-family: 'SF-Pro', sans-serif;
+        font-weight: bold;
+        appearance: none;
+    }
+}
+
+// svg position
+.selectButton--svg-left {
+    justify-content: flex-start;
+}
+
+.selectButton--svg-right {
+    justify-content: space-between;
+}
+
+// color
+.selectButton--color-white {
+    color: rgb(255, 255, 255);
+}
+
+.selectButton--color-red {
+    color: rgb(255, 86, 48);
+}
+
+// status
+.selectButton--active-true {
+    background-color: rgba(7, 141, 238, 0.08);
+    color: rgb(104, 205, 249);
+
+    &:hover {
+        background-color: rgba(7, 141, 238, 0.16);
+    }
+}
+
+.selectButton--active-false {
+    &:hover {
+        background-color: rgba(145, 158, 171, 0.08);
+    }
+}

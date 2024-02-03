@@ -1,10 +1,5 @@
-const home = (root: string) => ({
+const dashboard = (root: string) => ({
     ROOT: `${root}`,
-});
-
-const member = (root: string) => ({
-    ROOT: `${root}`,
-    LIST: `${root}/list`,
 });
 
 const boardAndCoordinators = (root: string) => ({
@@ -12,22 +7,39 @@ const boardAndCoordinators = (root: string) => ({
     LIST: `${root}`,
     CREATE: `${root}/create`,
     EDIT: `${root}/edit`,
-    VIEW: `${root}/view`,
+    DETAILS: `${root}/details`,
 });
 
 const committee = (root: string) => ({
     ROOT: `${root}`,
-    LIST: `${root}/list`,
+    LIST: `${root}`,
+    CREATE: `${root}/create`,
+    EDIT: `${root}/edit`,
+    DETAILS: `${root}/details`,
+});
+
+const member = (root: string) => ({
+    ROOT: `${root}`,
+    LIST: `${root}`,
+    CREATE: `${root}/create`,
+    EDIT: `${root}/edit`,
+    DETAILS: `${root}/details`,
 });
 
 const membership = (root: string) => ({
     ROOT: `${root}`,
-    LIST: `${root}/list`,
+    LIST: `${root}`,
+    CREATE: `${root}/create`,
+    EDIT: `${root}/edit`,
+    DETAILS: `${root}/details`,
 });
 
-const meeting = (root: string) => ({
+const event = (root: string) => ({
     ROOT: `${root}`,
-    LIST: `${root}/list`,
+    LIST: `${root}`,
+    CREATE: `${root}/create`,
+    EDIT: `${root}/edit`,
+    DETAILS: `${root}/details`,
 });
 
 const account = (root: string) => ({
@@ -37,7 +49,6 @@ const account = (root: string) => ({
 const auth = (root: string) => ({
     ROOT: `${root}`,
     LOGIN: `${root}/login`,
-    RESET: `${root}/reset-password`,
 });
 
 const error = (root: string) => ({
@@ -46,12 +57,13 @@ const error = (root: string) => ({
     500: `${root}/500`,
 });
 
-export const PATH_HOME = home('/home');
-export const PATH_MEMBER = member('/member');
+export const PATH_DASHBOARD = dashboard('/');
 export const PATH_BaC = boardAndCoordinators('/boardAndCoordinators');
 export const PATH_COMMITTEE = committee('/committee');
+export const PATH_EVENT = event('/event');
+export const PATH_MEMBER = member('/member');
 export const PATH_MEMBERSHIP = membership('/membership');
-export const PATH_MEETING = meeting('/meeting');
+//
 export const PATH_ACCOUNT = account('/account');
 export const PATH_AUTH = auth('/auth');
 export const PATH_ERROR = error('/error');
