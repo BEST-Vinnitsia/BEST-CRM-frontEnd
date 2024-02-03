@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import style from './table.module.scss';
 import TabContainer from './tab/TabContainer';
 import TableTab from './tab/Tab';
@@ -23,23 +23,23 @@ const tabList: ITabList[] = [
 ];
 
 export default function Table({ children }: IProps) {
-    const [activeTab, setActiveTab] = useState('All');
+    const [activeTab, setActiveTab] = useState(0);
 
-    const changeTab = (tabName: string) => {
-        setActiveTab(tabName);
+    const changeTab = (tabId: number) => {
+        setActiveTab(tabId);
     };
 
     return (
         <div className={style['table-block']}>
-            <TabContainer>
+            <TabContainer activeTabId={activeTab}>
                 {tabList.map((item, i) => (
                     <TableTab
                         key={i}
                         title={item.name}
                         label={item.label}
-                        status={activeTab === item.name}
+                        status={activeTab === i}
                         color={item.color}
-                        onClick={() => changeTab(item.name)}
+                        onClick={() => changeTab(i)}
                     />
                 ))}
             </TabContainer>

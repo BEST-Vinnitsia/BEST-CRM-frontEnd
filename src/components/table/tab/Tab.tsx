@@ -3,6 +3,7 @@ import style from './tab.module.scss';
 import { joinStyle } from '../../../utils';
 
 interface IProps {
+    elementRef?: React.LegacyRef<HTMLButtonElement>;
     title: string;
     label: string;
     status?: boolean;
@@ -10,9 +11,10 @@ interface IProps {
     onClick?: () => void;
 }
 
-export default function Tab({ label, title, status = false, color = 'white', onClick }: IProps) {
+export default function Tab({ elementRef, label, title, status = false, color = 'white', onClick }: IProps) {
     return (
         <button
+            ref={elementRef}
             className={joinStyle(
                 style['table__tab'], //
                 style[`table__tab--${status ? 'active' : 'inactive'}`],
