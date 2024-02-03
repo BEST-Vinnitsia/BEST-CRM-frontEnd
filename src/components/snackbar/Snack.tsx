@@ -2,22 +2,13 @@ import React, { useEffect, useRef } from 'react';
 import style from './snackbar.module.scss';
 import { SvgClose, SvgError, SvgInfo, SvgSuccess, SvgWarn } from '../../assets/svg';
 import { IUtilsStoreMessage } from '../../interfaces/redux/store';
-import { joinStyle } from '../../utils/joinClassName';
+import { joinStyle } from '../../utils/';
 import { motion } from 'framer-motion';
+import { animationLayoutTranslateX } from '../../styles/animationConfig';
 
 interface IProps extends Pick<IUtilsStoreMessage, 'message' | 'status'> {
     onClose: () => void;
 }
-
-const transition = { type: 'spring', stiffness: 500, damping: 50, mass: 1 };
-
-const animations = {
-    layout: true,
-    initial: { translateX: '110%' },
-    animate: { translateX: 0 },
-    exit: { translateX: '110%' },
-    transition,
-};
 
 export default function Snack({ message, status, onClose }: IProps) {
     const timerRef = useRef<NodeJS.Timeout>();
@@ -50,7 +41,7 @@ export default function Snack({ message, status, onClose }: IProps) {
 
     return (
         <motion.div
-            {...animations}
+            {...animationLayoutTranslateX}
             className={joinStyle(style['snack'], style[`snack--${status}`])}
             onMouseLeave={startTimer}
             onMouseEnter={clearTimer}

@@ -1,4 +1,4 @@
-table {
+.table {
     position: relative;
     display: table;
     border-collapse: collapse;
@@ -6,86 +6,57 @@ table {
     width: 100%;
     min-width: 960px;
 
+    //* head *//
+
     thead {
         display: table-header-group;
 
-        .tableHeaderRow {
+        .theadRow {
             color: inherit;
             display: table-row;
             vertical-align: middle;
             outline: 0px;
+            border-bottom: 1px dashed rgb(46, 50, 54);
 
-            th {
-                line-height: 1.5rem;
-                font-family: 'SF-Pro', sans-serif;
+            .theadCell {
                 display: table-cell;
-                vertical-align: inherit;
-                border-bottom: 1px dashed rgb(46, 50, 54);
-                text-align: left;
                 padding: 16px;
-                font-size: 14px;
-                color: rgb(145, 158, 171);
-                font-weight: 600;
+                vertical-align: middle;
+                overflow: hidden;
+                text-overflow: ellipsis;
                 background-color: rgba(145, 158, 171, 0.12);
+            }
 
-                div {
-                    &[data-size='50'] {
-                        width: 50px;
-                    }
-
-                    &[data-size='100'] {
-                        width: 100px;
-                    }
-
-                    &[data-size='150'] {
-                        width: 150px;
-                    }
-
-                    &[data-size='200'] {
-                        width: 200px;
-                    }
-
-                    &[data-size='250'] {
-                        width: 250px;
-                    }
-
-                    &[data-size='300'] {
-                        width: 300px;
-                    }
-                }
+            .theadCell--checkbox {
+                display: table-cell;
+                width: 44px;
+                min-height: 44px;
+                height: 100%;
+                padding: 0px 0px 0px 8px;
+                vertical-align: middle;
+                background-color: rgba(145, 158, 171, 0.12);
             }
         }
     }
 
-    /*  */
-    /*  */
-    /*  */
-
+    //* body *//
     tbody {
         display: table-row-group;
 
-        .tableRow {
-            color: inherit;
+        .tbodyRow {
             display: table-row;
-            vertical-align: middle;
-            outline: 0px;
-
-            td {
-                display: table-cell;
-                vertical-align: top;
-                text-align: left;
-                /* white-space: nowrap; */
-                padding: 16px;
-                line-height: 1.57143;
-                font-size: 0.875rem;
-                font-family: 'SF-Pro', sans-serif;
-                font-weight: 400;
-                border-bottom: 1px dashed rgb(46, 50, 54);
-                color: rgb(255, 255, 255);
-            }
+            border-bottom: 1px dashed rgb(46, 50, 54);
 
             &:hover {
                 background-color: rgba(145, 158, 171, 0.08);
+            }
+
+            .tbodyCell {
+                display: table-cell;
+                padding: 16px;
+                vertical-align: middle;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
     }

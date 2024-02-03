@@ -1,27 +1,46 @@
 import React from 'react';
-import { BreadcrumbsContainer } from '../../components';
+import { BreadcrumbsContainer, Button } from '../../components';
 import { PATH_BaC } from '../../routes/paths';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { pageNames } from '../../constants';
 
 const pathMapEdit = [
-    { url: PATH_BaC.ROOT, title: 'board and coordinators' },
-    { url: PATH_BaC.EDIT, title: 'edit' },
+    { url: PATH_BaC.ROOT, title: pageNames.pages.BaC },
+    { url: PATH_BaC.EDIT, title: pageNames.global.edit },
 ];
 
 const pathMapCreate = [
-    { url: PATH_BaC.ROOT, title: 'board and coordinators' },
-    { url: PATH_BaC.EDIT, title: 'edit' },
+    { url: PATH_BaC.ROOT, title: pageNames.pages.BaC },
+    { url: PATH_BaC.CREATE, title: pageNames.global.create },
 ];
 
-export default function BoardAndCoordinatorsEdit() {
-    const { memberId } = useParams();
+export default function BoardAndCoordinatorsEditPage() {
+    const { id } = useParams();
+    const navigate = useNavigate();
 
     return (
         <>
-            <BreadcrumbsContainer
-                path={memberId ? pathMapEdit : pathMapCreate}
-                title={memberId ? 'edit' : 'create'}
-            ></BreadcrumbsContainer>
+            {id ? (
+                <div className="p-4">
+                    <BreadcrumbsContainer path={pathMapEdit}>
+                        <div className="flex">
+                            <Button onClick={() => navigate(PATH_BaC.CREATE)} title="Create" />
+                            <Button onClick={() => navigate(`${PATH_BaC.DETAILS}/id`)} title="Details" />
+                            <Button onClick={() => navigate(PATH_BaC.LIST)} title="List" />
+                        </div>
+                    </BreadcrumbsContainer>
+                </div>
+            ) : (
+                <div className="p-4">
+                    <BreadcrumbsContainer path={pathMapCreate}>
+                        <div className="flex">
+                            <Button onClick={() => navigate(`${PATH_BaC.EDIT}/id`)} title="Edit" />
+                            <Button onClick={() => navigate(`${PATH_BaC.DETAILS}/id`)} title="Details" />
+                            <Button onClick={() => navigate(PATH_BaC.LIST)} title="List" />
+                        </div>
+                    </BreadcrumbsContainer>
+                </div>
+            )}
         </>
     );
 }
