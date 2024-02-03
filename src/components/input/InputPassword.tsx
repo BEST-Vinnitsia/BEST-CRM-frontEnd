@@ -1,23 +1,16 @@
 import React, { useState } from 'react';
 import style from './inputPassword.module.scss';
-import { IInputHookProps, IInputProps } from '../../interfaces/components/input';
+import { IInputHookProps } from '../../interfaces/components/input';
 import CircleButton from '../button/CircleButton';
 import { SvgHiddenPassword, SvgVisiblePassword } from '../../assets/svg';
-import { joinStyle } from '../../utils/joinClassName';
+import { joinStyle } from '../../utils/';
 
-type InputProps = IInputProps | IInputHookProps;
+export default function InputPassword({ placeholder, hookProps }: IInputHookProps) {
+    const { value, setValue, errorText, error } = hookProps;
 
-export default function InputPassword(props: InputProps) {
     const [focus, setFocus] = useState(false);
     const [visited, setVisited] = useState(false);
     const [visible, setVisible] = useState(false);
-    const isPropsHook = 'hook' in props;
-    //
-    const placeholder = props.placeholder;
-    const value = isPropsHook ? props.hook.value : props.value;
-    const errorText = isPropsHook ? props.hook.errorText : props.errorText;
-    const error = isPropsHook ? props.hook.error : props.error;
-    const setValue = isPropsHook ? props.hook.setValue : props.setValue;
 
     const onFocusHandler = () => {
         setFocus(true);

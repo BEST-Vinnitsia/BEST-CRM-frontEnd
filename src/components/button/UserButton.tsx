@@ -1,21 +1,21 @@
 import React from 'react';
 import style from './userButton.module.scss';
-import { joinStyle } from '../../utils/joinClassName';
+import { joinStyle } from '../../utils/';
 
 interface IProps {
     svg?: React.ReactNode;
     img?: string;
     active: boolean;
     onClick: () => void;
-    buttonRef?: React.RefObject<HTMLButtonElement>;
+    elementRef?: React.RefObject<HTMLButtonElement>;
 }
 
-export default function UserButton({ img, svg, active, onClick, buttonRef }: IProps) {
+export default function UserButton({ img, svg, active, onClick, elementRef }: IProps) {
     if (!img && !svg) return <></>;
 
     return (
         <button
-            ref={buttonRef}
+            ref={elementRef}
             onClick={onClick}
             className={joinStyle(style['userButton'], style[`userButton--active-${active}`])}
         >

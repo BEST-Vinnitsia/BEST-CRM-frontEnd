@@ -1,96 +1,11 @@
+/* tailwind */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
+/* zeroing styles */
+@import url('./styles/zeroing.css');
 
-* {
-    margin: 0;
-    padding: 0;
-}
-
-a {
-    text-decoration: none;
-}
-
-img {
-    max-width: 100%;
-    display: block;
-}
-
-svg {
-    max-width: 100%;
-    max-height: 100%;
-}
-
-body {
-    width: 100%;
-    height: 100dvh;
-    overflow: hidden;
-    scroll-behavior: smooth;
-    text-rendering: optimizeSpeed;
-    line-height: 1.5;
-    font-family: 'SF-Pro', sans-serif;
-    font-weight: 400;
-    color: #fff;
-    font-size: 16px;
-}
-
-/*  */
-/* fonts */
-/*  */
-
-/* SF-Pro */
-@font-face {
-    font-family: 'SF-Pro';
-    src: local('SF-Pro'), url(../public/fonts/SF-Pro/SF-Pro-Display-Light.otf) format('opentype');
-    font-weight: 300; /* Light */
-}
-
-@font-face {
-    font-family: 'SF-Pro';
-    src: local('SF-Pro'), url(../public/fonts/SF-Pro/SF-Pro-Display-Regular.otf) format('opentype');
-    font-weight: 400; /* Regular */
-}
-
-@font-face {
-    font-family: 'SF-Pro';
-    src: local('SF-Pro'), url(../public/fonts/SF-Pro/SF-Pro-Display-Medium.otf) format('opentype');
-    font-weight: 500; /* Medium */
-}
-
-@font-face {
-    font-family: 'SF-Pro';
-    src: local('SF-Pro'), url(../public/fonts/SF-Pro/SF-Pro-Display-Bold.otf) format('opentype');
-    font-weight: 700; /* Bold */
-}
-
-/* SF-Mono */
-
-@font-face {
-    font-family: 'SF-Mono';
-    src: local('SF-Mono'), url(../public/fonts/SF-Mono/SF-Mono-Light.otf) format('opentype');
-    font-weight: 300; /* Light */
-}
-
-@font-face {
-    font-family: 'SF-Mono';
-    src: local('SF-Mono'), url(../public/fonts/SF-Mono/SF-Mono-Regular.otf) format('opentype');
-    font-weight: 400; /* Regular */
-}
-
-@font-face {
-    font-family: 'SF-Mono';
-    src: local('SF-Mono'), url(../public/fonts/SF-Mono/SF-Mono-Medium.otf) format('opentype');
-    font-weight: 500; /* Medium */
-}
-
-@font-face {
-    font-family: 'SF-Mono';
-    src: local('SF-Mono'), url(../public/fonts/SF-Mono/SF-Mono-Bold.otf) format('opentype');
-    font-weight: 700; /* Bold */
-}
+/* local fonts */
+@import url('./styles/SF-Pro-font.css');
+@import url('./styles/SF-Mono-font.css');

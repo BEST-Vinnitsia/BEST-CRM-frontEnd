@@ -1,18 +1,16 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { useOutsideClick } from '../../hooks/useOutsideClick';
+import { useOutsideClick } from '../../hooks';
 import { createPortal } from 'react-dom';
 import style from './menu.module.scss';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useUtilsContext } from '../../contexts';
+import { animationOpacity } from '../../styles/animationConfig';
 
 interface IProps {
     children: React.ReactNode;
     open: boolean;
     onClose: () => void;
     depRef?: React.RefObject<HTMLElement>;
-    windowSize: {
-        width: number;
-        height: number;
-    };
 }
 
 interface ITargetPosition {
@@ -22,18 +20,11 @@ interface ITargetPosition {
     right: number;
 }
 
-const portal: HTMLElement | null = document.getElementById('portal-menu');
+const portal: HTMLElement | null = document.getElementById('portal');
 
-const transition = { type: 'spring', stiffness: 500, damping: 50, mass: 1 };
+export default function Menu({ children, onClose, open, depRef }: IProps) {
+    const utilsContext = useUtilsContext();
 
-const animations = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    exit: { opacity: 0 },
-    transition,
-};
-
-export default function Menu({ children, onClose, open, depRef, windowSize }: IProps) {
     const [triggerPosition, setTriggerPosition] = useState<ITargetPosition>();
     const menuRef = useRef<HTMLDivElement>(null);
 
@@ -49,9 +40,10 @@ export default function Menu({ children, onClose, open, depRef, windowSize }: IP
         if (!depRef) return;
 
         setTriggerPosition(depRef?.current?.getBoundingClientRect());
-    }, [depRef, open, windowSize]);
+    }, [depRef, open, utilsContext?.windowSize]);
 
     if (!portal) return <></>;
+    if (!utilsContext) return <></>;
 
     return createPortal(
         <AnimatePresence>
@@ -63,7 +55,7 @@ export default function Menu({ children, onClose, open, depRef, windowSize }: IP
                         top: triggerPosition.bottom + 10,
                         left: triggerPosition.left - 200 + 20 + 14 * Math.sqrt(2) + 14 / 2,
                     }}
-                    {...animations}
+                    {...animationOpacity}
                 >
                     <span className={style['menu__arrow']} />
 

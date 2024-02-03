@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
 import style from './input.module.scss';
-import { IInputHookProps, IInputProps } from '../../interfaces/components/input';
-import { joinStyle } from '../../utils/joinClassName';
+import { IInputHookProps } from '../../interfaces/components/input';
+import { joinStyle } from '../../utils/';
 
-export default function Input(props: IInputProps | IInputHookProps) {
+export default function Input({ placeholder, hookProps }: IInputHookProps) {
+    const { value, setValue, error, errorText } = hookProps;
+
     const [focus, setFocus] = useState(false);
     const [visited, setVisited] = useState(false);
-    const isPropsHook = 'hook' in props;
-    //
-    const placeholder = props.placeholder;
-    const value = isPropsHook ? props.hook.value : props.value;
-    const errorText = isPropsHook ? props.hook.errorText : props.errorText;
-    const error = isPropsHook ? props.hook.error : props.error;
-    const setValue = isPropsHook ? props.hook.setValue : props.setValue;
 
     const onFocusHandler = () => {
         setFocus(true);

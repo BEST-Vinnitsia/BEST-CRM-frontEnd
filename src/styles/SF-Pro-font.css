@@ -1,0 +1,31 @@
+@font-face {
+    font-family: 'SF-Pro';
+    src:
+        local('SF-Pro'),
+        url(../../public/fonts/SF-Pro/SF-Pro-Display-Light.otf) format('opentype');
+    font-weight: 300; /* Light */
+}
+
+@font-face {
+    font-family: 'SF-Pro';
+    src:
+        local('SF-Pro'),
+        url(../../public/fonts/SF-Pro/SF-Pro-Display-Regular.otf) format('opentype');
+    font-weight: 400; /* Regular */
+}
+
+@font-face {
+    font-family: 'SF-Pro';
+    src:
+        local('SF-Pro'),
+        url(../../public/fonts/SF-Pro/SF-Pro-Display-Medium.otf) format('opentype');
+    font-weight: 500; /* Medium */
+}
+
+@font-face {
+    font-family: 'SF-Pro';
+    src:
+        local('SF-Pro'),
+        url(../../public/fonts/SF-Pro/SF-Pro-Display-Bold.otf) format('opentype');
+    font-weight: 700; /* Bold */
+}
