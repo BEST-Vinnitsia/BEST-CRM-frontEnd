@@ -1,63 +1,41 @@
 import React from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 import {
-    PATH_DASHBOARD,
     PATH_AUTH,
     PATH_BaC,
     PATH_COMMITTEE,
+    PATH_DASHBOARD,
     PATH_ERROR,
+    PATH_EVENT,
     PATH_MEMBER,
     PATH_MEMBERSHIP,
-    PATH_EVENT,
 } from './paths';
 
 // Guard
-import { AuthGuard, ClaimGuard, GuestGuard } from '../guards';
+import { AuthGuard, GuestGuard } from '../guards';
 // import { Claims } from '../config/claims';
-
 // Imports
 import {
-    // Layout
-    DashboardLayout,
     AuthorizationLayout,
-
-    //
-    // PAGES
-    //
-
-    // Auth
-    LoginPage,
-
-    // Dashboard
-    DashboardPage,
-
-    // Board and coordinators
+    BoardAndCoordinatorsDetailPage,
     BoardAndCoordinatorsEditPage,
     BoardAndCoordinatorsListPage,
-    BoardAndCoordinatorsDetailPage,
-
-    // Committee
     CommitteeDetailPage,
     CommitteeEditPage,
     CommitteeListPage,
-
-    // Membership
-    MemberListPage,
-    MemberDetailPage,
-    MemberEditPage,
-
-    // Membership
-    MembershipListPage,
-    MembershipDetailPage,
-    MembershipEditPage,
-
-    // Event
-    EventListPage,
+    DashboardLayout,
+    DashboardPage,
+    ErrorPage,
     EventDetailPage,
     EventEditPage,
-
-    // Error
-    ErrorPage,
+    EventListPage,
+    LoginPage,
+    MemberDetailPage,
+    MemberEditPage,
+    MemberListPage,
+    MembershipDetailPage,
+    MembershipEditPage,
+    MembershipListPage,
 } from './imports';
 
 export default function Router() {
@@ -137,7 +115,7 @@ export default function Router() {
                 { path: PATH_MEMBER.LIST, element: <MemberListPage /> },
                 { path: PATH_MEMBER.CREATE, element: <MemberEditPage /> },
                 { path: `${PATH_MEMBER.EDIT}/:id`, element: <MemberEditPage /> },
-                { path: `${PATH_MEMBER.DETAILS}/:id`, element: <MemberListPage /> },
+                { path: `${PATH_MEMBER.DETAILS}/:id`, element: <MemberDetailPage /> },
             ],
         },
 

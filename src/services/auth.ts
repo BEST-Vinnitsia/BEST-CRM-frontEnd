@@ -3,11 +3,7 @@ import { API } from '../constants';
 import { ILogin, ILoginRes, IRefresh } from '../interfaces/services/auth';
 
 class AuthService {
-    root: string;
-
-    constructor() {
-        this.root = 'auth';
-    }
+    root: string = 'auth';
 
     private path(route: string) {
         return `${API}/${this.root}/${route}`;

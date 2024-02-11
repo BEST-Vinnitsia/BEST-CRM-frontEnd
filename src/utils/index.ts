@@ -4,3 +4,4 @@ export { checkErrorType, setErrorType } from './errorType';
 export { intToRoman } from './intToRoman';
 export { joinStyle } from './joinClassName';
 export { uuid } from './uuid';
+export { formatDate } from './formatDate';

@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const useCheckbox = (data: string[]) => {
     const [selectRows, setSelectRows] = useState<string[]>([]);
     const [allRows, setAllRows] = useState<string[]>(data);
+
+    useEffect(() => {
+        setAllRows(data);
+    }, [data]);
 
     const selectRow = (id: string) => {
         setSelectRows((prev) => {

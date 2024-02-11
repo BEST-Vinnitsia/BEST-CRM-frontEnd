@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     BreadcrumbsContainer,
-    Button, Label,
+    Button,
+    Label,
     ScrollY,
     Table,
     TBody,
@@ -13,38 +14,13 @@ import {
     TRHead,
 } from '../../components';
 import { PATH_MEMBER } from '../../routes/paths';
-import { utilsActions } from '../../redux/actions/utilsActions';
 import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
-import { useCheckbox } from '../../hooks/useCheckbox';
+import { useCheckbox } from '../../hooks';
 import Checkbox from '../../components/table/checkbox/Checkbox';
-
-const tableData = [
-    {
-        id: 'asd',
-        name: 'Name',
-        surname: 'Surname',
-        email: 'email@gmail.com',
-        phone: '+380971234567',
-        faculty: 'ФМІБ',
-        group: 'УБ-21б',
-        message: '@telegram',
-        status: 'Observer',
-        hb: '01.01.2001',
-    },
-    {
-        id: 'asdsd',
-        name: 'Name',
-        surname: 'Surname',
-        email: 'email 2@gmail.com',
-        phone: '+380971234567',
-        faculty: 'ФМІБ',
-        group: 'УБ-21б',
-        message: '@telegram',
-        status: 'Observer',
-        hb: '01.01.2001',
-    },
-];
+import { IMember } from '../../interfaces/member/member';
+import { memberService } from '../../services';
+import { formatDate } from '../../utils';
 
 const pathMap = [
     { url: PATH_MEMBER.ROOT, title: pageNames.pages.member },
@@ -53,7 +29,9 @@ const pathMap = [
 
 export default function MemberListPage() {
     const navigate = useNavigate();
-    const checkboxHook = useCheckbox(tableData.map((item) => item.id));
+
+    const [memberList, setMemberList] = useState<IMember[]>([]);
+    const checkboxHook = useCheckbox(memberList.map((item) => item.id));
 
     // useEffect(() => {
     //     utilsActions.loading(true);
@@ -62,15 +40,23 @@ export default function MemberListPage() {
     //     }, 2000);
     // }, []);
 
+    useEffect(() => {
+        getMemberList();
+    }, []);
+
+    const getMemberList = async () => {
+        const res = await memberService.getList();
+        if (!res) return;
+        setMemberList(res);
+    };
+
     return (
         <>
             <ScrollY>
                 <div className="p-4">
                     <BreadcrumbsContainer path={pathMap}>
                         <div className="flex">
-                            <Button onClick={() => navigate(`${PATH_MEMBER.EDIT}/id`)} title="Edit" />
                             <Button onClick={() => navigate(PATH_MEMBER.CREATE)} title="Create" />
-                            <Button onClick={() => navigate(`${PATH_MEMBER.DETAILS}/id`)} title="Details" />
                         </div>
                     </BreadcrumbsContainer>
                 </div>
@@ -113,7 +99,7 @@ export default function MemberListPage() {
                         </TRHead>
                     </THead>
                     <TBody>
-                        {tableData.map((item, i) => (
+                        {memberList.map((item, i) => (
                             <TRBody key={i}>
                                 <TD sx={{ p: '0px 0px 0px 8px' }}>
                                     <Checkbox
@@ -123,17 +109,13 @@ export default function MemberListPage() {
                                 </TD>
 
                                 <TD>
-                                    <div>
+                                    <div onClick={() => navigate(`${PATH_MEMBER.DETAILS}/${item.id}`)}>
                                         <Text text={`${item.name} ${item.surname}`} type={'span-sm'} />
-                                        <Text text={item.email} type={'span-sm'} color={'gray'} />
+                                        <Text text={item.login} type={'span-sm'} color={'gray'} />
                                     </div>
                                 </TD>
-                                <TD>
-                                    <Text text={item.phone} type={'span-sm'} />
-                                </TD>
-                                <TD>
-                                    <Text text={item.message} type={'span-sm'} />
-                                </TD>
+                                <TD>{/*<Text text={item.phone} type={'span-sm'} />*/}</TD>
+                                <TD>{/*<Text text={item.message} type={'span-sm'} />*/}</TD>
                                 <TD>
                                     <div>
                                         <Text text={item.faculty} type={'span-sm'} />
@@ -141,12 +123,12 @@ export default function MemberListPage() {
                                     </div>
                                 </TD>
                                 <TD>
-                                    <Label title={item.status} />
+                                    <Label title={item.membership} />
                                 </TD>
                                 <TD />
                                 <TD />
                                 <TD>
-                                    <Text text={item.hb} type={'span-sm'} />
+                                    <Text text={formatDate(new Date(item.birthday))} type={'span-sm'} />
                                 </TD>
                             </TRBody>
                         ))}
