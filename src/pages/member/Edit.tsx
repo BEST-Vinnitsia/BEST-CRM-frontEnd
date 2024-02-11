@@ -26,6 +26,9 @@ export default function MemberEditPage() {
         useInput({ name: 'surname' }),
         useInput({ name: 'middleName' }),
         useInput({ name: 'bestEmail' }),
+        useInput({ name: 'email' }),
+        useInput({ name: 'phone' }),
+        useInput({ name: 'socialNetwork' }),
         useInput({ name: 'membership' }),
         useInput({ name: 'group' }),
         useInput({ name: 'faculty' }),
@@ -50,6 +53,9 @@ export default function MemberEditPage() {
         form.surname.setValue(res.surname);
         form.middleName.setValue(res.middleName);
         form.bestEmail.setValue(res.bestEmail ? res.bestEmail : '');
+        form.email.setValue(res.email);
+        form.phone.setValue(res.phone);
+        form.socialNetwork.setValue(res.socialNetwork);
         form.membership.setValue(res.membership);
         form.group.setValue(res.group);
         form.faculty.setValue(res.faculty);
@@ -67,6 +73,9 @@ export default function MemberEditPage() {
                 surname: form.surname.value,
                 middleName: form.middleName.value,
                 bestEmail: form.bestEmail.value ? form.bestEmail.value : null,
+                email: form.email.value,
+                phone: form.phone.value,
+                socialNetwork: form.socialNetwork.value,
                 membership: form.membership.value,
                 group: form.group.value,
                 faculty: form.faculty.value,
@@ -84,6 +93,9 @@ export default function MemberEditPage() {
                 surname: form.surname.value,
                 middleName: form.middleName.value,
                 bestEmail: form.bestEmail.value ? form.bestEmail.value : null,
+                email: form.email.value,
+                phone: form.phone.value,
+                socialNetwork: form.socialNetwork.value,
                 membership: form.membership.value,
                 group: form.group.value,
                 faculty: form.faculty.value,
@@ -110,6 +122,9 @@ export default function MemberEditPage() {
                     <Input placeholder={'Surname'} hookProps={form.surname} />
                     <Input placeholder={'Middle name'} hookProps={form.middleName} />
                     <Input placeholder={'BEST email'} hookProps={form.bestEmail} />
+                    <Input placeholder={'Email'} hookProps={form.email} />
+                    <Input placeholder={'Phone'} hookProps={form.phone} />
+                    <Input placeholder={'Social network'} hookProps={form.socialNetwork} />
                     <Input placeholder={'Membership'} hookProps={form.membership} />
                     <Input placeholder={'Group'} hookProps={form.group} />
                     <Input placeholder={'Faculty'} hookProps={form.faculty} />

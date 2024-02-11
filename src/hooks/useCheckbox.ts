@@ -40,6 +40,7 @@ export const useCheckbox = (data: string[]) => {
         const selectLength = selectRows.length;
         const stateLength = allRows.length;
 
+        if (selectLength === 0) return '0';
         if (selectLength === stateLength) return '1';
         if (selectLength !== 0 && selectLength < stateLength) return '2';
         return '0';

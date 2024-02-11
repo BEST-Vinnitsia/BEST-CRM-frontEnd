@@ -6,6 +6,9 @@ export interface IMember {
     password: string;
 
     bestEmail: string | null;
+    email: string;
+    phone: string;
+    socialNetwork: string;
 
     name: string; //
     surname: string;
