@@ -19,8 +19,12 @@ import { useNavigate } from 'react-router';
 import { useCheckbox } from '../../hooks';
 import Checkbox from '../../components/table/checkbox/Checkbox';
 import { IMember } from '../../interfaces/member/member';
-import { memberService } from '../../services';
-import { formatDate } from '../../utils';
+import { boardService, boardToMemberService, cadenceService, memberService } from '../../services';
+import { formatDate, intToRoman } from '../../utils';
+import { IBoard } from '../../interfaces/board/board';
+import { IBoardToMember } from '../../interfaces/board/boardToMember';
+import { ICadence } from '../../interfaces/cadence';
+import { utilsActions } from '../../redux/actions/utilsActions';
 
 const pathMap = [
     { url: PATH_MEMBER.ROOT, title: pageNames.pages.member },
@@ -31,23 +35,80 @@ export default function MemberListPage() {
     const navigate = useNavigate();
 
     const [memberList, setMemberList] = useState<IMember[]>([]);
-    const checkboxHook = useCheckbox(memberList.map((item) => item.id));
+    const [boardList, setBoardList] = useState<IBoard[]>([]);
+    const [boardToMemberList, setBoardToMemberList] = useState<IBoardToMember[]>([]);
+    const [cadenceList, setCadenceList] = useState<ICadence[]>([]);
+    const [groupData, setGroupData] = useState<any>([]);
 
-    // useEffect(() => {
-    //     utilsActions.loading(true);
-    //     setTimeout(() => {
-    //         utilsActions.loading(false);
-    //     }, 2000);
-    // }, []);
-
+    const checkboxHook = useCheckbox(groupData.map((item: any) => item.id));
+    
     useEffect(() => {
-        getMemberList();
+        getDataWithServer();
     }, []);
 
-    const getMemberList = async () => {
-        const res = await memberService.getList();
-        if (!res) return;
-        setMemberList(res);
+    useEffect(() => {
+        if (boardList.length === 0) return;
+        if (boardToMemberList.length === 0) return;
+        if (cadenceList.length === 0) return;
+
+        group();
+    }, [boardList, boardToMemberList, cadenceList]);
+
+    const getDataWithServer = async () => {
+        try {
+            const memberListPromise = memberService.getList();
+            const cadenceListPromise = cadenceService.getList();
+            const boardListPromise = boardService.getList();
+            const memberToBoardListPromise = boardToMemberService.getList();
+
+            utilsActions.loading(true);
+            const [memberList, cadenceList, boardList, memberToBoardList] = await Promise.all([
+                memberListPromise,
+                cadenceListPromise,
+                boardListPromise,
+                memberToBoardListPromise,
+            ]);
+            utilsActions.loading(false);
+
+            setMemberList(memberList);
+            setCadenceList(cadenceList);
+            setBoardList(boardList);
+            setBoardToMemberList(memberToBoardList);
+        } catch (err) {
+            utilsActions.loading(false);
+            utilsActions.addMessage({
+                status: 'error',
+                message: 'Error loading data',
+            });
+        }
+    };
+
+    const group = () => {
+        const boardToMemberAndCadence = boardToMemberList.map((btm) => {
+            const cadence = cadenceList.filter((c) => c.id === btm.cadenceId);
+            const position = boardList.filter((b) => b.id === btm.boardId);
+
+            return {
+                memberId: btm.memberId,
+                board: {
+                    ...position[0],
+                    cadence: cadence[0],
+                },
+            };
+        });
+
+        const newMemberList: any[] = [];
+        const memberIdUnique = Array.from(new Set(boardToMemberAndCadence.map((item) => item.memberId)));
+
+        for (const member of memberList) {
+            if (memberIdUnique.includes(member.id)) {
+                const filter = boardToMemberAndCadence.filter((item) => item.memberId === member.id);
+                newMemberList.push({ ...member, board: filter.map((item) => item.board) });
+                continue;
+            }
+            newMemberList.push(member);
+        }
+        setGroupData(newMemberList);
     };
 
     return (
@@ -74,7 +135,9 @@ export default function MemberListPage() {
                             <TH>
                                 <Text text={'Name'} color={'gray'} width={'bold'} type={'span-sm'} />
                             </TH>
-
+                            <TH>
+                                <Text text={'Email'} color={'gray'} width={'bold'} type={'span-sm'} />
+                            </TH>
                             <TH>
                                 <Text text={'Phone'} color={'gray'} width={'bold'} type={'span-sm'} />
                             </TH>
@@ -99,7 +162,7 @@ export default function MemberListPage() {
                         </TRHead>
                     </THead>
                     <TBody>
-                        {memberList.map((item, i) => (
+                        {groupData.map((item: any, i: number) => (
                             <TRBody key={i}>
                                 <TD sx={{ p: '0px 0px 0px 8px' }}>
                                     <Checkbox
@@ -111,11 +174,22 @@ export default function MemberListPage() {
                                 <TD>
                                     <div onClick={() => navigate(`${PATH_MEMBER.DETAILS}/${item.id}`)}>
                                         <Text text={`${item.name} ${item.surname}`} type={'span-sm'} />
-                                        <Text text={item.login} type={'span-sm'} color={'gray'} />
+                                        <Text
+                                            text={item.bestEmail ? item.bestEmail : 'there is no BEST mail'}
+                                            type={'span-sm'}
+                                            color={'gray'}
+                                        />
                                     </div>
                                 </TD>
-                                <TD>{/*<Text text={item.phone} type={'span-sm'} />*/}</TD>
-                                <TD>{/*<Text text={item.message} type={'span-sm'} />*/}</TD>
+                                <TD>
+                                    <Text text={item.email} type={'span-sm'} />
+                                </TD>
+                                <TD>
+                                    <Text text={item.phone} type={'span-sm'} />
+                                </TD>
+                                <TD>
+                                    <Text text={item.socialNetwork} type={'span-sm'} />
+                                </TD>
                                 <TD>
                                     <div>
                                         <Text text={item.faculty} type={'span-sm'} />
@@ -125,7 +199,12 @@ export default function MemberListPage() {
                                 <TD>
                                     <Label title={item.membership} />
                                 </TD>
-                                <TD />
+                                <TD>
+                                    {item.board &&
+                                        item.board.map((item: any, i: number) => (
+                                            <Label key={i} title={`${intToRoman(item.cadence.number)} ${item.name}`} />
+                                        ))}
+                                </TD>
                                 <TD />
                                 <TD>
                                     <Text text={formatDate(new Date(item.birthday))} type={'span-sm'} />

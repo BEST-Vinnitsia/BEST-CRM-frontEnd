@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export const useCheckbox = (data: string[]) => {
     const [selectRows, setSelectRows] = useState<string[]>([]);
-    const [allRows, setAllRows] = useState<string[]>(data);
-
+    const allRows = useRef<string[]>([]);
+    
     useEffect(() => {
-        setAllRows(data);
+        allRows.current = data;
     }, [data]);
 
     const selectRow = (id: string) => {
@@ -19,26 +19,25 @@ export const useCheckbox = (data: string[]) => {
     };
 
     const checkSelectRow = (id: string) => {
-        if (selectRows.includes(id)) return true;
-        return false;
+        return selectRows.includes(id);
     };
 
     const selectAll = () => {
         const selectLength = selectRows.length;
-        const stateLength = allRows.length;
+        const stateLength = allRows.current.length;
 
         if (selectLength !== 0 && selectLength !== stateLength) {
-            setSelectRows(allRows);
+            setSelectRows(allRows.current);
         } else if (selectLength === stateLength) {
             setSelectRows([]);
         } else if (selectLength === 0) {
-            setSelectRows(allRows);
+            setSelectRows(allRows.current);
         }
     };
 
     const checkSelectAll = () => {
         const selectLength = selectRows.length;
-        const stateLength = allRows.length;
+        const stateLength = allRows.current.length;
 
         if (selectLength === 0) return '0';
         if (selectLength === stateLength) return '1';
@@ -47,9 +46,7 @@ export const useCheckbox = (data: string[]) => {
     };
 
     return {
-        setSelectRows,
-        setAllRows,
-
+        selectRows,
         selectRow,
         checkSelectRow,
         selectAll,
