@@ -1,8 +1,11 @@
 import React from 'react';
-import { BreadcrumbsContainer, Button } from '../../components';
+import { BreadcrumbsContainer, Button, Input } from '../../components';
 import { PATH_BaC } from '../../routes/paths';
 import { useNavigate, useParams } from 'react-router-dom';
 import { pageNames } from '../../constants';
+import { utilsActions } from '../../redux/actions/utilsActions';
+import { useForm, useInput } from '../../hooks';
+import { boardService } from '../../services';
 
 const pathMapEdit = [
     { url: PATH_BaC.ROOT, title: pageNames.pages.BaC },
@@ -18,29 +21,46 @@ export default function BoardAndCoordinatorsEditPage() {
     const { id } = useParams();
     const navigate = useNavigate();
 
+    const [form] = useForm([useInput({ name: 'name' })]);
+
+    const submit = async () => {
+        try {
+            utilsActions.loading(true);
+            if (id) {
+            } else {
+                await boardService.create({ name: form.name.value, isActive: true });
+                form.name.setValue('');
+                utilsActions.addMessage({
+                    status: 'success',
+                    message: 'Add board is done',
+                });
+            }
+        } catch (err) {
+            utilsActions.addMessage({
+                status: 'error',
+                message: 'Error create',
+            });
+        } finally {
+            utilsActions.loading(false);
+        }
+    };
+
     return (
         <>
-            {id ? (
-                <div className="p-4">
-                    <BreadcrumbsContainer path={pathMapEdit}>
-                        <div className="flex">
-                            <Button onClick={() => navigate(PATH_BaC.CREATE)} title="Create" />
-                            <Button onClick={() => navigate(`${PATH_BaC.DETAILS}/id`)} title="Details" />
-                            <Button onClick={() => navigate(PATH_BaC.LIST)} title="List" />
-                        </div>
-                    </BreadcrumbsContainer>
+            <div className="p-4">
+                <BreadcrumbsContainer path={pathMapEdit}>
+                    <div className="flex">
+                        <Button onClick={() => navigate(PATH_BaC.LIST)} title="List" />
+                    </div>
+                </BreadcrumbsContainer>
+
+                <div className="w-96">
+                    <Input placeholder={'Name'} hookProps={form.name} />
                 </div>
-            ) : (
-                <div className="p-4">
-                    <BreadcrumbsContainer path={pathMapCreate}>
-                        <div className="flex">
-                            <Button onClick={() => navigate(`${PATH_BaC.EDIT}/id`)} title="Edit" />
-                            <Button onClick={() => navigate(`${PATH_BaC.DETAILS}/id`)} title="Details" />
-                            <Button onClick={() => navigate(PATH_BaC.LIST)} title="List" />
-                        </div>
-                    </BreadcrumbsContainer>
+                <div className="mt-2">
+                    <Button title="Submit" onClick={submit} />
                 </div>
-            )}
+            </div>
         </>
     );
 }

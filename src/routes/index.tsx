@@ -3,12 +3,13 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import {
     PATH_AUTH,
     PATH_BaC,
+    PATH_CADENCE,
     PATH_COMMITTEE,
     PATH_DASHBOARD,
     PATH_ERROR,
     PATH_EVENT,
+    PATH_MEETING,
     PATH_MEMBER,
-    PATH_MEMBERSHIP,
 } from './paths';
 
 // Guard
@@ -20,6 +21,9 @@ import {
     BoardAndCoordinatorsDetailPage,
     BoardAndCoordinatorsEditPage,
     BoardAndCoordinatorsListPage,
+    CadenceDetailPage,
+    CadenceEditPage,
+    CadenceListPage,
     CommitteeDetailPage,
     CommitteeEditPage,
     CommitteeListPage,
@@ -30,12 +34,12 @@ import {
     EventEditPage,
     EventListPage,
     LoginPage,
+    MeetingDetailPage,
+    MeetingEditPage,
+    MeetingListPage,
     MemberDetailPage,
     MemberEditPage,
     MemberListPage,
-    MembershipDetailPage,
-    MembershipEditPage,
-    MembershipListPage,
 } from './imports';
 
 export default function Router() {
@@ -119,24 +123,46 @@ export default function Router() {
             ],
         },
 
-        // Membership
+        // Cadence
         {
-            path: PATH_MEMBERSHIP.ROOT,
+            path: PATH_CADENCE.ROOT,
             element: (
                 <AuthGuard>
                     <DashboardLayout />
                 </AuthGuard>
             ),
             children: [
-                { path: PATH_MEMBERSHIP.LIST, element: <MembershipListPage /> },
-                { path: PATH_MEMBERSHIP.CREATE, element: <MembershipEditPage /> },
+                { path: PATH_CADENCE.LIST, element: <CadenceListPage /> },
+                { path: PATH_CADENCE.CREATE, element: <CadenceEditPage /> },
                 {
-                    path: `${PATH_MEMBERSHIP.EDIT}/:id`,
-                    element: <MembershipEditPage />,
+                    path: `${PATH_CADENCE.EDIT}/:id`,
+                    element: <CadenceEditPage />,
                 },
                 {
-                    path: `${PATH_MEMBERSHIP.DETAILS}/:id`,
-                    element: <MembershipDetailPage />,
+                    path: `${PATH_CADENCE.DETAILS}/:id`,
+                    element: <CadenceDetailPage />,
+                },
+            ],
+        },
+
+        // Meeting
+        {
+            path: PATH_MEETING.ROOT,
+            element: (
+                <AuthGuard>
+                    <DashboardLayout />
+                </AuthGuard>
+            ),
+            children: [
+                { path: PATH_MEETING.LIST, element: <MeetingListPage /> },
+                { path: PATH_MEETING.CREATE, element: <MeetingEditPage /> },
+                {
+                    path: `${PATH_MEETING.EDIT}/:id`,
+                    element: <MeetingEditPage />,
+                },
+                {
+                    path: `${PATH_MEETING.DETAILS}/:id`,
+                    element: <MeetingDetailPage />,
                 },
             ],
         },

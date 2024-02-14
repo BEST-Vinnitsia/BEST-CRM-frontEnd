@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import style from './dashboard.module.scss';
-import { Loader, PreLoader, SidebarButton } from '../components';
-import { DesktopSidebar, Header, MobileSidebar } from '../components';
+import { DesktopSidebar, Header, Loader, MobileSidebar, PreLoader, SidebarButton } from '../components';
 import { UtilsProvider } from '../contexts';
 import { sidebarConfig } from '../routes/sidebarConfig';
+import { utilsActions } from '../redux/actions/utilsActions';
 
 export default function DashboardLayout() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     const openSidebar = () => {
         setSidebarOpen((prev) => !prev);
+        utilsActions.loading(false);
+    };
+
+    const stopLoader = () => {
+        utilsActions.loading(false);
     };
 
     return (
@@ -26,7 +31,13 @@ export default function DashboardLayout() {
                 <div className={style['dashboard__asideContainer']}>
                     <DesktopSidebar>
                         {sidebarConfig.map((item, i) => (
-                            <SidebarButton key={i} path={item.path} svg={item.svg} title={item.title} />
+                            <SidebarButton
+                                key={i}
+                                path={item.path}
+                                svg={item.svg}
+                                title={item.title}
+                                onClick={stopLoader}
+                            />
                         ))}
                     </DesktopSidebar>
                 </div>

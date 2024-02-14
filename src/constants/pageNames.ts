@@ -5,7 +5,8 @@ export const pageNames = {
         committee: 'Committee',
         event: 'Event',
         member: 'Member',
-        membership: 'Membership',
+        cadence: 'Cadence',
+        meeting: 'Meeting',
     },
 
     global: {

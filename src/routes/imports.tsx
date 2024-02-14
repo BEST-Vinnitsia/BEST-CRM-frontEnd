@@ -1,4 +1,5 @@
-import React, { Suspense, lazy, ComponentType } from 'react';
+import React, { ComponentType, lazy, Suspense } from 'react';
+
 // import ClaimsGuard from '../guards/claim.guard';
 
 interface iLoadable {
@@ -61,20 +62,25 @@ export const CommitteeListPage = Loadable(lazy(() => import('../pages/committee/
 export const CommitteeDetailPage = Loadable(lazy(() => import('../pages/committee/Detail')));
 export const CommitteeEditPage = Loadable(lazy(() => import('../pages/committee/Edit')));
 
-// Membership
+// Member
 export const MemberListPage = Loadable(lazy(() => import('../pages/member/List')));
 export const MemberDetailPage = Loadable(lazy(() => import('../pages/member/Detail')));
 export const MemberEditPage = Loadable(lazy(() => import('../pages/member/Edit')));
 
-// Membership
-export const MembershipListPage = Loadable(lazy(() => import('../pages/membership/List')));
-export const MembershipDetailPage = Loadable(lazy(() => import('../pages/membership/Detail')));
-export const MembershipEditPage = Loadable(lazy(() => import('../pages/membership/Edit')));
+// Cadence
+export const CadenceListPage = Loadable(lazy(() => import('../pages/cadence/List')));
+export const CadenceDetailPage = Loadable(lazy(() => import('../pages/cadence/Detail')));
+export const CadenceEditPage = Loadable(lazy(() => import('../pages/cadence/Edit')));
 
 // Event
 export const EventListPage = Loadable(lazy(() => import('../pages/event/List')));
 export const EventDetailPage = Loadable(lazy(() => import('../pages/event/Detail')));
 export const EventEditPage = Loadable(lazy(() => import('../pages/event/Edit')));
+
+// Meeting
+export const MeetingListPage = Loadable(lazy(() => import('../pages/meeting/List')));
+export const MeetingDetailPage = Loadable(lazy(() => import('../pages/meeting/Detail')));
+export const MeetingEditPage = Loadable(lazy(() => import('../pages/meeting/Edit')));
 
 // Error
 export const ErrorPage = Loadable(lazy(() => import('../pages/error/Error')));
