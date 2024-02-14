@@ -18,13 +18,10 @@ import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
 import { useCheckbox } from '../../hooks';
 import Checkbox from '../../components/table/checkbox/Checkbox';
-import { IMember } from '../../interfaces/member/member';
-import { boardService, boardToMemberService, cadenceService, memberService } from '../../services';
+import { memberService } from '../../services';
 import { formatDate, intToRoman } from '../../utils';
-import { IBoard } from '../../interfaces/board/board';
-import { IBoardToMember } from '../../interfaces/board/boardToMember';
-import { ICadence } from '../../interfaces/cadence';
 import { utilsActions } from '../../redux/actions/utilsActions';
+import { IMemberListAllInfo } from '../../interfaces/member/memberBigData';
 
 const pathMap = [
     { url: PATH_MEMBER.ROOT, title: pageNames.pages.member },
@@ -34,46 +31,23 @@ const pathMap = [
 export default function MemberListPage() {
     const navigate = useNavigate();
 
-    const [memberList, setMemberList] = useState<IMember[]>([]);
-    const [boardList, setBoardList] = useState<IBoard[]>([]);
-    const [boardToMemberList, setBoardToMemberList] = useState<IBoardToMember[]>([]);
-    const [cadenceList, setCadenceList] = useState<ICadence[]>([]);
-    const [groupData, setGroupData] = useState<any>([]);
+    const [memberList, setMemberList] = useState<IMemberListAllInfo[]>([]);
 
-    const checkboxHook = useCheckbox(groupData.map((item: any) => item.id));
-    
+    const checkboxHook = useCheckbox(memberList.map((item: any) => item.id));
+
     useEffect(() => {
-        getDataWithServer();
+        getMemberListAllInfo();
     }, []);
 
-    useEffect(() => {
-        if (boardList.length === 0) return;
-        if (boardToMemberList.length === 0) return;
-        if (cadenceList.length === 0) return;
-
-        group();
-    }, [boardList, boardToMemberList, cadenceList]);
-
-    const getDataWithServer = async () => {
+    const getMemberListAllInfo = async () => {
         try {
-            const memberListPromise = memberService.getList();
-            const cadenceListPromise = cadenceService.getList();
-            const boardListPromise = boardService.getList();
-            const memberToBoardListPromise = boardToMemberService.getList();
+            const memberListPromise = memberService.getListAllInfo();
 
             utilsActions.loading(true);
-            const [memberList, cadenceList, boardList, memberToBoardList] = await Promise.all([
-                memberListPromise,
-                cadenceListPromise,
-                boardListPromise,
-                memberToBoardListPromise,
-            ]);
+            const [memberList] = await Promise.all([memberListPromise]);
             utilsActions.loading(false);
 
             setMemberList(memberList);
-            setCadenceList(cadenceList);
-            setBoardList(boardList);
-            setBoardToMemberList(memberToBoardList);
         } catch (err) {
             utilsActions.loading(false);
             utilsActions.addMessage({
@@ -81,34 +55,6 @@ export default function MemberListPage() {
                 message: 'Error loading data',
             });
         }
-    };
-
-    const group = () => {
-        const boardToMemberAndCadence = boardToMemberList.map((btm) => {
-            const cadence = cadenceList.filter((c) => c.id === btm.cadenceId);
-            const position = boardList.filter((b) => b.id === btm.boardId);
-
-            return {
-                memberId: btm.memberId,
-                board: {
-                    ...position[0],
-                    cadence: cadence[0],
-                },
-            };
-        });
-
-        const newMemberList: any[] = [];
-        const memberIdUnique = Array.from(new Set(boardToMemberAndCadence.map((item) => item.memberId)));
-
-        for (const member of memberList) {
-            if (memberIdUnique.includes(member.id)) {
-                const filter = boardToMemberAndCadence.filter((item) => item.memberId === member.id);
-                newMemberList.push({ ...member, board: filter.map((item) => item.board) });
-                continue;
-            }
-            newMemberList.push(member);
-        }
-        setGroupData(newMemberList);
     };
 
     return (
@@ -151,7 +97,13 @@ export default function MemberListPage() {
                                 <Text text={'Status'} color={'gray'} width={'bold'} type={'span-sm'} />
                             </TH>
                             <TH>
-                                <Text text={'Position'} color={'gray'} width={'bold'} type={'span-sm'} />
+                                <Text text={'Board'} color={'gray'} width={'bold'} type={'span-sm'} />
+                            </TH>
+                            <TH>
+                                <Text text={'Coordinator'} color={'gray'} width={'bold'} type={'span-sm'} />
+                            </TH>
+                            <TH>
+                                <Text text={'Event'} color={'gray'} width={'bold'} type={'span-sm'} />
                             </TH>
                             <TH>
                                 <Text text={'Committee'} color={'gray'} width={'bold'} type={'span-sm'} />
@@ -162,7 +114,7 @@ export default function MemberListPage() {
                         </TRHead>
                     </THead>
                     <TBody>
-                        {groupData.map((item: any, i: number) => (
+                        {memberList.map((item, i) => (
                             <TRBody key={i}>
                                 <TD sx={{ p: '0px 0px 0px 8px' }}>
                                     <Checkbox
@@ -200,12 +152,41 @@ export default function MemberListPage() {
                                     <Label title={item.membership} />
                                 </TD>
                                 <TD>
-                                    {item.board &&
-                                        item.board.map((item: any, i: number) => (
-                                            <Label key={i} title={`${intToRoman(item.cadence.number)} ${item.name}`} />
+                                    {item.boardToMember &&
+                                        item.boardToMember.map((btm, i) => (
+                                            <Label
+                                                key={btm.id}
+                                                title={`${intToRoman(btm.cadence.number)} ${btm.board.name}`}
+                                            />
                                         ))}
                                 </TD>
-                                <TD />
+                                <TD>
+                                    {item.coordinatorToMember &&
+                                        item.coordinatorToMember.map((ctm, i) => (
+                                            <Label
+                                                key={ctm.id}
+                                                title={`${intToRoman(ctm.cadence.number)} ${ctm.coordinator.name}`}
+                                            />
+                                        ))}
+                                </TD>
+                                <TD>
+                                    {item.memberToEvent &&
+                                        item.memberToEvent.map((etm, i) => (
+                                            <Label
+                                                key={etm.id}
+                                                title={`${intToRoman(etm.newEvent.cadence.number)} ${etm.newEvent.event.name} ${etm.responsible.name} ${etm.responsible.role}`}
+                                            />
+                                        ))}
+                                </TD>
+                                <TD>
+                                    {item.committeeToMember &&
+                                        item.committeeToMember.map((ctm, i) => (
+                                            <Label
+                                                key={ctm.id}
+                                                title={`${intToRoman(ctm.cadence.number)} ${ctm.committee.name}`}
+                                            />
+                                        ))}
+                                </TD>
                                 <TD>
                                     <Text text={formatDate(new Date(item.birthday))} type={'span-sm'} />
                                 </TD>

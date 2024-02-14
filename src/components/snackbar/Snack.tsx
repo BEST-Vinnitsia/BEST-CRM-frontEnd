@@ -16,7 +16,7 @@ export default function Snack({ message, status, onClose }: IProps) {
     const startTimer = () => {
         timerRef.current = setTimeout(() => {
             onClose();
-        }, 1000 * 3);
+        }, 1000 * 5);
     };
 
     const clearTimer = () => {

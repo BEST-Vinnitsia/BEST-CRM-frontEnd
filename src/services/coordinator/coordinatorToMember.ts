@@ -1,9 +1,14 @@
 import { axios } from '../../utils';
-import { IMember, IMemberDeleteArray, IMemberGetId, IMemberUpdate } from '../../interfaces/member/member';
-import { IMemberListAllInfo } from '../../interfaces/member/memberBigData';
+import {
+    ICoordinatorToMember,
+    ICoordinatorToMemberCreate,
+    ICoordinatorToMemberDeleteArray,
+    ICoordinatorToMemberGetById,
+    ICoordinatorToMemberUpdate,
+} from '../../interfaces/coordinator/coordinatorToMember';
 
-class MemberService {
-    root: string = 'member';
+class CoordinatorToMemberService {
+    root: string = 'coordinator-to-member';
 
     private path(route: string) {
         return `${process.env.REACT_APP_API_URL}/${this.root}/${route}`;
@@ -11,7 +16,7 @@ class MemberService {
 
     /* --------- GET ---------- */
     getList = () => {
-        return new Promise<IMember[]>((resolve, reject) => {
+        return new Promise<ICoordinatorToMember[]>((resolve, reject) => {
             axios
                 .get(this.path('list'))
                 .then((response) => response.data && resolve(response.data))
@@ -19,17 +24,8 @@ class MemberService {
         });
     };
 
-    getListAllInfo = () => {
-        return new Promise<IMemberListAllInfo[]>((resolve, reject) => {
-            axios
-                .get(this.path('list-all-info'))
-                .then((response) => response.data && resolve(response.data))
-                .catch((error) => reject(error));
-        });
-    };
-
-    getById = ({ id }: IMemberGetId) => {
-        return new Promise<IMember>((resolve, reject) => {
+    getById = ({ id }: ICoordinatorToMemberGetById) => {
+        return new Promise<ICoordinatorToMember>((resolve, reject) => {
             axios
                 .get(this.path('by-id'), { params: { id } })
                 .then((response) => response.data && resolve(response.data))
@@ -38,8 +34,8 @@ class MemberService {
     };
 
     /* --------- POST ---------- */
-    create = (data: any) => {
-        return new Promise((resolve, reject) => {
+    create = (data: ICoordinatorToMemberCreate) => {
+        return new Promise<ICoordinatorToMember>((resolve, reject) => {
             axios
                 .post(this.path('create'), data)
                 .then((response) => response.data && resolve(response.data))
@@ -47,18 +43,9 @@ class MemberService {
         });
     };
 
-    createWithAllInfo = (data: any) => {
-        return new Promise((resolve, reject) => {
-            axios
-                .post(this.path('create-with-all-info'), data)
-                .then((response) => response.data && resolve(response.data))
-                .catch((error) => reject(error));
-        });
-    };
-
     /* --------- PUT ---------- */
-    update = (data: IMemberUpdate) => {
-        return new Promise((resolve, reject) => {
+    update = (data: ICoordinatorToMemberUpdate) => {
+        return new Promise<ICoordinatorToMember>((resolve, reject) => {
             axios
                 .put(this.path('update'), data)
                 .then((response) => response.data && resolve(response.data))
@@ -67,7 +54,7 @@ class MemberService {
     };
 
     /* --------- DELETE ---------- */
-    deleteMany = (data: IMemberDeleteArray) => {
+    deleteMany = (data: ICoordinatorToMemberDeleteArray) => {
         return new Promise((resolve, reject) => {
             axios
                 .delete(this.path('delete'), { data })
@@ -77,4 +64,4 @@ class MemberService {
     };
 }
 
-export const memberService = new MemberService();
+export const coordinatorToMemberService = new CoordinatorToMemberService();
