@@ -39,6 +39,10 @@ export default function EventListPage() {
         }
     };
 
+    const redirectToDetails = (id: string) => {
+        navigate(`${PATH_EVENT.DETAILS}/${id}`);
+    };
+
     return (
         <>
             <div className="p-4">
@@ -52,7 +56,7 @@ export default function EventListPage() {
                     <Text text={'Events'} color={'gray'} />
 
                     {eventList.map((item) => (
-                        <div key={item.id}>
+                        <div key={item.id} onClick={() => redirectToDetails(item.id)}>
                             <Text text={item.name} />
                         </div>
                     ))}

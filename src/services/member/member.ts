@@ -37,7 +37,7 @@ class MemberService {
         });
     };
 
-    getByIdAppInfo = ({ id }: IMemberGetId) => {
+    getByIdAllInfo = ({ id }: IMemberGetId) => {
         return new Promise<IMemberListAllInfo>((resolve, reject) => {
             axios
                 .get(this.path('by-id-all-info'), { params: { id } })
@@ -70,6 +70,15 @@ class MemberService {
         return new Promise((resolve, reject) => {
             axios
                 .put(this.path('update'), data)
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    updateAllInfo = (data: any) => {
+        return new Promise((resolve, reject) => {
+            axios
+                .put(this.path('update-all-info'), data)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });

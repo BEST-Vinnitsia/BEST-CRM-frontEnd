@@ -1,5 +1,6 @@
 import { axios } from '../../utils';
 import { IEvent, IEventCreate, IEventDeleteArray, IEventGetById, IEventUpdate } from '../../interfaces/event/event';
+import { IEventAllInfo } from '../../interfaces/event/eventByIdAllInfo';
 
 class EventService {
     root: string = 'event';
@@ -22,6 +23,15 @@ class EventService {
         return new Promise<IEvent>((resolve, reject) => {
             axios
                 .get(this.path('by-id'), { params: { id } })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    getByIdAllInfo = ({ id }: IEventGetById) => {
+        return new Promise<IEventAllInfo>((resolve, reject) => {
+            axios
+                .get(this.path('by-id-all-info'), { params: { id } })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });

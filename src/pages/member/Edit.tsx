@@ -128,10 +128,10 @@ export default function MemberEditPage() {
         form.clothingSize.setValue('');
         form.homeAddress.setValue('');
         form.birthday.setValue('');
-        setBoardSelect([])
-        setCoordinatorSelect([])
-        setCommitteeSelect([])
-        setEventSelect([])
+        setBoardSelect([]);
+        setCoordinatorSelect([]);
+        setCommitteeSelect([]);
+        setEventSelect([]);
     };
 
     const submitMember = async () => {
@@ -139,7 +139,20 @@ export default function MemberEditPage() {
             if (id) {
                 utilsActions.loading(true);
 
-                const res = await memberService.update({
+                const boardToMember = boardSelect
+                    .filter((item) => item.boardId !== '' && item.cadenceId !== '')
+                    .map((item) => ({ boardId: item.boardId, cadenceId: item.cadenceId }));
+                const coordinatorToMember = coordinatorSelect
+                    .filter((item) => item.coordinatorId !== '' && item.cadenceId !== '')
+                    .map((item) => ({ coordinatorId: item.coordinatorId, cadenceId: item.cadenceId }));
+                const committeeToMember = committeeSelect
+                    .filter((item) => item.committeeId !== '' && item.cadenceId !== '')
+                    .map((item) => ({ committeeId: item.committeeId, cadenceId: item.cadenceId }));
+                const eventToMember = eventSelect
+                    .filter((item) => item.newEventId !== '' && item.responsibleId !== '')
+                    .map((item) => ({ responsibleId: item.responsibleId, eventId: item.newEventId }));
+
+                const res = await memberService.updateAllInfo({
                     id,
                     name: form.name.value,
                     surname: form.surname.value,
@@ -158,6 +171,11 @@ export default function MemberEditPage() {
 
                     clothingSize: form.clothingSize.value.toUpperCase(),
                     homeAddress: form.homeAddress.value,
+
+                    boardToMember,
+                    coordinatorToMember,
+                    committeeToMember,
+                    eventToMember,
                 });
 
                 clearForm();
@@ -229,45 +247,115 @@ export default function MemberEditPage() {
 
     const getData = async () => {
         try {
-            const cadenceListPromise = cadenceService.getList();
-            const boardListPromise = boardService.getList();
-            const coordinatorListPromise = coordinatorService.getList();
-            const committeeListPromise = committeeService.getList();
-            const responsibleListPromise = responsibleService.getList();
-            const newEventListPromise = newEventService.getList();
-            const eventListPromise = eventService.getList();
+            utilsActions.loading(true);
+            if (id) {
+                const getAllInfoAboutMemberPromise = memberService.getByIdAllInfo({ id });
+                const cadenceListPromise = cadenceService.getList();
+                const boardListPromise = boardService.getList();
+                const coordinatorListPromise = coordinatorService.getList();
+                const committeeListPromise = committeeService.getList();
+                const responsibleListPromise = responsibleService.getList();
+                const newEventListPromise = newEventService.getList();
+                const eventListPromise = eventService.getList();
 
-            const [
-                cadenceListRes,
-                boardListRes,
-                coordinatorListRes,
-                committeeListRes,
-                responsibleListRes,
-                newEventListRes,
-                eventListRes,
-            ] = await Promise.all([
-                cadenceListPromise,
-                boardListPromise,
-                coordinatorListPromise,
-                committeeListPromise,
-                responsibleListPromise,
-                newEventListPromise,
-                eventListPromise,
-            ]);
+                const [
+                    getAllInfoAboutMemberRes,
+                    cadenceListRes,
+                    boardListRes,
+                    coordinatorListRes,
+                    committeeListRes,
+                    responsibleListRes,
+                    newEventListRes,
+                    eventListRes,
+                ] = await Promise.all([
+                    getAllInfoAboutMemberPromise,
+                    cadenceListPromise,
+                    boardListPromise,
+                    coordinatorListPromise,
+                    committeeListPromise,
+                    responsibleListPromise,
+                    newEventListPromise,
+                    eventListPromise,
+                ]);
 
-            setCadenceList(cadenceListRes);
-            setBoardList(boardListRes);
-            setCoordinatorList(coordinatorListRes);
-            setCommitteeList(committeeListRes);
-            setResponsibleList(responsibleListRes);
-            setNewEventList(newEventListRes);
-            setEventList(eventListRes);
+                setBoardSelect(
+                    getAllInfoAboutMemberRes.boardToMember.map((item, i) => {
+                        return { id: i, cadenceId: item.cadence.id, boardId: item.board.id };
+                    }),
+                );
+
+                setCoordinatorSelect(
+                    getAllInfoAboutMemberRes.coordinatorToMember.map((item, i) => {
+                        return { id: i, cadenceId: item.cadence.id, coordinatorId: item.coordinator.id };
+                    }),
+                );
+
+                setCommitteeSelect(
+                    getAllInfoAboutMemberRes.committeeToMember.map((item, i) => {
+                        return { id: i, cadenceId: item.cadence.id, committeeId: item.committee.id };
+                    }),
+                );
+
+                setEventSelect(
+                    getAllInfoAboutMemberRes.memberToEvent.map((item, i) => {
+                        return {
+                            id: i,
+                            eventId: item.newEvent.event.id,
+                            newEventId: item.newEvent.id,
+                            responsibleId: item.responsible.id,
+                        };
+                    }),
+                );
+
+                setCadenceList(cadenceListRes);
+                setBoardList(boardListRes);
+                setCoordinatorList(coordinatorListRes);
+                setCommitteeList(committeeListRes);
+                setResponsibleList(responsibleListRes);
+                setNewEventList(newEventListRes);
+                setEventList(eventListRes);
+            } else {
+                const cadenceListPromise = cadenceService.getList();
+                const boardListPromise = boardService.getList();
+                const coordinatorListPromise = coordinatorService.getList();
+                const committeeListPromise = committeeService.getList();
+                const responsibleListPromise = responsibleService.getList();
+                const newEventListPromise = newEventService.getList();
+                const eventListPromise = eventService.getList();
+
+                const [
+                    cadenceListRes,
+                    boardListRes,
+                    coordinatorListRes,
+                    committeeListRes,
+                    responsibleListRes,
+                    newEventListRes,
+                    eventListRes,
+                ] = await Promise.all([
+                    cadenceListPromise,
+                    boardListPromise,
+                    coordinatorListPromise,
+                    committeeListPromise,
+                    responsibleListPromise,
+                    newEventListPromise,
+                    eventListPromise,
+                ]);
+
+                setCadenceList(cadenceListRes);
+                setBoardList(boardListRes);
+                setCoordinatorList(coordinatorListRes);
+                setCommitteeList(committeeListRes);
+                setResponsibleList(responsibleListRes);
+                setNewEventList(newEventListRes);
+                setEventList(eventListRes);
+            }
         } catch (err) {
-            utilsActions.loading(false);
             utilsActions.addMessage({
                 status: 'error',
                 message: 'Error loading data',
             });
+        } finally {
+            utilsActions.loading(false);
         }
     };
 

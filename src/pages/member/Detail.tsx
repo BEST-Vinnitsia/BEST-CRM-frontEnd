@@ -31,7 +31,7 @@ export default function MemberDetailPage() {
         try {
             utilsActions.loading(true);
             
-            const res = await memberService.getByIdAppInfo({ id });
+            const res = await memberService.getByIdAllInfo({ id });
             setMember(res);
         } catch (err) {
             utilsActions.addMessage({
