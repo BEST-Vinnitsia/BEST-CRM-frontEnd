@@ -43,6 +43,10 @@ export default function BoardAndCoordinatorsListPage() {
         }
     };
 
+    const toDetails = (id: string, who: 'board' | 'coordinator') => {
+        navigate(`${PATH_BaC.DETAILS}/${who}/${id}`);
+    };
+
     return (
         <ScrollY>
             <div className="p-4">
@@ -56,7 +60,7 @@ export default function BoardAndCoordinatorsListPage() {
                     <Text text={'Board'} color={'gray'} />
 
                     {boardList.map((item) => (
-                        <div key={item.id}>
+                        <div key={item.id} onClick={() => toDetails(item.id, 'board')}>
                             <Text text={item.name} />
                         </div>
                     ))}
@@ -66,7 +70,7 @@ export default function BoardAndCoordinatorsListPage() {
                     <Text text={'Coordinators'} color={'gray'} />
 
                     {coordinatorList.map((item) => (
-                        <div key={item.id}>
+                        <div key={item.id} onClick={() => toDetails(item.id, 'coordinator')}>
                             <Text text={item.name} />
                         </div>
                     ))}

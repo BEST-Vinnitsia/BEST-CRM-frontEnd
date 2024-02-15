@@ -78,11 +78,11 @@ export default function Router() {
                 { path: PATH_BaC.LIST, element: <BoardAndCoordinatorsListPage /> },
                 { path: PATH_BaC.CREATE, element: <BoardAndCoordinatorsEditPage /> },
                 {
-                    path: `${PATH_BaC.EDIT}/:id`,
+                    path: `${PATH_BaC.EDIT}/:who/:id`,
                     element: <BoardAndCoordinatorsEditPage />,
                 },
                 {
-                    path: `${PATH_BaC.DETAILS}/:id`,
+                    path: `${PATH_BaC.DETAILS}/:who/:id`,
                     element: <BoardAndCoordinatorsDetailPage />,
                 },
             ],
