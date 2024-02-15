@@ -18,5 +18,5 @@ export interface ICommitteeCreate extends Omit<ICommittee, 'id' | 'createdAt' | 
 export interface ICommitteeUpdate extends Omit<ICommittee, 'name' | 'createdAt' | 'updatedAt'> {}
 
 export interface ICommitteeDeleteArray {
-    coordinatorsId: string[];
+    committeesId: string[];
 }

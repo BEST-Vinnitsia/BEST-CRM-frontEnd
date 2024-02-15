@@ -6,6 +6,7 @@ import {
     ICommitteeGetById,
     ICommitteeUpdate,
 } from '../../interfaces/committee/committee';
+import { ICommitteeAllInfo } from '../../interfaces/committee/committeeAllInfo';
 
 class CommitteeService {
     root: string = 'committee';
@@ -28,6 +29,15 @@ class CommitteeService {
         return new Promise<ICommittee>((resolve, reject) => {
             axios
                 .get(this.path('by-id'), { params: { id } })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    getByIdAllInfo = ({ id }: ICommitteeGetById) => {
+        return new Promise<ICommitteeAllInfo>((resolve, reject) => {
+            axios
+                .get(this.path('by-id-all-info'), { params: { id } })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });

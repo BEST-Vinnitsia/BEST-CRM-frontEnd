@@ -39,6 +39,10 @@ export default function CommitteeListPage() {
         }
     };
 
+    const redirectToDetails = (id: string) => {
+        navigate(`${PATH_COMMITTEE.DETAILS}/${id}`);
+    };
+
     return (
         <>
             <div className="p-4">
@@ -52,7 +56,7 @@ export default function CommitteeListPage() {
                     <Text text={'Committee'} color={'gray'} />
 
                     {committeeList.map((item) => (
-                        <div key={item.id}>
+                        <div key={item.id} onClick={() => redirectToDetails(item.id)}>
                             <Text text={item.name} />
                         </div>
                     ))}

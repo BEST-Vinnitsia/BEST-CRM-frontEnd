@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BreadcrumbsContainer, Button, Text } from '../../components';
 import { PATH_COMMITTEE } from '../../routes/paths';
 import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
+import { utilsActions } from '../../redux/actions/utilsActions';
+import { committeeService } from '../../services';
+import { ICommitteeAllInfo } from '../../interfaces/committee/committeeAllInfo';
+import { Navigate, useParams } from 'react-router-dom';
+import { intToRoman } from '../../utils';
 
 const pathMap = [
     { url: PATH_COMMITTEE.ROOT, title: pageNames.pages.committee },
@@ -11,108 +16,82 @@ const pathMap = [
 
 export default function CommitteeDetailPage() {
     const navigate = useNavigate();
+    const { id } = useParams();
+
+    const [committee, setCommittee] = useState<ICommitteeAllInfo | null>(null);
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = async () => {
+        if (!id) return;
+
+        try {
+            utilsActions.loading(true);
+
+            const res = await committeeService.getByIdAllInfo({ id });
+            setCommittee(res);
+        } catch (err) {
+            utilsActions.addMessage({
+                status: 'error',
+                message: 'Error loading data',
+            });
+        } finally {
+            utilsActions.loading(false);
+        }
+    };
+
+    const deleteCommittee = async () => {
+        if (!id) return;
+
+        try {
+            utilsActions.loading(true);
+
+            await committeeService.deleteMany({ committeesId: [id] });
+
+            navigate(PATH_COMMITTEE.LIST);
+
+            utilsActions.addMessage({
+                status: 'success',
+                message: 'Committee is deleted',
+            });
+        } catch (err) {
+            utilsActions.addMessage({
+                status: 'error',
+                message: 'Error delete committee',
+            });
+        } finally {
+            utilsActions.loading(false);
+        }
+    };
+
+    if (!id) <Navigate to={PATH_COMMITTEE.LIST} />;
 
     return (
         <>
             <div className="p-4">
                 <BreadcrumbsContainer path={pathMap}>
                     <div className="flex">
+                        <Button onClick={deleteCommittee} title="Delete" />
                         <Button onClick={() => navigate(`${PATH_COMMITTEE.EDIT}/id`)} title="Edit" />
-                        <Button onClick={() => navigate(PATH_COMMITTEE.CREATE)} title="Create" />
                         <Button onClick={() => navigate(PATH_COMMITTEE.LIST)} title="List" />
                     </div>
                 </BreadcrumbsContainer>
-            </div>
 
-            <div className="p-1 flex flex-row">
-                <span className="px-2 py-1">
-                    <Text text="Title" />
-                </span>
-                <span className="px-2 py-1">
-                    <Text text="Title" fontFamily="mono" />
-                </span>
-                <span className="px-2 py-1 w-14">
-                    <Text text="Title" horizon="center" />
-                </span>
-                <span className="px-2 py-1">
-                    <Text text="Title" width="bold" />
-                </span>
-                <span className="px-2 py-1">
-                    <Text text="Title" width="lite" />
-                </span>
-                <span className="px-2 py-1 w-14">
-                    <Text text="Lorem ipsum" space="nowrap" />
-                </span>
-            </div>
+                {committee && (
+                    <div>
+                        <Text text={committee.name} />
+                        <Text text={`Is active: ${committee.isActive}`} />
 
-            <div className="p-1 flex flex-row">
-                <span className="px-2 py-1">
-                    <Text text="Title" color="gray" />
-                </span>
-
-                <span className="px-2 py-1">
-                    <Text text="Title" color="gray" fontFamily="mono" />
-                </span>
-            </div>
-
-            <div className="p-1 flex flex-row">
-                <span className="px-2 py-1">
-                    <Text text="Title" type="span-sm" />
-                </span>
-
-                <span className="px-2 py-1">
-                    <Text text="Title" type="span-sm" fontFamily="mono" />
-                </span>
-
-                <span className="px-2 py-1">
-                    <Text text="Title" color="gray" type="span-sm" />
-                </span>
-
-                <span className="px-2 py-1">
-                    <Text text="Title" color="gray" fontFamily="mono" type="span-sm" />
-                </span>
-            </div>
-
-            <div className="p-1 flex flex-row">
-                <span className="px-2 py-1">
-                    <Text text="Title" type="h1" />
-                </span>
-                <span className="px-2 py-1">
-                    <Text text="Title" type="h2" />
-                </span>
-                <span className="px-2 py-1">
-                    <Text text="Title" type="h3" />
-                </span>
-                <span className="px-2 py-1">
-                    <Text text="Title" type="h4" />
-                </span>
-                <span className="px-2 py-1">
-                    <Text text="Title" type="h5" />
-                </span>
-                <span className="px-2 py-1">
-                    <Text text="Title" type="h6" />
-                </span>
-            </div>
-
-            <div className="p-1 flex flex-row">
-                <span className="px-2 py-1">
-                    <Text text="Title" type="h1" width="bold" />
-                </span>
-                <span className="px-2 py-1">
-                    <Text text="Title" type="h2" width="bold" />
-                </span>
-                <span className="px-2 py-1">
-                    <Text text="Title" type="h3" width="bold" />
-                </span>
-                <span className="px-2 py-1">
-                    <Text text="Title" type="h4" width="bold" />
-                </span>
-                <span className="px-2 py-1">
-                    <Text text="Title" type="h5" width="bold" />
-                </span>
-                <span className="px-2 py-1">
-                    <Text text="Title" type="h6" width="bold" />
-                </span>
+                        {committee.committeeToMember.map((item) => (
+                            <div>
+                                <Text text={`${item.member.name} ${item.member.surname}`} />
+                                <Text text={`Cadence: ${intToRoman(item.cadence.number)}`} />
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
         </>
     );

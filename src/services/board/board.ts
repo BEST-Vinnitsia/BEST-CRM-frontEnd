@@ -1,5 +1,6 @@
 import { axios } from '../../utils';
 import { IBoard, IBoardCreate, IBoardDeleteArray, IBoardGetById, IBoardUpdate } from '../../interfaces/board/board';
+import { IBoardAllInfo } from '../../interfaces/board/boardAllInfo';
 
 class BoardService {
     root: string = 'board';
@@ -22,6 +23,15 @@ class BoardService {
         return new Promise<IBoard>((resolve, reject) => {
             axios
                 .get(this.path('by-id'), { params: { id } })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    getByIdAllInfo = ({ id }: IBoardGetById) => {
+        return new Promise<IBoardAllInfo>((resolve, reject) => {
+            axios
+                .get(this.path('by-id-all-info'), { params: { id } })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });

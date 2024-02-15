@@ -5,8 +5,9 @@ import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
 import { Navigate, useParams } from 'react-router-dom';
 import { memberService } from '../../services';
-import { IMember } from '../../interfaces/member/member';
-import { formatDate } from '../../utils';
+import { formatDate, intToRoman } from '../../utils';
+import { IMemberListAllInfo } from '../../interfaces/member/memberBigData';
+import { utilsActions } from '../../redux/actions/utilsActions';
 
 const pathMap = [
     { url: PATH_MEMBER.ROOT, title: pageNames.pages.member },
@@ -17,7 +18,7 @@ export default function MemberDetailPage() {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    const [member, setMember] = useState<IMember | null>(null);
+    const [member, setMember] = useState<IMemberListAllInfo | null>(null);
 
     useEffect(() => {
         getMember();
@@ -27,28 +28,20 @@ export default function MemberDetailPage() {
 
     const getMember = async () => {
         if (!id) return;
-        const res = await memberService.getById({ id });
-        if (!res) return;
-        setMember(res);
+        try {
+            utilsActions.loading(true);
+            
+            const res = await memberService.getByIdAppInfo({ id });
+            setMember(res);
+        } catch (err) {
+            utilsActions.addMessage({
+                status: 'error',
+                message: 'Error loading data',
+            });
+        } finally {
+            utilsActions.loading(false);
+        }
     };
-
-    // const getPhones = async () => {
-    //     const res = await memberService.getById({ id });
-    //     if (!res) return;
-    //     setMember(res);
-    // };
-    //
-    // const getEmails = async () => {
-    //     const res = await memberService.getById({ id });
-    //     if (!res) return;
-    //     setMember(res);
-    // };
-    //
-    // const getEmails = async () => {
-    //     const res = await memberService.getById({ id });
-    //     if (!res) return;
-    //     setMember(res);
-    // };
 
     return (
         <>
@@ -65,13 +58,45 @@ export default function MemberDetailPage() {
                 <div>
                     <Text text={member.name} />
                     <Text text={member.surname} />
-                    <Text text={member.middleName} />
                     <Text text={member.bestEmail ? member.bestEmail : ''} />
                     <Text text={member.membership} />
                     <Text text={member.faculty} />
                     <Text text={member.group} />
-                    <Text text={member.homeAddress ? member.homeAddress : ''} />
                     <Text text={formatDate(new Date(member.birthday))} />
+
+                    <hr />
+                    <Text text={'Board'} />
+                    {member.boardToMember.map((item) => (
+                        <div>
+                            <span>{`${item.board.name} ${intToRoman(item.cadence.number)}`}</span>
+                        </div>
+                    ))}
+
+                    <hr />
+                    <Text text={'Coordinator'} />
+                    {member.coordinatorToMember.map((item) => (
+                        <div>
+                            <span>{`${item.coordinator.name} ${intToRoman(item.cadence.number)}`}</span>
+                        </div>
+                    ))}
+
+                    <hr />
+                    <Text text={'Committee'} />
+                    {member.committeeToMember.map((item) => (
+                        <div>
+                            <span>{`${item.committee.name} ${intToRoman(item.cadence.number)}`}</span>
+                            <span className="block">{`Position: `}</span>
+                        </div>
+                    ))}
+
+                    <hr />
+                    <Text text={'Event'} />
+                    {member.memberToEvent.map((item) => (
+                        <div>
+                            <span>{`${item.newEvent.event.name} ${intToRoman(item.newEvent.cadence.number)}`}</span>
+                            <span className="block">{`Position: ${item.responsible.name} ${item.responsible.role}`}</span>
+                        </div>
+                    ))}
                 </div>
             )}
         </>

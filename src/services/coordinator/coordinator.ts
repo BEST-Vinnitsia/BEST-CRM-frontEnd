@@ -6,6 +6,7 @@ import {
     ICoordinatorGetById,
     ICoordinatorUpdate,
 } from '../../interfaces/coordinator/coordinator';
+import { ICoordinatorAllInfo } from '../../interfaces/coordinator/coordinatorAllInfo';
 
 class CoordinatorService {
     root: string = 'coordinator';
@@ -28,6 +29,15 @@ class CoordinatorService {
         return new Promise<ICoordinator>((resolve, reject) => {
             axios
                 .get(this.path('by-id'), { params: { id } })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    getByIdAllInfo = ({ id }: ICoordinatorGetById) => {
+        return new Promise<ICoordinatorAllInfo>((resolve, reject) => {
+            axios
+                .get(this.path('by-id-all-info'), { params: { id } })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });

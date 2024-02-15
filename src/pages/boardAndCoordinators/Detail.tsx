@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { BreadcrumbsContainer, Button, ScrollY } from '../../components';
+import { BreadcrumbsContainer, Button, ScrollY, Text } from '../../components';
 import { PATH_BaC } from '../../routes/paths';
 import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
 import { Navigate, useParams } from 'react-router-dom';
 import { boardService, coordinatorService } from '../../services';
-import { IBoard } from '../../interfaces/board/board';
-import { ICoordinator } from '../../interfaces/coordinator/coordinator';
 import { utilsActions } from '../../redux/actions/utilsActions';
+import { IBoardAllInfo } from '../../interfaces/board/boardAllInfo';
+import { ICoordinatorAllInfo } from '../../interfaces/coordinator/coordinatorAllInfo';
+import { formatDate, intToRoman } from '../../utils';
 
 const pathMap = [
     { url: PATH_BaC.ROOT, title: pageNames.pages.BaC },
@@ -18,7 +19,7 @@ export default function BoardAndCoordinatorsDetailPage() {
     const navigate = useNavigate();
     const { id, who } = useParams();
 
-    const [BaC, setBaC] = useState<IBoard | ICoordinator | null>(null);
+    const [BaC, setBaC] = useState<IBoardAllInfo | ICoordinatorAllInfo | null>(null);
 
     useEffect(() => {
         getData();
@@ -31,10 +32,10 @@ export default function BoardAndCoordinatorsDetailPage() {
             utilsActions.loading(true);
 
             if (who === 'board') {
-                const res = await boardService.getById({ id });
+                const res = await boardService.getByIdAllInfo({ id });
                 setBaC(res);
             } else if (who === 'coordinator') {
-                const res = await coordinatorService.getById({ id });
+                const res = await coordinatorService.getByIdAllInfo({ id });
                 setBaC(res);
             }
         } catch (err) {
@@ -101,6 +102,39 @@ export default function BoardAndCoordinatorsDetailPage() {
                             <div>
                                 <span className={'block'}>{BaC.name}</span>
                                 <span className={'block'}>{`Is active: ${BaC.isActive}`}</span>
+                                {'boardToMember' in BaC &&
+                                    BaC.boardToMember.map((item) => (
+                                        <div>
+                                            <hr />
+                                            <span
+                                                className={'block'}
+                                            >{`${item.member.name} ${item.member.surname}`}</span>
+                                            <span className={'block'}>{`Excluded: ${item.excluded}`}</span>
+                                            <span className={'block'}>
+                                                {item.excludedDate
+                                                    ? `Excluded date: ${formatDate(new Date(item.excludedDate))}`
+                                                    : ''}
+                                            </span>
+                                            <Text text={`Cadence: ${intToRoman(item.cadence.number)}`} />
+                                        </div>
+                                    ))}
+
+                                {'coordinatorToMember' in BaC &&
+                                    BaC.coordinatorToMember.map((item) => (
+                                        <div>
+                                            <hr />
+                                            <span
+                                                className={'block'}
+                                            >{`${item.member.name} ${item.member.surname}`}</span>
+                                            <span className={'block'}>{`Excluded: ${item.excluded}`}</span>
+                                            <span className={'block'}>
+                                                {item.excludedDate
+                                                    ? `Excluded date: ${formatDate(new Date(item.excludedDate))}`
+                                                    : ''}
+                                            </span>
+                                            <Text text={`Cadence: ${intToRoman(item.cadence.number)}`} />
+                                        </div>
+                                    ))}
                             </div>
                         )}
                     </div>
