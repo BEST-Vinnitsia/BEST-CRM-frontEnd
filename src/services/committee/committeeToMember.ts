@@ -1,63 +1,77 @@
 import { axios } from '../../utils';
+
 import {
-    ICommitteeToMember,
-    ICommitteeToMemberCreate,
-    ICommitteeToMemberDeleteArray,
-    ICommitteeToMemberGetById,
-    ICommitteeToMemberUpdate,
-} from '../../interfaces/committee/committeeToMember';
+    ICommitteeToMemberCreateRes,
+    ICommitteeToMemberDeleteArrayRes,
+    ICommitteeToMemberDeleteRes,
+    ICommitteeToMemberGetByIdRes,
+    ICommitteeToMemberGetListRes,
+    ICommitteeToMemberUpdateRes,
+} from '../../interfaces/committee/committeeToMemberRes';
+import { API } from '../../constants';
+import {
+    ICommitteeToMemberCreateReq,
+    ICommitteeToMemberDeleteArrayReq,
+    ICommitteeToMemberDeleteReq,
+    ICommitteeToMemberGetByIdReq,
+    ICommitteeToMemberUpdateReq,
+} from '../../interfaces/committee/committeeToMemberReq';
 
 class CommitteeToMemberService {
     root: string = 'committee-to-member';
 
-    private path(route: string) {
-        return `${process.env.REACT_APP_API_URL}/${this.root}/${route}`;
-    }
-
-    /* --------- GET ---------- */
     getList = () => {
-        return new Promise<ICommitteeToMember[]>((resolve, reject) => {
+        return new Promise<ICommitteeToMemberGetListRes[]>((resolve, reject) => {
             axios
-                .get(this.path('list'))
+                .get(`${API}/${this.root}/list`)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
-    getById = ({ id }: ICommitteeToMemberGetById) => {
-        return new Promise<ICommitteeToMember>((resolve, reject) => {
+    getById = ({ id }: ICommitteeToMemberGetByIdReq) => {
+        return new Promise<ICommitteeToMemberGetByIdRes>((resolve, reject) => {
             axios
-                .get(this.path('by-id'), { params: { id } })
+                .get(`${API}/${this.root}`, { params: { id } })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- POST ---------- */
-    create = (data: ICommitteeToMemberCreate) => {
-        return new Promise<ICommitteeToMember>((resolve, reject) => {
+    create = (data: ICommitteeToMemberCreateReq) => {
+        return new Promise<ICommitteeToMemberCreateRes>((resolve, reject) => {
             axios
-                .post(this.path('create'), data)
+                .post(`${API}/${this.root}`, data)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- PUT ---------- */
-    update = (data: ICommitteeToMemberUpdate) => {
-        return new Promise<ICommitteeToMember>((resolve, reject) => {
+    update = (data: ICommitteeToMemberUpdateReq) => {
+        return new Promise<ICommitteeToMemberUpdateRes>((resolve, reject) => {
             axios
-                .put(this.path('update'), data)
+                .put(`${API}/${this.root}`, data)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- DELETE ---------- */
-    deleteMany = (data: ICommitteeToMemberDeleteArray) => {
-        return new Promise((resolve, reject) => {
+    delete = (data: ICommitteeToMemberDeleteReq) => {
+        return new Promise<ICommitteeToMemberDeleteRes>((resolve, reject) => {
             axios
-                .delete(this.path('delete'), { data })
+                .delete(`${API}/${this.root}`, { data })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    deleteArray = (data: ICommitteeToMemberDeleteArrayReq) => {
+        return new Promise<ICommitteeToMemberDeleteArrayRes>((resolve, reject) => {
+            axios
+                .delete(`${API}/${this.root}/delete-array`, { data })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });

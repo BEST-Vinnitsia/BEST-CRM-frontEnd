@@ -1,63 +1,76 @@
 import { axios } from '../../utils';
 import {
-    IBoardToMember,
-    IBoardToMemberCreate,
-    IBoardToMemberDeleteArray,
-    IBoardToMemberGetById,
-    IBoardToMemberUpdate,
-} from '../../interfaces/board/boardToMember';
+    IBoardToMemberCreateRes,
+    IBoardToMemberDeleteArrayRes,
+    IBoardToMemberDeleteRes,
+    IBoardToMemberGetByIdRes,
+    IBoardToMemberGetListRes,
+    IBoardToMemberUpdateRes,
+} from '../../interfaces/board/boardToMemberRes';
+import { API } from '../../constants';
+import {
+    IBoardToMemberCreateReq,
+    IBoardToMemberDeleteArrayReq,
+    IBoardToMemberDeleteReq,
+    IBoardToMemberGetByIdReq,
+    IBoardToMemberUpdateReq,
+} from '../../interfaces/board/boardToMemberReq';
 
 class BoardToMemberService {
     root: string = 'board-to-member';
 
-    private path(route: string) {
-        return `${process.env.REACT_APP_API_URL}/${this.root}/${route}`;
-    }
-
-    /* --------- GET ---------- */
     getList = () => {
-        return new Promise<IBoardToMember[]>((resolve, reject) => {
+        return new Promise<IBoardToMemberGetListRes[]>((resolve, reject) => {
             axios
-                .get(this.path('list'))
+                .get(`${API}/${this.root}/list`)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
-    getById = ({ id }: IBoardToMemberGetById) => {
-        return new Promise<IBoardToMember>((resolve, reject) => {
+    getById = ({ id }: IBoardToMemberGetByIdReq) => {
+        return new Promise<IBoardToMemberGetByIdRes>((resolve, reject) => {
             axios
-                .get(this.path('by-id'), { params: { id } })
+                .get(`${API}/${this.root}`, { params: { id } })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- POST ---------- */
-    create = (data: IBoardToMemberCreate) => {
-        return new Promise<IBoardToMember>((resolve, reject) => {
+    create = (data: IBoardToMemberCreateReq) => {
+        return new Promise<IBoardToMemberCreateRes>((resolve, reject) => {
             axios
-                .post(this.path('create'), data)
+                .post(`${API}/${this.root}`, data)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- PUT ---------- */
-    update = (data: IBoardToMemberUpdate) => {
-        return new Promise<IBoardToMember>((resolve, reject) => {
+    update = (data: IBoardToMemberUpdateReq) => {
+        return new Promise<IBoardToMemberUpdateRes>((resolve, reject) => {
             axios
-                .put(this.path('update'), data)
+                .put(`${API}/${this.root}`, data)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- DELETE ---------- */
-    deleteMany = (data: IBoardToMemberDeleteArray) => {
-        return new Promise((resolve, reject) => {
+    delete = (data: IBoardToMemberDeleteReq) => {
+        return new Promise<IBoardToMemberDeleteRes>((resolve, reject) => {
             axios
-                .delete(this.path('delete'), { data })
+                .delete(`${API}/${this.root}`, { data })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    deleteArray = (data: IBoardToMemberDeleteArrayReq) => {
+        return new Promise<IBoardToMemberDeleteArrayRes>((resolve, reject) => {
+            axios
+                .delete(`${API}/${this.root}/delete-array`, { data })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });

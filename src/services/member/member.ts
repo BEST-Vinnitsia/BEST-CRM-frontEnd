@@ -1,94 +1,77 @@
 import { axios } from '../../utils';
-import { IMember, IMemberDeleteArray, IMemberGetId, IMemberUpdate } from '../../interfaces/member/member';
-import { IMemberListAllInfo } from '../../interfaces/member/memberBigData';
+import {
+    IMemberCreateRes,
+    IMemberDeleteArrayRes,
+    IMemberDeleteRes,
+    IMemberGetByIdRes,
+    IMemberGetListRes,
+    IMemberUpdateRes,
+} from '../../interfaces/member/memberRes';
+import { API } from '../../constants';
+import {
+    IMemberCreateReq,
+    IMemberDeleteArrayReq,
+    IMemberDeleteReq,
+    IMemberGetByIdReq,
+    IMemberUpdateReq,
+} from '../../interfaces/member/memberReq';
 
 class MemberService {
     root: string = 'member';
 
-    private path(route: string) {
-        return `${process.env.REACT_APP_API_URL}/${this.root}/${route}`;
-    }
-
     /* --------- GET ---------- */
     getList = () => {
-        return new Promise<IMember[]>((resolve, reject) => {
+        return new Promise<IMemberGetListRes[]>((resolve, reject) => {
             axios
-                .get(this.path('list'))
+                .get(`${API}/${this.root}/list`)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
-    getListAllInfo = () => {
-        return new Promise<IMemberListAllInfo[]>((resolve, reject) => {
+    getById = ({ id }: IMemberGetByIdReq) => {
+        return new Promise<IMemberGetByIdRes>((resolve, reject) => {
             axios
-                .get(this.path('list-all-info'))
-                .then((response) => response.data && resolve(response.data))
-                .catch((error) => reject(error));
-        });
-    };
-
-    getById = ({ id }: IMemberGetId) => {
-        return new Promise<IMember>((resolve, reject) => {
-            axios
-                .get(this.path('by-id'), { params: { id } })
-                .then((response) => response.data && resolve(response.data))
-                .catch((error) => reject(error));
-        });
-    };
-
-    getByIdAllInfo = ({ id }: IMemberGetId) => {
-        return new Promise<IMemberListAllInfo>((resolve, reject) => {
-            axios
-                .get(this.path('by-id-all-info'), { params: { id } })
+                .get(`${API}/${this.root}`, { params: { id } })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- POST ---------- */
-    create = (data: any) => {
-        return new Promise((resolve, reject) => {
+    create = (data: IMemberCreateReq) => {
+        return new Promise<IMemberCreateRes>((resolve, reject) => {
             axios
-                .post(this.path('create'), data)
-                .then((response) => response.data && resolve(response.data))
-                .catch((error) => reject(error));
-        });
-    };
-
-    createWithAllInfo = (data: any) => {
-        return new Promise((resolve, reject) => {
-            axios
-                .post(this.path('create-with-all-info'), data)
+                .post(`${API}/${this.root}`, data)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- PUT ---------- */
-    update = (data: IMemberUpdate) => {
-        return new Promise((resolve, reject) => {
+    update = (data: IMemberUpdateReq) => {
+        return new Promise<IMemberUpdateRes>((resolve, reject) => {
             axios
-                .put(this.path('update'), data)
-                .then((response) => response.data && resolve(response.data))
-                .catch((error) => reject(error));
-        });
-    };
-
-    updateAllInfo = (data: any) => {
-        return new Promise((resolve, reject) => {
-            axios
-                .put(this.path('update-all-info'), data)
+                .put(`${API}/${this.root}`, data)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- DELETE ---------- */
-    deleteMany = (data: IMemberDeleteArray) => {
-        return new Promise((resolve, reject) => {
+    delete = (data: IMemberDeleteReq) => {
+        return new Promise<IMemberDeleteRes>((resolve, reject) => {
             axios
-                .delete(this.path('delete'), { data })
+                .delete(`${API}/${this.root}`, { data })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    deleteArray = (data: IMemberDeleteArrayReq) => {
+        return new Promise<IMemberDeleteArrayRes>((resolve, reject) => {
+            axios
+                .delete(`${API}/${this.root}/delete-array`, { data })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });

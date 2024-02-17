@@ -13,11 +13,11 @@ export { coordinatorToMemberService } from './coordinator/coordinatorToMember';
 export { committeeService } from './committee/committee';
 export { committeeToMemberService } from './committee/committeeToMember';
 
-// committee
+// event
 export { eventService } from './event/event';
 export { newEventService } from './event/newEvent';
 export { responsibleService } from './event/responsible';
-export { memberToEventService } from './event/memberToEvent';
+export { newEventToMemberService } from './event/newEventToMember';
 
 // cadence
 export { cadenceService } from './cadence';

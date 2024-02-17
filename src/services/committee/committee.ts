@@ -1,73 +1,77 @@
 import { axios } from '../../utils';
+
 import {
-    ICommittee,
-    ICommitteeCreate,
-    ICommitteeDeleteArray,
-    ICommitteeGetById,
-    ICommitteeUpdate,
-} from '../../interfaces/committee/committee';
-import { ICommitteeAllInfo } from '../../interfaces/committee/committeeAllInfo';
+    ICommitteeCreateRes,
+    ICommitteeDeleteArrayRes,
+    ICommitteeDeleteRes,
+    ICommitteeGetByIdRes,
+    ICommitteeGetListRes,
+    ICommitteeUpdateRes,
+} from '../../interfaces/committee/committeeRes';
+import { API } from '../../constants';
+import {
+    ICommitteeCreateReq,
+    ICommitteeDeleteArrayReq,
+    ICommitteeDeleteReq,
+    ICommitteeGetByIdReq,
+    ICommitteeUpdateReq,
+} from '../../interfaces/committee/committeeReq';
 
 class CommitteeService {
     root: string = 'committee';
 
-    private path(route: string) {
-        return `${process.env.REACT_APP_API_URL}/${this.root}/${route}`;
-    }
-
-    /* --------- GET ---------- */
     getList = () => {
-        return new Promise<ICommittee[]>((resolve, reject) => {
+        return new Promise<ICommitteeGetListRes[]>((resolve, reject) => {
             axios
-                .get(this.path('list'))
+                .get(`${API}/${this.root}/list`)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
-    getById = ({ id }: ICommitteeGetById) => {
-        return new Promise<ICommittee>((resolve, reject) => {
+    getById = ({ id }: ICommitteeGetByIdReq) => {
+        return new Promise<ICommitteeGetByIdRes>((resolve, reject) => {
             axios
-                .get(this.path('by-id'), { params: { id } })
-                .then((response) => response.data && resolve(response.data))
-                .catch((error) => reject(error));
-        });
-    };
-
-    getByIdAllInfo = ({ id }: ICommitteeGetById) => {
-        return new Promise<ICommitteeAllInfo>((resolve, reject) => {
-            axios
-                .get(this.path('by-id-all-info'), { params: { id } })
+                .get(`${API}/${this.root}`, { params: { id } })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- POST ---------- */
-    create = (data: ICommitteeCreate) => {
-        return new Promise<ICommittee>((resolve, reject) => {
+    create = (data: ICommitteeCreateReq) => {
+        return new Promise<ICommitteeCreateRes>((resolve, reject) => {
             axios
-                .post(this.path('create'), data)
+                .post(`${API}/${this.root}`, data)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- PUT ---------- */
-    update = (data: ICommitteeUpdate) => {
-        return new Promise<ICommittee>((resolve, reject) => {
+    update = (data: ICommitteeUpdateReq) => {
+        return new Promise<ICommitteeUpdateRes>((resolve, reject) => {
             axios
-                .put(this.path('update'), data)
+                .put(`${API}/${this.root}`, data)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- DELETE ---------- */
-    deleteMany = (data: ICommitteeDeleteArray) => {
-        return new Promise((resolve, reject) => {
+    delete = (data: ICommitteeDeleteReq) => {
+        return new Promise<ICommitteeDeleteRes>((resolve, reject) => {
             axios
-                .delete(this.path('delete'), { data })
+                .delete(`${API}/${this.root}`, { data })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    deleteArray = (data: ICommitteeDeleteArrayReq) => {
+        return new Promise<ICommitteeDeleteArrayRes>((resolve, reject) => {
+            axios
+                .delete(`${API}/${this.root}/delete-array`, { data })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });

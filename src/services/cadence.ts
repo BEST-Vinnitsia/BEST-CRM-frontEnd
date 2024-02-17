@@ -1,57 +1,77 @@
 import { axios } from '../utils';
-import { ICadence, ICadenceCreate, ICadenceDeleteArray, ICadenceGetById, ICadenceUpdate } from '../interfaces/cadence';
+import {
+    ICadenceCreateRes,
+    ICadenceDeleteArrayRes,
+    ICadenceDeleteRes,
+    ICadenceGetByIdRes,
+    ICadenceGetListRes,
+    ICadenceUpdateRes,
+} from '../interfaces/cadence/cadenceRes';
+import {
+    ICadenceCreateReq,
+    ICadenceDeleteArrayReq,
+    ICadenceDeleteReq,
+    ICadenceGetByIdReq,
+    ICadenceUpdateReq,
+} from '../interfaces/cadence/cadenceReq';
+import { API } from '../constants';
 
 class CadenceService {
     root: string = 'cadence';
 
-    private path(route: string) {
-        return `${process.env.REACT_APP_API_URL}/${this.root}/${route}`;
-    }
-
     /* --------- GET ---------- */
     getList = () => {
-        return new Promise<ICadence[]>((resolve, reject) => {
+        return new Promise<ICadenceGetListRes[]>((resolve, reject) => {
             axios
-                .get(this.path('list'))
+                .get(`${API}/${this.root}/list`)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
-    getById = ({ id }: ICadenceGetById) => {
-        return new Promise<ICadence>((resolve, reject) => {
+    getById = ({ id }: ICadenceGetByIdReq) => {
+        return new Promise<ICadenceGetByIdRes>((resolve, reject) => {
             axios
-                .get(this.path('by-id'), { params: { id } })
+                .get(`${API}/${this.root}`, { params: { id } })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- POST ---------- */
-    create = (data: ICadenceCreate) => {
-        return new Promise<ICadence>((resolve, reject) => {
+    create = (data: ICadenceCreateReq) => {
+        return new Promise<ICadenceCreateRes>((resolve, reject) => {
             axios
-                .post(this.path('create'), data)
+                .post(`${API}/${this.root}`, data)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- PUT ---------- */
-    update = (data: ICadenceUpdate) => {
-        return new Promise<ICadence>((resolve, reject) => {
+    update = (data: ICadenceUpdateReq) => {
+        return new Promise<ICadenceUpdateRes>((resolve, reject) => {
             axios
-                .put(this.path('update'), data)
+                .put(`${API}/${this.root}`, data)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- DELETE ---------- */
-    deleteMany = (data: ICadenceDeleteArray) => {
-        return new Promise((resolve, reject) => {
+    delete = (data: ICadenceDeleteReq) => {
+        return new Promise<ICadenceDeleteRes>((resolve, reject) => {
             axios
-                .delete(this.path('delete'), { data })
+                .delete(`${API}/${this.root}`, { data })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    deleteArray = (data: ICadenceDeleteArrayReq) => {
+        return new Promise<ICadenceDeleteArrayRes>((resolve, reject) => {
+            axios
+                .delete(`${API}/${this.root}/delete-array`, { data })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });

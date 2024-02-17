@@ -1,27 +1,26 @@
 import { axios } from '../../utils';
-
 import {
-    IBoardCreateRes,
-    IBoardDeleteArrayRes,
-    IBoardDeleteRes,
-    IBoardGetByIdRes,
-    IBoardGetListRes,
-    IBoardUpdateRes,
-} from '../../interfaces/board/boardRes';
+    INewEventToMemberCreateRes,
+    INewEventToMemberDeleteArrayRes,
+    INewEventToMemberDeleteRes,
+    INewEventToMemberGetByIdRes,
+    INewEventToMemberGetListRes,
+    INewEventToMemberUpdateRes,
+} from '../../interfaces/event/newEventToMemberRes';
 import { API } from '../../constants';
 import {
-    IBoardCreateReq,
-    IBoardDeleteArrayReq,
-    IBoardDeleteReq,
-    IBoardGetByIdReq,
-    IBoardUpdateReq,
-} from '../../interfaces/board/boardReq';
+    INewEventToMemberCreateReq,
+    INewEventToMemberDeleteArrayReq,
+    INewEventToMemberDeleteReq,
+    INewEventToMemberGetByIdReq,
+    INewEventToMemberUpdateReq,
+} from '../../interfaces/event/newEventToMemberReq';
 
-class BoardService {
-    root: string = 'board';
+class NewEventToMemberService {
+    root: string = 'new-event-to-member';
 
     getList = () => {
-        return new Promise<IBoardGetListRes[]>((resolve, reject) => {
+        return new Promise<INewEventToMemberGetListRes[]>((resolve, reject) => {
             axios
                 .get(`${API}/${this.root}/list`)
                 .then((response) => response.data && resolve(response.data))
@@ -29,8 +28,8 @@ class BoardService {
         });
     };
 
-    getById = ({ id }: IBoardGetByIdReq) => {
-        return new Promise<IBoardGetByIdRes>((resolve, reject) => {
+    getById = ({ id }: INewEventToMemberGetByIdReq) => {
+        return new Promise<INewEventToMemberGetByIdRes>((resolve, reject) => {
             axios
                 .get(`${API}/${this.root}`, { params: { id } })
                 .then((response) => response.data && resolve(response.data))
@@ -39,8 +38,8 @@ class BoardService {
     };
 
     /* --------- POST ---------- */
-    create = (data: IBoardCreateReq) => {
-        return new Promise<IBoardCreateRes>((resolve, reject) => {
+    create = (data: INewEventToMemberCreateReq) => {
+        return new Promise<INewEventToMemberCreateRes>((resolve, reject) => {
             axios
                 .post(`${API}/${this.root}`, data)
                 .then((response) => response.data && resolve(response.data))
@@ -49,8 +48,8 @@ class BoardService {
     };
 
     /* --------- PUT ---------- */
-    update = (data: IBoardUpdateReq) => {
-        return new Promise<IBoardUpdateRes>((resolve, reject) => {
+    update = (data: INewEventToMemberUpdateReq) => {
+        return new Promise<INewEventToMemberUpdateRes>((resolve, reject) => {
             axios
                 .put(`${API}/${this.root}`, data)
                 .then((response) => response.data && resolve(response.data))
@@ -59,8 +58,8 @@ class BoardService {
     };
 
     /* --------- DELETE ---------- */
-    delete = (data: IBoardDeleteReq) => {
-        return new Promise<IBoardDeleteRes>((resolve, reject) => {
+    delete = (data: INewEventToMemberDeleteReq) => {
+        return new Promise<INewEventToMemberDeleteRes>((resolve, reject) => {
             axios
                 .delete(`${API}/${this.root}`, { data })
                 .then((response) => response.data && resolve(response.data))
@@ -68,8 +67,8 @@ class BoardService {
         });
     };
 
-    deleteArray = (data: IBoardDeleteArrayReq) => {
-        return new Promise<IBoardDeleteArrayRes>((resolve, reject) => {
+    deleteArray = (data: INewEventToMemberDeleteArrayReq) => {
+        return new Promise<INewEventToMemberDeleteArrayRes>((resolve, reject) => {
             axios
                 .delete(`${API}/${this.root}/delete-array`, { data })
                 .then((response) => response.data && resolve(response.data))
@@ -78,4 +77,4 @@ class BoardService {
     };
 }
 
-export const boardService = new BoardService();
+export const newEventToMemberService = new NewEventToMemberService();

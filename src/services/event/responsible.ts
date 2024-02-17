@@ -1,63 +1,76 @@
 import { axios } from '../../utils';
 import {
-    IResponsible,
-    IResponsibleCreate,
-    IResponsibleDeleteArray,
-    IResponsibleGetById,
-    IResponsibleUpdate,
-} from '../../interfaces/event/responsible';
+    IResponsibleCreateRes,
+    IResponsibleDeleteArrayRes,
+    IResponsibleDeleteRes,
+    IResponsibleGetByIdRes,
+    IResponsibleGetListRes,
+    IResponsibleUpdateRes,
+} from '../../interfaces/event/responsibleRes';
+import { API } from '../../constants';
+import {
+    IResponsibleCreateReq,
+    IResponsibleDeleteArrayReq,
+    IResponsibleDeleteReq,
+    IResponsibleGetByIdReq,
+    IResponsibleUpdateReq,
+} from '../../interfaces/event/responsibleReq';
 
 class ResponsibleService {
     root: string = 'responsible';
 
-    private path(route: string) {
-        return `${process.env.REACT_APP_API_URL}/${this.root}/${route}`;
-    }
-
-    /* --------- GET ---------- */
     getList = () => {
-        return new Promise<IResponsible[]>((resolve, reject) => {
+        return new Promise<IResponsibleGetListRes[]>((resolve, reject) => {
             axios
-                .get(this.path('list'))
+                .get(`${API}/${this.root}/list`)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
-    getById = ({ id }: IResponsibleGetById) => {
-        return new Promise<IResponsible>((resolve, reject) => {
+    getById = ({ id }: IResponsibleGetByIdReq) => {
+        return new Promise<IResponsibleGetByIdRes>((resolve, reject) => {
             axios
-                .get(this.path('by-id'), { params: { id } })
+                .get(`${API}/${this.root}`, { params: { id } })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- POST ---------- */
-    create = (data: IResponsibleCreate) => {
-        return new Promise<IResponsible>((resolve, reject) => {
+    create = (data: IResponsibleCreateReq) => {
+        return new Promise<IResponsibleCreateRes>((resolve, reject) => {
             axios
-                .post(this.path('create'), data)
+                .post(`${API}/${this.root}`, data)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- PUT ---------- */
-    update = (data: IResponsibleUpdate) => {
-        return new Promise<IResponsible>((resolve, reject) => {
+    update = (data: IResponsibleUpdateReq) => {
+        return new Promise<IResponsibleUpdateRes>((resolve, reject) => {
             axios
-                .put(this.path('update'), data)
+                .put(`${API}/${this.root}`, data)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- DELETE ---------- */
-    deleteMany = (data: IResponsibleDeleteArray) => {
-        return new Promise((resolve, reject) => {
+    delete = (data: IResponsibleDeleteReq) => {
+        return new Promise<IResponsibleDeleteRes>((resolve, reject) => {
             axios
-                .delete(this.path('delete'), { data })
+                .delete(`${API}/${this.root}`, { data })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    deleteArray = (data: IResponsibleDeleteArrayReq) => {
+        return new Promise<IResponsibleDeleteArrayRes>((resolve, reject) => {
+            axios
+                .delete(`${API}/${this.root}/delete-array`, { data })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });

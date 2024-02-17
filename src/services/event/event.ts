@@ -1,67 +1,76 @@
 import { axios } from '../../utils';
-import { IEvent, IEventCreate, IEventDeleteArray, IEventGetById, IEventUpdate } from '../../interfaces/event/event';
-import { IEventAllInfo } from '../../interfaces/event/eventByIdAllInfo';
+import {
+    IEventCreateRes,
+    IEventDeleteArrayRes,
+    IEventDeleteRes,
+    IEventGetByIdRes,
+    IEventGetListRes,
+    IEventUpdateRes,
+} from '../../interfaces/event/eventRes';
+import { API } from '../../constants';
+import {
+    IEventCreateReq,
+    IEventDeleteArrayReq,
+    IEventDeleteReq,
+    IEventGetByIdReq,
+    IEventUpdateReq,
+} from '../../interfaces/event/eventReq';
 
 class EventService {
     root: string = 'event';
 
-    private path(route: string) {
-        return `${process.env.REACT_APP_API_URL}/${this.root}/${route}`;
-    }
-
-    /* --------- GET ---------- */
     getList = () => {
-        return new Promise<IEvent[]>((resolve, reject) => {
+        return new Promise<IEventGetListRes[]>((resolve, reject) => {
             axios
-                .get(this.path('list'))
+                .get(`${API}/${this.root}/list`)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
-    getById = ({ id }: IEventGetById) => {
-        return new Promise<IEvent>((resolve, reject) => {
+    getById = ({ id }: IEventGetByIdReq) => {
+        return new Promise<IEventGetByIdRes>((resolve, reject) => {
             axios
-                .get(this.path('by-id'), { params: { id } })
-                .then((response) => response.data && resolve(response.data))
-                .catch((error) => reject(error));
-        });
-    };
-
-    getByIdAllInfo = ({ id }: IEventGetById) => {
-        return new Promise<IEventAllInfo>((resolve, reject) => {
-            axios
-                .get(this.path('by-id-all-info'), { params: { id } })
+                .get(`${API}/${this.root}`, { params: { id } })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- POST ---------- */
-    create = (data: IEventCreate) => {
-        return new Promise<IEvent>((resolve, reject) => {
+    create = (data: IEventCreateReq) => {
+        return new Promise<IEventCreateRes>((resolve, reject) => {
             axios
-                .post(this.path('create'), data)
+                .post(`${API}/${this.root}`, data)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- PUT ---------- */
-    update = (data: IEventUpdate) => {
-        return new Promise<IEvent>((resolve, reject) => {
+    update = (data: IEventUpdateReq) => {
+        return new Promise<IEventUpdateRes>((resolve, reject) => {
             axios
-                .put(this.path('update'), data)
+                .put(`${API}/${this.root}`, data)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- DELETE ---------- */
-    deleteMany = (data: IEventDeleteArray) => {
-        return new Promise((resolve, reject) => {
+    delete = (data: IEventDeleteReq) => {
+        return new Promise<IEventDeleteRes>((resolve, reject) => {
             axios
-                .delete(this.path('delete'), { data })
+                .delete(`${API}/${this.root}`, { data })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    deleteArray = (data: IEventDeleteArrayReq) => {
+        return new Promise<IEventDeleteArrayRes>((resolve, reject) => {
+            axios
+                .delete(`${API}/${this.root}/delete-array`, { data })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });

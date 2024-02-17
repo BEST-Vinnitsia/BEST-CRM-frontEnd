@@ -1,73 +1,76 @@
 import { axios } from '../../utils';
 import {
-    ICoordinator,
-    ICoordinatorCreate,
-    ICoordinatorDeleteArray,
-    ICoordinatorGetById,
-    ICoordinatorUpdate,
-} from '../../interfaces/coordinator/coordinator';
-import { ICoordinatorAllInfo } from '../../interfaces/coordinator/coordinatorAllInfo';
+    ICoordinatorCreateRes,
+    ICoordinatorDeleteArrayRes,
+    ICoordinatorDeleteRes,
+    ICoordinatorGetByIdRes,
+    ICoordinatorGetListRes,
+    ICoordinatorUpdateRes,
+} from '../../interfaces/coordinator/coordinatorRes';
+import { API } from '../../constants';
+import {
+    ICoordinatorCreateReq,
+    ICoordinatorDeleteArrayReq,
+    ICoordinatorDeleteReq,
+    ICoordinatorGetByIdReq,
+    ICoordinatorUpdateReq,
+} from '../../interfaces/coordinator/coordinatorReq';
 
 class CoordinatorService {
     root: string = 'coordinator';
 
-    private path(route: string) {
-        return `${process.env.REACT_APP_API_URL}/${this.root}/${route}`;
-    }
-
-    /* --------- GET ---------- */
     getList = () => {
-        return new Promise<ICoordinator[]>((resolve, reject) => {
+        return new Promise<ICoordinatorGetListRes[]>((resolve, reject) => {
             axios
-                .get(this.path('list'))
+                .get(`${API}/${this.root}/list`)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
-    getById = ({ id }: ICoordinatorGetById) => {
-        return new Promise<ICoordinator>((resolve, reject) => {
+    getById = ({ id }: ICoordinatorGetByIdReq) => {
+        return new Promise<ICoordinatorGetByIdRes>((resolve, reject) => {
             axios
-                .get(this.path('by-id'), { params: { id } })
-                .then((response) => response.data && resolve(response.data))
-                .catch((error) => reject(error));
-        });
-    };
-
-    getByIdAllInfo = ({ id }: ICoordinatorGetById) => {
-        return new Promise<ICoordinatorAllInfo>((resolve, reject) => {
-            axios
-                .get(this.path('by-id-all-info'), { params: { id } })
+                .get(`${API}/${this.root}`, { params: { id } })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- POST ---------- */
-    create = (data: ICoordinatorCreate) => {
-        return new Promise<ICoordinator>((resolve, reject) => {
+    create = (data: ICoordinatorCreateReq) => {
+        return new Promise<ICoordinatorCreateRes>((resolve, reject) => {
             axios
-                .post(this.path('create'), data)
+                .post(`${API}/${this.root}`, data)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- PUT ---------- */
-    update = (data: ICoordinatorUpdate) => {
-        return new Promise<ICoordinator>((resolve, reject) => {
+    update = (data: ICoordinatorUpdateReq) => {
+        return new Promise<ICoordinatorUpdateRes>((resolve, reject) => {
             axios
-                .put(this.path('update'), data)
+                .put(`${API}/${this.root}`, data)
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
     };
 
     /* --------- DELETE ---------- */
-    deleteMany = (data: ICoordinatorDeleteArray) => {
-        return new Promise((resolve, reject) => {
+    delete = (data: ICoordinatorDeleteReq) => {
+        return new Promise<ICoordinatorDeleteRes>((resolve, reject) => {
             axios
-                .delete(this.path('delete'), { data })
+                .delete(`${API}/${this.root}`, { data })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    deleteArray = (data: ICoordinatorDeleteArrayReq) => {
+        return new Promise<ICoordinatorDeleteArrayRes>((resolve, reject) => {
+            axios
+                .delete(`${API}/${this.root}/delete-array`, { data })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
