@@ -18,10 +18,34 @@ import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
 import { useCheckbox } from '../../hooks';
 import Checkbox from '../../components/table/checkbox/Checkbox';
-import { memberService } from '../../services';
+import {
+    boardService,
+    boardToMemberService,
+    cadenceService,
+    committeeService,
+    committeeToMemberService,
+    coordinatorService,
+    coordinatorToMemberService,
+    eventService,
+    memberService,
+    newEventService,
+    newEventToMemberService,
+    responsibleService,
+} from '../../services';
 import { formatDate, intToRoman } from '../../utils';
 import { utilsActions } from '../../redux/actions/utilsActions';
-import { IMemberListAllInfo } from '../../interfaces/member/memberBigData';
+import { IMemberGetListRes } from '../../interfaces/member/memberRes';
+import { IBoardGetListRes } from '../../interfaces/board/boardRes';
+import { IBoardToMemberGetListRes } from '../../interfaces/board/boardToMemberRes';
+import { ICommitteeGetListRes } from '../../interfaces/committee/committeeRes';
+import { ICommitteeToMemberGetListRes } from '../../interfaces/committee/committeeToMemberRes';
+import { ICoordinatorGetListRes } from '../../interfaces/coordinator/coordinatorRes';
+import { ICoordinatorToMemberGetListRes } from '../../interfaces/coordinator/coordinatorToMemberRes';
+import { IEventGetListRes } from '../../interfaces/event/eventRes';
+import { INewEventGetListRes } from '../../interfaces/event/newEventRes';
+import { IResponsibleGetListRes } from '../../interfaces/event/responsibleRes';
+import { INewEventToMemberGetListRes } from '../../interfaces/event/newEventToMemberRes';
+import { ICadenceGetListRes } from '../../interfaces/cadence/cadenceRes';
 
 const pathMap = [
     { url: PATH_MEMBER.ROOT, title: pageNames.pages.member },
@@ -31,29 +55,88 @@ const pathMap = [
 export default function MemberListPage() {
     const navigate = useNavigate();
 
-    const [memberList, setMemberList] = useState<IMemberListAllInfo[]>([]);
+    const [memberList, setMemberList] = useState<IMemberGetListRes[]>([]);
+    const [boardList, setBoardList] = useState<IBoardGetListRes[]>([]);
+    const [boardToMemberList, setBoardToMemberList] = useState<IBoardToMemberGetListRes[]>([]);
+    const [committeeList, setCommitteeList] = useState<ICommitteeGetListRes[]>([]);
+    const [committeeToMemberList, setCommitteeToMemberList] = useState<ICommitteeToMemberGetListRes[]>([]);
+    const [coordinatorList, setCoordinatorList] = useState<ICoordinatorGetListRes[]>([]);
+    const [coordinatorToMemberList, setCoordinatorToMemberList] = useState<ICoordinatorToMemberGetListRes[]>([]);
+    const [eventList, setEventList] = useState<IEventGetListRes[]>([]);
+    const [newEventList, setNewEventList] = useState<INewEventGetListRes[]>([]);
+    const [responsibleList, setResponsibleList] = useState<IResponsibleGetListRes[]>([]);
+    const [newEventToMemberList, setNewEventToMemberList] = useState<INewEventToMemberGetListRes[]>([]);
+    const [cadenceList, setCadenceList] = useState<ICadenceGetListRes[]>([]);
 
     const checkboxHook = useCheckbox(memberList.map((item: any) => item.id));
 
     useEffect(() => {
-        getMemberListAllInfo();
+        getData();
     }, []);
 
-    const getMemberListAllInfo = async () => {
+    const getData = async () => {
         try {
-            const memberListPromise = memberService.getListAllInfo();
-
             utilsActions.loading(true);
-            const [memberList] = await Promise.all([memberListPromise]);
-            utilsActions.loading(false);
 
-            setMemberList(memberList);
+            // make cache this request
+            const memberReq = memberService.getList();
+            const boardReq = boardService.getList();
+            const boardToMemberReq = boardToMemberService.getList();
+            const coordinatorReq = coordinatorService.getList();
+            const coordinatorToMemberReq = coordinatorToMemberService.getList();
+            const committeeReq = committeeService.getList();
+            const committeeToMemberReq = committeeToMemberService.getList();
+            const eventReq = eventService.getList();
+            const newEventReq = newEventService.getList();
+            const newEventToMemberReq = newEventToMemberService.getList();
+            const responsibleReq = responsibleService.getList();
+            const cadenceReq = cadenceService.getList();
+
+            const [
+                memberRes,
+                boardRes,
+                boardToMemberRes,
+                coordinatorRes,
+                coordinatorToMemberRes,
+                committeeRes,
+                committeeToMemberRes,
+                eventRes,
+                newEventRes,
+                newEventToMemberRes,
+                responsibleRes,
+                cadenceRes,
+            ] = await Promise.all([
+                memberReq,
+                boardReq,
+                boardToMemberReq,
+                coordinatorReq,
+                coordinatorToMemberReq,
+                committeeReq,
+                committeeToMemberReq,
+                eventReq,
+                newEventReq,
+                newEventToMemberReq,
+                responsibleReq,
+                cadenceReq,
+            ]);
+
+            setMemberList(memberRes);
+            setBoardList(boardRes);
+            setBoardToMemberList(boardToMemberRes);
+            setCommitteeList(committeeRes);
+            setCommitteeToMemberList(committeeToMemberRes);
+            setCoordinatorList(coordinatorRes);
+            setCoordinatorToMemberList(coordinatorToMemberRes);
+            setEventList(eventRes);
+            setNewEventList(newEventRes);
+            setNewEventToMemberList(newEventToMemberRes);
+            setResponsibleList(responsibleRes);
+            setCadenceList(cadenceRes);
         } catch (err) {
+            console.log(err);
+            utilsActions.addMessage({ status: 'error', message: 'Error loading data' });
+        } finally {
             utilsActions.loading(false);
-            utilsActions.addMessage({
-                status: 'error',
-                message: 'Error loading data',
-            });
         }
     };
 
@@ -114,81 +197,137 @@ export default function MemberListPage() {
                         </TRHead>
                     </THead>
                     <TBody>
-                        {memberList.map((item, i) => (
+                        {memberList.map((member, i) => (
                             <TRBody key={i}>
                                 <TD sx={{ p: '0px 0px 0px 8px' }}>
                                     <Checkbox
-                                        active={checkboxHook.checkSelectRow(item.id)}
-                                        onClick={() => checkboxHook.selectRow(item.id)}
+                                        active={checkboxHook.checkSelectRow(member.id)}
+                                        onClick={() => checkboxHook.selectRow(member.id)}
                                     />
                                 </TD>
 
                                 <TD>
-                                    <div onClick={() => navigate(`${PATH_MEMBER.DETAILS}/${item.id}`)}>
-                                        <Text text={`${item.name} ${item.surname}`} type={'span-sm'} />
+                                    <div onClick={() => navigate(`${PATH_MEMBER.DETAILS}/${member.id}`)}>
+                                        <Text text={`${member.name} ${member.surname}`} type={'span-sm'} />
                                         <Text
-                                            text={item.bestEmail ? item.bestEmail : 'there is no BEST mail'}
+                                            text={member.bestEmail ? member.bestEmail : 'there is no BEST mail'}
                                             type={'span-sm'}
                                             color={'gray'}
                                         />
                                     </div>
                                 </TD>
                                 <TD>
-                                    <Text text={item.email} type={'span-sm'} />
+                                    <Text text={member.email} type={'span-sm'} />
                                 </TD>
                                 <TD>
-                                    <Text text={item.phone} type={'span-sm'} />
+                                    <Text text={member.phone} type={'span-sm'} />
                                 </TD>
                                 <TD>
-                                    <Text text={item.socialNetwork} type={'span-sm'} />
+                                    <Text text={member.socialNetwork} type={'span-sm'} />
                                 </TD>
                                 <TD>
                                     <div>
-                                        <Text text={item.faculty} type={'span-sm'} />
-                                        <Text text={item.group} type={'span-sm'} color={'gray'} />
+                                        <Text text={member.faculty} type={'span-sm'} />
+                                        <Text text={member.group} type={'span-sm'} color={'gray'} />
                                     </div>
                                 </TD>
                                 <TD>
-                                    <Label title={item.membership} />
+                                    <Label title={member.membership} />
                                 </TD>
                                 <TD>
-                                    {item.boardToMember &&
-                                        item.boardToMember.map((btm, i) => (
-                                            <Label
-                                                key={btm.id}
-                                                title={`${intToRoman(btm.cadence.number)} ${btm.board.name}`}
-                                            />
-                                        ))}
+                                    {boardToMemberList
+                                        .filter((boardToMember) => boardToMember.memberId === member.id)
+                                        .map((boardToMember, i) => {
+                                            const board = boardList.find((item) => item.id === boardToMember.boardId);
+                                            const cadence = cadenceList.find(
+                                                (item) => item.id === boardToMember.cadenceId,
+                                            );
+
+                                            if (!board || !cadence) return <React.Fragment key={i} />;
+
+                                            return (
+                                                <Label
+                                                    key={board.id}
+                                                    title={`${intToRoman(cadence.number)} ${board.name}`}
+                                                />
+                                            );
+                                        })}
                                 </TD>
                                 <TD>
-                                    {item.coordinatorToMember &&
-                                        item.coordinatorToMember.map((ctm, i) => (
-                                            <Label
-                                                key={ctm.id}
-                                                title={`${intToRoman(ctm.cadence.number)} ${ctm.coordinator.name}`}
-                                            />
-                                        ))}
+                                    {coordinatorToMemberList
+                                        .filter((coordinatorToMember) => coordinatorToMember.memberId === member.id)
+                                        .map((coordinatorToMember, i) => {
+                                            const coordinator = coordinatorList.find(
+                                                (item) => item.id === coordinatorToMember.coordinatorId,
+                                            );
+                                            const cadence = cadenceList.find(
+                                                (item) => item.id === coordinatorToMember.cadenceId,
+                                            );
+
+                                            if (!coordinator || !cadence) return <React.Fragment key={i} />;
+
+                                            return (
+                                                <Label
+                                                    key={coordinator.id}
+                                                    title={`${intToRoman(cadence.number)} ${coordinator.name}`}
+                                                />
+                                            );
+                                        })}
                                 </TD>
+
                                 <TD>
-                                    {item.memberToEvent &&
-                                        item.memberToEvent.map((etm, i) => (
-                                            <Label
-                                                key={etm.id}
-                                                title={`${intToRoman(etm.newEvent.cadence.number)} ${etm.newEvent.event.name} ${etm.responsible.name} ${etm.responsible.role}`}
-                                            />
-                                        ))}
+                                    {newEventToMemberList
+                                        .filter((newEventToMember) => newEventToMember.memberId === member.id)
+                                        .map((newEventToMember, i) => {
+                                            const newEvent = newEventList.find(
+                                                (item) => item.id === newEventToMember.newEventId,
+                                            );
+                                            if (!newEvent) return <React.Fragment key={i} />;
+
+                                            const event = eventList.find((item) => item.id === newEvent.eventId);
+                                            if (!event) return <React.Fragment key={i} />;
+
+                                            const responsible = responsibleList.find(
+                                                (item) => item.id === newEventToMember.responsibleId,
+                                            );
+                                            if (!responsible) return <React.Fragment key={i} />;
+
+                                            const cadence = cadenceList.find((item) => item.id === newEvent.cadenceId);
+                                            if (!cadence) return <React.Fragment key={i} />;
+
+                                            return (
+                                                <Label
+                                                    key={newEventToMember.id}
+                                                    title={`${intToRoman(cadence.number)} ${event.name} ${responsible.name} ${responsible.role}`}
+                                                />
+                                            );
+                                        })}
                                 </TD>
+
                                 <TD>
-                                    {item.committeeToMember &&
-                                        item.committeeToMember.map((ctm, i) => (
-                                            <Label
-                                                key={ctm.id}
-                                                title={`${intToRoman(ctm.cadence.number)} ${ctm.committee.name}`}
-                                            />
-                                        ))}
+                                    {committeeToMemberList
+                                        .filter((committeeToMember) => committeeToMember.memberId === member.id)
+                                        .map((committeeToMember, i) => {
+                                            const committee = committeeList.find(
+                                                (item) => item.id === committeeToMember.committeeId,
+                                            );
+                                            const cadence = cadenceList.find(
+                                                (item) => item.id === committeeToMember.cadenceId,
+                                            );
+
+                                            if (!committee || !cadence) return <React.Fragment key={i} />;
+
+                                            return (
+                                                <Label
+                                                    key={committee.id}
+                                                    title={`${intToRoman(cadence.number)} ${committee.name}`}
+                                                />
+                                            );
+                                        })}
                                 </TD>
+
                                 <TD>
-                                    <Text text={formatDate(new Date(item.birthday))} type={'span-sm'} />
+                                    <Text text={formatDate(new Date(member.birthday))} type={'span-sm'} />
                                 </TD>
                             </TRBody>
                         ))}

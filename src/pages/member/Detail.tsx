@@ -4,10 +4,35 @@ import { PATH_MEMBER } from '../../routes/paths';
 import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
 import { Navigate, useParams } from 'react-router-dom';
-import { memberService } from '../../services';
-import { formatDate, intToRoman } from '../../utils';
-import { IMemberListAllInfo } from '../../interfaces/member/memberBigData';
+// import { IMemberListAllInfo } from '../../interfaces/member/memberBigData';
 import { utilsActions } from '../../redux/actions/utilsActions';
+import { IMemberGetByIdRes } from '../../interfaces/member/memberRes';
+import { IBoardGetListRes } from '../../interfaces/board/boardRes';
+import { IBoardToMemberGetByMemberIdRes } from '../../interfaces/board/boardToMemberRes';
+import { ICommitteeGetListRes } from '../../interfaces/committee/committeeRes';
+import { ICommitteeToMemberGetByMemberIdRes } from '../../interfaces/committee/committeeToMemberRes';
+import { ICoordinatorGetListRes } from '../../interfaces/coordinator/coordinatorRes';
+import { ICoordinatorToMemberGetByMemberIdRes } from '../../interfaces/coordinator/coordinatorToMemberRes';
+import { IEventGetListRes } from '../../interfaces/event/eventRes';
+import { INewEventGetListRes } from '../../interfaces/event/newEventRes';
+import { IResponsibleGetListRes } from '../../interfaces/event/responsibleRes';
+import { INewEventToMemberGetListRes } from '../../interfaces/event/newEventToMemberRes';
+import { ICadenceGetListRes } from '../../interfaces/cadence/cadenceRes';
+import {
+    boardService,
+    boardToMemberService,
+    cadenceService,
+    committeeService,
+    committeeToMemberService,
+    coordinatorService,
+    coordinatorToMemberService,
+    eventService,
+    memberService,
+    newEventService,
+    newEventToMemberService,
+    responsibleService,
+} from '../../services';
+import { formatDate, intToRoman } from '../../utils';
 
 const pathMap = [
     { url: PATH_MEMBER.ROOT, title: pageNames.pages.member },
@@ -18,21 +43,83 @@ export default function MemberDetailPage() {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    const [member, setMember] = useState<IMemberListAllInfo | null>(null);
+    const [member, setMember] = useState<IMemberGetByIdRes>();
+    const [boardList, setBoardList] = useState<IBoardGetListRes[]>([]);
+    const [boardToMemberList, setBoardToMemberList] = useState<IBoardToMemberGetByMemberIdRes[]>([]);
+    const [committeeList, setCommitteeList] = useState<ICommitteeGetListRes[]>([]);
+    const [committeeToMemberList, setCommitteeToMemberList] = useState<ICommitteeToMemberGetByMemberIdRes[]>([]);
+    const [coordinatorList, setCoordinatorList] = useState<ICoordinatorGetListRes[]>([]);
+    const [coordinatorToMemberList, setCoordinatorToMemberList] = useState<ICoordinatorToMemberGetByMemberIdRes[]>([]);
+    const [eventList, setEventList] = useState<IEventGetListRes[]>([]);
+    const [newEventList, setNewEventList] = useState<INewEventGetListRes[]>([]);
+    const [responsibleList, setResponsibleList] = useState<IResponsibleGetListRes[]>([]);
+    const [newEventToMemberList, setNewEventToMemberList] = useState<INewEventToMemberGetListRes[]>([]);
+    const [cadenceList, setCadenceList] = useState<ICadenceGetListRes[]>([]);
 
     useEffect(() => {
-        getMember();
+        getData();
     }, []);
 
     if (!id) return <Navigate to={PATH_MEMBER.LIST} />;
 
-    const getMember = async () => {
-        if (!id) return;
+    const getData = async () => {
         try {
+            if (!id) return;
             utilsActions.loading(true);
-            
-            const res = await memberService.getByIdAllInfo({ id });
-            setMember(res);
+
+            const memberReq = memberService.getById({ id });
+            const boardReq = boardService.getList();
+            const boardToMemberReq = boardToMemberService.getByMemberId({ memberId: id });
+            const coordinatorReq = coordinatorService.getList();
+            const coordinatorToMemberReq = coordinatorToMemberService.getByMemberId({ memberId: id });
+            const committeeReq = committeeService.getList();
+            const committeeToMemberReq = committeeToMemberService.getByMemberId({ memberId: id });
+            const eventReq = eventService.getList();
+            const newEventReq = newEventService.getList();
+            const newEventToMemberReq = newEventToMemberService.getList();
+            const responsibleReq = responsibleService.getList();
+            const cadenceReq = cadenceService.getList();
+
+            const [
+                memberRes,
+                boardRes,
+                boardToMemberRes,
+                coordinatorRes,
+                coordinatorToMemberRes,
+                committeeRes,
+                committeeToMemberRes,
+                eventRes,
+                newEventRes,
+                newEventToMemberRes,
+                responsibleRes,
+                cadenceRes,
+            ] = await Promise.all([
+                memberReq,
+                boardReq,
+                boardToMemberReq,
+                coordinatorReq,
+                coordinatorToMemberReq,
+                committeeReq,
+                committeeToMemberReq,
+                eventReq,
+                newEventReq,
+                newEventToMemberReq,
+                responsibleReq,
+                cadenceReq,
+            ]);
+
+            setMember(memberRes);
+            setBoardList(boardRes);
+            setBoardToMemberList(boardToMemberRes);
+            setCommitteeList(committeeRes);
+            setCommitteeToMemberList(committeeToMemberRes);
+            setCoordinatorList(coordinatorRes);
+            setCoordinatorToMemberList(coordinatorToMemberRes);
+            setEventList(eventRes);
+            setNewEventList(newEventRes);
+            setNewEventToMemberList(newEventToMemberRes);
+            setResponsibleList(responsibleRes);
+            setCadenceList(cadenceRes);
         } catch (err) {
             utilsActions.addMessage({
                 status: 'error',
@@ -66,37 +153,59 @@ export default function MemberDetailPage() {
 
                     <hr />
                     <Text text={'Board'} />
-                    {member.boardToMember.map((item) => (
-                        <div>
-                            <span>{`${item.board.name} ${intToRoman(item.cadence.number)}`}</span>
-                        </div>
-                    ))}
+                    {boardToMemberList.map((boardToMember, i) => {
+                        const cadence = cadenceList.find((cadence) => cadence.id === boardToMember.cadenceId);
+                        const board = boardList.find((board) => board.id === boardToMember.boardId);
+
+                        if (!board || !cadence) return <React.Fragment key={i} />;
+
+                        return <Text key={i} text={`${board.name} ${intToRoman(cadence.number)}`} />;
+                    })}
 
                     <hr />
                     <Text text={'Coordinator'} />
-                    {member.coordinatorToMember.map((item) => (
-                        <div>
-                            <span>{`${item.coordinator.name} ${intToRoman(item.cadence.number)}`}</span>
-                        </div>
-                    ))}
+                    {coordinatorToMemberList.map((coordinatorToMember, i) => {
+                        const cadence = cadenceList.find((cadence) => cadence.id === coordinatorToMember.cadenceId);
+                        const coordinator = boardList.find((board) => board.id === coordinatorToMember.coordinatorId);
+
+                        if (!coordinator || !cadence) return <React.Fragment key={i} />;
+
+                        return <Text key={i} text={`${coordinator.name} ${intToRoman(cadence.number)}`} />;
+                    })}
 
                     <hr />
                     <Text text={'Committee'} />
-                    {member.committeeToMember.map((item) => (
-                        <div>
-                            <span>{`${item.committee.name} ${intToRoman(item.cadence.number)}`}</span>
-                            <span className="block">{`Position: `}</span>
-                        </div>
-                    ))}
+                    {committeeToMemberList.map((committeeToMember, i) => {
+                        const cadence = cadenceList.find((cadence) => cadence.id === committeeToMember.cadenceId);
+                        const committee = boardList.find((board) => board.id === committeeToMember.committeeId);
+
+                        if (!committee || !cadence) return <React.Fragment key={i} />;
+
+                        return <Text key={i} text={`${committee.name} ${intToRoman(cadence.number)}`} />;
+                    })}
 
                     <hr />
                     <Text text={'Event'} />
-                    {member.memberToEvent.map((item) => (
-                        <div>
-                            <span>{`${item.newEvent.event.name} ${intToRoman(item.newEvent.cadence.number)}`}</span>
-                            <span className="block">{`Position: ${item.responsible.name} ${item.responsible.role}`}</span>
-                        </div>
-                    ))}
+                    {newEventToMemberList.map((newEventToMember, i) => {
+                        const newEvent = newEventList.find((newEvent) => newEvent.id === newEventToMember.newEventId);
+                        if (!newEvent) return <React.Fragment key={i} />;
+
+                        const event = eventList.find((event) => event.id === newEvent.eventId);
+                        if (!event) return <React.Fragment key={i} />;
+
+                        const cadence = cadenceList.find((cadence) => cadence.id === newEvent.cadenceId);
+                        if (!cadence) return <React.Fragment key={i} />;
+
+                        const responsible = responsibleList.find((resp) => resp.id === newEventToMember.responsibleId);
+                        if (!responsible) return <React.Fragment key={i} />;
+
+                        return (
+                            <Text
+                                key={i}
+                                text={`${event.name} ${intToRoman(cadence.number)} ${responsible.name} ${responsible.role}`}
+                            />
+                        );
+                    })}
                 </div>
             )}
         </>

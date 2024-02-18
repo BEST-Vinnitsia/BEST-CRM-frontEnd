@@ -1,13 +1,31 @@
 import { IBoardToMemberPrisma } from '../prisma';
 
 export interface IBoardToMemberGetListReq {}
-export interface IBoardToMemberGetByIdReq extends Pick<IBoardToMemberPrisma, 'id'> {}
-export interface IBoardToMemberGetByBoardIdReq extends Pick<IBoardToMemberPrisma, 'boardId'> {}
-export interface IBoardToMemberGetByCadenceIdReq extends Pick<IBoardToMemberPrisma, 'cadenceId'> {}
-export interface IBoardToMemberGetByMemberIdReq extends Pick<IBoardToMemberPrisma, 'memberId'> {}
+
+export interface IBoardToMemberGetByIdReq {
+    id: string;
+}
+
+export interface IBoardToMemberGetByBoardIdReq {
+    boardId: string;
+}
+
+export interface IBoardToMemberGetByCadenceIdReq {
+    cadenceId: string;
+}
+
+export interface IBoardToMemberGetByMemberIdReq {
+    memberId: string;
+}
+
 export interface IBoardToMemberCreateReq extends Omit<IBoardToMemberPrisma, 'id' | 'createdAt' | 'updatedAt'> {}
+
 export interface IBoardToMemberUpdateReq extends Omit<IBoardToMemberPrisma, 'createdAt' | 'updatedAt'> {}
-export interface IBoardToMemberDeleteReq extends Pick<IBoardToMemberPrisma, 'id'> {}
+
+export interface IBoardToMemberDeleteReq {
+    id: string;
+}
+
 export interface IBoardToMemberDeleteArrayReq {
     id: number[];
 }

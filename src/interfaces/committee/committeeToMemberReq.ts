@@ -1,13 +1,31 @@
 import { ICommitteeToMemberPrisma } from '../prisma';
 
 export interface ICommitteeToMemberGetListReq {}
-export interface ICommitteeToMemberGetByIdReq extends Pick<ICommitteeToMemberPrisma, 'id'> {}
-export interface ICommitteeToMemberGetByCommitteeIdReq extends Pick<ICommitteeToMemberPrisma, 'committeeId'> {}
-export interface ICommitteeToMemberGetByCadenceIdReq extends Pick<ICommitteeToMemberPrisma, 'cadenceId'> {}
-export interface ICommitteeToMemberGetByMemberIdReq extends Pick<ICommitteeToMemberPrisma, 'memberId'> {}
+
+export interface ICommitteeToMemberGetByIdReq {
+    id: string;
+}
+
+export interface ICommitteeToMemberGetByCommitteeIdReq {
+    committeeId: string;
+}
+
+export interface ICommitteeToMemberGetByCadenceIdReq {
+    cadenceId: string;
+}
+
+export interface ICommitteeToMemberGetByMemberIdReq {
+    memberId: string;
+}
+
 export interface ICommitteeToMemberCreateReq extends Omit<ICommitteeToMemberPrisma, 'id' | 'createdAt' | 'updatedAt'> {}
+
 export interface ICommitteeToMemberUpdateReq extends Omit<ICommitteeToMemberPrisma, 'createdAt' | 'updatedAt'> {}
-export interface ICommitteeToMemberDeleteReq extends Pick<ICommitteeToMemberPrisma, 'id'> {}
+
+export interface ICommitteeToMemberDeleteReq {
+    id: string;
+}
+
 export interface ICommitteeToMemberDeleteArrayReq {
     id: number[];
 }

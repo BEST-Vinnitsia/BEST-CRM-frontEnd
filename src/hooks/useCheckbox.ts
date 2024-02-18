@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 
-export const useCheckbox = (data: string[]) => {
-    const [selectRows, setSelectRows] = useState<string[]>([]);
-    const allRows = useRef<string[]>([]);
-    
+export const useCheckbox = (data: number[]) => {
+    const [selectRows, setSelectRows] = useState<number[]>([]);
+    const allRows = useRef<number[]>([]);
+
     useEffect(() => {
         allRows.current = data;
     }, [data]);
 
-    const selectRow = (id: string) => {
+    const selectRow = (id: number) => {
         setSelectRows((prev) => {
             if (prev.includes(id)) {
                 return prev.filter((selectedId) => selectedId !== id);
@@ -18,7 +18,7 @@ export const useCheckbox = (data: string[]) => {
         });
     };
 
-    const checkSelectRow = (id: string) => {
+    const checkSelectRow = (id: number) => {
         return selectRows.includes(id);
     };
 
