@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { BreadcrumbsContainer, Button, Text } from '../../components';
+import style from './style.module.scss';
+import { BreadcrumbsContainer, Button, PageHeader, ScrollY, Text } from '../../components';
 import { PATH_MEMBER } from '../../routes/paths';
 import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
@@ -33,6 +34,9 @@ import {
     responsibleService,
 } from '../../services';
 import { formatDate, intToRoman } from '../../utils';
+import Card from '../../components/card/Card';
+import { UserAvatar } from '../../assets/img';
+import CardContainer from '../../components/card/CardContainer';
 
 const pathMap = [
     { url: PATH_MEMBER.ROOT, title: pageNames.pages.member },
@@ -131,7 +135,7 @@ export default function MemberDetailPage() {
     };
 
     return (
-        <>
+        <ScrollY>
             <div className="p-4">
                 <BreadcrumbsContainer path={pathMap}>
                     <div className="flex">
@@ -139,75 +143,156 @@ export default function MemberDetailPage() {
                         <Button onClick={() => navigate(PATH_MEMBER.LIST)} title="List" />
                     </div>
                 </BreadcrumbsContainer>
+
+                {member && (
+                    <div className="mt-1">
+                        <PageHeader
+                            title={`${member.name} ${member.surname} ${member.middleName}`}
+                            subtitle={member.membership}
+                            img={UserAvatar}
+                        />
+
+                        <div className={style['boxContainer']}>
+                            <div className={style['boxContainer__block']}>
+                                <div className={style['boxContainer__block-header']}>
+                                    <Text text={'Contacts'} size={'18'} width={'bold'} />
+                                </div>
+
+                                <div className={style['boxContainer__block-segment']}>
+                                    <Text text={`Email`} />
+                                    <Text text={member.email} color={'gray'} />
+                                </div>
+
+                                <div className={style['boxContainer__block-segment']}>
+                                    <Text text={`BEST email`} />
+                                    <Text text={member.bestEmail ? member.bestEmail : 'Not specified'} color={'gray'} />
+                                </div>
+
+                                <div className={style['boxContainer__block-segment']}>
+                                    <Text text={`Phone`} />
+                                    <Text text={member.phone} color={'gray'} />
+                                </div>
+
+                                <div className={style['boxContainer__block-segment']}>
+                                    <Text text={`Message`} />
+                                    <Text text={member.socialNetwork} color={'gray'} />
+                                </div>
+                            </div>
+
+                            <div className={style['boxContainer__block']}>
+                                <div className={style['boxContainer__block-header']}>
+                                    <Text text={'Info'} size={'18'} width={'bold'} />
+                                </div>
+
+                                <div className={style['boxContainer__block-segment']}>
+                                    <Text text={`Faculty`} />
+                                    <Text text={member.faculty} color={'gray'} />
+                                </div>
+
+                                <div className={style['boxContainer__block-segment']}>
+                                    <Text text={`Group`} />
+                                    <Text text={member.group} color={'gray'} />
+                                </div>
+
+                                <div className={style['boxContainer__block-segment']}>
+                                    <Text text={`Clothing size`} />
+                                    <Text text={member.clothingSize ? member.clothingSize : 'Not specified'} color={'gray'} />
+                                </div>
+
+                                <div className={style['boxContainer__block-segment']}>
+                                    <Text text={`Home address`} />
+                                    <Text text={member.homeAddress ? member.homeAddress : 'Not specified'} color={'gray'} />
+                                </div>
+
+                                <div className={style['boxContainer__block-segment']}>
+                                    <Text text={`Birthday`} />
+                                    <Text text={formatDate(new Date(member.birthday))} color={'gray'} />
+                                </div>
+                            </div>
+                        </div>
+
+                        <CardContainer>
+                            {/**/}
+                            {boardToMemberList.map((boardToMember, i) => {
+                                const cadence = cadenceList.find((cadence) => cadence.id === boardToMember.cadenceId);
+                                const board = boardList.find((board) => board.id === boardToMember.boardId);
+
+                                if (!board || !cadence) return <React.Fragment key={i} />;
+
+                                return (
+                                    <Card key={i} title={`${board.name} ${intToRoman(cadence.number)}`} img={UserAvatar} />
+                                );
+                            })}
+
+                            {/**/}
+                            {coordinatorToMemberList.map((coordinatorToMember, i) => {
+                                const cadence = cadenceList.find((cadence) => cadence.id === coordinatorToMember.cadenceId);
+                                const coordinator = coordinatorList.find(
+                                    (coordinator) => coordinator.id === coordinatorToMember.coordinatorId,
+                                );
+
+                                if (!coordinator || !cadence) return <React.Fragment key={i} />;
+
+                                return (
+                                    <Card
+                                        key={i}
+                                        title={`${coordinator.name} ${intToRoman(cadence.number)}`}
+                                        img={UserAvatar}
+                                    />
+                                );
+                            })}
+
+                            {/**/}
+                            {committeeToMemberList.map((committeeToMember, i) => {
+                                const cadence = cadenceList.find((cadence) => cadence.id === committeeToMember.cadenceId);
+                                const committee = committeeList.find(
+                                    (committee) => committee.id === committeeToMember.committeeId,
+                                );
+
+                                if (!committee || !cadence) return <React.Fragment key={i} />;
+
+                                return (
+                                    <Card
+                                        key={i}
+                                        title={`${committee.name} ${intToRoman(cadence.number)}`}
+                                        img={UserAvatar}
+                                    />
+                                );
+                            })}
+
+                            {/**/}
+                            {newEventToMemberList.map((newEventToMember, i) => {
+                                const newEvent = newEventList.find(
+                                    (newEvent) => newEvent.id === newEventToMember.newEventId,
+                                );
+                                if (!newEvent) return <React.Fragment key={i} />;
+
+                                const event = eventList.find((event) => event.id === newEvent.eventId);
+                                if (!event) return <React.Fragment key={i} />;
+
+                                const cadence = cadenceList.find((cadence) => cadence.id === newEvent.cadenceId);
+                                if (!cadence) return <React.Fragment key={i} />;
+
+                                const responsible = responsibleList.find(
+                                    (resp) => resp.id === newEventToMember.responsibleId,
+                                );
+                                if (!responsible) return <React.Fragment key={i} />;
+
+                                return (
+                                    <Card
+                                        key={i}
+                                        title={`${event.name} ${responsible.name}`}
+                                        subtitle={`${intToRoman(cadence.number)}`}
+                                        img={UserAvatar}
+                                    />
+                                );
+                            })}
+                        </CardContainer>
+                    </div>
+                )}
             </div>
 
-            {member && (
-                <div>
-                    <Text text={member.name} />
-                    <Text text={member.surname} />
-                    <Text text={member.bestEmail ? member.bestEmail : ''} />
-                    <Text text={member.membership} />
-                    <Text text={member.faculty} />
-                    <Text text={member.group} />
-                    <Text text={formatDate(new Date(member.birthday))} />
 
-                    <hr />
-                    <Text text={'Board'} />
-                    {boardToMemberList.map((boardToMember, i) => {
-                        const cadence = cadenceList.find((cadence) => cadence.id === boardToMember.cadenceId);
-                        const board = boardList.find((board) => board.id === boardToMember.boardId);
-
-                        if (!board || !cadence) return <React.Fragment key={i} />;
-
-                        return <Text key={i} text={`${board.name} ${intToRoman(cadence.number)}`} />;
-                    })}
-
-                    <hr />
-                    <Text text={'Coordinator'} />
-                    {coordinatorToMemberList.map((coordinatorToMember, i) => {
-                        const cadence = cadenceList.find((cadence) => cadence.id === coordinatorToMember.cadenceId);
-                        const coordinator = boardList.find((board) => board.id === coordinatorToMember.coordinatorId);
-
-                        if (!coordinator || !cadence) return <React.Fragment key={i} />;
-
-                        return <Text key={i} text={`${coordinator.name} ${intToRoman(cadence.number)}`} />;
-                    })}
-
-                    <hr />
-                    <Text text={'Committee'} />
-                    {committeeToMemberList.map((committeeToMember, i) => {
-                        const cadence = cadenceList.find((cadence) => cadence.id === committeeToMember.cadenceId);
-                        const committee = boardList.find((board) => board.id === committeeToMember.committeeId);
-
-                        if (!committee || !cadence) return <React.Fragment key={i} />;
-
-                        return <Text key={i} text={`${committee.name} ${intToRoman(cadence.number)}`} />;
-                    })}
-
-                    <hr />
-                    <Text text={'Event'} />
-                    {newEventToMemberList.map((newEventToMember, i) => {
-                        const newEvent = newEventList.find((newEvent) => newEvent.id === newEventToMember.newEventId);
-                        if (!newEvent) return <React.Fragment key={i} />;
-
-                        const event = eventList.find((event) => event.id === newEvent.eventId);
-                        if (!event) return <React.Fragment key={i} />;
-
-                        const cadence = cadenceList.find((cadence) => cadence.id === newEvent.cadenceId);
-                        if (!cadence) return <React.Fragment key={i} />;
-
-                        const responsible = responsibleList.find((resp) => resp.id === newEventToMember.responsibleId);
-                        if (!responsible) return <React.Fragment key={i} />;
-
-                        return (
-                            <Text
-                                key={i}
-                                text={`${event.name} ${intToRoman(cadence.number)} ${responsible.name} ${responsible.role}`}
-                            />
-                        );
-                    })}
-                </div>
-            )}
-        </>
+        </ScrollY>
     );
 }

@@ -13,7 +13,10 @@ import {
     ICommitteeToMemberCreateReq,
     ICommitteeToMemberDeleteArrayReq,
     ICommitteeToMemberDeleteReq,
+    ICommitteeToMemberGetByCadenceIdReq,
+    ICommitteeToMemberGetByCommitteeIdReq,
     ICommitteeToMemberGetByIdReq,
+    ICommitteeToMemberGetByMemberIdReq,
     ICommitteeToMemberUpdateReq,
 } from '../../interfaces/committee/committeeToMemberReq';
 
@@ -33,6 +36,33 @@ class CommitteeToMemberService {
         return new Promise<ICommitteeToMemberGetByIdRes>((resolve, reject) => {
             axios
                 .get(`${API}/${this.root}`, { params: { id } })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    getByMemberId = ({ memberId }: ICommitteeToMemberGetByMemberIdReq) => {
+        return new Promise<ICommitteeToMemberGetByIdRes[]>((resolve, reject) => {
+            axios
+                .get(`${API}/${this.root}/by-member-id`, { params: { memberId } })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    getByCadenceId = ({ cadenceId }: ICommitteeToMemberGetByCadenceIdReq) => {
+        return new Promise<ICommitteeToMemberGetByIdRes[]>((resolve, reject) => {
+            axios
+                .get(`${API}/${this.root}/by-cadence-id`, { params: { cadenceId } })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    getByCommitteeId = ({ committeeId }: ICommitteeToMemberGetByCommitteeIdReq) => {
+        return new Promise<ICommitteeToMemberGetByIdRes[]>((resolve, reject) => {
+            axios
+                .get(`${API}/${this.root}/by-committee-id`, { params: { committeeId } })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });

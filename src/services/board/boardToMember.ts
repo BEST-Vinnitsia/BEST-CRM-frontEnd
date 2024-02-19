@@ -12,7 +12,10 @@ import {
     IBoardToMemberCreateReq,
     IBoardToMemberDeleteArrayReq,
     IBoardToMemberDeleteReq,
+    IBoardToMemberGetByBoardIdReq,
+    IBoardToMemberGetByCadenceIdReq,
     IBoardToMemberGetByIdReq,
+    IBoardToMemberGetByMemberIdReq,
     IBoardToMemberUpdateReq,
 } from '../../interfaces/board/boardToMemberReq';
 
@@ -32,6 +35,33 @@ class BoardToMemberService {
         return new Promise<IBoardToMemberGetByIdRes>((resolve, reject) => {
             axios
                 .get(`${API}/${this.root}`, { params: { id } })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    getByMemberId = ({ memberId }: IBoardToMemberGetByMemberIdReq) => {
+        return new Promise<IBoardToMemberGetByIdRes[]>((resolve, reject) => {
+            axios
+                .get(`${API}/${this.root}/by-member-id`, { params: { memberId } })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    getByCadenceId = ({ cadenceId }: IBoardToMemberGetByCadenceIdReq) => {
+        return new Promise<IBoardToMemberGetByIdRes[]>((resolve, reject) => {
+            axios
+                .get(`${API}/${this.root}/by-cadence-id`, { params: { cadenceId } })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    getByBoardId = ({ boardId }: IBoardToMemberGetByBoardIdReq) => {
+        return new Promise<IBoardToMemberGetByIdRes[]>((resolve, reject) => {
+            axios
+                .get(`${API}/${this.root}/by-board-id`, { params: { boardId } })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });

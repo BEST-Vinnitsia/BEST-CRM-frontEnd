@@ -162,37 +162,37 @@ export default function MemberListPage() {
                                 />
                             </TH>
                             <TH>
-                                <Text text={'Name'} color={'gray'} width={'bold'} type={'span-sm'} />
+                                <Text text={'Name'} color={'gray'} width={'bold'} size={'14'} />
                             </TH>
                             <TH>
-                                <Text text={'Email'} color={'gray'} width={'bold'} type={'span-sm'} />
+                                <Text text={'Email'} color={'gray'} width={'bold'} size={'14'} />
                             </TH>
                             <TH>
-                                <Text text={'Phone'} color={'gray'} width={'bold'} type={'span-sm'} />
+                                <Text text={'Phone'} color={'gray'} width={'bold'} size={'14'} />
                             </TH>
                             <TH>
-                                <Text text={'Message'} color={'gray'} width={'bold'} type={'span-sm'} />
+                                <Text text={'Message'} color={'gray'} width={'bold'} size={'14'} />
                             </TH>
                             <TH>
-                                <Text text={'VNTU'} color={'gray'} width={'bold'} type={'span-sm'} />
+                                <Text text={'VNTU'} color={'gray'} width={'bold'} size={'14'} />
                             </TH>
                             <TH>
-                                <Text text={'Status'} color={'gray'} width={'bold'} type={'span-sm'} />
+                                <Text text={'Status'} color={'gray'} width={'bold'} size={'14'} />
                             </TH>
                             <TH>
-                                <Text text={'Board'} color={'gray'} width={'bold'} type={'span-sm'} />
+                                <Text text={'Board'} color={'gray'} width={'bold'} size={'14'} />
                             </TH>
                             <TH>
-                                <Text text={'Coordinator'} color={'gray'} width={'bold'} type={'span-sm'} />
+                                <Text text={'Coordinator'} color={'gray'} width={'bold'} size={'14'} />
                             </TH>
                             <TH>
-                                <Text text={'Event'} color={'gray'} width={'bold'} type={'span-sm'} />
+                                <Text text={'Event'} color={'gray'} width={'bold'} size={'14'} />
                             </TH>
                             <TH>
-                                <Text text={'Committee'} color={'gray'} width={'bold'} type={'span-sm'} />
+                                <Text text={'Committee'} color={'gray'} width={'bold'} size={'14'} />
                             </TH>
                             <TH>
-                                <Text text={'Happy Birthday'} color={'gray'} width={'bold'} type={'span-sm'} />
+                                <Text text={'Happy Birthday'} color={'gray'} width={'bold'} size={'14'} />
                             </TH>
                         </TRHead>
                     </THead>
@@ -208,27 +208,27 @@ export default function MemberListPage() {
 
                                 <TD>
                                     <div onClick={() => navigate(`${PATH_MEMBER.DETAILS}/${member.id}`)}>
-                                        <Text text={`${member.name} ${member.surname}`} type={'span-sm'} />
+                                        <Text text={`${member.name} ${member.surname}`} size={'14'} />
                                         <Text
                                             text={member.bestEmail ? member.bestEmail : 'there is no BEST mail'}
-                                            type={'span-sm'}
+                                            size={'14'}
                                             color={'gray'}
                                         />
                                     </div>
                                 </TD>
                                 <TD>
-                                    <Text text={member.email} type={'span-sm'} />
+                                    <Text text={member.email} size={'14'} />
                                 </TD>
                                 <TD>
-                                    <Text text={member.phone} type={'span-sm'} />
+                                    <Text text={member.phone} size={'14'} />
                                 </TD>
                                 <TD>
-                                    <Text text={member.socialNetwork} type={'span-sm'} />
+                                    <Text text={member.socialNetwork} size={'14'} />
                                 </TD>
                                 <TD>
                                     <div>
-                                        <Text text={member.faculty} type={'span-sm'} />
-                                        <Text text={member.group} type={'span-sm'} color={'gray'} />
+                                        <Text text={member.faculty} size={'14'} />
+                                        <Text text={member.group} size={'14'} color={'gray'} />
                                     </div>
                                 </TD>
                                 <TD>
@@ -327,7 +327,7 @@ export default function MemberListPage() {
                                 </TD>
 
                                 <TD>
-                                    <Text text={formatDate(new Date(member.birthday))} type={'span-sm'} />
+                                    <Text text={formatDate(new Date(member.birthday))} size={'14'} />
                                 </TD>
                             </TRBody>
                         ))}

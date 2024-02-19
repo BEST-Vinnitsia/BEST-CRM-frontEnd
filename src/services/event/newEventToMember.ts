@@ -4,6 +4,9 @@ import {
     INewEventToMemberDeleteArrayRes,
     INewEventToMemberDeleteRes,
     INewEventToMemberGetByIdRes,
+    INewEventToMemberGetByMemberIdRes,
+    INewEventToMemberGetByNewEventIdRes,
+    INewEventToMemberGetByResponsibleIdRes,
     INewEventToMemberGetListRes,
     INewEventToMemberUpdateRes,
 } from '../../interfaces/event/newEventToMemberRes';
@@ -13,6 +16,9 @@ import {
     INewEventToMemberDeleteArrayReq,
     INewEventToMemberDeleteReq,
     INewEventToMemberGetByIdReq,
+    INewEventToMemberGetByMemberIdReq,
+    INewEventToMemberGetByNewEventIdReq,
+    INewEventToMemberGetByResponsibleIdReq,
     INewEventToMemberUpdateReq,
 } from '../../interfaces/event/newEventToMemberReq';
 
@@ -32,6 +38,33 @@ class NewEventToMemberService {
         return new Promise<INewEventToMemberGetByIdRes>((resolve, reject) => {
             axios
                 .get(`${API}/${this.root}`, { params: { id } })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    getByMemberId = ({ memberId }: INewEventToMemberGetByMemberIdReq) => {
+        return new Promise<INewEventToMemberGetByMemberIdRes[]>((resolve, reject) => {
+            axios
+                .get(`${API}/${this.root}/by-member-id`, { params: { memberId } })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    getByNewEventId = ({ newEventId }: INewEventToMemberGetByNewEventIdReq) => {
+        return new Promise<INewEventToMemberGetByNewEventIdRes[]>((resolve, reject) => {
+            axios
+                .get(`${API}/${this.root}/by-new-event-id`, { params: { newEventId } })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    getByResponsibleId = ({ responsibleId }: INewEventToMemberGetByResponsibleIdReq) => {
+        return new Promise<INewEventToMemberGetByResponsibleIdRes[]>((resolve, reject) => {
+            axios
+                .get(`${API}/${this.root}/by-responsible-id`, { params: { responsibleId } })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });

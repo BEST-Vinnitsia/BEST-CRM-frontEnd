@@ -12,6 +12,9 @@ export { default as Line } from './line/Line';
 // label
 export { default as Label } from './labels/Label';
 
+// card
+export { default as Card } from './card/Card';
+export { default as CardContainer } from './card/CardContainer';
 
 // containers
 export { default as Menu } from './menu/Menu';
@@ -48,13 +51,13 @@ export { default as TBody } from './table/TBody';
 export { default as TRBody } from './table/TRBody';
 export { default as TD } from './table/TD';
 
-
 //
 // containers or modules
 //
 
 // header
 export { default as Header } from './header/Header';
+export { default as PageHeader } from './header/PageHeader';
 
 // sidebar
 export { default as DesktopSidebar } from './sidebar/desktopSidebar';

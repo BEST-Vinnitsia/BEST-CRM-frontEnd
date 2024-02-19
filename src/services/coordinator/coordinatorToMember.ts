@@ -12,7 +12,10 @@ import {
     ICoordinatorToMemberCreateReq,
     ICoordinatorToMemberDeleteArrayReq,
     ICoordinatorToMemberDeleteReq,
+    ICoordinatorToMemberGetByCadenceIdReq,
+    ICoordinatorToMemberGetByCoordinatorIdReq,
     ICoordinatorToMemberGetByIdReq,
+    ICoordinatorToMemberGetByMemberIdReq,
     ICoordinatorToMemberUpdateReq,
 } from '../../interfaces/coordinator/coordinatorToMemberReq';
 
@@ -32,6 +35,33 @@ class CoordinatorToMemberService {
         return new Promise<ICoordinatorToMemberGetByIdRes>((resolve, reject) => {
             axios
                 .get(`${API}/${this.root}`, { params: { id } })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    getByMemberId = ({ memberId }: ICoordinatorToMemberGetByMemberIdReq) => {
+        return new Promise<ICoordinatorToMemberGetByIdRes[]>((resolve, reject) => {
+            axios
+                .get(`${API}/${this.root}/by-member-id`, { params: { memberId } })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    getByCadenceId = ({ cadenceId }: ICoordinatorToMemberGetByCadenceIdReq) => {
+        return new Promise<ICoordinatorToMemberGetByIdRes[]>((resolve, reject) => {
+            axios
+                .get(`${API}/${this.root}/by-cadence-id`, { params: { cadenceId } })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    getByCoordinatorId = ({ coordinatorId }: ICoordinatorToMemberGetByCoordinatorIdReq) => {
+        return new Promise<ICoordinatorToMemberGetByIdRes[]>((resolve, reject) => {
+            axios
+                .get(`${API}/${this.root}/by-coordinator-id`, { params: { coordinatorId } })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
