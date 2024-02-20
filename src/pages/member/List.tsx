@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
     BreadcrumbsContainer,
-    Button,
     Label,
     ScrollY,
     Table,
@@ -144,11 +143,7 @@ export default function MemberListPage() {
         <>
             <ScrollY>
                 <div className="p-4">
-                    <BreadcrumbsContainer path={pathMap}>
-                        <div className="flex">
-                            <Button onClick={() => navigate(PATH_MEMBER.CREATE)} title="Create" />
-                        </div>
-                    </BreadcrumbsContainer>
+                    <BreadcrumbsContainer path={pathMap} buttons={[{ title: 'Create', path: PATH_MEMBER.CREATE }]} />
                 </div>
 
                 <Table>
@@ -197,8 +192,8 @@ export default function MemberListPage() {
                         </TRHead>
                     </THead>
                     <TBody>
-                        {memberList.map((member, i) => (
-                            <TRBody key={i}>
+                        {memberList.map((member) => (
+                            <TRBody key={member.id}>
                                 <TD sx={{ p: '0px 0px 0px 8px' }}>
                                     <Checkbox
                                         active={checkboxHook.checkSelectRow(member.id)}
@@ -243,11 +238,11 @@ export default function MemberListPage() {
                                                 (item) => item.id === boardToMember.cadenceId,
                                             );
 
-                                            if (!board || !cadence) return <React.Fragment key={i} />;
+                                            if (!board || !cadence) return <React.Fragment key={boardToMember.id} />;
 
                                             return (
                                                 <Label
-                                                    key={board.id}
+                                                    key={boardToMember.id}
                                                     title={`${intToRoman(cadence.number)} ${board.name}`}
                                                 />
                                             );
@@ -256,7 +251,7 @@ export default function MemberListPage() {
                                 <TD>
                                     {coordinatorToMemberList
                                         .filter((coordinatorToMember) => coordinatorToMember.memberId === member.id)
-                                        .map((coordinatorToMember, i) => {
+                                        .map((coordinatorToMember) => {
                                             const coordinator = coordinatorList.find(
                                                 (item) => item.id === coordinatorToMember.coordinatorId,
                                             );
@@ -264,11 +259,12 @@ export default function MemberListPage() {
                                                 (item) => item.id === coordinatorToMember.cadenceId,
                                             );
 
-                                            if (!coordinator || !cadence) return <React.Fragment key={i} />;
+                                            if (!coordinator || !cadence)
+                                                return <React.Fragment key={coordinatorToMember.id} />;
 
                                             return (
                                                 <Label
-                                                    key={coordinator.id}
+                                                    key={coordinatorToMember.id}
                                                     title={`${intToRoman(cadence.number)} ${coordinator.name}`}
                                                 />
                                             );
@@ -278,26 +274,26 @@ export default function MemberListPage() {
                                 <TD>
                                     {newEventToMemberList
                                         .filter((newEventToMember) => newEventToMember.memberId === member.id)
-                                        .map((newEventToMember, i) => {
+                                        .map((newEventToMember) => {
                                             const newEvent = newEventList.find(
                                                 (item) => item.id === newEventToMember.newEventId,
                                             );
-                                            if (!newEvent) return <React.Fragment key={i} />;
+                                            if (!newEvent) return <React.Fragment key={newEventToMember.id} />;
 
                                             const event = eventList.find((item) => item.id === newEvent.eventId);
-                                            if (!event) return <React.Fragment key={i} />;
+                                            if (!event) return <React.Fragment key={newEventToMember.id} />;
 
                                             const responsible = responsibleList.find(
                                                 (item) => item.id === newEventToMember.responsibleId,
                                             );
-                                            if (!responsible) return <React.Fragment key={i} />;
+                                            if (!responsible) return <React.Fragment key={newEventToMember.id} />;
 
                                             const cadence = cadenceList.find((item) => item.id === newEvent.cadenceId);
-                                            if (!cadence) return <React.Fragment key={i} />;
+                                            if (!cadence) return <React.Fragment key={newEventToMember.id} />;
 
                                             return (
                                                 <Label
-                                                    key={newEventToMember.id}
+                                                    key={newEvent.id}
                                                     title={`${intToRoman(cadence.number)} ${event.name} ${responsible.name} ${responsible.role}`}
                                                 />
                                             );
@@ -307,7 +303,7 @@ export default function MemberListPage() {
                                 <TD>
                                     {committeeToMemberList
                                         .filter((committeeToMember) => committeeToMember.memberId === member.id)
-                                        .map((committeeToMember, i) => {
+                                        .map((committeeToMember) => {
                                             const committee = committeeList.find(
                                                 (item) => item.id === committeeToMember.committeeId,
                                             );
@@ -315,11 +311,12 @@ export default function MemberListPage() {
                                                 (item) => item.id === committeeToMember.cadenceId,
                                             );
 
-                                            if (!committee || !cadence) return <React.Fragment key={i} />;
+                                            if (!committee || !cadence)
+                                                return <React.Fragment key={committeeToMember.id} />;
 
                                             return (
                                                 <Label
-                                                    key={committee.id}
+                                                    key={committeeToMember.id}
                                                     title={`${intToRoman(cadence.number)} ${committee.name}`}
                                                 />
                                             );

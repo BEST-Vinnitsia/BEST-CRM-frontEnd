@@ -2,13 +2,15 @@
     position: relative;
     display: grid;
     gap: 8px 16px;
-    grid-template-columns: minmax(250px, 350px) 1fr;
+    //grid-template-columns: minmax(250px, 350px) 1fr;
+    grid-template-columns: 1fr;
     width: 100%;
-    margin-top: 16px;
     margin-bottom: 16px;
 
+    justify-items: center;
+
     &__formBlock {
-        width: 100%;
+        width: 900px;
         padding: 16px;
         border-radius: 16px;
         background-color: rgb(33, 43, 54);

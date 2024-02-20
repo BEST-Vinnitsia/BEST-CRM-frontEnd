@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import style from './style.module.scss';
-import { BreadcrumbsContainer, Button, PageHeader, ScrollY, Text } from '../../components';
+import { BreadcrumbsContainer, PageHeader, ScrollY, Text } from '../../components';
 import { PATH_MEMBER } from '../../routes/paths';
 import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
@@ -34,9 +34,10 @@ import {
     responsibleService,
 } from '../../services';
 import { formatDate, intToRoman } from '../../utils';
-import Card from '../../components/card/Card';
 import { UserAvatar } from '../../assets/img';
 import CardContainer from '../../components/card/CardContainer';
+import SmallCard from '../../components/card/SmallCard';
+import { SvgBoardAndCoordinatorsSidebar, SvgCommitteeSidebar, SvgEventSidebar } from '../../assets/svg';
 
 const pathMap = [
     { url: PATH_MEMBER.ROOT, title: pageNames.pages.member },
@@ -137,12 +138,13 @@ export default function MemberDetailPage() {
     return (
         <ScrollY>
             <div className="p-4">
-                <BreadcrumbsContainer path={pathMap}>
-                    <div className="flex">
-                        <Button onClick={() => navigate(`${PATH_MEMBER.EDIT}/${id}`)} title="Edit" />
-                        <Button onClick={() => navigate(PATH_MEMBER.LIST)} title="List" />
-                    </div>
-                </BreadcrumbsContainer>
+                <BreadcrumbsContainer
+                    path={pathMap}
+                    buttons={[
+                        { title: 'Edit', path: `${PATH_MEMBER.EDIT}/${id}` },
+                        { title: 'List', path: PATH_MEMBER.LIST },
+                    ]}
+                />
 
                 {member && (
                     <div className="mt-1">
@@ -155,7 +157,7 @@ export default function MemberDetailPage() {
                         <div className={style['boxContainer']}>
                             <div className={style['boxContainer__block']}>
                                 <div className={style['boxContainer__block-header']}>
-                                    <Text text={'Contacts'} size={'18'} width={'bold'} />
+                                    <Text text={'Contacts'} size={'24'} width={'bold'} color={'gray'} />
                                 </div>
 
                                 <div className={style['boxContainer__block-segment']}>
@@ -181,7 +183,7 @@ export default function MemberDetailPage() {
 
                             <div className={style['boxContainer__block']}>
                                 <div className={style['boxContainer__block-header']}>
-                                    <Text text={'Info'} size={'18'} width={'bold'} />
+                                    <Text text={'Info'} size={'24'} width={'bold'} color={'gray'} />
                                 </div>
 
                                 <div className={style['boxContainer__block-segment']}>
@@ -196,12 +198,18 @@ export default function MemberDetailPage() {
 
                                 <div className={style['boxContainer__block-segment']}>
                                     <Text text={`Clothing size`} />
-                                    <Text text={member.clothingSize ? member.clothingSize : 'Not specified'} color={'gray'} />
+                                    <Text
+                                        text={member.clothingSize ? member.clothingSize : 'Not specified'}
+                                        color={'gray'}
+                                    />
                                 </div>
 
                                 <div className={style['boxContainer__block-segment']}>
                                     <Text text={`Home address`} />
-                                    <Text text={member.homeAddress ? member.homeAddress : 'Not specified'} color={'gray'} />
+                                    <Text
+                                        text={member.homeAddress ? member.homeAddress : 'Not specified'}
+                                        color={'gray'}
+                                    />
                                 </div>
 
                                 <div className={style['boxContainer__block-segment']}>
@@ -220,13 +228,20 @@ export default function MemberDetailPage() {
                                 if (!board || !cadence) return <React.Fragment key={i} />;
 
                                 return (
-                                    <Card key={i} title={`${board.name} ${intToRoman(cadence.number)}`} img={UserAvatar} />
+                                    <SmallCard
+                                        key={i}
+                                        title={`${board.name}`}
+                                        subtitle={`Cadence: ${intToRoman(cadence.number)}`}
+                                        svg={<SvgBoardAndCoordinatorsSidebar />}
+                                    />
                                 );
                             })}
 
                             {/**/}
                             {coordinatorToMemberList.map((coordinatorToMember, i) => {
-                                const cadence = cadenceList.find((cadence) => cadence.id === coordinatorToMember.cadenceId);
+                                const cadence = cadenceList.find(
+                                    (cadence) => cadence.id === coordinatorToMember.cadenceId,
+                                );
                                 const coordinator = coordinatorList.find(
                                     (coordinator) => coordinator.id === coordinatorToMember.coordinatorId,
                                 );
@@ -234,17 +249,20 @@ export default function MemberDetailPage() {
                                 if (!coordinator || !cadence) return <React.Fragment key={i} />;
 
                                 return (
-                                    <Card
+                                    <SmallCard
                                         key={i}
-                                        title={`${coordinator.name} ${intToRoman(cadence.number)}`}
-                                        img={UserAvatar}
+                                        title={`${coordinator.name}`}
+                                        subtitle={`Cadence: ${intToRoman(cadence.number)}`}
+                                        svg={<SvgBoardAndCoordinatorsSidebar />}
                                     />
                                 );
                             })}
 
                             {/**/}
                             {committeeToMemberList.map((committeeToMember, i) => {
-                                const cadence = cadenceList.find((cadence) => cadence.id === committeeToMember.cadenceId);
+                                const cadence = cadenceList.find(
+                                    (cadence) => cadence.id === committeeToMember.cadenceId,
+                                );
                                 const committee = committeeList.find(
                                     (committee) => committee.id === committeeToMember.committeeId,
                                 );
@@ -252,10 +270,11 @@ export default function MemberDetailPage() {
                                 if (!committee || !cadence) return <React.Fragment key={i} />;
 
                                 return (
-                                    <Card
+                                    <SmallCard
                                         key={i}
-                                        title={`${committee.name} ${intToRoman(cadence.number)}`}
-                                        img={UserAvatar}
+                                        title={`${committee.name}`}
+                                        subtitle={`Cadence: ${intToRoman(cadence.number)}`}
+                                        svg={<SvgCommitteeSidebar />}
                                     />
                                 );
                             })}
@@ -279,11 +298,11 @@ export default function MemberDetailPage() {
                                 if (!responsible) return <React.Fragment key={i} />;
 
                                 return (
-                                    <Card
+                                    <SmallCard
                                         key={i}
-                                        title={`${event.name} ${responsible.name}`}
-                                        subtitle={`${intToRoman(cadence.number)}`}
-                                        img={UserAvatar}
+                                        title={`${newEvent.name}`}
+                                        subtitle={`Position: ${responsible.name} - ${responsible.role}`}
+                                        svg={<SvgEventSidebar />}
                                     />
                                 );
                             })}
@@ -291,8 +310,6 @@ export default function MemberDetailPage() {
                     </div>
                 )}
             </div>
-
-
         </ScrollY>
     );
 }
