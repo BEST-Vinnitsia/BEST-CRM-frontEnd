@@ -157,7 +157,7 @@ export default function MemberDetailPage() {
                         <div className={style['boxContainer']}>
                             <div className={style['boxContainer__block']}>
                                 <div className={style['boxContainer__block-header']}>
-                                    <Text text={'Contacts'} size={'24'} width={'bold'} color={'gray'} />
+                                    <h3 className={style['boxContainer__block-header-firstTitle']}>Contacts</h3>
                                 </div>
 
                                 <div className={style['boxContainer__block-segment']}>
@@ -183,7 +183,7 @@ export default function MemberDetailPage() {
 
                             <div className={style['boxContainer__block']}>
                                 <div className={style['boxContainer__block-header']}>
-                                    <Text text={'Info'} size={'24'} width={'bold'} color={'gray'} />
+                                    <h3 className={style['boxContainer__block-header-secondTitle']}>Info</h3>
                                 </div>
 
                                 <div className={style['boxContainer__block-segment']}>
@@ -218,6 +218,8 @@ export default function MemberDetailPage() {
                                 </div>
                             </div>
                         </div>
+
+                        <h2 className={style['title']}>Active</h2>
 
                         <CardContainer>
                             {/**/}
