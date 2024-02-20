@@ -2,7 +2,7 @@ export interface ISelectHookProps {
     placeholder: string;
     hookProps: ISelectMainProps;
     data: {
-        id: string;
+        id: number | string;
         name: string;
     }[];
 }

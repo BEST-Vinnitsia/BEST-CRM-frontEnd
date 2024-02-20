@@ -2,6 +2,7 @@
 export { default as Input } from './input/Input';
 export { default as InputPassword } from './input/InputPassword';
 export { default as Select } from './input/Select';
+export { default as SelectSimple } from './input/SelectSimple';
 
 // text
 export { default as Text } from './text/Text';
@@ -15,6 +16,7 @@ export { default as Label } from './labels/Label';
 // card
 export { default as Card } from './card/Card';
 export { default as CardContainer } from './card/CardContainer';
+export { default as SmallCard } from './card/SmallCard';
 
 // containers
 export { default as Menu } from './menu/Menu';

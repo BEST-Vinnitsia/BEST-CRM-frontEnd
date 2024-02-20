@@ -2,9 +2,7 @@
     position: relative;
     display: flex;
     align-items: flex-end;
-    width: 100%;
-    min-width: 240px;
-    max-width: 250px;
+    width: 240px;
     height: 280px;
     background-color: #343434;
     border-radius: 16px;
@@ -49,10 +47,4 @@
             transform: scale(1.1);
         }
     }
-}
-
-.cardContainer {
-    display: grid;
-    gap: 24px;
-    grid-template-columns: repeat(5, 1fr);
 }

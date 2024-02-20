@@ -3,13 +3,21 @@ import style from './select.module.scss';
 import { joinStyle } from '../../utils/';
 import CircleButton from '../button/CircleButton';
 import { SvgArrowBottom, SvgArrowTop } from '../../assets/svg';
-import { ISelectHookProps } from '../../interfaces/components/select';
 import { SelectButton } from '../index';
 import { useOutsideClick } from '../../hooks';
 
-export default function Select({ placeholder, hookProps, data }: ISelectHookProps) {
-    const { value, setValue, error } = hookProps;
+interface IProps {
+    placeholder: string;
+    selected: string;
+    error: boolean;
+    onChange: (data: string) => void;
+    data: { id: number; name: string }[];
+}
+
+export default function SelectSimple({ placeholder, selected, onChange, error, data }: IProps) {
     const ref = useRef(null);
+
+    const [value, setValue] = useState('');
 
     const [focus, setFocus] = useState(false);
     const [visited, setVisited] = useState(false);
@@ -17,9 +25,12 @@ export default function Select({ placeholder, hookProps, data }: ISelectHookProp
     const [selectData, setSelectData] = useState('');
 
     useEffect(() => {
-        setSelectData(value);
+        setSelectData(selected);
+    }, [selected]);
+
+    useEffect(() => {
         setValueSelect();
-    }, [value]);
+    }, [selectData]);
 
     useEffect(() => {
         setFilteredData(data);
@@ -36,29 +47,29 @@ export default function Select({ placeholder, hookProps, data }: ISelectHookProp
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = e.target.value;
-        setSelectData(inputValue);
+        setValue(inputValue);
         const filteredList = data.filter((item) => item.name.toLowerCase().includes(inputValue.toLowerCase()));
         setFilteredData(filteredList);
     };
 
     const handlerSelect = (id: number | string) => {
-        setValue(id.toString());
+        onChange(id.toString());
         const findRes = data.find((item) => item.id === id);
         setSelectData(findRes && findRes.name ? findRes.name : '');
         onBlurHandler();
-        setValueSelect();
+        setValueSelect()
     };
+
+    const setValueSelect = () => {
+        const selectDataId = data.find((item) => item.id.toString() === selected);
+        if (selectDataId && selectDataId.name) setValue(selectDataId.name);
+    }
 
     useOutsideClick({
         elementRef: ref,
         handler: onBlurHandler,
         enable: focus,
     });
-
-    const setValueSelect = () => {
-        const selectDataId = data.find((item) => item.id.toString() === value);
-        if (selectDataId && selectDataId.name) setSelectData(selectDataId.name);
-    };
 
     return (
         <>
@@ -79,7 +90,7 @@ export default function Select({ placeholder, hookProps, data }: ISelectHookProp
                             type="text"
                             onFocus={onFocusHandler}
                             onChange={onChangeHandler}
-                            value={selectData}
+                            value={value}
                             autoComplete="off"
                         />
 

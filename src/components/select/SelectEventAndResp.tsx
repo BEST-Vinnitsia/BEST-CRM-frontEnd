@@ -1,10 +1,11 @@
 import React from 'react';
-import { Button, CircleButton, Text } from '../index';
-import { SvgClose } from '../../assets/svg';
-import { ICadence } from '../../interfaces/cadence';
-import { IEvent } from '../../interfaces/event/event';
-import { INewEvent } from '../../interfaces/event/newEvent';
-import { IResponsible } from '../../interfaces/event/responsible';
+import { CircleButton, SelectSimple, Text } from '../index';
+import { SvgAdd, SvgTrash } from '../../assets/svg';
+import { ICadenceGetListRes } from '../../interfaces/cadence/cadenceRes';
+import { IEventGetListRes } from '../../interfaces/event/eventRes';
+import { INewEventGetListRes } from '../../interfaces/event/newEventRes';
+import { IResponsibleGetListRes } from '../../interfaces/event/responsibleRes';
+import style from './select.module.scss';
 
 interface ISelectEvent {
     id: number;
@@ -15,10 +16,10 @@ interface ISelectEvent {
 
 interface IProps {
     title: string;
-    cadenceList: ICadence[];
-    eventList: IEvent[];
-    newEventList: INewEvent[];
-    respList: IResponsible[];
+    cadenceList: ICadenceGetListRes[];
+    eventList: IEventGetListRes[];
+    newEventList: INewEventGetListRes[];
+    respList: IResponsibleGetListRes[];
     selectArray: ISelectEvent[];
     setSelectArray: (data: ISelectEvent[]) => void;
 }
@@ -47,11 +48,12 @@ function SelectEventAndResp({
             selectArray.map((item) => {
                 if (id === item.id) {
                     if (inputName === 'newEvent') {
-                        const findEventId = newEventList.find((NEItem) => NEItem.id === select);
+                        const findEventId = newEventList.find((NEItem) => NEItem.id.toString() === select);
+
                         if (!findEventId) return item;
                         return {
                             id: item.id,
-                            eventId: findEventId.eventId,
+                            eventId: findEventId.eventId.toString(),
                             newEventId: select,
                             responsibleId: '',
                         };
@@ -69,54 +71,64 @@ function SelectEventAndResp({
         );
     };
 
-    const getValue = (id: number, inputName: 'newEvent' | 'resp'): string | undefined => {
-        if (inputName === 'newEvent') return selectArray.find((item) => item.id === id)?.newEventId;
-        if (inputName === 'resp') return selectArray.find((item) => item.id === id)?.responsibleId;
-        return undefined;
+    const getValue = (id: number, inputName: 'newEvent' | 'resp'): string => {
+        if (inputName === 'newEvent') {
+            const newEventData = selectArray.find((item) => item.id === id)?.newEventId;
+            if (newEventData) return newEventData;
+        }
+
+        if (inputName === 'resp') {
+            const respData = selectArray.find((item) => item.id === id)?.responsibleId;
+            if (respData) return respData;
+        }
+
+        return '';
+    };
+
+    const dataNewEvent = () => {
+        const array = [];
+        for (const newEventListKey of newEventList) {
+            // const event = eventList.find((ev) => ev.id === newEventListKey.eventId);
+            // const cadence = cadenceList.find((c) => c.id === newEventListKey.cadenceId);
+            // if (!event || !cadence) continue;
+
+            array.push({
+                id: newEventListKey.id,
+                name: newEventListKey.name,
+            });
+        }
+
+        return array;
     };
 
     return (
-        <div>
-            <Text text={title} type={'h4'} color={'gray'} />
-            <CircleButton svg={<SvgClose />} onClick={addSelect} />
+        <div className={style['sidebarArray']}>
+            <div className={style['sidebarArray__title']}>
+                <Text text={title} size={'20'} color={'gray'} />
+                <CircleButton svg={<SvgAdd />} onClick={addSelect} size={'large'} color="white" />
+            </div>
 
             {selectArray.map((item) => (
-                <div key={item.id} className="mb-5">
-                    <select
-                        className="text-black w-80"
-                        onChange={(e) => onChange(item.id, e.target.value, 'newEvent')}
-                        value={getValue(item.id, 'newEvent')}
-                    >
-                        <option value="">---- Event ---</option>
-                        {newEventList.map((newEventItem) => {
-                            const event = eventList.find((ev) => ev.id === newEventItem.eventId);
-                            const cadence = cadenceList.find((c) => c.id === newEventItem.cadenceId);
-                            if (!event || !cadence) return <></>;
+                <div key={item.id} className={style['sidebarArray__selectContainer']}>
+                    <SelectSimple
+                        placeholder="Event in cadence"
+                        data={dataNewEvent()}
+                        selected={getValue(item.id, 'newEvent')}
+                        onChange={(e) => onChange(item.id, e, 'newEvent')}
+                        error={false}
+                    />
 
-                            return (
-                                <option key={newEventItem.id} value={newEventItem.id}>
-                                    {`${event.name}'${cadence.number}`}
-                                </option>
-                            );
-                        })}
-                    </select>
+                    <SelectSimple
+                        placeholder="Resp & WG"
+                        data={respList
+                            .filter((respItem) => item.eventId.toString() === respItem.eventId.toString())
+                            .map((respItem) => ({ id: respItem.id, name: `${respItem.name}: ${respItem.role}` }))}
+                        selected={getValue(item.id, 'resp')}
+                        onChange={(e) => onChange(item.id, e, 'resp')}
+                        error={false}
+                    />
 
-                    <select
-                        className="text-black w-80"
-                        onChange={(e) => onChange(item.id, e.target.value, 'resp')}
-                        value={getValue(item.id, 'resp')}
-                    >
-                        <option value="">---- Resp & WG ---</option>
-                        {respList
-                            .filter((respItem) => item.eventId === respItem.eventId)
-                            .map((respItem) => (
-                                <option key={respItem.id} value={respItem.id}>
-                                    {`${respItem.name}: ${respItem.role}`}
-                                </option>
-                            ))}
-                    </select>
-
-                    <Button title={'Delete'} onClick={() => deleteSelect(item.id)} />
+                    <CircleButton svg={<SvgTrash />} onClick={() => deleteSelect(item.id)} />
                 </div>
             ))}
         </div>

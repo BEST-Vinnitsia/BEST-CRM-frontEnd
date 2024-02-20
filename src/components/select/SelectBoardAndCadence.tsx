@@ -1,9 +1,10 @@
 import React from 'react';
-import { Button, CircleButton, Text } from '../index';
-import { SvgClose } from '../../assets/svg';
+import style from './select.module.scss';
+import { CircleButton, SelectSimple, Text } from '../index';
+import { SvgAdd, SvgTrash } from '../../assets/svg';
 import { intToRoman } from '../../utils';
-import { ICadence } from '../../interfaces/cadence';
-import { IBoard } from '../../interfaces/board/board';
+import { IBoardGetListRes } from '../../interfaces/board/boardRes';
+import { ICadenceGetListRes } from '../../interfaces/cadence/cadenceRes';
 
 interface ISelectBoard {
     id: number;
@@ -13,8 +14,8 @@ interface ISelectBoard {
 
 interface IProps {
     title: string;
-    cadenceList: ICadence[];
-    boardList: IBoard[];
+    cadenceList: ICadenceGetListRes[];
+    boardList: IBoardGetListRes[];
     selectArray: ISelectBoard[];
     setSelectArray: (data: ISelectBoard[]) => void;
 }
@@ -42,46 +43,46 @@ function SelectBoardAndCadence({ title, cadenceList, boardList, selectArray, set
         );
     };
 
-    const getValue = (id: number, inputName: 'board' | 'cadence'): string | undefined => {
-        if (inputName === 'board') return selectArray.find((item) => item.id === id)?.boardId;
-        if (inputName === 'cadence') return selectArray.find((item) => item.id === id)?.cadenceId;
-        return undefined;
-    };
+    const getValue = (id: number, inputName: 'board' | 'cadence'): string => {
+        if (inputName === 'board') {
+            const boardData = selectArray.find((item) => item.id === id)?.boardId;
+            if (boardData) return boardData;
+        }
 
+        if (inputName === 'cadence') {
+            const cadenceData = selectArray.find((item) => item.id === id)?.cadenceId;
+            if (cadenceData) return cadenceData;
+        }
+
+        return '';
+    };
+    
     return (
-        <div>
-            <Text text={title} type={'h4'} color={'gray'} />
-            <CircleButton svg={<SvgClose />} onClick={addSelect} />
+        <div className={style['sidebarArray']}>
+            <div className={style['sidebarArray__title']}>
+                <Text text={title} size={'20'} color={'gray'} />
+                <CircleButton svg={<SvgAdd />} onClick={addSelect} size={'large'} color="white" />
+            </div>
 
             {selectArray.map((item) => (
-                <div key={item.id} className="mb-5">
-                    <select
-                        className="text-black w-80"
-                        onChange={(e) => onChange(item.id, e.target.value, 'cadence')}
-                        value={getValue(item.id, 'cadence')}
-                    >
-                        <option value="">---- Cadence ---</option>
-                        {cadenceList.map((item) => (
-                            <option key={item.id} value={item.id}>
-                                {`Cadence: ${intToRoman(item.number)}`}
-                            </option>
-                        ))}
-                    </select>
+                <div key={item.id} className={style['sidebarArray__selectContainer']}>
+                    <SelectSimple
+                        placeholder="Cadence"
+                        data={cadenceList.map((item) => ({ id: item.id, name: `Cadence: ${intToRoman(item.number)}` }))}
+                        selected={getValue(item.id, 'cadence')}
+                        onChange={(e) => onChange(item.id, e, 'cadence')}
+                        error={false}
+                    />
 
-                    <select
-                        className="text-black w-80"
-                        onChange={(e) => onChange(item.id, e.target.value, 'board')}
-                        value={getValue(item.id, 'board')}
-                    >
-                        <option value="">---- Board ---</option>
-                        {boardList.map((item) => (
-                            <option key={item.id} value={item.id}>
-                                {item.name}
-                            </option>
-                        ))}
-                    </select>
+                    <SelectSimple
+                        placeholder="Board"
+                        data={boardList.map((item) => ({ id: item.id, name: item.name }))}
+                        selected={getValue(item.id, 'board')}
+                        onChange={(e) => onChange(item.id, e, 'board')}
+                        error={false}
+                    />
 
-                    <Button title={'Delete'} onClick={() => deleteSelect(item.id)} />
+                    <CircleButton svg={<SvgTrash />} onClick={() => deleteSelect(item.id)} />
                 </div>
             ))}
         </div>

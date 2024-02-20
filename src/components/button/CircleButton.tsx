@@ -7,16 +7,19 @@ interface IProps {
     onClick?: () => void;
     elementRef?: React.LegacyRef<HTMLButtonElement>;
     size?: 'small' | 'medium' | 'large';
+    color?: string;
 }
 
-export default function CircleButton({ svg, elementRef, onClick, size = 'medium' }: IProps) {
+export default function CircleButton({ svg, elementRef, onClick, size = 'medium', color }: IProps) {
     return (
         <button
             ref={elementRef}
             className={joinStyle(style['circleButton'], style[`circleButton--${size}`])}
             onClick={onClick}
         >
-            <span className={style['circleButton__svg']}>{svg}</span>
+            <span className={style['circleButton__svg']} style={{ color }}>
+                {svg}
+            </span>
         </button>
     );
 }
