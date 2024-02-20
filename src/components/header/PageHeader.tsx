@@ -1,6 +1,5 @@
 import React from 'react';
 import style from './pageHeader.module.scss';
-import { Text } from '../index';
 
 interface IProps {
     title: string;
@@ -16,8 +15,8 @@ export default function PageHeader({ title, subtitle, img }: IProps) {
             </div>
 
             <div className={style['pageHeader__text']}>
-                <Text text={title} size={'24'} width={'bold'} />
-                <Text text={subtitle} color={'gray'} />
+                <h1 className={style['pageHeader__text-title']}>{title}</h1>
+                <h2 className={style['pageHeader__text-subtitle']}>{subtitle}</h2>
             </div>
         </div>
     );

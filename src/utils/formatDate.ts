@@ -8,5 +8,5 @@ export const formatDate = (date: Date) => {
   const minutes = String(data.getMinutes()).padStart(2, '0');
   const seconds = String(data.getSeconds()).padStart(2, '0');
 
-  return `${day}.${month}.${year}`;
+  return `${day} / ${month} / ${year}`;
 };

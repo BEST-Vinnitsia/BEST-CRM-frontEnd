@@ -423,9 +423,7 @@ export default function MemberEditPage() {
 
                 console.log(committeeAddReqData);
 
-                const boardAddRes = Promise.all(
-                    boardAddReqData.map(async (item) => boardToMemberService.create(item)),
-                );
+                const boardAddRes = Promise.all(boardAddReqData.map(async (item) => boardToMemberService.create(item)));
                 const committeeAddRes = Promise.all(
                     committeeAddReqData.map(async (item) => committeeToMemberService.create(item)),
                 );
@@ -475,10 +473,14 @@ export default function MemberEditPage() {
                 <div className="p-4">
                     <BreadcrumbsContainer
                         path={id ? pathMapEdit : pathMapCreate}
-                        buttons={[
-                            { title: 'Details', path: `${PATH_MEMBER.DETAILS}/${id}` },
-                            { title: 'List', path: PATH_MEMBER.LIST },
-                        ]}
+                        buttons={
+                            id
+                                ? [
+                                      { title: 'Details', path: `${PATH_MEMBER.DETAILS}/${id}` },
+                                      { title: 'List', path: PATH_MEMBER.LIST },
+                                  ]
+                                : [{ title: 'List', path: PATH_MEMBER.LIST }]
+                        }
                     />
 
                     <div className={style['boxContainer']}>
