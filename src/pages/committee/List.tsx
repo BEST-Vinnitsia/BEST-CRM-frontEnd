@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { BreadcrumbsContainer, Button, Text } from '../../components';
+import { BreadcrumbsContainer, CardContainer, ScrollY, SmallCard, TitleContainer } from '../../components';
 import { PATH_COMMITTEE } from '../../routes/paths';
 import { utilsActions } from '../../redux/actions/utilsActions';
 import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
 import { committeeService } from '../../services';
-import { ICommittee } from '../../interfaces/committee/committee';
+import { ICommitteeGetListRes } from '../../interfaces/committee/committeeRes';
+import Title from '../../components/title/Title';
+import { SvgCommitteeSidebar } from '../../assets/svg';
+// import { ICommittee } from '../../interfaces/committee/committee';
 
 const pathMap = [
     { url: PATH_COMMITTEE.ROOT, title: pageNames.pages.committee },
@@ -15,7 +18,7 @@ const pathMap = [
 export default function CommitteeListPage() {
     const navigate = useNavigate();
 
-    const [committeeList, setCommitteeList] = useState<ICommittee[]>([]);
+    const [committeeList, setCommitteeList] = useState<ICommitteeGetListRes[]>([]);
 
     useEffect(() => {
         getInfo();
@@ -23,45 +26,42 @@ export default function CommitteeListPage() {
 
     const getInfo = async () => {
         try {
-            const committeeListPromise = committeeService.getList();
-
             utilsActions.loading(true);
-            const [committeeRes] = await Promise.all([committeeListPromise]);
-            utilsActions.loading(false);
 
+            const [committeeRes] = await Promise.all([committeeService.getList()]);
             setCommitteeList(committeeRes);
         } catch (err) {
-            utilsActions.loading(false);
             utilsActions.addMessage({
                 status: 'error',
                 message: 'Error loading data',
             });
+        } finally {
+            utilsActions.loading(false);
         }
     };
 
-    const redirectToDetails = (id: string) => {
-        navigate(`${PATH_COMMITTEE.DETAILS}/${id}`);
-    };
-
     return (
-        <>
+        <ScrollY>
             <div className="p-4">
-                <BreadcrumbsContainer path={pathMap}>
-                    <div className="flex">
-                        <Button onClick={() => navigate(PATH_COMMITTEE.CREATE)} title="Create" />
-                    </div>
-                </BreadcrumbsContainer>
+                <BreadcrumbsContainer path={pathMap} buttons={[{ title: 'Create', path: PATH_COMMITTEE.CREATE }]} />
 
-                <div className="mb-5">
-                    <Text text={'Committee'} color={'gray'} />
+                <TitleContainer position={'center'}>
+                    <Title title={'Committees'} color={'whiteGray'} size={'32'} />
+                </TitleContainer>
 
+                <CardContainer>
                     {committeeList.map((item) => (
-                        <div key={item.id} onClick={() => redirectToDetails(item.id)}>
-                            <Text text={item.name} />
-                        </div>
+                        <SmallCard
+                            key={item.id}
+                            title={item.name}
+                            // subtitle={item.isActive ? 'Active' : 'Disable'}
+                            subtitle={item.fullName}
+                            onClick={() => navigate(`${PATH_COMMITTEE.DETAILS}/${item.id}`)}
+                            svg={<SvgCommitteeSidebar />}
+                        />
                     ))}
-                </div>
+                </CardContainer>
             </div>
-        </>
+        </ScrollY>
     );
 }

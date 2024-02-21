@@ -219,7 +219,7 @@ export default function MemberDetailPage() {
                             </div>
                         </div>
 
-                        <h2 className={style['title']}>Active</h2>
+                        <h2 className={style['title']}>Active in BEST</h2>
 
                         <CardContainer>
                             {/**/}

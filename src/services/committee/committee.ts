@@ -59,10 +59,10 @@ class CommitteeService {
     };
 
     /* --------- DELETE ---------- */
-    delete = (data: ICommitteeDeleteReq) => {
+    delete = ({ id }: ICommitteeDeleteReq) => {
         return new Promise<ICommitteeDeleteRes>((resolve, reject) => {
             axios
-                .delete(`${API}/${this.root}`, { data })
+                .delete(`${API}/${this.root}`, { params: { id } })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });
