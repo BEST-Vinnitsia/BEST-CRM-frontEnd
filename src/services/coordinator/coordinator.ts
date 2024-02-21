@@ -58,10 +58,10 @@ class CoordinatorService {
     };
 
     /* --------- DELETE ---------- */
-    delete = (data: ICoordinatorDeleteReq) => {
+    delete = ({ id }: ICoordinatorDeleteReq) => {
         return new Promise<ICoordinatorDeleteRes>((resolve, reject) => {
             axios
-                .delete(`${API}/${this.root}`, { data })
+                .delete(`${API}/${this.root}`, { params: { id } })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });

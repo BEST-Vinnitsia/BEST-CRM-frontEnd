@@ -1,0 +1,21 @@
+.titleContainer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+//
+// POSITION
+//
+
+.titleContainer--position-center {
+    align-items: center;
+}
+
+.titleContainer--position-start {
+    align-items: flex-start;
+}
+
+.titleContainer--position-end {
+    align-items: flex-end;
+}

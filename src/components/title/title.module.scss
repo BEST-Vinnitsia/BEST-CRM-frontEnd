@@ -1,0 +1,72 @@
+.title {
+    display: inline-block;
+    font-family: 'SF-Pro';
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    background-clip: text;
+}
+
+//
+// COLOR
+//
+
+.title--color-white {
+    background: #fff;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.title--color-whiteGray {
+    background: linear-gradient(90deg, #fff 0%, #9292a9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.title--color-green {
+    background: linear-gradient(90deg, #c3ff93 0%, #8fff35 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.title--color-blue {
+    background: linear-gradient(90deg, #91c4ff 0.27%, #2d86ed 100.27%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+//
+// SIZE
+//
+
+.title--size-14 {
+    font-size: 14px;
+}
+
+.title--size-16 {
+    font-size: 16px;
+}
+
+.title--size-18 {
+    font-size: 18px;
+}
+
+.title--size-20 {
+    font-size: 20px;
+}
+
+.title--size-24 {
+    font-size: 24px;
+}
+
+.title--size-32 {
+    font-size: 32px;
+}
+
+.title--size-40 {
+    font-size: 40px;
+}
+
+.title--size-48 {
+    font-size: 48px;
+}

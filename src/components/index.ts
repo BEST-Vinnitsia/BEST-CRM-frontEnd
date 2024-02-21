@@ -6,6 +6,8 @@ export { default as SelectSimple } from './input/SelectSimple';
 
 // text
 export { default as Text } from './text/Text';
+export { default as Title } from './title/Title';
+export { default as TitleContainer } from './title/TitleContainer';
 
 // line
 export { default as Line } from './line/Line';

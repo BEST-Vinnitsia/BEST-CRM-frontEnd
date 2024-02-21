@@ -1,14 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { BreadcrumbsContainer, Button, ScrollY, Text } from '../../components';
+import {
+    BreadcrumbsContainer,
+    Card,
+    CardContainer,
+    PageHeader,
+    ScrollY,
+    Title,
+    TitleContainer,
+} from '../../components';
 import { PATH_BaC } from '../../routes/paths';
 import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
 import { Navigate, useParams } from 'react-router-dom';
-import { boardService, coordinatorService } from '../../services';
 import { utilsActions } from '../../redux/actions/utilsActions';
-import { IBoardAllInfo } from '../../interfaces/board/boardAllInfo';
-import { ICoordinatorAllInfo } from '../../interfaces/coordinator/coordinatorAllInfo';
-import { formatDate, intToRoman } from '../../utils';
+import {
+    boardService,
+    boardToMemberService,
+    cadenceService,
+    coordinatorService,
+    coordinatorToMemberService,
+    memberService,
+} from '../../services';
+import { IBoardGetByIdRes } from '../../interfaces/board/boardRes';
+import { ICoordinatorGetByIdRes } from '../../interfaces/coordinator/coordinatorRes';
+import { ImgCrmHome, UserAvatar } from '../../assets/img';
+import { IBoardToMemberGetByBoardIdRes } from '../../interfaces/board/boardToMemberRes';
+import { ICadenceGetListRes } from '../../interfaces/cadence/cadenceRes';
+import { intToRoman } from '../../utils';
+import { IMemberGetListRes } from '../../interfaces/member/memberRes';
+import { ICoordinatorToMemberGetByCoordinatorIdRes } from '../../interfaces/coordinator/coordinatorToMemberRes';
+// import { IBoardAllInfo } from '../../interfaces/board/boardAllInfo';
+// import { ICoordinatorAllInfo } from '../../interfaces/coordinator/coordinatorAllInfo';
 
 const pathMap = [
     { url: PATH_BaC.ROOT, title: pageNames.pages.BaC },
@@ -19,7 +41,14 @@ export default function BoardAndCoordinatorsDetailPage() {
     const navigate = useNavigate();
     const { id, who } = useParams();
 
-    const [BaC, setBaC] = useState<IBoardAllInfo | ICoordinatorAllInfo | null>(null);
+    const [boardInfo, setBoardInfo] = useState<IBoardGetByIdRes | null>(null);
+    const [boardToMemberList, setBoardToMemberList] = useState<IBoardToMemberGetByBoardIdRes[]>([]);
+    const [coordinatorInfo, setCoordinatorInfo] = useState<ICoordinatorGetByIdRes | null>(null);
+    const [coordinatorToMemberList, setCoordinatorToMemberList] = useState<ICoordinatorToMemberGetByCoordinatorIdRes[]>(
+        [],
+    );
+    const [cadenceList, setCadenceList] = useState<ICadenceGetListRes[]>([]);
+    const [memberList, setMemberList] = useState<IMemberGetListRes[]>([]);
 
     useEffect(() => {
         getData();
@@ -30,13 +59,30 @@ export default function BoardAndCoordinatorsDetailPage() {
 
         try {
             utilsActions.loading(true);
-
             if (who === 'board') {
-                const res = await boardService.getByIdAllInfo({ id });
-                setBaC(res);
+                const [boardRes, boardToMemberRes, cadenceRes, memberRes] = await Promise.all([
+                    await boardService.getById({ id }),
+                    await boardToMemberService.getByBoardId({ boardId: id }),
+                    await cadenceService.getList(),
+                    await memberService.getList(),
+                ]);
+
+                setBoardInfo(boardRes);
+                setBoardToMemberList(boardToMemberRes);
+                setCadenceList(cadenceRes);
+                setMemberList(memberRes);
             } else if (who === 'coordinator') {
-                const res = await coordinatorService.getByIdAllInfo({ id });
-                setBaC(res);
+                const [coordinatorRes, coordinatorToMemberRes, cadenceRes, memberRes] = await Promise.all([
+                    await coordinatorService.getById({ id }),
+                    await coordinatorToMemberService.getByCoordinatorId({ coordinatorId: id }),
+                    await cadenceService.getList(),
+                    await memberService.getList(),
+                ]);
+
+                setCoordinatorInfo(coordinatorRes);
+                setCoordinatorToMemberList(coordinatorToMemberRes);
+                setCadenceList(cadenceRes);
+                setMemberList(memberRes);
             }
         } catch (err) {
             utilsActions.addMessage({
@@ -48,39 +94,16 @@ export default function BoardAndCoordinatorsDetailPage() {
         }
     };
 
-    const deletePosition = async () => {
-        if (!id || !who) return;
+    const getCadence = (cadenceId: number) => {
+        const cadence = cadenceList.find((item) => item.id === cadenceId);
+        if (!cadence) return 0;
+        return cadence.number;
+    };
 
-        try {
-            utilsActions.loading(true);
-
-            if (who === 'board') {
-                await boardService.deleteMany({ boardsId: [id] });
-
-                navigate(PATH_BaC.LIST);
-
-                utilsActions.addMessage({
-                    status: 'success',
-                    message: 'Board is deleted',
-                });
-            } else if (who === 'coordinator') {
-                await coordinatorService.deleteMany({ coordinatorsId: [id] });
-
-                navigate(PATH_BaC.LIST);
-
-                utilsActions.addMessage({
-                    status: 'success',
-                    message: 'Coordinator is deleted',
-                });
-            }
-        } catch (err) {
-            utilsActions.addMessage({
-                status: 'error',
-                message: 'Error delete position',
-            });
-        } finally {
-            utilsActions.loading(false);
-        }
+    const getMemberName = (memberId: number) => {
+        const member = memberList.find((item) => item.id === memberId);
+        if (!member) return '';
+        return `${member.name} ${member.surname}`;
     };
 
     if (!id || !who) <Navigate to={PATH_BaC.LIST} />;
@@ -89,55 +112,75 @@ export default function BoardAndCoordinatorsDetailPage() {
         <>
             <ScrollY>
                 <div className="p-4">
-                    <BreadcrumbsContainer path={pathMap}>
-                        <div className="flex">
-                            <Button onClick={deletePosition} title="delete" />
-                            <Button onClick={() => navigate(`${PATH_BaC.EDIT}/${who}/${id}`)} title="Edit" />
-                            <Button onClick={() => navigate(PATH_BaC.LIST)} title="List" />
-                        </div>
-                    </BreadcrumbsContainer>
+                    <BreadcrumbsContainer
+                        path={pathMap}
+                        buttons={[
+                            { title: 'Edit', path: `${PATH_BaC.EDIT}/${who}/${id}` },
+                            { title: 'List', path: PATH_BaC.LIST },
+                        ]}
+                    />
 
-                    <div>
-                        {BaC && (
-                            <div>
-                                <span className={'block'}>{BaC.name}</span>
-                                <span className={'block'}>{`Is active: ${BaC.isActive}`}</span>
-                                {'boardToMember' in BaC &&
-                                    BaC.boardToMember.map((item) => (
-                                        <div>
-                                            <hr />
-                                            <span
-                                                className={'block'}
-                                            >{`${item.member.name} ${item.member.surname}`}</span>
-                                            <span className={'block'}>{`Excluded: ${item.excluded}`}</span>
-                                            <span className={'block'}>
-                                                {item.excludedDate
-                                                    ? `Excluded date: ${formatDate(new Date(item.excludedDate))}`
-                                                    : ''}
-                                            </span>
-                                            <Text text={`Cadence: ${intToRoman(item.cadence.number)}`} />
-                                        </div>
-                                    ))}
+                    {boardInfo && (
+                        <>
+                            <PageHeader
+                                title={`${boardInfo.name}`}
+                                subtitle={`${boardInfo.fullName} / ${boardInfo.isActive ? 'Active' : 'Disable'}`}
+                                img={UserAvatar}
+                            />
 
-                                {'coordinatorToMember' in BaC &&
-                                    BaC.coordinatorToMember.map((item) => (
-                                        <div>
-                                            <hr />
-                                            <span
-                                                className={'block'}
-                                            >{`${item.member.name} ${item.member.surname}`}</span>
-                                            <span className={'block'}>{`Excluded: ${item.excluded}`}</span>
-                                            <span className={'block'}>
-                                                {item.excludedDate
-                                                    ? `Excluded date: ${formatDate(new Date(item.excludedDate))}`
-                                                    : ''}
-                                            </span>
-                                            <Text text={`Cadence: ${intToRoman(item.cadence.number)}`} />
-                                        </div>
-                                    ))}
-                            </div>
-                        )}
-                    </div>
+                            <TitleContainer position={'center'}>
+                                <Title title={'History'} color={'whiteGray'} size={'40'} />
+                            </TitleContainer>
+
+                            {boardToMemberList.length > 0 && (
+                                <>
+                                    <CardContainer>
+                                        {boardToMemberList.map((item) => (
+                                            <Card
+                                                key={item.id}
+                                                title={getMemberName(item.memberId)}
+                                                subtitle={`Cadence ${intToRoman(getCadence(item.cadenceId))}`}
+                                                img={ImgCrmHome}
+                                            />
+                                        ))}
+                                    </CardContainer>
+                                </>
+                            )}
+                        </>
+                    )}
+
+                    {/*    */}
+                    {/*    */}
+                    {/*    */}
+
+                    {coordinatorInfo && (
+                        <>
+                            <PageHeader
+                                title={`${coordinatorInfo.name}`}
+                                subtitle={`${coordinatorInfo.fullName} / ${coordinatorInfo.isActive ? 'Active' : 'Disable'}`}
+                                img={UserAvatar}
+                            />
+
+                            <TitleContainer position={'center'}>
+                                <Title title={'History'} color={'whiteGray'} size={'40'} />
+                            </TitleContainer>
+
+                            {coordinatorToMemberList.length > 0 && (
+                                <>
+                                    <CardContainer>
+                                        {coordinatorToMemberList.map((item) => (
+                                            <Card
+                                                key={item.id}
+                                                title={getMemberName(item.memberId)}
+                                                subtitle={`Cadence ${intToRoman(getCadence(item.cadenceId))}`}
+                                                img={ImgCrmHome}
+                                            />
+                                        ))}
+                                    </CardContainer>
+                                </>
+                            )}
+                        </>
+                    )}
                 </div>
             </ScrollY>
         </>

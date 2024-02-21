@@ -52,3 +52,12 @@
         }
     }
 }
+
+.smallCard--click {
+    transition: border 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    cursor: pointer;
+
+    &:hover {
+        border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+}

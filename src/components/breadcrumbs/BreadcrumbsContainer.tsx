@@ -7,6 +7,7 @@ import { Button } from '../index';
 interface IProps {
     path: IPath[];
     buttons?: { path: string; title: string }[] | [];
+    children?: React.ReactNode;
 }
 
 interface IPath {
@@ -14,7 +15,7 @@ interface IPath {
     title: string;
 }
 
-export default function BreadcrumbsContainer({ buttons, path }: IProps) {
+export default function BreadcrumbsContainer({ buttons, path, children }: IProps) {
     const navigate = useNavigate();
 
     return (
@@ -40,6 +41,7 @@ export default function BreadcrumbsContainer({ buttons, path }: IProps) {
             </nav>
 
             <div className={style['breadcrumbs__buttons']}>
+                {children}
                 {buttons &&
                     buttons.map((item, i) => <Button key={i} onClick={() => navigate(item.path)} title={item.title} />)}
             </div>

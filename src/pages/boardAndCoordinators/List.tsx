@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { PATH_BaC } from '../../routes/paths';
-import { BreadcrumbsContainer, Button, ScrollY, Text } from '../../components';
+import { BreadcrumbsContainer, CardContainer, ScrollY, SmallCard, TitleContainer } from '../../components';
 import { useNavigate } from 'react-router-dom';
 import { pageNames } from '../../constants';
-import { ICoordinator } from '../../interfaces/coordinator/coordinator';
+// import { ICoordinator } from '../../interfaces/coordinator/coordinator';
 import { boardService, coordinatorService } from '../../services';
 import { utilsActions } from '../../redux/actions/utilsActions';
-import { IBoard } from '../../interfaces/board/board';
+import { IBoardGetListRes } from '../../interfaces/board/boardRes';
+import Title from '../../components/title/Title';
+import { ICoordinatorGetListRes } from '../../interfaces/coordinator/coordinatorRes';
+import { SvgBoardAndCoordinatorsSidebar } from '../../assets/svg';
 
 const pathMap = [
     { url: PATH_BaC.ROOT, title: pageNames.pages.BaC },
@@ -16,8 +19,8 @@ const pathMap = [
 export default function BoardAndCoordinatorsListPage() {
     const navigate = useNavigate();
 
-    const [coordinatorList, setCoordinatorList] = useState<ICoordinator[]>([]);
-    const [boardList, setBoardList] = useState<IBoard[]>([]);
+    const [boardList, setBoardList] = useState<IBoardGetListRes[]>([]);
+    const [coordinatorList, setCoordinatorList] = useState<ICoordinatorGetListRes[]>([]);
 
     useEffect(() => {
         getInfo();
@@ -25,56 +28,71 @@ export default function BoardAndCoordinatorsListPage() {
 
     const getInfo = async () => {
         try {
+            utilsActions.loading(true);
+
             const boardListPromise = boardService.getList();
             const coordinatorListPromise = coordinatorService.getList();
 
-            utilsActions.loading(true);
             const [boardRes, coordinatorRes] = await Promise.all([boardListPromise, coordinatorListPromise]);
-            utilsActions.loading(false);
 
             setBoardList(boardRes);
             setCoordinatorList(coordinatorRes);
         } catch (err) {
-            utilsActions.loading(false);
             utilsActions.addMessage({
                 status: 'error',
                 message: 'Error loading data',
             });
+        } finally {
+            utilsActions.loading(false);
         }
     };
 
-    const toDetails = (id: string, who: 'board' | 'coordinator') => {
+    const toDetails = (id: number, who: 'board' | 'coordinator') => {
         navigate(`${PATH_BaC.DETAILS}/${who}/${id}`);
     };
 
     return (
         <ScrollY>
             <div className="p-4">
-                <BreadcrumbsContainer path={pathMap}>
-                    <div className="flex">
-                        <Button onClick={() => navigate(PATH_BaC.CREATE)} title="Create" />
-                    </div>
-                </BreadcrumbsContainer>
+                <BreadcrumbsContainer path={pathMap} buttons={[{ title: 'Create', path: PATH_BaC.CREATE }]} />
 
-                <div className="mb-5">
-                    <Text text={'Board'} color={'gray'} />
+                <TitleContainer position={'center'}>
+                    <Title title={'Board'} color={'whiteGray'} size={'32'} />
+                </TitleContainer>
 
+                <CardContainer>
                     {boardList.map((item) => (
-                        <div key={item.id} onClick={() => toDetails(item.id, 'board')}>
-                            <Text text={item.name} />
-                        </div>
+                        <SmallCard
+                            key={item.id}
+                            title={item.name}
+                            // subtitle={item.isActive ? 'Active' : 'Disable'}
+                            subtitle={item.fullName}
+                            onClick={() => toDetails(item.id, 'board')}
+                            svg={<SvgBoardAndCoordinatorsSidebar />}
+                        />
                     ))}
-                </div>
+                </CardContainer>
 
-                <div>
-                    <Text text={'Coordinators'} color={'gray'} />
+                {/*  */}
 
+                <div className={'h-8'} />
+
+                <TitleContainer position={'center'}>
+                    <Title title={'Coordinators'} color={'whiteGray'} size={'32'} />
+                </TitleContainer>
+
+                <CardContainer>
                     {coordinatorList.map((item) => (
-                        <div key={item.id} onClick={() => toDetails(item.id, 'coordinator')}>
-                            <Text text={item.name} />
-                        </div>
+                        <SmallCard
+                            key={item.id}
+                            title={item.name}
+                            // subtitle={item.isActive ? 'Active' : 'Disable'}
+                            subtitle={item.fullName}
+                            onClick={() => toDetails(item.id, 'coordinator')}
+                            svg={<SvgBoardAndCoordinatorsSidebar />}
+                        />
                     ))}
-                </div>
+                </CardContainer>
             </div>
         </ScrollY>
     );
