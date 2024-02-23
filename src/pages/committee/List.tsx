@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
-import { BreadcrumbsContainer, Button, Popup, ScrollY, Text } from '../../components';
+import React, { useEffect, useState } from 'react';
+import { BreadcrumbsContainer, CardContainer, ScrollY, SmallCard, TitleContainer } from '../../components';
 import { PATH_COMMITTEE } from '../../routes/paths';
 import { utilsActions } from '../../redux/actions/utilsActions';
 import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
+import { committeeService } from '../../services';
+import { ICommitteeGetListRes } from '../../interfaces/committee/committeeRes';
+import Title from '../../components/title/Title';
+import { SvgCommitteeSidebar } from '../../assets/svg';
+// import { ICommittee } from '../../interfaces/committee/committee';
 
 const pathMap = [
     { url: PATH_COMMITTEE.ROOT, title: pageNames.pages.committee },
@@ -13,68 +18,50 @@ const pathMap = [
 export default function CommitteeListPage() {
     const navigate = useNavigate();
 
-    const [count, setCount] = useState(1);
-    const [openPopup, setOpenPopup] = useState(false);
+    const [committeeList, setCommitteeList] = useState<ICommitteeGetListRes[]>([]);
 
-    const test = () => {
-        utilsActions.addMessage({
-            status: count % 2 === 0 ? 'error' : 'success',
-            message: `${count}`,
-        });
-        // utilsActions.addMessage({ status: 'info', message: `${2}` });
-        // utilsActions.addMessage({ status: 'success', message: `${3}` });
-        // utilsActions.addMessage({ status: 'warn', message: `${4}` });
+    useEffect(() => {
+        getInfo();
+    }, []);
 
-        setCount((prev) => prev + 1);
+    const getInfo = async () => {
+        try {
+            utilsActions.loading(true);
+
+            const [committeeRes] = await Promise.all([committeeService.getList()]);
+            setCommitteeList(committeeRes);
+        } catch (err) {
+            utilsActions.addMessage({
+                status: 'error',
+                message: 'Error loading data',
+            });
+        } finally {
+            utilsActions.loading(false);
+        }
     };
 
     return (
-        <>
+        <ScrollY>
             <div className="p-4">
-                <BreadcrumbsContainer path={pathMap}>
-                    <div className="flex">
-                        <Button onClick={() => navigate(`${PATH_COMMITTEE.EDIT}/id`)} title="Edit" />
-                        <Button onClick={() => navigate(PATH_COMMITTEE.CREATE)} title="Create" />
-                        <Button onClick={() => navigate(`${PATH_COMMITTEE.DETAILS}/id`)} title="Details" />
-                    </div>
-                </BreadcrumbsContainer>
+                <BreadcrumbsContainer path={pathMap} buttons={[{ title: 'Create', path: PATH_COMMITTEE.CREATE }]} />
+
+                <TitleContainer position={'center'}>
+                    <Title title={'Committees'} color={'whiteGray'} size={'32'} />
+                </TitleContainer>
+
+                <CardContainer>
+                    {committeeList.map((item) => (
+                        <SmallCard
+                            key={item.id}
+                            title={item.name}
+                            // subtitle={item.isActive ? 'Active' : 'Disable'}
+                            subtitle={item.fullName}
+                            onClick={() => navigate(`${PATH_COMMITTEE.DETAILS}/${item.id}`)}
+                            svg={<SvgCommitteeSidebar />}
+                        />
+                    ))}
+                </CardContainer>
             </div>
-
-            <button onClick={test} className="p-3 bg-slate-500 rounded-lg m-4">
-                Add message
-            </button>
-
-            <button onClick={() => setOpenPopup(true)} className="p-3 bg-slate-500 rounded-lg m-4">
-                popup
-            </button>
-
-            <Popup isOpen={openPopup} onClose={() => setOpenPopup(false)} sx={{ maxH: 'calc(100dvh - 20px)' }}>
-                <ScrollY sx={{ p: '8px' }}>
-                    <Text text="Demo" type={'h4'} width={'bold'} />
-                    <Text
-                        type={'span'}
-                        width={'lite'}
-                        color={'gray'}
-                        text={`asdhG Khgkh ga ksh dgka jh sdg  ka hjs gd k aj hs gd k aj hgsd ja sgd kjha 
-                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
-                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
-                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
-                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
-                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
-                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
-                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
-                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
-                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
-                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
-                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
-                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
-                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
-                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
-                        gdshjkasdhG Khgkh gak shd gkaj hs dg k ah jsg d ka jh sg d ka jh gsd jah gd kjha 
-                        `}
-                    />
-                </ScrollY>
-            </Popup>
-        </>
+        </ScrollY>
     );
 }

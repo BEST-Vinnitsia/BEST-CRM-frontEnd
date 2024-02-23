@@ -1,16 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     BreadcrumbsContainer,
-    Button,
-    CircleButton,
-    LongButton,
+    Card,
+    CardContainer,
+    PageHeader,
     ScrollY,
-    SelectButton,
+    Title,
+    TitleContainer,
 } from '../../components';
 import { PATH_BaC } from '../../routes/paths';
 import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
-import { SvgArrowLeft, SvgArrowRight, SvgLogo } from '../../assets/svg';
+import { Navigate, useParams } from 'react-router-dom';
+import { utilsActions } from '../../redux/actions/utilsActions';
+import {
+    boardService,
+    boardToMemberService,
+    cadenceService,
+    coordinatorService,
+    coordinatorToMemberService,
+    memberService,
+} from '../../services';
+import { IBoardGetByIdRes } from '../../interfaces/board/boardRes';
+import { ICoordinatorGetByIdRes } from '../../interfaces/coordinator/coordinatorRes';
+import { ImgCrmHome, UserAvatar } from '../../assets/img';
+import { IBoardToMemberGetByBoardIdRes } from '../../interfaces/board/boardToMemberRes';
+import { ICadenceGetListRes } from '../../interfaces/cadence/cadenceRes';
+import { intToRoman } from '../../utils';
+import { IMemberGetListRes } from '../../interfaces/member/memberRes';
+import { ICoordinatorToMemberGetByCoordinatorIdRes } from '../../interfaces/coordinator/coordinatorToMemberRes';
+// import { IBoardAllInfo } from '../../interfaces/board/boardAllInfo';
+// import { ICoordinatorAllInfo } from '../../interfaces/coordinator/coordinatorAllInfo';
 
 const pathMap = [
     { url: PATH_BaC.ROOT, title: pageNames.pages.BaC },
@@ -19,159 +39,148 @@ const pathMap = [
 
 export default function BoardAndCoordinatorsDetailPage() {
     const navigate = useNavigate();
+    const { id, who } = useParams();
+
+    const [boardInfo, setBoardInfo] = useState<IBoardGetByIdRes | null>(null);
+    const [boardToMemberList, setBoardToMemberList] = useState<IBoardToMemberGetByBoardIdRes[]>([]);
+    const [coordinatorInfo, setCoordinatorInfo] = useState<ICoordinatorGetByIdRes | null>(null);
+    const [coordinatorToMemberList, setCoordinatorToMemberList] = useState<ICoordinatorToMemberGetByCoordinatorIdRes[]>(
+        [],
+    );
+    const [cadenceList, setCadenceList] = useState<ICadenceGetListRes[]>([]);
+    const [memberList, setMemberList] = useState<IMemberGetListRes[]>([]);
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = async () => {
+        if (!id || !who) return;
+
+        try {
+            utilsActions.loading(true);
+            if (who === 'board') {
+                const [boardRes, boardToMemberRes, cadenceRes, memberRes] = await Promise.all([
+                    await boardService.getById({ id }),
+                    await boardToMemberService.getByBoardId({ boardId: id }),
+                    await cadenceService.getList(),
+                    await memberService.getList(),
+                ]);
+
+                setBoardInfo(boardRes);
+                setBoardToMemberList(boardToMemberRes);
+                setCadenceList(cadenceRes);
+                setMemberList(memberRes);
+            } else if (who === 'coordinator') {
+                const [coordinatorRes, coordinatorToMemberRes, cadenceRes, memberRes] = await Promise.all([
+                    await coordinatorService.getById({ id }),
+                    await coordinatorToMemberService.getByCoordinatorId({ coordinatorId: id }),
+                    await cadenceService.getList(),
+                    await memberService.getList(),
+                ]);
+
+                setCoordinatorInfo(coordinatorRes);
+                setCoordinatorToMemberList(coordinatorToMemberRes);
+                setCadenceList(cadenceRes);
+                setMemberList(memberRes);
+            }
+        } catch (err) {
+            utilsActions.addMessage({
+                status: 'error',
+                message: 'Error loading data',
+            });
+        } finally {
+            utilsActions.loading(false);
+        }
+    };
+
+    const getCadence = (cadenceId: number) => {
+        const cadence = cadenceList.find((item) => item.id === cadenceId);
+        if (!cadence) return 0;
+        return cadence.number;
+    };
+
+    const getMemberName = (memberId: number) => {
+        const member = memberList.find((item) => item.id === memberId);
+        if (!member) return '';
+        return `${member.name} ${member.surname}`;
+    };
+
+    if (!id || !who) <Navigate to={PATH_BaC.LIST} />;
 
     return (
         <>
             <ScrollY>
                 <div className="p-4">
-                    <BreadcrumbsContainer path={pathMap}>
-                        <div className="flex">
-                            <Button onClick={() => navigate(`${PATH_BaC.EDIT}/id`)} title="Edit" />
-                            <Button onClick={() => navigate(PATH_BaC.CREATE)} title="Create" />
-                            <Button onClick={() => navigate(PATH_BaC.LIST)} title="List" />
-                        </div>
-                    </BreadcrumbsContainer>
-                </div>
+                    <BreadcrumbsContainer
+                        path={pathMap}
+                        buttons={[
+                            { title: 'Edit', path: `${PATH_BaC.EDIT}/${who}/${id}` },
+                            { title: 'List', path: PATH_BaC.LIST },
+                        ]}
+                    />
 
-                <div className="p-1 flex flex-row">
-                    <span className="px-2 py-1">
-                        <Button title="Test" size="small" />
-                    </span>
-                    <span className="px-2 py-1">
-                        <Button title="Test" svg={<SvgArrowLeft />} svgPosition="left" size="small" />
-                    </span>
-                    <span className="px-2 py-1">
-                        <Button title="Test" svg={<SvgArrowRight />} size="small" />
-                    </span>
-                </div>
+                    {boardInfo && (
+                        <>
+                            <PageHeader
+                                title={`${boardInfo.name}`}
+                                subtitle={`${boardInfo.fullName} / ${boardInfo.isActive ? 'Active' : 'Disable'}`}
+                                img={UserAvatar}
+                            />
 
-                <div className="p-1 flex flex-row">
-                    <span className="px-2 py-1">
-                        <Button title="Test" size="medium" />
-                    </span>
-                    <span className="px-2 py-1">
-                        <Button title="Test" svg={<SvgArrowLeft />} svgPosition="left" size="medium" />
-                    </span>
-                    <span className="px-2 py-1">
-                        <Button title="Test" svg={<SvgArrowRight />} size="medium" />
-                    </span>
-                </div>
+                            <TitleContainer position={'center'}>
+                                <Title title={'History'} color={'whiteGray'} size={'40'} />
+                            </TitleContainer>
 
-                <div className="p-1 flex flex-row">
-                    <span className="px-2 py-1">
-                        <Button title="Test" size="large" />
-                    </span>
-                    <span className="px-2 py-1">
-                        <Button title="Test" svg={<SvgArrowLeft />} svgPosition="left" size="large" />
-                    </span>
-                    <span className="px-2 py-1">
-                        <Button title="Test" svg={<SvgArrowRight />} size="large" />
-                    </span>
-                </div>
+                            {boardToMemberList.length > 0 && (
+                                <>
+                                    <CardContainer>
+                                        {boardToMemberList.map((item) => (
+                                            <Card
+                                                key={item.id}
+                                                title={getMemberName(item.memberId)}
+                                                subtitle={`Cadence ${intToRoman(getCadence(item.cadenceId))}`}
+                                                img={ImgCrmHome}
+                                            />
+                                        ))}
+                                    </CardContainer>
+                                </>
+                            )}
+                        </>
+                    )}
 
-                <div className="p-1 flex flex-row">
-                    <span className="px-2 py-1">
-                        <CircleButton size="small" svg={<SvgLogo />} />
-                    </span>
-                    <span className="px-2 py-1">
-                        <CircleButton size="medium" svg={<SvgLogo />} />
-                    </span>
-                    <span className="px-2 py-1">
-                        <CircleButton size="large" svg={<SvgLogo />} />
-                    </span>
-                </div>
+                    {/*    */}
+                    {/*    */}
+                    {/*    */}
 
-                <div className="p-1 flex flex-row">
-                    <span className="py-1 px-2 w-60">
-                        <LongButton title="Long button" size="small" />
-                    </span>
-                    <span className="py-1 px-2 w-60">
-                        <LongButton title="Long button" />
-                    </span>
-                    <span className="py-1 px-2 w-60">
-                        <LongButton title="Long button" size="large" />
-                    </span>
-                </div>
+                    {coordinatorInfo && (
+                        <>
+                            <PageHeader
+                                title={`${coordinatorInfo.name}`}
+                                subtitle={`${coordinatorInfo.fullName} / ${coordinatorInfo.isActive ? 'Active' : 'Disable'}`}
+                                img={UserAvatar}
+                            />
 
-                <div className="p-1 flex flex-row">
-                    <span className="py-1 px-2 w-60">
-                        <LongButton title="Long button" size="small" color="dark" />
-                    </span>
-                    <span className="py-1 px-2 w-60">
-                        <LongButton title="Long button" color="dark" />
-                    </span>
-                    <span className="py-1 px-2 w-60">
-                        <LongButton title="Long button" size="large" color="dark" />
-                    </span>
-                </div>
+                            <TitleContainer position={'center'}>
+                                <Title title={'History'} color={'whiteGray'} size={'40'} />
+                            </TitleContainer>
 
-                <div className="p-1 flex flex-row">
-                    <span className="py-1 px-2 w-60">
-                        <LongButton title="Long button" disable />
-                    </span>
-                    <span className="py-1 px-2 w-60">
-                        <LongButton title="Long button" color="dark" disable />
-                    </span>
-                </div>
-
-                <div className="p-1 flex flex-row">
-                    <span className="py-1 px-2 w-60">
-                        <LongButton title="Long button" loading />
-                    </span>
-                    <span className="py-1 px-2 w-60">
-                        <LongButton title="Long button" color="dark" loading />
-                    </span>
-                </div>
-
-                <div className="p-1 flex flex-row">
-                    <span className="py-1 px-2 w-60">
-                        <LongButton title="Long button" loading disable />
-                    </span>
-                    <span className="py-1 px-2 w-60">
-                        <LongButton title="Long button" color="dark" loading disable />
-                    </span>
-                </div>
-
-                <div className="p-1 flex flex-row">
-                    <span className="py-1 px-2 w-60">
-                        <SelectButton title="Long button" />
-                    </span>
-
-                    <span className="py-1 px-2 w-60">
-                        <SelectButton title="Long button" svg={<SvgLogo />} />
-                    </span>
-
-                    <span className="py-1 px-2 w-60">
-                        <SelectButton title="Long button" svg={<SvgLogo />} svgPosition="right" />
-                    </span>
-                </div>
-
-                <div className="p-1 flex flex-row">
-                    <span className="py-1 px-2 w-60">
-                        <SelectButton title="Long button" active />
-                    </span>
-
-                    <span className="py-1 px-2 w-60">
-                        <SelectButton title="Long button" svg={<SvgLogo />} active />
-                    </span>
-
-                    <span className="py-1 px-2 w-60">
-                        <SelectButton title="Long button" svg={<SvgLogo />} svgPosition="right" active />
-                    </span>
-                </div>
-
-                <div className="p-1 flex flex-row">
-                    <span className="py-1 px-2 w-60">
-                        <SelectButton title="Long button" color="red" />
-                    </span>
-
-                    <span className="py-1 px-2 w-60">
-                        <SelectButton title="Long button" svg={<SvgLogo />} color="red" />
-                    </span>
-
-                    <span className="py-1 px-2 w-60">
-                        <SelectButton title="Long button" svg={<SvgLogo />} svgPosition="right" color="red" />
-                    </span>
+                            {coordinatorToMemberList.length > 0 && (
+                                <>
+                                    <CardContainer>
+                                        {coordinatorToMemberList.map((item) => (
+                                            <Card
+                                                key={item.id}
+                                                title={getMemberName(item.memberId)}
+                                                subtitle={`Cadence ${intToRoman(getCadence(item.cadenceId))}`}
+                                                img={ImgCrmHome}
+                                            />
+                                        ))}
+                                    </CardContainer>
+                                </>
+                            )}
+                        </>
+                    )}
                 </div>
             </ScrollY>
         </>

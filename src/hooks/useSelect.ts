@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ISelectHookRes } from '../interfaces/components/select';
 
 interface IProps {

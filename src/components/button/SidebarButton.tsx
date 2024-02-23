@@ -38,9 +38,8 @@ export default function SidebarButton({ path, svg, title, elementRef, onClick }:
         <a
             ref={elementRef}
             className={joinStyle(style['sidebarButton'], style[`sidebarButton--active-${checkPath()}`])}
-            onClick={redirect}
         >
-            <div className={style['sidebarButton__container']}>
+            <div className={style['sidebarButton__container']} onClick={redirect}>
                 <span className={style['sidebarButton__container-svg']}>{svg}</span>
                 <span className={style['sidebarButton__container-textContainer']}>
                     <span className={style['sidebarButton__container-textContainer-text']}>{title}</span>

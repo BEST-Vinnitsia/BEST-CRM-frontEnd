@@ -4,8 +4,11 @@ export const pageNames = {
         BaC: 'Board & coordinators',
         committee: 'Committee',
         event: 'Event',
+        newEvent: 'New event',
+        resp: 'Responsible',
         member: 'Member',
-        membership: 'Membership',
+        cadence: 'Cadence',
+        meeting: 'Meeting',
     },
 
     global: {
