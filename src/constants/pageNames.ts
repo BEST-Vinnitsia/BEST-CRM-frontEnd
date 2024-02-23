@@ -4,6 +4,8 @@ export const pageNames = {
         BaC: 'Board & coordinators',
         committee: 'Committee',
         event: 'Event',
+        newEvent: 'New event',
+        resp: 'Responsible',
         member: 'Member',
         cadence: 'Cadence',
         meeting: 'Meeting',

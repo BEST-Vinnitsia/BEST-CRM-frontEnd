@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { BreadcrumbsContainer, Button, Text } from '../../components';
-import { PATH_EVENT } from '../../routes/paths';
+import { PATH_EVENT, PATH_NEW_EVENT, PATH_RESP } from '../../routes/paths';
 import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
 import { utilsActions } from '../../redux/actions/utilsActions';
-import { eventService } from '../../services';
 import { Navigate, useParams } from 'react-router-dom';
-import { IEventAllInfo } from '../../interfaces/event/eventByIdAllInfo';
-import { intToRoman } from '../../utils';
+import { eventService, newEventService, responsibleService } from '../../services';
+import { BreadcrumbsContainer, Card, CardContainer, PageHeader } from '../../components';
+import { intToRoman, joinStyle } from '../../utils';
+import { ImgCrmHome, UserAvatar } from '../../assets/img';
+import style from '../cadence/details.module.scss';
+import { IEventGetByIdRes } from '../../interfaces/event/eventRes';
+import { IResponsibleGetByEventIdRes } from '../../interfaces/event/responsibleRes';
+import { INewEventGetByEventIdRes } from '../../interfaces/event/newEventRes';
+// import { IEventAllInfo } from '../../interfaces/event/eventByIdAllInfo';
 
 const pathMap = [
     { url: PATH_EVENT.ROOT, title: pageNames.pages.event },
@@ -18,7 +23,11 @@ export default function EventDetailPage() {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    const [event, setEvent] = useState<IEventAllInfo | null>(null);
+    const [openTab, setOpenTab] = useState<'resp' | 'history'>('resp');
+
+    const [eventInfo, setEventInfo] = useState<IEventGetByIdRes | null>(null);
+    const [respList, setRespList] = useState<IResponsibleGetByEventIdRes[]>([]);
+    const [newEventList, setNewEventList] = useState<INewEventGetByEventIdRes[]>([]);
 
     useEffect(() => {
         getData();
@@ -30,8 +39,15 @@ export default function EventDetailPage() {
         try {
             utilsActions.loading(true);
 
-            const res = await eventService.getByIdAllInfo({ id });
-            setEvent(res);
+            const [eventInfoRes, respListRes, newEventListRes] = await Promise.all([
+                eventService.getById({ id }),
+                responsibleService.getByEventId({ eventId: id }),
+                newEventService.getByEventId({ eventId: id }),
+            ]);
+
+            setEventInfo(eventInfoRes);
+            setRespList(respListRes);
+            setNewEventList(newEventListRes);
         } catch (err) {
             utilsActions.addMessage({
                 status: 'error',
@@ -42,66 +58,86 @@ export default function EventDetailPage() {
         }
     };
 
-    const deleteEvent = async () => {
-        if (!id) return;
-
-        try {
-            utilsActions.loading(true);
-
-            await eventService.deleteMany({ eventsId: [id] });
-
-            navigate(PATH_EVENT.LIST);
-
-            utilsActions.addMessage({
-                status: 'success',
-                message: 'Event is deleted',
-            });
-        } catch (err) {
-            utilsActions.addMessage({
-                status: 'error',
-                message: 'Error delete event',
-            });
-        } finally {
-            utilsActions.loading(false);
-        }
-    };
+    // const getMemberName = (memberId: number) => {
+    //     const member = memberList.find((item) => item.id === memberId);
+    //     if (!member) return '';
+    //     return `${member.name} ${member.surname}`;
+    // };
 
     if (!id) <Navigate to={PATH_EVENT.LIST} />;
 
     return (
         <>
             <div className="p-4">
-                <BreadcrumbsContainer path={pathMap}>
-                    <div className="flex">
-                        <Button onClick={deleteEvent} title="Delete" />
-                        <Button onClick={() => navigate(`${PATH_EVENT.EDIT}/id`)} title="Edit" />
-                        <Button onClick={() => navigate(PATH_EVENT.LIST)} title="List" />
-                    </div>
-                </BreadcrumbsContainer>
+                <BreadcrumbsContainer
+                    path={pathMap}
+                    buttons={[
+                        { title: 'Init event', path: PATH_NEW_EVENT.CREATE },
+                        { title: 'Add resp', path: PATH_RESP.CREATE },
 
-                {event && (
-                    <div>
-                        <Text text={event.name} />
-                        <Text text={`Is active: ${event.isActive}`} />
+                        { title: 'Edit', path: `${PATH_EVENT.EDIT}/${id}` },
+                        { title: 'List', path: PATH_EVENT.LIST },
+                    ]}
+                />
 
-                        {event.newEvent.map((item) => (
-                            <>
-                                <div>
-                                    <Text text={`Cadence: ${intToRoman(item.cadence.number)}`} color={'gray'} />
-                                </div>
+                {eventInfo && (
+                    <PageHeader
+                        title={eventInfo.name}
+                        subtitle={`${eventInfo.fullName} / ${eventInfo.isActive ? 'active' : 'close'}`}
+                        img={UserAvatar}
+                    />
+                )}
 
-                                <div>
-                                    {item.memberToEvent.map((m) => (
-                                        <div>
-                                            <hr />
-                                            <Text text={`${m.member.name} ${m.member.surname}`} />
-                                            <Text text={`${m.responsible.name} ${m.responsible.role}`} />
-                                        </div>
-                                    ))}
-                                </div>
-                            </>
+                <div className={style['tobContainer']}>
+                    <span
+                        className={joinStyle(
+                            style['tobContainer__tab'],
+                            style[`tobContainer__tab--${openTab === 'resp' ? 'active' : 'inActive'}`],
+                        )}
+                        onClick={() => setOpenTab('resp')}
+                    >
+                        Resp & WG
+                    </span>
+                    <span
+                        className={joinStyle(
+                            style['tobContainer__tab'],
+                            style[`tobContainer__tab--${openTab === 'history' ? 'active' : 'inActive'}`],
+                        )}
+                        onClick={() => setOpenTab('history')}
+                    >
+                        History
+                    </span>
+                </div>
+
+                {openTab === 'resp' && (
+                    <CardContainer>
+                        {respList
+                            .filter((resp) => resp.role === 'Resp')
+                            .filter((resp) => resp.isActive)
+                            .map((resp) => (
+                                <Card
+                                    key={resp.id}
+                                    title={`${resp.name}`}
+                                    subtitle={resp.fullName}
+                                    img={ImgCrmHome}
+                                    onClick={() => navigate(`${PATH_RESP.DETAILS}/${resp.id}`)}
+                                />
+                            ))}
+                    </CardContainer>
+                )}
+
+                {openTab === 'history' && (
+                    <CardContainer>
+                        {newEventList.map((newEvent) => (
+                            <Card
+                                key={newEvent.id}
+                                title={`${newEvent.name}`}
+                                subtitle={`Cadence: ${intToRoman(newEvent.cadenceId)}`}
+                                onClick={() => navigate(`${PATH_NEW_EVENT.DETAILS}/${newEvent.id}`)}
+                                img={ImgCrmHome}
+                            />
                         ))}
-                    </div>
+                    </CardContainer>
                 )}
             </div>
         </>

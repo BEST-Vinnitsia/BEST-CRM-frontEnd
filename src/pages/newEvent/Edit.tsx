@@ -1,32 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import { BreadcrumbsContainer, Button, Input, LongButton, ScrollY } from '../../components';
-import { PATH_CADENCE, PATH_EVENT } from '../../routes/paths';
+import { BreadcrumbsContainer, Button, Input, ScrollY, Select } from '../../components';
+import { PATH_EVENT, PATH_NEW_EVENT } from '../../routes/paths';
 import { useNavigate, useParams } from 'react-router-dom';
 import { pageNames } from '../../constants';
-import { useForm, useInput } from '../../hooks';
+import { useForm, useInput, useSelect } from '../../hooks';
 import { utilsActions } from '../../redux/actions/utilsActions';
-import { eventService } from '../../services';
+import { cadenceService, eventService, newEventService } from '../../services';
 import style from '../member/styleEdit.module.scss';
+import { IEventGetListRes } from '../../interfaces/event/eventRes';
+import { ICadenceGetListRes } from '../../interfaces/cadence/cadenceRes';
+import { intToRoman } from '../../utils';
 
 const pathMapEdit = [
-    { url: PATH_EVENT.ROOT, title: pageNames.pages.event },
-    { url: PATH_EVENT.EDIT, title: pageNames.global.edit },
+    { url: PATH_EVENT.ROOT, title: pageNames.pages.newEvent },
+    { url: PATH_NEW_EVENT.EDIT, title: pageNames.global.edit },
 ];
 
 const pathMapCreate = [
-    { url: PATH_EVENT.ROOT, title: pageNames.pages.event },
-    { url: PATH_EVENT.CREATE, title: pageNames.global.create },
+    { url: PATH_EVENT.ROOT, title: pageNames.pages.newEvent },
+    { url: PATH_NEW_EVENT.CREATE, title: pageNames.global.create },
 ];
 
-export default function EventEditPage() {
+export default function NewEventEditPage() {
     const { id } = useParams();
     const navigate = useNavigate();
 
+    const [eventList, setEventList] = useState<IEventGetListRes[]>([]);
+    const [cadenceList, setCadenceList] = useState<ICadenceGetListRes[]>([]);
     const [form] = useForm([
         useInput({ name: 'name' }), //
-        useInput({ name: 'fullName' }),
+        useSelect({ name: 'eventId' }),
+        useSelect({ name: 'cadenceId' }),
     ]);
-    const [isActive, setIsActive] = useState(true);
 
     useEffect(() => {
         getDate();
@@ -34,13 +39,18 @@ export default function EventEditPage() {
 
     const getDate = async () => {
         try {
-            if (!id) return;
             utilsActions.loading(true);
 
-            const res = await eventService.getById({ id });
+            const eventListRes = await eventService.getList();
+            const cadenceListRes = await cadenceService.getList();
+            setEventList(eventListRes);
+            setCadenceList(cadenceListRes);
+
+            if (!id) return;
+
+            const res = await newEventService.getById({ id });
             form.name.setValue(res.name.toString());
-            form.fullName.setValue(res.fullName.toString());
-            setIsActive(res.isActive);
+            form.eventId.setValue(res.eventId.toString());
         } catch (err) {
             utilsActions.addMessage({
                 status: 'error',
@@ -55,17 +65,17 @@ export default function EventEditPage() {
         try {
             utilsActions.loading(true);
             if (id) {
-                await eventService.update({
+                await newEventService.update({
                     id: parseInt(id),
+                    eventId: parseInt(form.eventId.value),
                     name: form.name.value,
-                    fullName: form.fullName.value,
-                    isActive: isActive,
+                    cadenceId: parseInt(form.cadenceId.value),
                 });
             } else {
-                await eventService.create({
+                await newEventService.create({
+                    eventId: parseInt(form.eventId.value),
                     name: form.name.value,
-                    fullName: form.fullName.value,
-                    isActive: isActive,
+                    cadenceId: parseInt(form.cadenceId.value),
                 });
             }
 
@@ -91,14 +101,14 @@ export default function EventEditPage() {
         try {
             utilsActions.loading(true);
 
-            await eventService.delete({ id: id.toString() });
+            await newEventService.delete({ id: id.toString() });
 
             utilsActions.addMessage({
                 status: 'success',
                 message: `Event is deleted`,
             });
 
-            navigate(PATH_CADENCE.LIST);
+            navigate(PATH_EVENT.LIST);
         } catch (err) {
             utilsActions.addMessage({
                 status: 'error',
@@ -117,7 +127,7 @@ export default function EventEditPage() {
                     buttons={
                         id
                             ? [
-                                  { title: 'Details', path: `${PATH_EVENT.DETAILS}/${id}` },
+                                  { title: 'Details', path: `${PATH_NEW_EVENT.DETAILS}/${id}` },
                                   { title: 'List', path: PATH_EVENT.LIST },
                               ]
                             : [{ title: 'List', path: PATH_EVENT.LIST }]
@@ -128,17 +138,22 @@ export default function EventEditPage() {
 
                 <div className={style['boxContainer']}>
                     <div className={style['boxContainer__formBlock']}>
-                        <div className={style['boxContainer__formBlock-inner']}>
-                            <LongButton
-                                color={'dark'}
-                                title={`Is ${isActive ? 'active' : 'disable'}`}
-                                onClick={() => setIsActive((prev) => !prev)}
-                            />
-                        </div>
 
                         <div className={style['boxContainer__formBlock-inner']}>
+                            <Select
+                                placeholder={'Event'}
+                                hookProps={form.eventId}
+                                data={eventList.map((item) => ({ id: item.id, name: item.name }))}
+                            />
+                            <Select
+                                placeholder={'Cadence'}
+                                hookProps={form.cadenceId}
+                                data={cadenceList.map((item) => ({
+                                    id: item.id,
+                                    name: `Cadence: ${intToRoman(item.number)}`,
+                                }))}
+                            />
                             <Input placeholder={'Name'} hookProps={form.name} />
-                            <Input placeholder={'Full name'} hookProps={form.fullName} />
                         </div>
 
                         <div className={style['boxContainer__formBlock-button']}>

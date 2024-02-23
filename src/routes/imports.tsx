@@ -77,6 +77,14 @@ export const EventListPage = Loadable(lazy(() => import('../pages/event/List')))
 export const EventDetailPage = Loadable(lazy(() => import('../pages/event/Detail')));
 export const EventEditPage = Loadable(lazy(() => import('../pages/event/Edit')));
 
+// Responsible
+export const ResponsibleDetailPage = Loadable(lazy(() => import('../pages/responsible/Detail')));
+export const ResponsibleEditPage = Loadable(lazy(() => import('../pages/responsible/Edit')));
+
+// New event
+export const NewEventDetailPage = Loadable(lazy(() => import('../pages/newEvent/Detail')));
+export const NewEventEditPage = Loadable(lazy(() => import('../pages/newEvent/Edit')));
+
 // Meeting
 export const MeetingListPage = Loadable(lazy(() => import('../pages/meeting/List')));
 export const MeetingDetailPage = Loadable(lazy(() => import('../pages/meeting/Detail')));

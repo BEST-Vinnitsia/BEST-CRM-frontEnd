@@ -3,7 +3,7 @@ import style from './pageHeader.module.scss';
 
 interface IProps {
     title: string;
-    subtitle: string;
+    subtitle?: string;
     img?: string;
 }
 

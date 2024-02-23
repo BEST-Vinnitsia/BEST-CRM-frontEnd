@@ -3,6 +3,8 @@ import {
     INewEventCreateRes,
     INewEventDeleteArrayRes,
     INewEventDeleteRes,
+    INewEventGetByCadenceIdRes,
+    INewEventGetByEventIdRes,
     INewEventGetByIdRes,
     INewEventGetListRes,
     INewEventUpdateRes,
@@ -12,6 +14,8 @@ import {
     INewEventCreateReq,
     INewEventDeleteArrayReq,
     INewEventDeleteReq,
+    INewEventGetByCadenceIdReq,
+    INewEventGetByEventIdReq,
     INewEventGetByIdReq,
     INewEventUpdateReq,
 } from '../../interfaces/event/newEventReq';
@@ -32,6 +36,24 @@ class NewEventService {
         return new Promise<INewEventGetByIdRes>((resolve, reject) => {
             axios
                 .get(`${API}/${this.root}`, { params: { id } })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    getByCadenceId = ({ cadenceId }: INewEventGetByCadenceIdReq) => {
+        return new Promise<INewEventGetByCadenceIdRes[]>((resolve, reject) => {
+            axios
+                .get(`${API}/${this.root}/by-cadence-id`, { params: { cadenceId } })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    getByEventId = ({ eventId }: INewEventGetByEventIdReq) => {
+        return new Promise<INewEventGetByEventIdRes[]>((resolve, reject) => {
+            axios
+                .get(`${API}/${this.root}/by-event-id`, { params: { eventId } })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });

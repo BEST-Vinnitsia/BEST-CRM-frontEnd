@@ -3,6 +3,7 @@ import {
     IResponsibleCreateRes,
     IResponsibleDeleteArrayRes,
     IResponsibleDeleteRes,
+    IResponsibleGetByEventIdRes,
     IResponsibleGetByIdRes,
     IResponsibleGetListRes,
     IResponsibleUpdateRes,
@@ -12,6 +13,7 @@ import {
     IResponsibleCreateReq,
     IResponsibleDeleteArrayReq,
     IResponsibleDeleteReq,
+    IResponsibleGetByEventIdReq,
     IResponsibleGetByIdReq,
     IResponsibleUpdateReq,
 } from '../../interfaces/event/responsibleReq';
@@ -32,6 +34,15 @@ class ResponsibleService {
         return new Promise<IResponsibleGetByIdRes>((resolve, reject) => {
             axios
                 .get(`${API}/${this.root}`, { params: { id } })
+                .then((response) => response.data && resolve(response.data))
+                .catch((error) => reject(error));
+        });
+    };
+
+    getByEventId = ({ eventId }: IResponsibleGetByEventIdReq) => {
+        return new Promise<IResponsibleGetByEventIdRes[]>((resolve, reject) => {
+            axios
+                .get(`${API}/${this.root}/by-event-id`, { params: { eventId } })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });

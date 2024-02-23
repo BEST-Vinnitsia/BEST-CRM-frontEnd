@@ -10,6 +10,8 @@ import {
     PATH_EVENT,
     PATH_MEETING,
     PATH_MEMBER,
+    PATH_NEW_EVENT,
+    PATH_RESP,
 } from './paths';
 
 // Guard
@@ -40,6 +42,10 @@ import {
     MemberDetailPage,
     MemberEditPage,
     MemberListPage,
+    NewEventDetailPage,
+    NewEventEditPage,
+    ResponsibleDetailPage,
+    ResponsibleEditPage,
 } from './imports';
 
 export default function Router() {
@@ -180,6 +186,36 @@ export default function Router() {
                 { path: PATH_EVENT.CREATE, element: <EventEditPage /> },
                 { path: `${PATH_EVENT.EDIT}/:id`, element: <EventEditPage /> },
                 { path: `${PATH_EVENT.DETAILS}/:id`, element: <EventDetailPage /> },
+            ],
+        },
+
+        // New event
+        {
+            path: PATH_NEW_EVENT.ROOT,
+            element: (
+                <AuthGuard>
+                    <DashboardLayout />
+                </AuthGuard>
+            ),
+            children: [
+                { path: PATH_NEW_EVENT.CREATE, element: <NewEventEditPage /> },
+                { path: `${PATH_NEW_EVENT.EDIT}/:id`, element: <NewEventEditPage /> },
+                { path: `${PATH_NEW_EVENT.DETAILS}/:id`, element: <NewEventDetailPage /> },
+            ],
+        },
+
+        // Resp
+        {
+            path: PATH_RESP.ROOT,
+            element: (
+                <AuthGuard>
+                    <DashboardLayout />
+                </AuthGuard>
+            ),
+            children: [
+                { path: PATH_RESP.CREATE, element: <ResponsibleEditPage /> },
+                { path: `${PATH_RESP.EDIT}/:id`, element: <ResponsibleEditPage /> },
+                { path: `${PATH_RESP.DETAILS}/:id`, element: <ResponsibleDetailPage /> },
             ],
         },
 

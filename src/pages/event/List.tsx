@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { PATH_EVENT } from '../../routes/paths';
 import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
-import { BreadcrumbsContainer, Button, Text } from '../../components';
+import { BreadcrumbsContainer, CardContainer, SmallCard, TitleContainer } from '../../components';
 import { eventService } from '../../services';
 import { utilsActions } from '../../redux/actions/utilsActions';
-import { IEvent } from '../../interfaces/event/event';
+import Title from '../../components/title/Title';
+import { SvgEventSidebar } from '../../assets/svg';
+import { IEventGetListRes } from '../../interfaces/event/eventRes';
 
 const pathMap = [
     { url: PATH_EVENT.ROOT, title: pageNames.pages.event },
@@ -15,7 +17,7 @@ const pathMap = [
 export default function EventListPage() {
     const navigate = useNavigate();
 
-    const [eventList, setEventList] = useState<IEvent[]>([]);
+    const [eventList, setEventList] = useState<IEventGetListRes[]>([]);
 
     useEffect(() => {
         getInfo();
@@ -23,44 +25,45 @@ export default function EventListPage() {
 
     const getInfo = async () => {
         try {
-            const eventListPromise = eventService.getList();
-
             utilsActions.loading(true);
-            const [eventRes] = await Promise.all([eventListPromise]);
-            utilsActions.loading(false);
 
-            setEventList(eventRes);
+            const [eventListRes] = await Promise.all([eventService.getList()]);
+
+            setEventList(eventListRes);
         } catch (err) {
-            utilsActions.loading(false);
             utilsActions.addMessage({
                 status: 'error',
                 message: 'Error loading data',
             });
+        } finally {
+            utilsActions.loading(false);
         }
     };
 
-    const redirectToDetails = (id: string) => {
+    const toDetails = (id: number) => {
         navigate(`${PATH_EVENT.DETAILS}/${id}`);
     };
 
     return (
         <>
             <div className="p-4">
-                <BreadcrumbsContainer path={pathMap}>
-                    <div className="flex">
-                        <Button onClick={() => navigate(PATH_EVENT.CREATE)} title="Create" />
-                    </div>
-                </BreadcrumbsContainer>
+                <BreadcrumbsContainer path={pathMap} buttons={[{ title: 'Create', path: PATH_EVENT.CREATE }]} />
 
-                <div className="mb-5">
-                    <Text text={'Events'} color={'gray'} />
+                <TitleContainer position={'center'}>
+                    <Title title={'Events'} color={'whiteGray'} size={'32'} />
+                </TitleContainer>
 
+                <CardContainer>
                     {eventList.map((item) => (
-                        <div key={item.id} onClick={() => redirectToDetails(item.id)}>
-                            <Text text={item.name} />
-                        </div>
+                        <SmallCard
+                            key={item.id}
+                            title={item.name}
+                            subtitle={`Is ${item.isActive ? 'active' : 'close'}`}
+                            onClick={() => toDetails(item.id)}
+                            svg={<SvgEventSidebar />}
+                        />
                     ))}
-                </div>
+                </CardContainer>
             </div>
         </>
     );
