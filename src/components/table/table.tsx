@@ -1,7 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import style from './table.module.scss';
-import TabContainer from './tab/TabContainer';
-import TableTab from './tab/Tab';
 import ScrollX from '../scroll/ScrollX';
 
 interface IProps {
@@ -31,18 +29,18 @@ export default function Table({ children }: IProps) {
 
     return (
         <div className={style['table-block']}>
-            <TabContainer activeTabId={activeTab}>
-                {tabList.map((item, i) => (
-                    <TableTab
-                        key={i}
-                        title={item.name}
-                        label={item.label}
-                        status={activeTab === i}
-                        color={item.color}
-                        onClick={() => changeTab(i)}
-                    />
-                ))}
-            </TabContainer>
+            {/*<TabContainer activeTabId={activeTab}>*/}
+            {/*    {tabList.map((item, i) => (*/}
+            {/*        <TableTab*/}
+            {/*            key={i}*/}
+            {/*            title={item.name}*/}
+            {/*            label={item.label}*/}
+            {/*            status={activeTab === i}*/}
+            {/*            color={item.color}*/}
+            {/*            onClick={() => changeTab(i)}*/}
+            {/*        />*/}
+            {/*    ))}*/}
+            {/*</TabContainer>*/}
 
             <ScrollX>
                 <table className={style['table']}>{children}</table>

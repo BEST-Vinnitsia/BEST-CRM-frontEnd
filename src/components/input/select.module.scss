@@ -106,31 +106,27 @@
             }
         }
     }
-
-    &__errorText {
-        color: rgb(255, 86, 48);
-        line-height: 1.5;
-        font-size: 14px;
-        text-align: left;
-        margin: 8px 14px 4px;
-    }
 }
 
 /* new */
 .selectContainer {
+    $bg-color: #131317;
+
     position: absolute;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
+    width: 100%;
     //transform: translateY(100%);
-    max-height: 40dvh;
+    //max-height: 40dvh;
     border-radius: 8px;
-    background-color: rgba(33, 43, 54, 0.9);
-    backdrop-filter: blur(4px);
+    background-color: $bg-color;
+    border: 1px solid rgba(255, 255, 255, 0.15);
     box-shadow:
         rgba(0, 0, 0, 0.24) 0px 0px 2px 0px,
         rgba(0, 0, 0, 0.24) -20px 20px 40px -4px;
     overflow-y: hidden;
+    z-index: 100;
 }
 
 // error

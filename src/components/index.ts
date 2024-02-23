@@ -2,9 +2,12 @@
 export { default as Input } from './input/Input';
 export { default as InputPassword } from './input/InputPassword';
 export { default as Select } from './input/Select';
+export { default as SelectSimple } from './input/SelectSimple';
 
 // text
 export { default as Text } from './text/Text';
+export { default as Title } from './title/Title';
+export { default as TitleContainer } from './title/TitleContainer';
 
 // line
 export { default as Line } from './line/Line';
@@ -12,6 +15,10 @@ export { default as Line } from './line/Line';
 // label
 export { default as Label } from './labels/Label';
 
+// card
+export { default as Card } from './card/Card';
+export { default as CardContainer } from './card/CardContainer';
+export { default as SmallCard } from './card/SmallCard';
 
 // containers
 export { default as Menu } from './menu/Menu';
@@ -48,13 +55,13 @@ export { default as TBody } from './table/TBody';
 export { default as TRBody } from './table/TRBody';
 export { default as TD } from './table/TD';
 
-
 //
 // containers or modules
 //
 
 // header
 export { default as Header } from './header/Header';
+export { default as PageHeader } from './header/PageHeader';
 
 // sidebar
 export { default as DesktopSidebar } from './sidebar/desktopSidebar';

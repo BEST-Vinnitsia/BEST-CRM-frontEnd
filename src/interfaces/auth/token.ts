@@ -1,6 +1,6 @@
 export interface IToken {
-    refreshTokenId: string;
-    memberId: string;
+    refreshTokenId: number;
+    memberId: number;
     membershipName: string;
     fullName: string;
     surname: string;

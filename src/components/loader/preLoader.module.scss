@@ -1,4 +1,6 @@
 .preLoader {
+    $bg-color: #131317;
+
     position: absolute;
     // inset: 0;
     top: 0;
@@ -8,8 +10,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgb(22, 28, 36);
-    z-index: 100;
+    background: $bg-color;
+    z-index: 400;
 
     &__logoContainer {
         display: flex;

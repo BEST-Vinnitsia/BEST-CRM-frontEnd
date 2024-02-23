@@ -1,6 +1,6 @@
 import React from 'react';
 import { BreadcrumbsContainer, Button, Select } from '../../components';
-import { PATH_MEMBERSHIP } from '../../routes/paths';
+import { PATH_MEETING } from '../../routes/paths';
 import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
 import { useForm, useSelect } from '../../hooks';
@@ -30,11 +30,11 @@ const demoList = [
 ];
 
 const pathMap = [
-    { url: PATH_MEMBERSHIP.ROOT, title: pageNames.pages.membership },
-    { url: PATH_MEMBERSHIP.LIST, title: pageNames.global.list },
+    { url: PATH_MEETING.ROOT, title: pageNames.pages.meeting },
+    { url: PATH_MEETING.LIST, title: pageNames.global.list },
 ];
 
-export default function MembershipListPage() {
+export default function MeetingListPage() {
     const navigate = useNavigate();
 
     const [form] = useForm([useSelect({ name: 'test', required: true })]);
@@ -44,9 +44,9 @@ export default function MembershipListPage() {
             <div className="p-4">
                 <BreadcrumbsContainer path={pathMap}>
                     <div className="flex">
-                        <Button onClick={() => navigate(`${PATH_MEMBERSHIP.EDIT}/id`)} title="Edit" />
-                        <Button onClick={() => navigate(PATH_MEMBERSHIP.CREATE)} title="Create" />
-                        <Button onClick={() => navigate(`${PATH_MEMBERSHIP.DETAILS}/id`)} title="Details" />
+                        <Button onClick={() => navigate(`${PATH_MEETING.EDIT}/id`)} title="Edit" />
+                        <Button onClick={() => navigate(PATH_MEETING.CREATE)} title="Create" />
+                        <Button onClick={() => navigate(`${PATH_MEETING.DETAILS}/id`)} title="Details" />
                     </div>
                 </BreadcrumbsContainer>
             </div>

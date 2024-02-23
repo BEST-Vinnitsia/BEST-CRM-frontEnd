@@ -26,7 +26,7 @@ const member = (root: string) => ({
     DETAILS: `${root}/details`,
 });
 
-const membership = (root: string) => ({
+const cadence = (root: string) => ({
     ROOT: `${root}`,
     LIST: `${root}`,
     CREATE: `${root}/create`,
@@ -35,6 +35,30 @@ const membership = (root: string) => ({
 });
 
 const event = (root: string) => ({
+    ROOT: `${root}`,
+    LIST: `${root}`,
+    CREATE: `${root}/create`,
+    EDIT: `${root}/edit`,
+    DETAILS: `${root}/details`,
+});
+
+const newEvent = (root: string) => ({
+    ROOT: `${root}`,
+    LIST: `${root}`,
+    CREATE: `${root}/create`,
+    EDIT: `${root}/edit`,
+    DETAILS: `${root}/details`,
+});
+
+const resp = (root: string) => ({
+    ROOT: `${root}`,
+    LIST: `${root}`,
+    CREATE: `${root}/create`,
+    EDIT: `${root}/edit`,
+    DETAILS: `${root}/details`,
+});
+
+const meeting = (root: string) => ({
     ROOT: `${root}`,
     LIST: `${root}`,
     CREATE: `${root}/create`,
@@ -61,8 +85,11 @@ export const PATH_DASHBOARD = dashboard('/');
 export const PATH_BaC = boardAndCoordinators('/boardAndCoordinators');
 export const PATH_COMMITTEE = committee('/committee');
 export const PATH_EVENT = event('/event');
+export const PATH_NEW_EVENT = event('/new-event');
+export const PATH_RESP = resp('/resp');
 export const PATH_MEMBER = member('/member');
-export const PATH_MEMBERSHIP = membership('/membership');
+export const PATH_CADENCE = cadence('/cadence');
+export const PATH_MEETING = meeting('/meeting');
 //
 export const PATH_ACCOUNT = account('/account');
 export const PATH_AUTH = auth('/auth');
