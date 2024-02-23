@@ -1,6 +1,6 @@
 import React from 'react';
 import { pageNames } from '../constants/pageNames';
-import { PATH_BaC, PATH_CADENCE, PATH_COMMITTEE, PATH_DASHBOARD, PATH_EVENT, PATH_MEETING, PATH_MEMBER } from './paths';
+import { PATH_BaC, PATH_CADENCE, PATH_COMMITTEE, PATH_DASHBOARD, PATH_EVENT, PATH_MEMBER } from './paths';
 import {
     SvgBoardAndCoordinatorsSidebar,
     SvgCommitteeSidebar,
@@ -41,9 +41,9 @@ export const sidebarConfig = [
         path: PATH_CADENCE.ROOT,
         svg: <SvgMembershipSidebar />,
     },
-    {
-        title: pageNames.pages.meeting,
-        path: PATH_MEETING.ROOT,
-        svg: <SvgMembershipSidebar />,
-    },
+    // {
+    //     title: pageNames.pages.meeting,
+    //     path: PATH_MEETING.ROOT,
+    //     svg: <SvgMembershipSidebar />,
+    // },
 ];
