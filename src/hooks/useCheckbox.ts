@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-export const useCheckbox = (data: string[]) => {
-    const [selectRows, setSelectRows] = useState<string[]>([]);
-    const [allRows, setAllRows] = useState<string[]>(data);
+export const useCheckbox = (data: number[]) => {
+    const [selectRows, setSelectRows] = useState<number[]>([]);
+    const allRows = useRef<number[]>([]);
 
-    const selectRow = (id: string) => {
+    useEffect(() => {
+        allRows.current = data;
+    }, [data]);
+
+    const selectRow = (id: number) => {
         setSelectRows((prev) => {
             if (prev.includes(id)) {
                 return prev.filter((selectedId) => selectedId !== id);
@@ -14,37 +18,35 @@ export const useCheckbox = (data: string[]) => {
         });
     };
 
-    const checkSelectRow = (id: string) => {
-        if (selectRows.includes(id)) return true;
-        return false;
+    const checkSelectRow = (id: number) => {
+        return selectRows.includes(id);
     };
 
     const selectAll = () => {
         const selectLength = selectRows.length;
-        const stateLength = allRows.length;
+        const stateLength = allRows.current.length;
 
         if (selectLength !== 0 && selectLength !== stateLength) {
-            setSelectRows(allRows);
+            setSelectRows(allRows.current);
         } else if (selectLength === stateLength) {
             setSelectRows([]);
         } else if (selectLength === 0) {
-            setSelectRows(allRows);
+            setSelectRows(allRows.current);
         }
     };
 
     const checkSelectAll = () => {
         const selectLength = selectRows.length;
-        const stateLength = allRows.length;
+        const stateLength = allRows.current.length;
 
+        if (selectLength === 0) return '0';
         if (selectLength === stateLength) return '1';
         if (selectLength !== 0 && selectLength < stateLength) return '2';
         return '0';
     };
 
     return {
-        setSelectRows,
-        setAllRows,
-
+        selectRows,
         selectRow,
         checkSelectRow,
         selectAll,

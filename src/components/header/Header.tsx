@@ -41,8 +41,8 @@ export default function Header({ openSidebar }: IProps) {
 
             <Menu depRef={userButtonRef} onClose={openMenu} open={menuOpen}>
                 <div style={{ padding: '16px 16px 12px' }}>
-                    <Text text="User Name" type="span-sm" width="bold" space="nowrap" />
-                    <Text text="email@gmail.com" type="span-sm" space="nowrap" color="gray" />
+                    <Text text="User Name" size={'14'} width="bold" space="nowrap" />
+                    <Text text="email@gmail.com" size={'14'} space="nowrap" color="gray" />
                 </div>
                 <Line />
                 <SelectButton title="Profile" onClick={openMenu} />

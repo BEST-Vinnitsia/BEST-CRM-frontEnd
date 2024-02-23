@@ -1,51 +1,43 @@
 // /* table size */ /* mobile size */
 
-// h1
-.h1 {
-    font-size: 2.125rem; // /* 2.125rem */ /* 1.5rem */
-    line-height: 1;
+.p34 {
+  font-size: 2.125rem; // /* 2.125rem */ /* 1.5rem */
+  line-height: 1;
 }
 
-// h2
-.h2 {
-    font-size: 1.875rem; // /* 1.5rem */ /* 1.125rem */
-    line-height: 1.067;
+.p30 {
+  font-size: 1.875rem; // /* 1.5rem */ /* 1.125rem */
+  line-height: 1.067;
 }
 
-// h3
-.h3 {
-    font-size: 1.5rem; // /* 1.25rem */ /* 1.125rem */
-    line-height: 1.083;
+.p24 {
+  font-size: 1.5rem; // /* 1.25rem */ /* 1.125rem */
+  line-height: 1.083;
 }
 
-// h4
-.h4 {
-    font-size: 1.25rem; // /* 1.125rem */ /* 1.125rem */
-    line-height: 1.1;
+.p20 {
+  font-size: 1.25rem; // /* 1.125rem */ /* 1.125rem */
+  line-height: 1.1;
 }
 
-// h5
-.h5 {
-    font-size: 1.125rem; // /* 1rem */ /* 1rem */
-    line-height: 1.111;
+.p18 {
+  font-size: 1.125rem; // /* 1rem */ /* 1rem */
+  line-height: 1.111;
 }
 
-// h6
-.h6 {
-    font-size: 1rem;
-    line-height: 1.125;
+.p16--comp {
+  font-size: 1rem;
+  line-height: 1.125;
 }
 
-// span
-.span {
-    font-size: 1rem;
-    line-height: 1.5rem;
+.p16 {
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
-// span sm
-.span-sm {
-    font-size: 0.875rem;
-    line-height: 1.57143;
+.p14 {
+  font-size: 0.875rem;
+  line-height: 1.57143;
 }
 
 //
@@ -53,15 +45,15 @@
 //
 
 .font--width-lite {
-    font-weight: lighter; /* 300 */
+  font-weight: lighter; /* 300 */
 }
 
 .font--width-normal {
-    font-weight: normal; /* 400 */
+  font-weight: normal; /* 400 */
 }
 
 .font--width-bold {
-    font-weight: bold; /* 700 */
+  font-weight: bold; /* 700 */
 }
 
 //
@@ -69,11 +61,11 @@
 //
 
 .font--color-white {
-    color: #fff;
+  color: #fff;
 }
 
 .font--color-gray {
-    color: rgb(145, 158, 171);
+  color: rgb(145, 158, 171);
 }
 
 //
@@ -81,11 +73,12 @@
 //
 
 .font--family-pro {
-    font-family: 'SF-Pro', sans-serif;
+  font-family: 'SF-Pro', sans-serif;
 }
 
 .font--family-mono {
-    font-family: 'SF-Mono', sans-serif;
+  font-family: 'SF-Mono', sans-serif;
+  letter-spacing: 2px;
 }
 
 //
@@ -93,14 +86,14 @@
 //
 
 .font--space-wrap {
-    white-space: normal;
+  white-space: normal;
 }
 
 .font--space-nowrap {
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 //
@@ -108,18 +101,38 @@
 //
 
 .font--horizon-start {
-    display: block;
-    text-align: start;
+  display: block;
+  text-align: start;
 }
 
 .font--horizon-center {
-    display: block;
-    text-align: center;
+  display: block;
+  text-align: center;
 }
 
 .font--horizon-end {
-    display: block;
-    text-align: end;
+  display: block;
+  text-align: end;
+}
+
+//
+// transform
+//
+
+.font--transform-default {
+  text-transform: none;
+}
+
+.font--transform-capitalize {
+  text-transform: capitalize;
+}
+
+.font--transform-uppercase {
+  text-transform: uppercase;
+}
+
+.font--transform-lowercase {
+  text-transform: lowercase;
 }
 
 //

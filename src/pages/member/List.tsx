@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     BreadcrumbsContainer,
-    Button, Label,
+    Label,
     ScrollY,
     Table,
     TBody,
@@ -13,38 +13,38 @@ import {
     TRHead,
 } from '../../components';
 import { PATH_MEMBER } from '../../routes/paths';
-import { utilsActions } from '../../redux/actions/utilsActions';
 import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
-import { useCheckbox } from '../../hooks/useCheckbox';
+import { useCheckbox } from '../../hooks';
 import Checkbox from '../../components/table/checkbox/Checkbox';
-
-const tableData = [
-    {
-        id: 'asd',
-        name: 'Name',
-        surname: 'Surname',
-        email: 'email@gmail.com',
-        phone: '+380971234567',
-        faculty: 'ФМІБ',
-        group: 'УБ-21б',
-        message: '@telegram',
-        status: 'Observer',
-        hb: '01.01.2001',
-    },
-    {
-        id: 'asdsd',
-        name: 'Name',
-        surname: 'Surname',
-        email: 'email 2@gmail.com',
-        phone: '+380971234567',
-        faculty: 'ФМІБ',
-        group: 'УБ-21б',
-        message: '@telegram',
-        status: 'Observer',
-        hb: '01.01.2001',
-    },
-];
+import {
+    boardService,
+    boardToMemberService,
+    cadenceService,
+    committeeService,
+    committeeToMemberService,
+    coordinatorService,
+    coordinatorToMemberService,
+    eventService,
+    memberService,
+    newEventService,
+    newEventToMemberService,
+    responsibleService,
+} from '../../services';
+import { formatDate, intToRoman } from '../../utils';
+import { utilsActions } from '../../redux/actions/utilsActions';
+import { IMemberGetListRes } from '../../interfaces/member/memberRes';
+import { IBoardGetListRes } from '../../interfaces/board/boardRes';
+import { IBoardToMemberGetListRes } from '../../interfaces/board/boardToMemberRes';
+import { ICommitteeGetListRes } from '../../interfaces/committee/committeeRes';
+import { ICommitteeToMemberGetListRes } from '../../interfaces/committee/committeeToMemberRes';
+import { ICoordinatorGetListRes } from '../../interfaces/coordinator/coordinatorRes';
+import { ICoordinatorToMemberGetListRes } from '../../interfaces/coordinator/coordinatorToMemberRes';
+import { IEventGetListRes } from '../../interfaces/event/eventRes';
+import { INewEventGetListRes } from '../../interfaces/event/newEventRes';
+import { IResponsibleGetListRes } from '../../interfaces/event/responsibleRes';
+import { INewEventToMemberGetListRes } from '../../interfaces/event/newEventToMemberRes';
+import { ICadenceGetListRes } from '../../interfaces/cadence/cadenceRes';
 
 const pathMap = [
     { url: PATH_MEMBER.ROOT, title: pageNames.pages.member },
@@ -53,26 +53,97 @@ const pathMap = [
 
 export default function MemberListPage() {
     const navigate = useNavigate();
-    const checkboxHook = useCheckbox(tableData.map((item) => item.id));
 
-    // useEffect(() => {
-    //     utilsActions.loading(true);
-    //     setTimeout(() => {
-    //         utilsActions.loading(false);
-    //     }, 2000);
-    // }, []);
+    const [memberList, setMemberList] = useState<IMemberGetListRes[]>([]);
+    const [boardList, setBoardList] = useState<IBoardGetListRes[]>([]);
+    const [boardToMemberList, setBoardToMemberList] = useState<IBoardToMemberGetListRes[]>([]);
+    const [committeeList, setCommitteeList] = useState<ICommitteeGetListRes[]>([]);
+    const [committeeToMemberList, setCommitteeToMemberList] = useState<ICommitteeToMemberGetListRes[]>([]);
+    const [coordinatorList, setCoordinatorList] = useState<ICoordinatorGetListRes[]>([]);
+    const [coordinatorToMemberList, setCoordinatorToMemberList] = useState<ICoordinatorToMemberGetListRes[]>([]);
+    const [eventList, setEventList] = useState<IEventGetListRes[]>([]);
+    const [newEventList, setNewEventList] = useState<INewEventGetListRes[]>([]);
+    const [responsibleList, setResponsibleList] = useState<IResponsibleGetListRes[]>([]);
+    const [newEventToMemberList, setNewEventToMemberList] = useState<INewEventToMemberGetListRes[]>([]);
+    const [cadenceList, setCadenceList] = useState<ICadenceGetListRes[]>([]);
+
+    const checkboxHook = useCheckbox(memberList.map((item: any) => item.id));
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = async () => {
+        try {
+            utilsActions.loading(true);
+
+            // make cache this request
+            const memberReq = memberService.getList();
+            const boardReq = boardService.getList();
+            const boardToMemberReq = boardToMemberService.getList();
+            const coordinatorReq = coordinatorService.getList();
+            const coordinatorToMemberReq = coordinatorToMemberService.getList();
+            const committeeReq = committeeService.getList();
+            const committeeToMemberReq = committeeToMemberService.getList();
+            const eventReq = eventService.getList();
+            const newEventReq = newEventService.getList();
+            const newEventToMemberReq = newEventToMemberService.getList();
+            const responsibleReq = responsibleService.getList();
+            const cadenceReq = cadenceService.getList();
+
+            const [
+                memberRes,
+                boardRes,
+                boardToMemberRes,
+                coordinatorRes,
+                coordinatorToMemberRes,
+                committeeRes,
+                committeeToMemberRes,
+                eventRes,
+                newEventRes,
+                newEventToMemberRes,
+                responsibleRes,
+                cadenceRes,
+            ] = await Promise.all([
+                memberReq,
+                boardReq,
+                boardToMemberReq,
+                coordinatorReq,
+                coordinatorToMemberReq,
+                committeeReq,
+                committeeToMemberReq,
+                eventReq,
+                newEventReq,
+                newEventToMemberReq,
+                responsibleReq,
+                cadenceReq,
+            ]);
+
+            setMemberList(memberRes);
+            setBoardList(boardRes);
+            setBoardToMemberList(boardToMemberRes);
+            setCommitteeList(committeeRes);
+            setCommitteeToMemberList(committeeToMemberRes);
+            setCoordinatorList(coordinatorRes);
+            setCoordinatorToMemberList(coordinatorToMemberRes);
+            setEventList(eventRes);
+            setNewEventList(newEventRes);
+            setNewEventToMemberList(newEventToMemberRes);
+            setResponsibleList(responsibleRes);
+            setCadenceList(cadenceRes);
+        } catch (err) {
+            console.log(err);
+            utilsActions.addMessage({ status: 'error', message: 'Error loading data' });
+        } finally {
+            utilsActions.loading(false);
+        }
+    };
 
     return (
         <>
             <ScrollY>
                 <div className="p-4">
-                    <BreadcrumbsContainer path={pathMap}>
-                        <div className="flex">
-                            <Button onClick={() => navigate(`${PATH_MEMBER.EDIT}/id`)} title="Edit" />
-                            <Button onClick={() => navigate(PATH_MEMBER.CREATE)} title="Create" />
-                            <Button onClick={() => navigate(`${PATH_MEMBER.DETAILS}/id`)} title="Details" />
-                        </div>
-                    </BreadcrumbsContainer>
+                    <BreadcrumbsContainer path={pathMap} buttons={[{ title: 'Create', path: PATH_MEMBER.CREATE }]} />
                 </div>
 
                 <Table>
@@ -86,67 +157,174 @@ export default function MemberListPage() {
                                 />
                             </TH>
                             <TH>
-                                <Text text={'Name'} color={'gray'} width={'bold'} type={'span-sm'} />
-                            </TH>
-
-                            <TH>
-                                <Text text={'Phone'} color={'gray'} width={'bold'} type={'span-sm'} />
+                                <Text text={'Name'} color={'gray'} width={'bold'} size={'14'} />
                             </TH>
                             <TH>
-                                <Text text={'Message'} color={'gray'} width={'bold'} type={'span-sm'} />
+                                <Text text={'Email'} color={'gray'} width={'bold'} size={'14'} />
                             </TH>
                             <TH>
-                                <Text text={'VNTU'} color={'gray'} width={'bold'} type={'span-sm'} />
+                                <Text text={'Phone'} color={'gray'} width={'bold'} size={'14'} />
                             </TH>
                             <TH>
-                                <Text text={'Status'} color={'gray'} width={'bold'} type={'span-sm'} />
+                                <Text text={'Message'} color={'gray'} width={'bold'} size={'14'} />
                             </TH>
                             <TH>
-                                <Text text={'Position'} color={'gray'} width={'bold'} type={'span-sm'} />
+                                <Text text={'VNTU'} color={'gray'} width={'bold'} size={'14'} />
                             </TH>
                             <TH>
-                                <Text text={'Committee'} color={'gray'} width={'bold'} type={'span-sm'} />
+                                <Text text={'Status'} color={'gray'} width={'bold'} size={'14'} />
                             </TH>
                             <TH>
-                                <Text text={'Happy Birthday'} color={'gray'} width={'bold'} type={'span-sm'} />
+                                <Text text={'Board'} color={'gray'} width={'bold'} size={'14'} />
+                            </TH>
+                            <TH>
+                                <Text text={'Coordinator'} color={'gray'} width={'bold'} size={'14'} />
+                            </TH>
+                            <TH>
+                                <Text text={'Event'} color={'gray'} width={'bold'} size={'14'} />
+                            </TH>
+                            <TH>
+                                <Text text={'Committee'} color={'gray'} width={'bold'} size={'14'} />
+                            </TH>
+                            <TH>
+                                <Text text={'Happy Birthday'} color={'gray'} width={'bold'} size={'14'} />
                             </TH>
                         </TRHead>
                     </THead>
                     <TBody>
-                        {tableData.map((item, i) => (
-                            <TRBody key={i}>
+                        {memberList.map((member) => (
+                            <TRBody key={member.id}>
                                 <TD sx={{ p: '0px 0px 0px 8px' }}>
                                     <Checkbox
-                                        active={checkboxHook.checkSelectRow(item.id)}
-                                        onClick={() => checkboxHook.selectRow(item.id)}
+                                        active={checkboxHook.checkSelectRow(member.id)}
+                                        onClick={() => checkboxHook.selectRow(member.id)}
                                     />
                                 </TD>
 
                                 <TD>
-                                    <div>
-                                        <Text text={`${item.name} ${item.surname}`} type={'span-sm'} />
-                                        <Text text={item.email} type={'span-sm'} color={'gray'} />
+                                    <div onClick={() => navigate(`${PATH_MEMBER.DETAILS}/${member.id}`)}>
+                                        <Text text={`${member.name} ${member.surname}`} size={'14'} />
+                                        <Text
+                                            text={member.bestEmail ? member.bestEmail : 'there is no BEST mail'}
+                                            size={'14'}
+                                            color={'gray'}
+                                        />
                                     </div>
                                 </TD>
                                 <TD>
-                                    <Text text={item.phone} type={'span-sm'} />
+                                    <Text text={member.email} size={'14'} />
                                 </TD>
                                 <TD>
-                                    <Text text={item.message} type={'span-sm'} />
+                                    <Text text={member.phone} size={'14'} />
+                                </TD>
+                                <TD>
+                                    <Text text={member.socialNetwork} size={'14'} />
                                 </TD>
                                 <TD>
                                     <div>
-                                        <Text text={item.faculty} type={'span-sm'} />
-                                        <Text text={item.group} type={'span-sm'} color={'gray'} />
+                                        <Text text={member.faculty} size={'14'} />
+                                        <Text text={member.group} size={'14'} color={'gray'} />
                                     </div>
                                 </TD>
                                 <TD>
-                                    <Label title={item.status} />
+                                    <Label title={member.membership} />
                                 </TD>
-                                <TD />
-                                <TD />
                                 <TD>
-                                    <Text text={item.hb} type={'span-sm'} />
+                                    {boardToMemberList
+                                        .filter((boardToMember) => boardToMember.memberId === member.id)
+                                        .map((boardToMember, i) => {
+                                            const board = boardList.find((item) => item.id === boardToMember.boardId);
+                                            const cadence = cadenceList.find(
+                                                (item) => item.id === boardToMember.cadenceId,
+                                            );
+
+                                            if (!board || !cadence) return <React.Fragment key={boardToMember.id} />;
+
+                                            return (
+                                                <Label
+                                                    key={boardToMember.id}
+                                                    title={`${intToRoman(cadence.number)} ${board.name}`}
+                                                />
+                                            );
+                                        })}
+                                </TD>
+                                <TD>
+                                    {coordinatorToMemberList
+                                        .filter((coordinatorToMember) => coordinatorToMember.memberId === member.id)
+                                        .map((coordinatorToMember) => {
+                                            const coordinator = coordinatorList.find(
+                                                (item) => item.id === coordinatorToMember.coordinatorId,
+                                            );
+                                            const cadence = cadenceList.find(
+                                                (item) => item.id === coordinatorToMember.cadenceId,
+                                            );
+
+                                            if (!coordinator || !cadence)
+                                                return <React.Fragment key={coordinatorToMember.id} />;
+
+                                            return (
+                                                <Label
+                                                    key={coordinatorToMember.id}
+                                                    title={`${intToRoman(cadence.number)} ${coordinator.name}`}
+                                                />
+                                            );
+                                        })}
+                                </TD>
+
+                                <TD>
+                                    {newEventToMemberList
+                                        .filter((newEventToMember) => newEventToMember.memberId === member.id)
+                                        .map((newEventToMember) => {
+                                            const newEvent = newEventList.find(
+                                                (item) => item.id === newEventToMember.newEventId,
+                                            );
+                                            if (!newEvent) return <React.Fragment key={newEventToMember.id} />;
+
+                                            const event = eventList.find((item) => item.id === newEvent.eventId);
+                                            if (!event) return <React.Fragment key={newEventToMember.id} />;
+
+                                            const responsible = responsibleList.find(
+                                                (item) => item.id === newEventToMember.responsibleId,
+                                            );
+                                            if (!responsible) return <React.Fragment key={newEventToMember.id} />;
+
+                                            const cadence = cadenceList.find((item) => item.id === newEvent.cadenceId);
+                                            if (!cadence) return <React.Fragment key={newEventToMember.id} />;
+
+                                            return (
+                                                <Label
+                                                    key={newEvent.id}
+                                                    title={`${intToRoman(cadence.number)} ${event.name} ${responsible.name} ${responsible.role}`}
+                                                />
+                                            );
+                                        })}
+                                </TD>
+
+                                <TD>
+                                    {committeeToMemberList
+                                        .filter((committeeToMember) => committeeToMember.memberId === member.id)
+                                        .map((committeeToMember) => {
+                                            const committee = committeeList.find(
+                                                (item) => item.id === committeeToMember.committeeId,
+                                            );
+                                            const cadence = cadenceList.find(
+                                                (item) => item.id === committeeToMember.cadenceId,
+                                            );
+
+                                            if (!committee || !cadence)
+                                                return <React.Fragment key={committeeToMember.id} />;
+
+                                            return (
+                                                <Label
+                                                    key={committeeToMember.id}
+                                                    title={`${intToRoman(cadence.number)} ${committee.name}`}
+                                                />
+                                            );
+                                        })}
+                                </TD>
+
+                                <TD>
+                                    <Text text={formatDate(new Date(member.birthday))} size={'14'} />
                                 </TD>
                             </TRBody>
                         ))}

@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
-
 // Redux
 import { Provider as ReduxProvider } from 'react-redux';
 import { store } from './redux/store';
@@ -12,9 +11,20 @@ import App from './App';
 import { Snackbar } from './components';
 import AuthContainer from './auth/AuthContainer';
 
+interface IStrictModeContainer {
+    children: React.ReactNode;
+    status: boolean;
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+
+const StrictModeContainer = ({ children, status }: IStrictModeContainer) => {
+    if (status) return <React.StrictMode>{children}</React.StrictMode>;
+    return <>{children}</>;
+};
+
 root.render(
-    <React.StrictMode>
+    <StrictModeContainer status={false}>
         <ReduxProvider store={store}>
             <AuthContainer>
                 <BrowserRouter>
@@ -23,7 +33,7 @@ root.render(
                 </BrowserRouter>
             </AuthContainer>
         </ReduxProvider>
-    </React.StrictMode>,
+    </StrictModeContainer>
 );
 
 // If you want to start measuring performance in your app, pass a function
