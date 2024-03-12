@@ -20,5 +20,5 @@ export const animationSidebarMobile = {
     initial: { translateX: '-100%' },
     animate: { translateX: 0 },
     exit: { translateX: '-100%' },
-    transition,
+    transition: { type: 'spring', stiffness: 1000, damping: 50, mass: 1 },
 };

@@ -53,7 +53,7 @@ export default function DashboardLayout() {
                     />
                     <div
                         className={js(style['bg__item'], style['bg__item--blue'])}
-                        style={{ translate: '10% 25%', bottom: 0, left: 0 }}
+                        style={{ translate: '-5% 50%', bottom: 0, left: 0 }}
                     />
                     <div
                         className={js(style['bg__item'], style['bg__item--orange'])}
