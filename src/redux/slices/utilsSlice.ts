@@ -6,6 +6,7 @@ const initialState: IUtilsStore = {
     isLoadingApp: false,
     message: [],
     windowSize: null,
+    smallSidebar: false,
 };
 
 const slice = createSlice({
@@ -34,6 +35,11 @@ const slice = createSlice({
 
         deleteMessage(state, action) {
             state.message = state.message.filter((item) => item.id !== action.payload);
+        },
+
+        // sidebar
+        smaleSidebar(state, action) {
+            state.smallSidebar = action.payload;
         },
     },
 });

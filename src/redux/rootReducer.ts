@@ -22,9 +22,17 @@ const userPersistConfig = {
     whitelist: ['name', 'claims', 'token'],
 };
 
+const utilsPersistConfig = {
+    key: 'utils',
+    storage,
+    keyPrefix: 'redux-',
+    whitelist: ['smallSidebar'],
+};
+
 const rootReducer = combineReducers({
     user: persistReducer(userPersistConfig, userSlice.reducer),
-    utils: utilsSlice.reducer,
+    utils: persistReducer(utilsPersistConfig, utilsSlice.reducer),
+    // utils: utilsSlice.reducer,
 });
 
 // ----------------------------------------------------------------------

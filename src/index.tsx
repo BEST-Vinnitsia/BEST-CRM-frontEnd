@@ -10,6 +10,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { Snackbar } from './components';
 import AuthContainer from './auth/AuthContainer';
+import { UtilsProvider } from './contexts';
 
 interface IStrictModeContainer {
     children: React.ReactNode;
@@ -27,13 +28,15 @@ root.render(
     <StrictModeContainer status={false}>
         <ReduxProvider store={store}>
             <AuthContainer>
-                <BrowserRouter>
-                    <App />
-                    <Snackbar />
-                </BrowserRouter>
+                <UtilsProvider>
+                    <BrowserRouter>
+                        <App />
+                        <Snackbar />
+                    </BrowserRouter>
+                </UtilsProvider>
             </AuthContainer>
         </ReduxProvider>
-    </StrictModeContainer>
+    </StrictModeContainer>,
 );
 
 // If you want to start measuring performance in your app, pass a function

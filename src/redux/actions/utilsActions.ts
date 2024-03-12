@@ -35,6 +35,11 @@ class UtilsActions {
     public deleteMessage(id: string) {
         dispatch(slice.actions.deleteMessage(id));
     }
+
+    // sidebar
+    public smaleSidebar(status: boolean) {
+        dispatch(slice.actions.smaleSidebar(status));
+    }
 }
 
 export const utilsActions = new UtilsActions();

@@ -30,7 +30,6 @@ export { default as Button } from './button/Button';
 export { default as UserButton } from './button/UserButton';
 export { default as CircleButton } from './button/CircleButton';
 export { default as LongButton } from './button/LongButton';
-export { default as SidebarButton } from './button/SidebarButton';
 export { default as SelectButton } from './button/SelectButton';
 
 // loader
@@ -60,12 +59,7 @@ export { default as TD } from './table/TD';
 //
 
 // header
-export { default as Header } from './header/Header';
 export { default as PageHeader } from './header/PageHeader';
-
-// sidebar
-export { default as DesktopSidebar } from './sidebar/desktopSidebar';
-export { default as MobileSidebar } from './sidebar/mobileSidebar';
 
 // other
 export { default as Snackbar } from './snackbar/Snackbar';

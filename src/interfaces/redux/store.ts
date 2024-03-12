@@ -18,6 +18,7 @@ export interface IUtilsStore {
     isLoadingApp: boolean;
     windowSize: IUtilsStoreWindowSize | null;
     message: IUtilsStoreMessage[];
+    smallSidebar: boolean;
 }
 
 //

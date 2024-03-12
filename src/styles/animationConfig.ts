@@ -14,3 +14,11 @@ export const animationLayoutTranslateX = {
     exit: { translateX: '110%' },
     transition,
 };
+
+export const animationSidebarMobile = {
+    layout: false,
+    initial: { translateX: '-100%' },
+    animate: { translateX: 0 },
+    exit: { translateX: '-100%' },
+    transition,
+};

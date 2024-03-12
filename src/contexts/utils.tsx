@@ -21,7 +21,7 @@ const UtilsContext = createContext<IProvideData | null>(null);
 export const useUtilsContext = () => useContext(UtilsContext);
 
 export const UtilsProvider = ({ children }: IUtilsProvider) => {
-    const windowSize = useWindowSize(300);
+    const windowSize = useWindowSize(100);
 
     const provideData: IProvideData = {
         windowSize,

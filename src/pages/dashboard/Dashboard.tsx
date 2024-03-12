@@ -36,7 +36,10 @@ export default function DashboardPage() {
             {/*    delete*/}
             {/*</button>*/}
 
+            <div className={'h-96'}>
+
             <img src={ImgCrmHome} className={style['globalImg']} />
+            </div>
         </>
     );
 }
