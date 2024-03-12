@@ -1,12 +1,12 @@
 .button {
     position: relative;
     display: grid;
-    grid-template-rows: 25px 1fr;
+    grid-template-rows: 24px 1fr;
     justify-items: center;
     gap: 4px;
     width: 100%;
-    min-height: 62px;
-    padding: 4px;
+    min-height: 50px;
+    padding: 8px;
     border-radius: 8px;
     border: 1px solid rgba(147, 147, 147, 0.2);
     background: rgba(18, 18, 22, 0.5);
@@ -21,8 +21,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 25px;
-        height: 25px;
+        width: 24px;
+        height: 24px;
+        z-index: 2;
     }
 
     &__title {
@@ -30,6 +31,7 @@
         align-items: center;
         font-size: 10px;
         text-align: center;
+        z-index: 2;
     }
 
     &__bg {
@@ -41,7 +43,7 @@
         opacity: 0;
         backdrop-filter: blur(108px);
         transition: opacity ease-in 150ms;
-        z-index: -1;
+        z-index: 1;
     }
 }
 

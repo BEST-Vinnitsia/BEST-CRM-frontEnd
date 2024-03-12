@@ -33,6 +33,18 @@ export { ReactComponent as SvgMenu } from './menu.svg';
 export { ReactComponent as SvgUser } from './user.svg';
 export { ReactComponent as SvgClose } from './close.svg';
 
+// sidebar
+export { ReactComponent as SvgDashboard } from './sidebar svg/dashboard.svg';
+export { ReactComponent as SvgInfoSidebar } from './sidebar svg/info.svg';
+export { ReactComponent as SvgMembers } from './sidebar svg/members.svg';
+export { ReactComponent as SvgUserSidebar } from './sidebar svg/user.svg';
+export { ReactComponent as SvgCommitteeSidebar } from './sidebar svg/committee.svg';
+export { ReactComponent as SvgEventSidebar } from './sidebar svg/event.svg';
+export { ReactComponent as SvgHomeSidebar } from './sidebar svg/home.svg';
+export { ReactComponent as SvgMembershipSidebar } from './sidebar svg/membership.svg';
+export { ReactComponent as SvgBoardAndCoordinatorsSidebar } from './sidebar svg/boardAndCoordinators.svg';
+
+
 //
 //
 //
@@ -40,9 +52,3 @@ export { ReactComponent as SvgClose } from './close.svg';
 export { ReactComponent as SvgTrash } from './trash.svg';
 export { ReactComponent as SvgAdd } from './add.svg';
 
-export { ReactComponent as SvgUserSidebar } from './sidebar svg/user.svg';
-export { ReactComponent as SvgCommitteeSidebar } from './sidebar svg/committee.svg';
-export { ReactComponent as SvgEventSidebar } from './sidebar svg/event.svg';
-export { ReactComponent as SvgHomeSidebar } from './sidebar svg/home.svg';
-export { ReactComponent as SvgMembershipSidebar } from './sidebar svg/membership.svg';
-export { ReactComponent as SvgBoardAndCoordinatorsSidebar } from './sidebar svg/boardAndCoordinators.svg';

@@ -1,29 +1,22 @@
 import React from 'react';
 import { PATH_BaC, PATH_CADENCE, PATH_COMMITTEE, PATH_DASHBOARD, PATH_EVENT, PATH_MEMBER } from './paths';
-import {
-    SvgBoardAndCoordinatorsSidebar,
-    SvgCommitteeSidebar,
-    SvgEventSidebar,
-    SvgHomeSidebar,
-    SvgMembershipSidebar,
-    SvgUserSidebar,
-} from '../assets/svg';
+import { SvgCommitteeSidebar, SvgDashboard, SvgEventSidebar, SvgInfoSidebar, SvgMembers } from '../assets/svg';
 
 export const sidebarConfig = [
     {
         title: 'Dashboard',
         path: PATH_DASHBOARD.ROOT,
-        svg: <SvgHomeSidebar />,
+        svg: <SvgDashboard />,
     },
     {
         title: 'Members',
         path: PATH_BaC.ROOT,
-        svg: <SvgBoardAndCoordinatorsSidebar />,
+        svg: <SvgMembers />,
     },
     {
         title: 'Event',
         path: PATH_COMMITTEE.ROOT,
-        svg: <SvgCommitteeSidebar />,
+        svg: <SvgEventSidebar />,
     },
     {
         title: 'Event Categories',
@@ -33,11 +26,11 @@ export const sidebarConfig = [
     {
         title: 'Committee',
         path: PATH_MEMBER.ROOT,
-        svg: <SvgUserSidebar />,
+        svg: <SvgCommitteeSidebar />,
     },
     {
         title: 'Info',
         path: PATH_CADENCE.ROOT,
-        svg: <SvgMembershipSidebar />,
+        svg: <SvgInfoSidebar />,
     },
 ];
