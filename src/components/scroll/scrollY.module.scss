@@ -1,8 +1,11 @@
-.scrollY-container {
-    $scroll-size: 10px;
+$thumb-w-desktop: 8px;
+$thumb-w-table: 6px;
+$thumb-w-phone: 4px;
 
+.scrollY-container {
     position: relative;
     display: grid;
+    grid-template: auto / 1fr $thumb-w-desktop;
     height: 100%;
     width: 100%;
     overflow: hidden;
@@ -26,13 +29,13 @@
             display: block;
             height: 100%;
             position: relative;
-            width: $scroll-size;
+            width: $thumb-w-desktop;
 
             &-track {
                 position: absolute;
                 bottom: 0;
                 top: 0;
-                width: $scroll-size;
+                width: $thumb-w-desktop;
                 border-radius: 12px;
                 //background-color: #fff;
                 cursor: pointer;
@@ -40,7 +43,7 @@
 
             &-thumb {
                 position: absolute;
-                width: $scroll-size;
+                width: $thumb-w-desktop;
                 //mix-blend-mode: overlay;
                 background: linear-gradient(to bottom, rgba(34, 34, 34, 0.5), rgba(63, 63, 63, 0.5));
                 border-radius: 12px;
@@ -59,18 +62,38 @@
 
 @media (max-width: 991px) {
     .scrollY-container {
-        $scroll-size: 8px;
-
-        grid-template: auto / 1fr $scroll-size;
+        grid-template: auto / 1fr $thumb-w-table;
 
         &__scrollbar {
             &-trackAndThumb {
+                width: $thumb-w-table;
+
                 &-track {
-                    width: $scroll-size;
+                    width: $thumb-w-table;
                 }
 
                 &-thumb {
-                    width: $scroll-size;
+                    width: $thumb-w-table;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 720px) {
+    .scrollY-container {
+        grid-template: auto / 1fr $thumb-w-phone;
+
+        &__scrollbar {
+            &-trackAndThumb {
+                width: $thumb-w-phone;
+
+                &-track {
+                    width: $thumb-w-phone;
+                }
+
+                &-thumb {
+                    width: $thumb-w-phone;
                 }
             }
         }

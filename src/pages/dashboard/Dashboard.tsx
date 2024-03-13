@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './style.module.scss';
 import { utilsActions } from '../../redux/actions/utilsActions';
 import { ImgCrmHome } from '../../assets/img';
+import { ScrollY } from '../../components';
 
 export default function DashboardPage() {
     // const isLoading = useSelector((state: IStore) => state.utils.isLoading);
+
+    const [toggle, setToggle] = useState(false);
 
     const handler = () => {
         utilsActions.loading(true);
@@ -36,10 +39,22 @@ export default function DashboardPage() {
             {/*    delete*/}
             {/*</button>*/}
 
-            <div className={'h-96'}>
+            {/*<div className={'h-96'}>*/}
 
-            <img src={ImgCrmHome} className={style['globalImg']} />
-            </div>
+            {/*<img src={ImgCrmHome} className={style['globalImg']} />*/}
+            {/*</div>*/}
+
+            <ScrollY>
+                <div
+                    style={{ width: '200px', height: '100px' }}
+                    className={'bg-amber-800 p-10 m-10'}
+                    onClick={() => setToggle((prev) => !prev)}
+                ></div>
+
+                {toggle && (
+                    <div style={{ width: '200px', height: '1000px' }} className={'bg-amber-800 p-10 m-10'}></div>
+                )}
+            </ScrollY>
         </>
     );
 }

@@ -3,12 +3,9 @@ import style from './scrollY.module.scss';
 
 interface IProps {
     children?: React.ReactNode;
-    sx?: {
-        p?: string;
-    };
 }
 
-export default function ScrollY({ children, sx = {} }: IProps) {
+export default function ScrollY({ children }: IProps) {
     const contentRef = useRef<HTMLDivElement>(null);
     const scrollTrackRef = useRef<HTMLDivElement>(null);
     const scrollThumbRef = useRef<HTMLDivElement>(null);
@@ -19,6 +16,7 @@ export default function ScrollY({ children, sx = {} }: IProps) {
     const [scrollStartPosition, setScrollStartPosition] = useState<number>(0);
     const [initialContentScrollTop, setInitialContentScrollTop] = useState<number>(0);
 
+    // resize
     const handleResize = useCallback(() => {
         if (scrollTrackRef.current && contentRef.current) {
             const trackSize = scrollTrackRef.current.clientHeight;
@@ -29,28 +27,26 @@ export default function ScrollY({ children, sx = {} }: IProps) {
         }
     }, [children]);
 
+    // thumb position
     const handleThumbPosition = useCallback(() => {
         if (!contentRef.current || !scrollTrackRef.current || !scrollThumbRef.current) return;
 
-        const { scrollTop: contentTop, scrollHeight: contentHeight } = contentRef.current;
-        const { clientHeight: trackHeight } = scrollTrackRef.current;
+        const { scrollTop, scrollHeight } = contentRef.current;
+        const { clientHeight } = scrollTrackRef.current;
 
-        let newTop = (contentTop / contentHeight) * trackHeight;
-        newTop = Math.min(newTop, trackHeight - thumbHeight);
+        let newTop = (scrollTop / scrollHeight) * clientHeight;
+        newTop = Math.min(newTop, clientHeight - thumbHeight);
 
         const thumb = scrollThumbRef.current;
-        requestAnimationFrame(() => {
-            thumb.style.top = `${newTop}px`;
-        });
+
+        requestAnimationFrame(() => (thumb.style.top = `${newTop}px`));
     }, [thumbHeight]);
 
     useEffect(() => {
         if (contentRef.current) {
             const content = contentRef.current;
 
-            observer.current = new ResizeObserver(() => {
-                handleResize();
-            });
+            observer.current = new ResizeObserver(() => handleResize());
             observer.current.observe(content);
 
             content.addEventListener('scroll', handleThumbPosition);
@@ -62,6 +58,11 @@ export default function ScrollY({ children, sx = {} }: IProps) {
         }
     }, [handleResize, handleThumbPosition]);
 
+    //
+    //
+    //
+
+    // thumb mousedown
     const handleThumbMousedown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
         e.preventDefault();
         e.stopPropagation();
@@ -69,33 +70,36 @@ export default function ScrollY({ children, sx = {} }: IProps) {
         setScrollStartPosition(e.clientY);
 
         if (contentRef.current) setInitialContentScrollTop(contentRef.current.scrollTop);
+
         setIsDragging(true);
     }, []);
 
-    const handleThumbMouseup = useCallback((e: MouseEvent) => {
-        e.preventDefault();
-        e.stopPropagation();
-
-        if (isDragging) {
-            setIsDragging(false);
-        }
-    }, [isDragging]);
-
-    const handleThumbMousemove = useCallback((e: MouseEvent) => {
-        if (contentRef.current && isDragging) {
+    // thumb mouseup
+    const handleThumbMouseup = useCallback(
+        (e: MouseEvent) => {
+            // e.preventDefault();
             e.stopPropagation();
-            const { scrollHeight: contentScrollHeight, clientHeight: contentClientHeight } = contentRef.current;
 
-            const deltaY = (e.clientY - scrollStartPosition) * (contentClientHeight / thumbHeight);
+            if (isDragging) setIsDragging(false);
+        },
+        [isDragging],
+    );
 
-            const newScrollTop = Math.min(
-                initialContentScrollTop + deltaY,
-                contentScrollHeight - contentClientHeight,
-            );
+    // thumb mousemove
+    const handleThumbMousemove = useCallback(
+        (e: MouseEvent) => {
+            if (contentRef.current && isDragging) {
+                e.stopPropagation();
+                const { scrollHeight, clientHeight } = contentRef.current;
 
-            contentRef.current.scrollTop = newScrollTop;
-        }
-    }, [isDragging, initialContentScrollTop, thumbHeight, scrollStartPosition]);
+                const Y = (e.clientY - scrollStartPosition) * (clientHeight / thumbHeight);
+                const newScrollTop = Math.min(initialContentScrollTop + Y, scrollHeight - clientHeight);
+
+                contentRef.current.scrollTop = newScrollTop;
+            }
+        },
+        [isDragging, initialContentScrollTop, thumbHeight, scrollStartPosition],
+    );
 
     useEffect(() => {
         document.addEventListener('mousemove', handleThumbMousemove);
@@ -107,32 +111,36 @@ export default function ScrollY({ children, sx = {} }: IProps) {
         };
     }, [handleThumbMousemove, handleThumbMouseup]);
 
-    const handleTrackClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
+    // track click
+    const handleTrackClick = useCallback(
+        (e: React.MouseEvent<HTMLDivElement>) => {
+            e.preventDefault();
+            e.stopPropagation();
 
-        const track = scrollTrackRef.current;
-        const content = contentRef.current;
+            const track = scrollTrackRef.current;
+            const content = contentRef.current;
 
-        if (track && content) {
-            const { clientY } = e;
-            const target = e.target as HTMLDivElement;
-            const rect = target.getBoundingClientRect();
-            const trackTop = rect.top;
-            const thumbOffset = -(thumbHeight / 2);
-            const clickRatio = (clientY - trackTop + thumbOffset) / track.clientHeight;
-            const scrollAmount = Math.floor(clickRatio * content.scrollHeight);
+            if (track && content) {
+                const { clientY } = e;
+                const target = e.target as HTMLDivElement;
+                const rect = target.getBoundingClientRect();
+                const trackTop = rect.top;
+                const thumbOffset = -(thumbHeight / 2);
+                const clickRatio = (clientY - trackTop + thumbOffset) / track.clientHeight;
+                const scrollAmount = Math.floor(clickRatio * content.scrollHeight);
 
-            content.scrollTo({
-                top: scrollAmount,
-                behavior: 'smooth',
-            });
-        }
-    }, [thumbHeight]);
+                content.scrollTo({
+                    top: scrollAmount,
+                    behavior: 'smooth',
+                });
+            }
+        },
+        [thumbHeight],
+    );
 
     return (
         <div className={style['scrollY-container']}>
-            <div ref={contentRef} className={style['scrollY-container__content']} style={{ padding: sx.p }}>
+            <div ref={contentRef} className={style['scrollY-container__content']}>
                 {children}
             </div>
 
