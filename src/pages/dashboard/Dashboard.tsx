@@ -3,7 +3,7 @@ import style from './style.module.scss';
 import { utilsActions } from '../../redux/actions/utilsActions';
 import { ImgCrmHome } from '../../assets/img';
 import { Button, ScrollY } from '../../components';
-import Breadcrumbs from '../../components/breadcrumbs/BreadcrumbsContainer';
+import Breadcrumbs from '../../ui/breadcrumbs/BreadcrumbsContainer';
 import { PATH_EVENT } from '../../routes/paths';
 
 export default function DashboardPage() {
@@ -53,7 +53,8 @@ export default function DashboardPage() {
                         {
                             url: PATH_EVENT.ROOT,
                             title: 'IT-Revolution`24',
-                        },{
+                        },
+                        {
                             url: 'asd',
                             title: 'rear',
                         },

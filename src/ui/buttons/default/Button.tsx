@@ -1,14 +1,15 @@
 import React from 'react';
 import style from './button.module.scss';
-import { joinStyle } from '../../utils';
+import { js } from '../../../helpers';
 
 interface IProps {
-    title: string;
+    title?: string;
     svg?: React.ReactNode;
     onClick?: () => void;
     elementRef?: React.LegacyRef<HTMLButtonElement>;
     size?: 'small' | 'medium' | 'large';
     svgPosition?: 'right' | 'left';
+    color?: 'default' | 'green' | 'red';
 }
 
 export default function Button({
@@ -18,9 +19,14 @@ export default function Button({
     elementRef,
     size = 'medium',
     svgPosition = 'right',
+    color = 'default',
 }: IProps) {
     return (
-        <button ref={elementRef} className={joinStyle(style['button'], style[`button--${size}`])} onClick={onClick}>
+        <button
+            ref={elementRef}
+            onClick={onClick}
+            className={js(style['button'], style[`button--size-${size}`], style[`button--color-${color}`])}
+        >
             {svg && svgPosition === 'left' && <span className={style['button__svg']}>{svg}</span>}
 
             <span className={style['button__title']}>{title}</span>

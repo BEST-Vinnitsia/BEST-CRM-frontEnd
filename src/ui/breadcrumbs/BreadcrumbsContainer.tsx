@@ -6,7 +6,6 @@ import { js } from '../../helpers';
 interface IProps {
     path: {
         url: string;
-        svg?: React.ReactNode;
         title: string;
     }[];
     children?: React.ReactNode;
