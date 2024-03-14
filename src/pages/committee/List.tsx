@@ -43,7 +43,7 @@ export default function CommitteeListPage() {
     return (
         <ScrollY>
             <div className="p-4">
-                <BreadcrumbsContainer path={pathMap} buttons={[{ title: 'Create', path: PATH_COMMITTEE.CREATE }]} />
+                {/*<BreadcrumbsContainer path={pathMap} buttons={[{ title: 'Create', path: PATH_COMMITTEE.CREATE }]} />*/}
 
                 <TitleContainer position={'center'}>
                     <Title title={'Committees'} color={'whiteGray'} size={'32'} />

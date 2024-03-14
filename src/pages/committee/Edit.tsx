@@ -113,19 +113,19 @@ export default function CommitteeEditPage() {
     return (
         <>
             <div className="p-4">
-                <BreadcrumbsContainer
-                    path={id ? pathMapEdit : pathMapCreate}
-                    buttons={
-                        id
-                            ? [
-                                  { title: 'Details', path: `${PATH_COMMITTEE.DETAILS}//${id}` },
-                                  { title: 'List', path: PATH_COMMITTEE.LIST },
-                              ]
-                            : [{ title: 'List', path: PATH_COMMITTEE.LIST }]
-                    }
-                >
-                    {id && <Button title={'Delete'} onClick={deletePosition} />}
-                </BreadcrumbsContainer>
+                {/*<BreadcrumbsContainer*/}
+                {/*    path={id ? pathMapEdit : pathMapCreate}*/}
+                {/*    buttons={*/}
+                {/*        id*/}
+                {/*            ? [*/}
+                {/*                  { title: 'Details', path: `${PATH_COMMITTEE.DETAILS}//${id}` },*/}
+                {/*                  { title: 'List', path: PATH_COMMITTEE.LIST },*/}
+                {/*              ]*/}
+                {/*            : [{ title: 'List', path: PATH_COMMITTEE.LIST }]*/}
+                {/*    }*/}
+                {/*>*/}
+                {/*    {id && <Button title={'Delete'} onClick={deletePosition} />}*/}
+                {/*</BreadcrumbsContainer>*/}
 
                 <div className={style['boxContainer']}>
                     <div className={style['boxContainer__formBlock']}>

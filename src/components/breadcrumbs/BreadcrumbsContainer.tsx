@@ -1,37 +1,44 @@
 import React from 'react';
 import style from './breadcrumbs.module.scss';
 import { useNavigate } from 'react-router-dom';
-import { joinStyle } from '../../utils/';
-import { Button } from '../index';
+import { js } from '../../helpers';
 
 interface IProps {
-    path: IPath[];
-    buttons?: { path: string; title: string }[] | [];
+    path: {
+        url: string;
+        svg?: React.ReactNode;
+        title: string;
+    }[];
     children?: React.ReactNode;
+    column?: boolean;
 }
 
-interface IPath {
-    url: string;
-    title: string;
-}
-
-export default function BreadcrumbsContainer({ buttons, path, children }: IProps) {
+export default function Breadcrumbs({ path, children, column }: IProps) {
     const navigate = useNavigate();
 
     return (
-        <div className={style['breadcrumbs']}>
-            <nav className={style['breadcrumbs__breadcrumb']}>
-                <ol className={style['breadcrumbs__breadcrumb-listBlock']}>
+        <div className={js(style['breadcrumbs'], style[`breadcrumbs--${column ? 'column' : ''}`])}>
+            <nav className={style['breadcrumbs__nav']}>
+                <ol className={style['breadcrumbs__nav-list']}>
                     {path.map((item, i) => (
-                        <React.Fragment key={i}>
-                            {i !== 0 && <li className={style['breadcrumbs__breadcrumb-listBlock-list']}>/</li>}
+                        <React.Fragment>
+                            {i !== 0 && (
+                                <li
+                                    className={js(
+                                        style['breadcrumbs__nav-list-item'],
+                                        style['breadcrumbs__nav-list-item--separator'],
+                                    )}
+                                >
+                                    {'/'}
+                                </li>
+                            )}
 
                             <li
-                                onClick={() => path.length - 1 !== i && navigate(item.url)}
-                                className={joinStyle(
-                                    style['breadcrumbs__breadcrumb-listBlock-rout'],
-                                    style[`breadcrumbs__breadcrumb-listBlock-rout--visiting-${path.length - 1 === i}`],
+                                className={js(
+                                    style['breadcrumbs__nav-list-item'],
+                                    path.length - 1 !== i ? style['breadcrumbs__nav-list-item--active'] : '',
                                 )}
+                                onClick={() => navigate(item.url)}
                             >
                                 {item.title}
                             </li>
@@ -40,11 +47,7 @@ export default function BreadcrumbsContainer({ buttons, path, children }: IProps
                 </ol>
             </nav>
 
-            <div className={style['breadcrumbs__buttons']}>
-                {children}
-                {buttons &&
-                    buttons.map((item, i) => <Button key={i} onClick={() => navigate(item.path)} title={item.title} />)}
-            </div>
+            <div className={style['breadcrumbs__buttons']}>{children}</div>
         </div>
     );
 }

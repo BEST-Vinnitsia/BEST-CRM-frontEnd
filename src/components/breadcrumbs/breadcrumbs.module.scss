@@ -1,53 +1,50 @@
 .breadcrumbs {
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: -moz-none;
-    -o-user-select: none;
-    user-select: none;
-
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     width: 100%;
+    padding: 16px;
+    user-select: none;
+    transition: padding 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 
-    &__breadcrumb {
-        margin: 0px;
-        line-height: 1.5;
+    &__nav {
+        display: block;
         font-size: 1rem;
         font-family: 'SF-Pro', sans-serif;
         font-weight: 400;
         color: rgb(145, 158, 171);
+        white-space: nowrap;
 
-        &-listBlock {
-            display: flex;
+        &-list {
+            display: inline-block;
             flex-wrap: wrap;
             align-items: center;
-            padding: 0px;
-            margin: 0px;
+            padding: 0;
+            margin: 0;
             list-style: none;
 
-            &-list {
-                display: flex;
-                margin-left: 16px;
-                margin-right: 16px;
+            &-item {
+                display: inline-block;
+                max-width: 150px;
+                margin-left: 0;
+                margin-right: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
 
-            &-rout {
-                display: inline-flex;
-                margin: 2px 0px;
+            &-item--separator {
+                margin-left: 8px;
+                margin-right: 8px;
             }
 
-            &-rout--visiting-false {
+            &-item--active {
                 color: #fff;
                 cursor: pointer;
 
                 &:hover {
                     text-decoration: underline;
                 }
-            }
-
-            &-rout--true {
-                color: rgb(145, 158, 171);
             }
         }
     }
@@ -58,5 +55,19 @@
         & > *:not(:last-child) {
             margin-right: 10px;
         }
+    }
+}
+
+.breadcrumbs--column {
+}
+
+@media (max-width: 720px) {
+    .breadcrumbs {
+        padding: 8px;
+    }
+
+    .breadcrumbs--column {
+        flex-direction: column;
+        gap: 8px;
     }
 }

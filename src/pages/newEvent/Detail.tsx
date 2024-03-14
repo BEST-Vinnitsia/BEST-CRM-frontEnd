@@ -73,13 +73,13 @@ export default function NewEventDetailPage() {
     return (
         <>
             <div className="p-4">
-                <BreadcrumbsContainer
-                    path={pathMap}
-                    buttons={[
-                        { title: 'Edit', path: `${PATH_NEW_EVENT.EDIT}/${id}` },
-                        { title: 'List', path: PATH_EVENT.LIST },
-                    ]}
-                />
+                {/*<BreadcrumbsContainer*/}
+                {/*    path={pathMap}*/}
+                {/*    buttons={[*/}
+                {/*        { title: 'Edit', path: `${PATH_NEW_EVENT.EDIT}/${id}` },*/}
+                {/*        { title: 'List', path: PATH_EVENT.LIST },*/}
+                {/*    ]}*/}
+                {/*/>*/}
 
                 {newEventInfo && <PageHeader title={newEventInfo.name} img={UserAvatar} />}
 

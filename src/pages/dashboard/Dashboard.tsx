@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import style from './style.module.scss';
 import { utilsActions } from '../../redux/actions/utilsActions';
 import { ImgCrmHome } from '../../assets/img';
-import { ScrollY } from '../../components';
+import { Button, ScrollY } from '../../components';
+import Breadcrumbs from '../../components/breadcrumbs/BreadcrumbsContainer';
+import { PATH_EVENT } from '../../routes/paths';
 
 export default function DashboardPage() {
     // const isLoading = useSelector((state: IStore) => state.utils.isLoading);
@@ -45,6 +47,21 @@ export default function DashboardPage() {
             {/*</div>*/}
 
             <ScrollY>
+                <Breadcrumbs
+                    column={true}
+                    path={[
+                        {
+                            url: PATH_EVENT.ROOT,
+                            title: 'IT-Revolution`24',
+                        },{
+                            url: 'asd',
+                            title: 'rear',
+                        },
+                    ]}
+                >
+                    <Button title={'asd'} />
+                </Breadcrumbs>
+
                 <div
                     style={{ width: '200px', height: '100px' }}
                     className={'bg-amber-800 p-10 m-10'}

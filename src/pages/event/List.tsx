@@ -47,7 +47,7 @@ export default function EventListPage() {
     return (
         <>
             <div className="p-4">
-                <BreadcrumbsContainer path={pathMap} buttons={[{ title: 'Create', path: PATH_EVENT.CREATE }]} />
+                {/*<BreadcrumbsContainer path={pathMap} buttons={[{ title: 'Create', path: PATH_EVENT.CREATE }]} />*/}
 
                 <TitleContainer position={'center'}>
                     <Title title={'Events'} color={'whiteGray'} size={'32'} />

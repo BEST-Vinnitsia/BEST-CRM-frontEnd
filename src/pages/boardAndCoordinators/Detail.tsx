@@ -112,13 +112,13 @@ export default function BoardAndCoordinatorsDetailPage() {
         <>
             <ScrollY>
                 <div className="p-4">
-                    <BreadcrumbsContainer
-                        path={pathMap}
-                        buttons={[
-                            { title: 'Edit', path: `${PATH_BaC.EDIT}/${who}/${id}` },
-                            { title: 'List', path: PATH_BaC.LIST },
-                        ]}
-                    />
+                    {/*<BreadcrumbsContainer*/}
+                    {/*    path={pathMap}*/}
+                    {/*    buttons={[*/}
+                    {/*        { title: 'Edit', path: `${PATH_BaC.EDIT}/${who}/${id}` },*/}
+                    {/*        { title: 'List', path: PATH_BaC.LIST },*/}
+                    {/*    ]}*/}
+                    {/*/>*/}
 
                     {boardInfo && (
                         <>

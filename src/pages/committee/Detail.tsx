@@ -109,13 +109,13 @@ export default function CommitteeDetailPage() {
     return (
         <ScrollY>
             <div className="p-4">
-                <BreadcrumbsContainer
-                    path={pathMap}
-                    buttons={[
-                        { title: 'Edit', path: `${PATH_COMMITTEE.EDIT}/${id}` },
-                        { title: 'List', path: PATH_COMMITTEE.LIST },
-                    ]}
-                />
+                {/*<BreadcrumbsContainer*/}
+                {/*    path={pathMap}*/}
+                {/*    buttons={[*/}
+                {/*        { title: 'Edit', path: `${PATH_COMMITTEE.EDIT}/${id}` },*/}
+                {/*        { title: 'List', path: PATH_COMMITTEE.LIST },*/}
+                {/*    ]}*/}
+                {/*/>*/}
 
                 {committeeInfo && (
                     <>

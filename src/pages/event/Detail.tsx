@@ -69,16 +69,16 @@ export default function EventDetailPage() {
     return (
         <>
             <div className="p-4">
-                <BreadcrumbsContainer
-                    path={pathMap}
-                    buttons={[
-                        { title: 'Init event', path: PATH_NEW_EVENT.CREATE },
-                        { title: 'Add resp', path: PATH_RESP.CREATE },
+                {/*<BreadcrumbsContainer*/}
+                {/*    path={pathMap}*/}
+                {/*    buttons={[*/}
+                {/*        { title: 'Init event', path: PATH_NEW_EVENT.CREATE },*/}
+                {/*        { title: 'Add resp', path: PATH_RESP.CREATE },*/}
 
-                        { title: 'Edit', path: `${PATH_EVENT.EDIT}/${id}` },
-                        { title: 'List', path: PATH_EVENT.LIST },
-                    ]}
-                />
+                {/*        { title: 'Edit', path: `${PATH_EVENT.EDIT}/${id}` },*/}
+                {/*        { title: 'List', path: PATH_EVENT.LIST },*/}
+                {/*    ]}*/}
+                {/*/>*/}
 
                 {eventInfo && (
                     <PageHeader

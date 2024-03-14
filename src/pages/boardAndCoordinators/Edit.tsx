@@ -147,19 +147,19 @@ export default function BoardAndCoordinatorsEditPage() {
     return (
         <>
             <div className="p-4">
-                <BreadcrumbsContainer
-                    path={id ? pathMapEdit : pathMapCreate}
-                    buttons={
-                        id
-                            ? [
-                                  { title: 'Details', path: `${PATH_BaC.DETAILS}/${who}/${id}` },
-                                  { title: 'List', path: PATH_BaC.LIST },
-                              ]
-                            : [{ title: 'List', path: PATH_BaC.LIST }]
-                    }
-                >
-                    {id && <Button title={'Delete'} onClick={deletePosition} />}
-                </BreadcrumbsContainer>
+                {/*<BreadcrumbsContainer*/}
+                {/*    path={id ? pathMapEdit : pathMapCreate}*/}
+                {/*    buttons={*/}
+                {/*        id*/}
+                {/*            ? [*/}
+                {/*                  { title: 'Details', path: `${PATH_BaC.DETAILS}/${who}/${id}` },*/}
+                {/*                  { title: 'List', path: PATH_BaC.LIST },*/}
+                {/*              ]*/}
+                {/*            : [{ title: 'List', path: PATH_BaC.LIST }]*/}
+                {/*    }*/}
+                {/*>*/}
+                {/*    {id && <Button title={'Delete'} onClick={deletePosition} />}*/}
+                {/*</BreadcrumbsContainer>*/}
 
                 <div className={style['boxContainer']}>
                     <div className={style['boxContainer__formBlock']}>

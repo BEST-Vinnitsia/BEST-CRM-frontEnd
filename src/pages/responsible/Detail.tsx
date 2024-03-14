@@ -53,13 +53,13 @@ export default function ResponsibleDetailPage() {
     return (
         <>
             <div className="p-4">
-                <BreadcrumbsContainer
-                    path={pathMap}
-                    buttons={[
-                        { title: 'Edit', path: `${PATH_RESP.EDIT}/${id}` },
-                        { title: 'List', path: PATH_EVENT.LIST },
-                    ]}
-                />
+                {/*<BreadcrumbsContainer*/}
+                {/*    path={pathMap}*/}
+                {/*    buttons={[*/}
+                {/*        { title: 'Edit', path: `${PATH_RESP.EDIT}/${id}` },*/}
+                {/*        { title: 'List', path: PATH_EVENT.LIST },*/}
+                {/*    ]}*/}
+                {/*/>*/}
 
                 {respInfo && (
                     <PageHeader

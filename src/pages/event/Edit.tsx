@@ -112,19 +112,19 @@ export default function EventEditPage() {
     return (
         <ScrollY>
             <div className="p-4">
-                <BreadcrumbsContainer
-                    path={id ? pathMapEdit : pathMapCreate}
-                    buttons={
-                        id
-                            ? [
-                                  { title: 'Details', path: `${PATH_EVENT.DETAILS}/${id}` },
-                                  { title: 'List', path: PATH_EVENT.LIST },
-                              ]
-                            : [{ title: 'List', path: PATH_EVENT.LIST }]
-                    }
-                >
-                    {id && <Button title={'Delete'} onClick={deleteEvent} />}
-                </BreadcrumbsContainer>
+                {/*<BreadcrumbsContainer*/}
+                {/*    path={id ? pathMapEdit : pathMapCreate}*/}
+                {/*    buttons={*/}
+                {/*        id*/}
+                {/*            ? [*/}
+                {/*                  { title: 'Details', path: `${PATH_EVENT.DETAILS}/${id}` },*/}
+                {/*                  { title: 'List', path: PATH_EVENT.LIST },*/}
+                {/*              ]*/}
+                {/*            : [{ title: 'List', path: PATH_EVENT.LIST }]*/}
+                {/*    }*/}
+                {/*>*/}
+                {/*    {id && <Button title={'Delete'} onClick={deleteEvent} />}*/}
+                {/*</BreadcrumbsContainer>*/}
 
                 <div className={style['boxContainer']}>
                     <div className={style['boxContainer__formBlock']}>

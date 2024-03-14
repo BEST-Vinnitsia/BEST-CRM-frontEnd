@@ -122,13 +122,13 @@ export default function CadenceDetailPage() {
     return (
         <ScrollY>
             <div className="p-4">
-                <BreadcrumbsContainer
-                    path={pathMap}
-                    buttons={[
-                        { title: 'Edit', path: `${PATH_CADENCE.EDIT}/${id}` },
-                        { title: 'List', path: PATH_CADENCE.LIST },
-                    ]}
-                />
+                {/*<BreadcrumbsContainer*/}
+                {/*    path={pathMap}*/}
+                {/*    buttons={[*/}
+                {/*        { title: 'Edit', path: `${PATH_CADENCE.EDIT}/${id}` },*/}
+                {/*        { title: 'List', path: PATH_CADENCE.LIST },*/}
+                {/*    ]}*/}
+                {/*/>*/}
 
                 {cadenceInfo && (
                     <PageHeader

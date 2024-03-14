@@ -48,7 +48,7 @@ export default function CadenceListPage() {
     return (
         <ScrollY>
             <div className="p-4">
-                <BreadcrumbsContainer path={pathMap} buttons={[{ title: 'Create', path: PATH_CADENCE.CREATE }]} />
+                {/*<BreadcrumbsContainer path={pathMap} buttons={[{ title: 'Create', path: PATH_CADENCE.CREATE }]} />*/}
 
                 <TitleContainer position={'center'}>
                     <Title title={'Cadence'} color={'whiteGray'} size={'32'} />

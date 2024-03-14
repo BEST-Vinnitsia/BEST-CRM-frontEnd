@@ -112,19 +112,19 @@ export default function CadenceEditPage() {
     return (
         <>
             <div className="p-4">
-                <BreadcrumbsContainer
-                    path={id ? pathMapEdit : pathMapCreate}
-                    buttons={
-                        id
-                            ? [
-                                  { title: 'Details', path: `${PATH_CADENCE.DETAILS}/${id}` },
-                                  { title: 'List', path: PATH_CADENCE.LIST },
-                              ]
-                            : [{ title: 'List', path: PATH_CADENCE.LIST }]
-                    }
-                >
-                    {id && <Button title={'Delete'} onClick={deleteCadence} />}
-                </BreadcrumbsContainer>
+                {/*<BreadcrumbsContainer*/}
+                {/*    path={id ? pathMapEdit : pathMapCreate}*/}
+                {/*    buttons={*/}
+                {/*        id*/}
+                {/*            ? [*/}
+                {/*                  { title: 'Details', path: `${PATH_CADENCE.DETAILS}/${id}` },*/}
+                {/*                  { title: 'List', path: PATH_CADENCE.LIST },*/}
+                {/*              ]*/}
+                {/*            : [{ title: 'List', path: PATH_CADENCE.LIST }]*/}
+                {/*    }*/}
+                {/*>*/}
+                {/*    {id && <Button title={'Delete'} onClick={deleteCadence} />}*/}
+                {/*</BreadcrumbsContainer>*/}
 
                 <div className={style['boxContainer']}>
                     <div className={style['boxContainer__formBlock']}>

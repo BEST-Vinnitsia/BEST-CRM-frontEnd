@@ -138,13 +138,13 @@ export default function MemberDetailPage() {
     return (
         <ScrollY>
             <div className="p-4">
-                <BreadcrumbsContainer
-                    path={pathMap}
-                    buttons={[
-                        { title: 'Edit', path: `${PATH_MEMBER.EDIT}/${id}` },
-                        { title: 'List', path: PATH_MEMBER.LIST },
-                    ]}
-                />
+                {/*<BreadcrumbsContainer*/}
+                {/*    path={pathMap}*/}
+                {/*    buttons={[*/}
+                {/*        { title: 'Edit', path: `${PATH_MEMBER.EDIT}/${id}` },*/}
+                {/*        { title: 'List', path: PATH_MEMBER.LIST },*/}
+                {/*    ]}*/}
+                {/*/>*/}
 
                 {member && (
                     <div className="mt-1">

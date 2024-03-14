@@ -76,6 +76,7 @@ $main-w-desktop: 100dvh;
     &__main {
       grid-area: 2 / 2 / 3 / 3;
       padding: 8px;
+      transition: padding 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 
       &-content {
         width: 100%;
@@ -133,6 +134,16 @@ $main-w-desktop: 100dvh;
 /*  */
 /*  */
 /*  */
+
+@media (max-width: 720px) {
+  .container {
+    .layout {
+      &__main {
+        padding: 4px;
+      }
+    }
+  }
+}
 
 // @media (min-width: 1200px) {
 //     .dashboard {

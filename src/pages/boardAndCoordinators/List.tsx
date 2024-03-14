@@ -54,7 +54,7 @@ export default function BoardAndCoordinatorsListPage() {
     return (
         <ScrollY>
             <div className="p-4">
-                <BreadcrumbsContainer path={pathMap} buttons={[{ title: 'Create', path: PATH_BaC.CREATE }]} />
+                {/*<BreadcrumbsContainer path={pathMap} buttons={[{ title: 'Create', path: PATH_BaC.CREATE }]} />*/}
 
                 <TitleContainer position={'center'}>
                     <Title title={'Board'} color={'whiteGray'} size={'32'} />

@@ -471,17 +471,17 @@ export default function MemberEditPage() {
         <>
             <ScrollY>
                 <div className="p-4">
-                    <BreadcrumbsContainer
-                        path={id ? pathMapEdit : pathMapCreate}
-                        buttons={
-                            id
-                                ? [
-                                      { title: 'Details', path: `${PATH_MEMBER.DETAILS}/${id}` },
-                                      { title: 'List', path: PATH_MEMBER.LIST },
-                                  ]
-                                : [{ title: 'List', path: PATH_MEMBER.LIST }]
-                        }
-                    />
+                    {/*<BreadcrumbsContainer*/}
+                    {/*    path={id ? pathMapEdit : pathMapCreate}*/}
+                    {/*    buttons={*/}
+                    {/*        id*/}
+                    {/*            ? [*/}
+                    {/*                  { title: 'Details', path: `${PATH_MEMBER.DETAILS}/${id}` },*/}
+                    {/*                  { title: 'List', path: PATH_MEMBER.LIST },*/}
+                    {/*              ]*/}
+                    {/*            : [{ title: 'List', path: PATH_MEMBER.LIST }]*/}
+                    {/*    }*/}
+                    {/*/>*/}
 
                     <div className={style['boxContainer']}>
                         {/*<div></div>*/}
