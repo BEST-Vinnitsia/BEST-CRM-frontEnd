@@ -5,11 +5,26 @@ import { ImgCrmHome } from '../../assets/img';
 import { Button, ScrollY } from '../../components';
 import Breadcrumbs from '../../ui/breadcrumbs/BreadcrumbsContainer';
 import { PATH_EVENT } from '../../routes/paths';
+import Input from '../../ui/inputs/text/Input';
+import { SvgAdd } from '../../assets/svg';
+
+const breadcrumbsPath = [
+    {
+        url: PATH_EVENT.ROOT,
+        title: 'IT-Revolution`24',
+    },
+    {
+        url: 'asd',
+        title: 'rear',
+    },
+];
 
 export default function DashboardPage() {
     // const isLoading = useSelector((state: IStore) => state.utils.isLoading);
 
     const [toggle, setToggle] = useState(false);
+
+    const [test, setTest] = useState('');
 
     const handler = () => {
         utilsActions.loading(true);
@@ -47,21 +62,13 @@ export default function DashboardPage() {
             {/*</div>*/}
 
             <ScrollY>
-                <Breadcrumbs
-                    column={true}
-                    path={[
-                        {
-                            url: PATH_EVENT.ROOT,
-                            title: 'IT-Revolution`24',
-                        },
-                        {
-                            url: 'asd',
-                            title: 'rear',
-                        },
-                    ]}
-                >
+                <Breadcrumbs column={true} path={breadcrumbsPath}>
                     <Button title={'asd'} />
                 </Breadcrumbs>
+
+                <div className={'p-10 w-96'}>
+                    <Input label={'Event category'} value={test} error={false} setValue={setTest} svg={<SvgAdd />} />
+                </div>
 
                 <div
                     style={{ width: '200px', height: '100px' }}
