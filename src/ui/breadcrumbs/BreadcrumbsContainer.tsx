@@ -37,7 +37,7 @@ export default function Breadcrumbs({ path, children, column }: IProps) {
                                     style['breadcrumbs__nav-list-item'],
                                     path.length - 1 !== i ? style['breadcrumbs__nav-list-item--active'] : '',
                                 )}
-                                onClick={() => navigate(item.url)}
+                                onClick={() => path.length - 1 !== i && navigate(item.url)}
                             >
                                 {item.title}
                             </li>
