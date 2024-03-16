@@ -20,7 +20,7 @@ export default function Breadcrumbs({ path, children, column }: IProps) {
             <nav className={style['breadcrumbs__nav']}>
                 <ol className={style['breadcrumbs__nav-list']}>
                     {path.map((item, i) => (
-                        <React.Fragment>
+                        <React.Fragment key={i}>
                             {i !== 0 && (
                                 <li
                                     className={js(
