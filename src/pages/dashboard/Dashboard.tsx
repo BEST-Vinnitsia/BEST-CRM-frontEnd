@@ -3,10 +3,11 @@ import { utilsActions } from '../../redux/actions/utilsActions';
 import { Button, ScrollY } from '../../components';
 import Breadcrumbs from '../../ui/breadcrumbs/BreadcrumbsContainer';
 import { PATH_EVENT } from '../../routes/paths';
+import Select from '../../ui/inputs/select/Select';
 import Input from '../../ui/inputs/text/Input';
-import { SvgAdd } from '../../assets/svg';
 import InputPassword from '../../ui/inputs/password/InputPassword';
 import InputDate from '../../ui/inputs/date/InputDate';
+import { SvgAdd } from '../../assets/svg';
 
 const breadcrumbsPath = [
     {
@@ -71,6 +72,7 @@ export default function DashboardPage() {
                     <Input label={'Event category'} value={test} error={false} setValue={setTest} svg={<SvgAdd />} />
                     <InputPassword label={'Password'} value={test} error={false} setValue={setTest} />
                     <InputDate label={'Date'} value={testDate} error={false} setValue={setTestDate} />
+                    <Select label={'Select data'} value={test} setValue={setTest} arr={[]} />
                 </div>
 
                 <div
