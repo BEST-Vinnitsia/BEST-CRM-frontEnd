@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import style from './style.module.scss';
 import { utilsActions } from '../../redux/actions/utilsActions';
-import { ImgCrmHome } from '../../assets/img';
 import { Button, ScrollY } from '../../components';
 import Breadcrumbs from '../../ui/breadcrumbs/BreadcrumbsContainer';
 import { PATH_EVENT } from '../../routes/paths';
 import Input from '../../ui/inputs/text/Input';
 import { SvgAdd } from '../../assets/svg';
+import InputPassword from '../../ui/inputs/password/InputPassword';
 
 const breadcrumbsPath = [
     {
@@ -68,6 +67,7 @@ export default function DashboardPage() {
 
                 <div className={'p-10 w-96'}>
                     <Input label={'Event category'} value={test} error={false} setValue={setTest} svg={<SvgAdd />} />
+                    <InputPassword label={'Password'} value={test} error={false} setValue={setTest} />
                 </div>
 
                 <div

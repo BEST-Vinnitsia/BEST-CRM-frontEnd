@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="46dba494-486f-4f7d-9a8a-77943f7c8096" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/BEST-CRM-frontEnd.iml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/inputs/password/InputPassword.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/inputs/password/inputPassword.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/dashboard/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/dashboard/Dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/inputs/text/input.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/inputs/text/input.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +39,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/GitHub/BEST-CRM-frontEnd/src/components/sidebar/container",
+    "last_opened_file_path": "D:/GitHub/BEST-CRM-frontEnd/src/ui/inputs/password",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -54,11 +54,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\GitHub\BEST-CRM-frontEnd\src\ui\inputs\password" />
       <recent name="D:\GitHub\BEST-CRM-frontEnd\src\components\sidebar\container" />
       <recent name="D:\GitHub\BEST-CRM-frontEnd\src\ui\sidebar\toggle" />
       <recent name="D:\GitHub\BEST-CRM-frontEnd\src\ui\sidebar\button" />
       <recent name="D:\GitHub\BEST-CRM-frontEnd\src\ui\sidebar\container" />
-      <recent name="D:\GitHub\BEST-CRM-frontEnd" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\GitHub\BEST-CRM-frontEnd\src\ui\buttons\default" />
@@ -103,6 +103,7 @@
       <workItem from="1710612073094" duration="12573000" />
       <workItem from="1710757148601" duration="465000" />
       <workItem from="1710757623495" duration="499000" />
+      <workItem from="1710758381277" duration="2229000" />
     </task>
     <servers />
   </component>
