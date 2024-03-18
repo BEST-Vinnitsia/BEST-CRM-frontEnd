@@ -6,6 +6,7 @@ import { PATH_EVENT } from '../../routes/paths';
 import Input from '../../ui/inputs/text/Input';
 import { SvgAdd } from '../../assets/svg';
 import InputPassword from '../../ui/inputs/password/InputPassword';
+import InputDate from '../../ui/inputs/date/InputDate';
 
 const breadcrumbsPath = [
     {
@@ -24,6 +25,7 @@ export default function DashboardPage() {
     const [toggle, setToggle] = useState(false);
 
     const [test, setTest] = useState('');
+    const [testDate, setTestDate] = useState('');
 
     const handler = () => {
         utilsActions.loading(true);
@@ -68,6 +70,7 @@ export default function DashboardPage() {
                 <div className={'p-10 w-96'}>
                     <Input label={'Event category'} value={test} error={false} setValue={setTest} svg={<SvgAdd />} />
                     <InputPassword label={'Password'} value={test} error={false} setValue={setTest} />
+                    <InputDate label={'Date'} value={testDate} error={false} setValue={setTestDate} />
                 </div>
 
                 <div
