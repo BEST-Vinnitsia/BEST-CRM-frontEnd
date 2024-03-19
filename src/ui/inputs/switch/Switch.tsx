@@ -11,7 +11,7 @@ interface IProps {
 export default function Switch({ label, onClick, value }: IProps) {
     return (
         <div className={style['switch-container']} onClick={onClick}>
-            <span className={style['switch-container__label']}>{label}</span>
+            {label && <span className={style['switch-container__label']}>{label}</span>}
 
             <button className={js(style['switch'], value ? style['switch--active'] : '')}>
                 <div className={style['switch__toggle']} />

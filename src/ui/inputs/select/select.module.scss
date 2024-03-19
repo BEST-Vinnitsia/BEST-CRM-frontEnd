@@ -1,4 +1,4 @@
-.inputPassword {
+.select {
     position: relative;
     display: grid;
     grid-template-columns: 1fr 40px;
@@ -96,11 +96,11 @@
 //
 //
 
-.inputPassword--focus {
+.select--focus {
     border: 1px solid rgba(255, 255, 255, 0.25);
     background-color: rgba(91, 91, 91, 0.19);
 
-    .inputPassword__label {
+    .select__label {
         top: 3px;
         font-size: 12px;
         font-weight: bold;
@@ -112,8 +112,8 @@
 //
 //
 
-.inputPassword--change {
-    .inputPassword__label {
+.select--change {
+    .select__label {
         top: 3px;
         font-size: 12px;
         font-weight: bold;
@@ -125,11 +125,11 @@
 //
 //
 
-.inputPassword--error {
+.select--error {
     border: 1px solid rgba(255, 63, 109, 0.61);
     background-color: rgba(80, 32, 43, 0.19);
 
-    .inputPassword__label {
+    .select__label {
         color: #ff3f6d;
     }
 }
@@ -138,10 +138,10 @@
 //
 //
 
-.inputPassword--error-focus {
+.select--error-focus {
     background-color: rgba(80, 32, 43, 0.19);
 
-    .inputPassword__label {
+    .select__label {
         color: #ff3f6d;
     }
 }
@@ -150,7 +150,7 @@
 /*  */
 /*  */
 
-.select-list {
+.selectList {
     position: absolute;
     top:0;
     left: 0;

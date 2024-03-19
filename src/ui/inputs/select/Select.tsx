@@ -70,20 +70,20 @@ export default function Select({ label, setValue, value, arr }: IProps) {
                 ref={inputRef}
                 onClick={focusHandler}
                 className={js(
-                    style['inputPassword'],
-                    viewList ? style['inputPassword--focus'] : '',
-                    value !== '' ? style['inputPassword--change'] : '',
+                    style['select'],
+                    viewList ? style['select--focus'] : '',
+                    value !== '' ? style['select--change'] : '',
                 )}
             >
-                <label className={style['inputPassword__label']}>{label}</label>
+                <label className={style['select__label']}>{label}</label>
 
-                <div className={style['inputPassword__fieldContainer']}>
+                <div className={style['select__fieldContainer']}>
                     {value !== '' ? arr.find((item) => item.value === value)?.title : ''}
                 </div>
 
-                <div className={style['inputPassword__buttonContainer']}>
-                    <button className={style['inputPassword__buttonContainer-button']} onClick={(e) => toggleList(e)}>
-                        <div className={style['inputPassword__buttonContainer-button-svg']}>
+                <div className={style['select__buttonContainer']}>
+                    <button className={style['select__buttonContainer-button']} onClick={(e) => toggleList(e)}>
+                        <div className={style['select__buttonContainer-button-svg']}>
                             {viewList ? <SvgArrowTop /> : <SvgArrowBottom />}
                         </div>
                     </button>
@@ -96,18 +96,18 @@ export default function Select({ label, setValue, value, arr }: IProps) {
                 createPortal(
                     <div
                         ref={selectRef}
-                        className={style['select-list']}
+                        className={style['selectList']}
                         style={{
                             top: inputPosition.top + inputPosition.height + 4,
                             left: inputPosition.left,
                             width: inputPosition.width,
                         }}
                     >
-                        <div className={style['select-list__inner']}>
+                        <div className={style['selectList__inner']}>
                             {arr.map((item, i) => (
                                 <button
                                     key={i}
-                                    className={style['select-list__inner-button']}
+                                    className={style['selectList__inner-button']}
                                     onClick={() => onChangeHandler(item.value)}
                                 >
                                     {item.title}
