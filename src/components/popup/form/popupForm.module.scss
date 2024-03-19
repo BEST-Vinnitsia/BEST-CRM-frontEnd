@@ -1,0 +1,41 @@
+.popupBlock {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100dvw;
+    height: 100dvh;
+    background-color: rgba(18, 18, 22, 0.8);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+
+    .popup {
+        position: relative;
+        width: 400px;
+        min-height: 100px;
+        padding: 16px;
+        background-color: #121216;
+        border-radius: 16px;
+        border: 1px solid rgba(61, 139, 255, 0.15);
+        z-index: 105;
+
+        &__titleBlock {
+            margin-bottom: 16px;
+        }
+
+        &__contentBlock {
+            margin-bottom: 8px;
+        }
+
+        &__buttonBlock {
+            display: flex;
+            justify-content: flex-end;
+
+            & > *:not(:last-child) {
+                margin-right: 8px;
+            }
+        }
+    }
+}
