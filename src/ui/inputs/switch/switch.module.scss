@@ -1,0 +1,62 @@
+.switch-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: fit-content;
+    color: #8A8A9C;
+    transition: color 150ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    cursor: pointer;
+
+    &:hover {
+        color: #FFFFFF;
+
+        .switch {
+            opacity: 1;
+        }
+    }
+
+    &__label {
+        font-size: 16px;
+    }
+
+    //
+    //
+    //
+    
+    .switch {
+        position: relative;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 34px;
+        height: 21px;
+        border: 1px solid rgba(170, 52, 4, 0.5);
+        background: linear-gradient(111deg, rgba(66, 19, 0, 0.5) 0%, rgba(141, 43, 4, 0.5) 100%);
+        border-radius: 12px;
+        padding: 2px 3px;
+        overflow: hidden;
+        opacity: .8;
+        transition: opacity 150ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+
+        &__toggle {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 15px;
+            height: 15px;
+            border: 1px solid #7e7e7e;
+            background: #b3b4c2;
+            border-radius: 50%;
+            transition: left 150ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+        }
+    }
+
+    .switch--active {
+        background: linear-gradient(111deg, rgba(0, 34, 85, 0.5) 0%, rgba(0, 63, 158, 0.5) 100%);
+        border: 1px solid rgba(0, 102, 255, 0.5);
+
+        .switch__toggle {
+            left: 15px;
+        }
+    }
+}

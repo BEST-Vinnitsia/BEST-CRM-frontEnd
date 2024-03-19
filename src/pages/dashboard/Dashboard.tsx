@@ -8,6 +8,7 @@ import Input from '../../ui/inputs/text/Input';
 import InputPassword from '../../ui/inputs/password/InputPassword';
 import InputDate from '../../ui/inputs/date/InputDate';
 import { SvgAdd } from '../../assets/svg';
+import Switch from '../../ui/inputs/switch/Switch';
 
 const breadcrumbsPath = [
     {
@@ -73,6 +74,7 @@ export default function DashboardPage() {
                     <InputPassword label={'Password'} value={test} error={false} setValue={setTest} />
                     <InputDate label={'Date'} value={testDate} error={false} setValue={setTestDate} />
                     <Select label={'Select data'} value={test} setValue={setTest} arr={[]} />
+                    <Switch onClick={() => { setToggle((prev) => !prev)}} value={toggle} label={'Test switch'} />
                 </div>
 
                 <div
