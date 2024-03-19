@@ -22,10 +22,10 @@ export { default as SmallCard } from './card/SmallCard';
 
 // containers
 export { default as Menu } from './menu/Menu';
-export { default as BreadcrumbsContainer } from '../ui/breadcrumbs/BreadcrumbsContainer';
+export { default as BreadcrumbsContainer } from '../ui/breadcrumbs/Breadcrumbs';
 export { default as Popup } from './popup/Popup';
 
-// button
+// buttonContainer
 export { default as Button } from '../ui/buttons/default/Button';
 export { default as UserButton } from './button/UserButton';
 export { default as CircleButton } from './button/CircleButton';

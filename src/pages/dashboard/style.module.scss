@@ -1,5 +1,14 @@
 .globalImg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.demo {
+    width: 300px;
+    margin: 20px;
+
+    & > *:not(:last-child) {
+        margin-bottom: 8px;
+    }
 }

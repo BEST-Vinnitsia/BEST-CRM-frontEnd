@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import style from './style.module.scss';
 import { utilsActions } from '../../redux/actions/utilsActions';
 import { Button, ScrollY } from '../../components';
-import Breadcrumbs from '../../ui/breadcrumbs/BreadcrumbsContainer';
+import Breadcrumbs from '../../ui/breadcrumbs/Breadcrumbs';
 import { PATH_EVENT } from '../../routes/paths';
 import Select from '../../ui/inputs/select/Select';
 import Input from '../../ui/inputs/text/Input';
@@ -9,6 +10,7 @@ import InputPassword from '../../ui/inputs/password/InputPassword';
 import InputDate from '../../ui/inputs/date/InputDate';
 import { SvgAdd } from '../../assets/svg';
 import Switch from '../../ui/inputs/switch/Switch';
+import PopupForm from '../../components/popup/form/PopupForm';
 
 const breadcrumbsPath = [
     {
@@ -38,26 +40,26 @@ export default function DashboardPage() {
 
     return (
         <>
-            {/*<button onClick={handler} className="p-2 m-4 bg-cyan-800 rounded-lg">*/}
+            {/*<buttonContainer onClick={handler} className="p-2 m-4 bg-cyan-800 rounded-lg">*/}
             {/*    loading*/}
-            {/*</button>*/}
-            {/*<button*/}
+            {/*</buttonContainer>*/}
+            {/*<buttonContainer*/}
             {/*    onClick={() => userActions.setAccessToken(new Date().toISOString())}*/}
             {/*    className="p-2 m-4 bg-cyan-800 rounded-lg"*/}
             {/*>*/}
             {/*    access*/}
-            {/*</button>*/}
+            {/*</buttonContainer>*/}
 
-            {/*<button*/}
+            {/*<buttonContainer*/}
             {/*    onClick={() => userActions.setRefreshToken(new Date().toISOString())}*/}
             {/*    className="p-2 m-4 bg-cyan-800 rounded-lg"*/}
             {/*>*/}
             {/*    refresh*/}
-            {/*</button>*/}
+            {/*</buttonContainer>*/}
 
-            {/*<button onClick={() => userActions.logout()} className="p-2 m-4 bg-cyan-800 rounded-lg">*/}
+            {/*<buttonContainer onClick={() => userActions.logout()} className="p-2 m-4 bg-cyan-800 rounded-lg">*/}
             {/*    delete*/}
-            {/*</button>*/}
+            {/*</buttonContainer>*/}
 
             {/*<div className={'h-96'}>*/}
 
@@ -69,13 +71,30 @@ export default function DashboardPage() {
                     <Button title={'asd'} />
                 </Breadcrumbs>
 
-                <div className={'p-10 w-96'}>
+                <div className={style['demo']}>
                     <Input label={'Event category'} value={test} error={false} setValue={setTest} svg={<SvgAdd />} />
                     <InputPassword label={'Password'} value={test} error={false} setValue={setTest} />
                     <InputDate label={'Date'} value={testDate} error={false} setValue={setTestDate} />
-                    <Select label={'Select data'} value={test} setValue={setTest} arr={[]} />
-                    <Switch onClick={() => { setToggle((prev) => !prev)}} value={toggle} label={'Test switch'} />
+                    <Select
+                        label={'Select data'}
+                        value={test}
+                        setValue={setTest}
+                        arr={[
+                            { title: 'IT-Revolution', value: '1' },
+                            { title: 'Anniversary', value: '2' },
+                            { title: 'MW', value: '3' },
+                        ]}
+                    />
+                    <Switch
+                        onClick={() => {
+                            setToggle((prev) => !prev);
+                        }}
+                        value={toggle}
+                        label={'Test switch'}
+                    />
                 </div>
+
+                <PopupForm title={'Update'} />
 
                 <div
                     style={{ width: '200px', height: '100px' }}
