@@ -1,0 +1,16 @@
+.popupContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.popupContent--one {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+@media (max-width: 720px) {
+    .popupContent {
+        grid-template-columns: 1fr;
+    }
+}

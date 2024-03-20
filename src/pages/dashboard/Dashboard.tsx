@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import style from './style.module.scss';
 import { utilsActions } from '../../redux/actions/utilsActions';
 import { Button, ScrollY } from '../../components';
 import Breadcrumbs from '../../ui/breadcrumbs/Breadcrumbs';
@@ -11,6 +10,7 @@ import InputDate from '../../ui/inputs/date/InputDate';
 import { SvgAdd } from '../../assets/svg';
 import Switch from '../../ui/inputs/switch/Switch';
 import PopupForm from '../../components/popup/form/PopupForm';
+import PopupContent from '../../ui/popup/content/PopupContent';
 
 const breadcrumbsPath = [
     {
@@ -27,6 +27,7 @@ export default function DashboardPage() {
     // const isLoading = useSelector((state: IStore) => state.utils.isLoading);
 
     const [toggle, setToggle] = useState(false);
+    const [popupVisible, setPopupVisible] = useState(false);
 
     const [test, setTest] = useState('');
     const [testDate, setTestDate] = useState('');
@@ -71,30 +72,7 @@ export default function DashboardPage() {
                     <Button title={'asd'} />
                 </Breadcrumbs>
 
-                <div className={style['demo']}>
-                    <Input label={'Event category'} value={test} error={false} setValue={setTest} svg={<SvgAdd />} />
-                    <InputPassword label={'Password'} value={test} error={false} setValue={setTest} />
-                    <InputDate label={'Date'} value={testDate} error={false} setValue={setTestDate} />
-                    <Select
-                        label={'Select data'}
-                        value={test}
-                        setValue={setTest}
-                        arr={[
-                            { title: 'IT-Revolution', value: '1' },
-                            { title: 'Anniversary', value: '2' },
-                            { title: 'MW', value: '3' },
-                        ]}
-                    />
-                    <Switch
-                        onClick={() => {
-                            setToggle((prev) => !prev);
-                        }}
-                        value={toggle}
-                        label={'Test switch'}
-                    />
-                </div>
-
-                <PopupForm title={'Update'} />
+                <Button title={'open popup'} onClick={() => setPopupVisible(true)} />
 
                 <div
                     style={{ width: '200px', height: '100px' }}
@@ -106,6 +84,40 @@ export default function DashboardPage() {
                     <div style={{ width: '200px', height: '1000px' }} className={'bg-amber-800 p-10 m-10'}></div>
                 )}
             </ScrollY>
+
+            {popupVisible && (
+                <PopupForm title={'Update'} onClose={() => setPopupVisible(false)}>
+                    <PopupContent>
+                        <Input
+                            label={'Event category'}
+                            value={test}
+                            error={false}
+                            setValue={setTest}
+                            svg={<SvgAdd />}
+                        />
+                        <InputPassword label={'Password'} value={test} error={false} setValue={setTest} />
+                        <InputDate label={'Date'} value={testDate} error={false} setValue={setTestDate} />
+                        <Select
+                            label={'Select data'}
+                            value={test}
+                            setValue={setTest}
+                            arr={[
+                                { title: 'IT-Revolution', value: '1' },
+                                { title: 'Anniversary', value: '2' },
+                                { title: 'MW', value: '3' },
+                            ]}
+                        />
+                    </PopupContent>
+
+                    <Switch
+                        onClick={() => {
+                            setToggle((prev) => !prev);
+                        }}
+                        value={toggle}
+                        label={'Test switch'}
+                    />
+                </PopupForm>
+            )}
         </>
     );
 }

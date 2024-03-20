@@ -13,9 +13,11 @@
 
     .popup {
         position: relative;
-        width: 400px;
+        width: 600px;
         min-height: 100px;
         padding: 16px;
+        margin-right: 8px;
+        margin-left: 8px;
         background-color: #121216;
         border-radius: 16px;
         border: 1px solid rgba(61, 139, 255, 0.15);
