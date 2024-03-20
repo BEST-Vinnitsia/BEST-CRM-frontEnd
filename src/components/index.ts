@@ -23,7 +23,6 @@ export { default as SmallCard } from './card/SmallCard';
 // containers
 export { default as Menu } from './menu/Menu';
 export { default as BreadcrumbsContainer } from '../ui/breadcrumbs/Breadcrumbs';
-export { default as Popup } from './popup/Popup';
 
 // buttonContainer
 export { default as Button } from '../ui/buttons/default/Button';
@@ -37,7 +36,7 @@ export { default as Loader } from './loader/Loader';
 export { default as PreLoader } from './loader/PreLoader';
 
 // scroll
-export { default as ScrollY } from './scroll/ScrollY';
+export { default as ScrollY } from '../ui/scroll/sctollY/ScrollY';
 export { default as ScrollX } from './scroll/ScrollX';
 
 //

@@ -4,7 +4,7 @@ export const animationOpacity = {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
     exit: { opacity: 0 },
-    transition,
+    transition: { type: 'spring', stiffness: 500, damping: 50, mass: 1 },
 };
 
 export const animationLayoutTranslateX = {

@@ -87,7 +87,7 @@ export default function DashboardPage() {
 
             {popupVisible && (
                 <PopupForm title={'Update'} onClose={() => setPopupVisible(false)}>
-                    <PopupContent>
+                    <PopupContent sx={{ mb: '8px' }}>
                         <Input
                             label={'Event category'}
                             value={test}

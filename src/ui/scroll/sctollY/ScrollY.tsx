@@ -1,11 +1,32 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import style from './scrollY.module.scss';
 
-interface IProps {
-    children?: React.ReactNode;
+type size = '2px' | '4px' | '6px' | '8px' | '10px' | '12px' | '16px' | '24px' | string;
+
+interface stylePadding {
+    paddingTop: undefined | string;
+    paddingBottom: undefined | string;
+    paddingLeft: undefined | string;
+    paddingRight: undefined | string;
 }
 
-export default function ScrollY({ children }: IProps) {
+//
+
+interface IProps {
+    children?: React.ReactNode;
+    sx?: {
+        // padding
+        p?: size; // padding on all sides
+        px?: size; // padding left and right
+        py?: size; // padding top and bottom
+        pt?: size; // padding top
+        pb?: size; // padding bottom
+        pl?: size; // padding left
+        pr?: size; // padding right
+    };
+}
+
+export default function ScrollY({ children, sx }: IProps) {
     const contentRef = useRef<HTMLDivElement>(null);
     const scrollTrackRef = useRef<HTMLDivElement>(null);
     const scrollThumbRef = useRef<HTMLDivElement>(null);
@@ -138,9 +159,53 @@ export default function ScrollY({ children }: IProps) {
         [thumbHeight],
     );
 
+    //
+    //
+    //
+
+    const padding = () => {
+        const temp: stylePadding = {
+            paddingTop: undefined,
+            paddingBottom: undefined,
+            paddingLeft: undefined,
+            paddingRight: undefined,
+        };
+
+        if (!sx) return temp;
+
+        if (sx.p) {
+            temp.paddingRight = sx.p;
+            temp.paddingLeft = sx.p;
+            temp.paddingTop = sx.p;
+            temp.paddingBottom = sx.p;
+        }
+
+        if (sx.pt) temp.paddingTop = sx.pt;
+        if (sx.pb) temp.paddingBottom = sx.pb;
+        if (sx.pr) temp.paddingRight = sx.pr;
+        if (sx.pl) temp.paddingLeft = sx.pl;
+
+        if (sx.px) {
+            temp.paddingRight = sx.px;
+            temp.paddingLeft = sx.px;
+        }
+        if (sx.py) {
+            temp.paddingTop = sx.py;
+            temp.paddingBottom = sx.py;
+        }
+
+        return temp;
+    };
+
     return (
         <div className={style['scrollY-container']}>
-            <div ref={contentRef} className={style['scrollY-container__content']}>
+            <div
+                ref={contentRef}
+                className={style['scrollY-container__content']}
+                style={{
+                    ...padding(),
+                }}
+            >
                 {children}
             </div>
 

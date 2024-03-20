@@ -3,12 +3,13 @@
     align-items: center;
     gap: 16px;
     width: fit-content;
-    color: #8A8A9C;
+    color: #8a8a9c;
     transition: color 150ms cubic-bezier(0, 0, 0.2, 1) 0ms;
     cursor: pointer;
+    user-select: none;
 
     &:hover {
-        color: #FFFFFF;
+        color: #ffffff;
 
         .switch {
             opacity: 1;
@@ -35,7 +36,7 @@
         border-radius: 12px;
         padding: 2px 3px;
         overflow: hidden;
-        opacity: .8;
+        opacity: 0.8;
         transition: opacity 150ms cubic-bezier(0, 0, 0.2, 1) 0ms;
 
         &__toggle {
