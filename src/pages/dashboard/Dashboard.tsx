@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { utilsActions } from '../../redux/actions/utilsActions';
 import { Button, ScrollY } from '../../components';
 import Breadcrumbs from '../../ui/breadcrumbs/Breadcrumbs';
@@ -13,6 +13,7 @@ import PopupForm from '../../components/popup/form/PopupForm';
 import PopupContent from '../../ui/popup/content/PopupContent';
 import PopupMessage from '../../components/popup/message/PopupMessage';
 import Tab from '../../ui/tab/Tab';
+import CardMember from '../../ui/cards/member/CardMember';
 
 const breadcrumbsPath = [
     {
@@ -34,6 +35,25 @@ export default function DashboardPage() {
 
     const [test, setTest] = useState('');
     const [testDate, setTestDate] = useState('');
+
+    const [img, setImg] = useState<Blob | undefined>(undefined);
+    const [imgUrl, setImgUrl] = useState<string>('');
+
+    const getImg = async () => {
+        fetch(`http://localhost:3000/img/user.jpg`)
+            .then((res) => res.blob())
+            .then((blob) => {
+                setImg(blob);
+            });
+    };
+
+    useEffect(() => {
+        getImg();
+    }, []);
+
+    useEffect(() => {
+        if (img) setImgUrl(URL.createObjectURL(img));
+    }, [img]);
 
     const handler = () => {
         utilsActions.loading(true);
@@ -75,10 +95,29 @@ export default function DashboardPage() {
                     <Button title={'asd'} />
                 </Breadcrumbs>
 
-                <Tab onClick={(s: string) => {}} value={'test 2'} tabs={[
-                    {title: 'test', svg: <SvgAdd />},
-                    {title: 'test 2', svg: <SvgInfo />},
-                ]} />
+                <Tab
+                    onClick={(s: string) => {}}
+                    value={'test 2'}
+                    tabs={[
+                        { title: 'test', svg: <SvgAdd /> },
+                        { title: 'test 2', svg: <SvgInfo /> },
+                    ]}
+                />
+
+                <div className={'flex mt-2'}>
+                    <div className={'mr-2'}>
+                        <CardMember title={'Designer'} subtitle={'asd'} svg={<SvgAdd />} />
+                    </div>
+                    <div className={'mr-2'}>
+                        <CardMember title={'Designer'} svg={<SvgAdd />} />
+                    </div>
+                    <div className={'mr-2'}>
+                        <CardMember title={'Designer'} imgUrl={imgUrl} />
+                    </div>
+                    <div className={'mr-2'}>
+                        <CardMember title={'Designer'} subtitle={'demo'} imgUrl={imgUrl} />
+                    </div>
+                </div>
 
                 {/*<Button title={'open popup'} onClick={() => setPopupVisible(true)} />*/}
                 {/*<Button title={'open delete popup'} onClick={() => setPopupMessageDeleteVisible(true)} />*/}
