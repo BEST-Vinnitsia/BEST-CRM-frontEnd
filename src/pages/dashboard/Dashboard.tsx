@@ -7,14 +7,12 @@ import Select from '../../ui/inputs/select/Select';
 import Input from '../../ui/inputs/text/Input';
 import InputPassword from '../../ui/inputs/password/InputPassword';
 import InputDate from '../../ui/inputs/date/InputDate';
-import { SvgAdd } from '../../assets/svg';
+import { SvgAdd, SvgInfo } from '../../assets/svg';
 import Switch from '../../ui/inputs/switch/Switch';
 import PopupForm from '../../components/popup/form/PopupForm';
 import PopupContent from '../../ui/popup/content/PopupContent';
 import PopupMessage from '../../components/popup/message/PopupMessage';
-import Label from '../../ui/label/Label';
-import ButtonCircle from '../../ui/buttons/circle/ButtonCircle';
-import ButtonLong from '../../ui/buttons/long/ButtonLong';
+import Tab from '../../ui/tab/Tab';
 
 const breadcrumbsPath = [
     {
@@ -77,26 +75,26 @@ export default function DashboardPage() {
                     <Button title={'asd'} />
                 </Breadcrumbs>
 
-                <Button title={'open popup'} onClick={() => setPopupVisible(true)} />
-                <Button title={'open delete popup'} onClick={() => setPopupMessageDeleteVisible(true)} />
+                <Tab onClick={(s: string) => {}} value={'test 2'} tabs={[
+                    {title: 'test', svg: <SvgAdd />},
+                    {title: 'test 2', svg: <SvgInfo />},
+                ]} />
 
-                <ButtonCircle svg={<SvgAdd />} />
-                <ButtonCircle svg={<SvgAdd />} size={'small'} />
-                <ButtonCircle svg={<SvgAdd />} size={'large'}/>
+                {/*<Button title={'open popup'} onClick={() => setPopupVisible(true)} />*/}
+                {/*<Button title={'open delete popup'} onClick={() => setPopupMessageDeleteVisible(true)} />*/}
 
-                <ButtonLong title={'Submit'} status={'default'} />
-                <ButtonLong title={'Submit'} status={'active'} />
-                <ButtonLong title={'Submit'} status={'disable'} />
-                <ButtonLong title={'Submit'} status={'loading'} />
+                {/*<ButtonCircle svg={<SvgAdd />} />*/}
+                {/*<ButtonCircle svg={<SvgAdd />} size={'small'} />*/}
+                {/*<ButtonCircle svg={<SvgAdd />} size={'large'}/>*/}
 
-                <Label title={'test'}/>
-                <Label title={'test'} color={'blue'}/>
-                <Label title={'test'} color={'red'}/>
-                <Label title={'test'} color={'gray'}/>
-                <Label title={'test'} color={'green'}/>
-                <Label title={'test'} color={'pink'}/>
-                <Label title={'test'} color={'orange'}/>
-                <Label title={'test'} color={'purple'}/>
+                {/*<Label title={'test'}/>*/}
+                {/*<Label title={'test'} color={'blue'}/>*/}
+                {/*<Label title={'test'} color={'red'}/>*/}
+                {/*<Label title={'test'} color={'gray'}/>*/}
+                {/*<Label title={'test'} color={'green'}/>*/}
+                {/*<Label title={'test'} color={'pink'}/>*/}
+                {/*<Label title={'test'} color={'orange'}/>*/}
+                {/*<Label title={'test'} color={'purple'}/>*/}
 
                 <div
                     style={{ width: '200px', height: '100px' }}

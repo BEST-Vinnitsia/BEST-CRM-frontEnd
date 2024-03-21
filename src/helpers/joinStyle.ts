@@ -1,3 +1,4 @@
 export const joinStyle = (...classNames: string[]): string => {
-    return classNames.join(' ');
+    let temp = classNames.join(' ');
+    return temp.trim()
 };
