@@ -11,6 +11,7 @@ import { SvgAdd } from '../../assets/svg';
 import Switch from '../../ui/inputs/switch/Switch';
 import PopupForm from '../../components/popup/form/PopupForm';
 import PopupContent from '../../ui/popup/content/PopupContent';
+import PopupMessage from '../../components/popup/message/PopupMessage';
 
 const breadcrumbsPath = [
     {
@@ -28,6 +29,7 @@ export default function DashboardPage() {
 
     const [toggle, setToggle] = useState(false);
     const [popupVisible, setPopupVisible] = useState(false);
+    const [popupMessageDeleteVisible, setPopupMessageDeleteVisible] = useState(false);
 
     const [test, setTest] = useState('');
     const [testDate, setTestDate] = useState('');
@@ -73,6 +75,7 @@ export default function DashboardPage() {
                 </Breadcrumbs>
 
                 <Button title={'open popup'} onClick={() => setPopupVisible(true)} />
+                <Button title={'open delete popup'} onClick={() => setPopupMessageDeleteVisible(true)} />
 
                 <div
                     style={{ width: '200px', height: '100px' }}
@@ -84,6 +87,19 @@ export default function DashboardPage() {
                     <div style={{ width: '200px', height: '1000px' }} className={'bg-amber-800 p-10 m-10'}></div>
                 )}
             </ScrollY>
+
+            {popupMessageDeleteVisible && (
+                <PopupMessage
+                    title={'Delete'}
+                    text={[
+                        'If you delete this event, you delete all history about it too',
+                        'To confirm delete click on button',
+                    ]}
+                    onClose={() => setPopupMessageDeleteVisible(false)}
+                    type={'error'}
+                    onSubmit={() => {}}
+                />
+            )}
 
             {popupVisible && (
                 <PopupForm title={'Update'} onClose={() => setPopupVisible(false)}>

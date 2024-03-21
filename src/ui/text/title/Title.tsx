@@ -5,7 +5,7 @@ import { js } from '../../../helpers';
 interface IProps {
     title: string;
     size?: '14' | '16' | '18' | '20' | '24' | '32' | '40' | '48';
-    color?: 'white' | 'whiteGray' | 'blue' | 'green';
+    color?: 'white' | 'whiteGray' | 'blue' | 'green' | 'red';
     position?: 'start' | 'center' | 'end';
 }
 
