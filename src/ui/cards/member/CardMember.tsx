@@ -1,19 +1,29 @@
 import React from 'react';
 import style from './cardMemebr.module.scss';
+import { js } from '../../../helpers';
 
 interface IProps {
     title: string;
     subtitle?: string;
     svg?: React.ReactNode;
     imgUrl?: string;
+    onClick?: () => void;
 }
 
-export default function CardMember({ title, subtitle, svg, imgUrl }: IProps) {
+export default function CardMember({ title, subtitle, svg, imgUrl, onClick }: IProps) {
     return (
-        <div className={style['cardMember']}>
-            {imgUrl && <div className={style['cardMember__img']}>
-                <img src={imgUrl} alt={'img'} />
-            </div>}
+        <div
+            className={js(
+                style['cardMember'], //
+                onClick ? style['cardMember--click'] : '',
+            )}
+            onClick={onClick}
+        >
+            {imgUrl && (
+                <div className={style['cardMember__img']}>
+                    <img src={imgUrl} alt={'img'} />
+                </div>
+            )}
 
             {svg && <div className={style['cardMember__svg']}>{svg}</div>}
 

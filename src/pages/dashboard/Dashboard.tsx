@@ -14,6 +14,10 @@ import PopupContent from '../../ui/popup/content/PopupContent';
 import PopupMessage from '../../components/popup/message/PopupMessage';
 import Tab from '../../ui/tab/Tab';
 import CardMember from '../../ui/cards/member/CardMember';
+import ButtonCircle from '../../ui/buttons/circle/ButtonCircle';
+import Label from '../../ui/label/Label';
+import style from './style.module.scss';
+import ButtonLong from '../../ui/buttons/long/ButtonLong';
 
 const breadcrumbsPath = [
     {
@@ -104,12 +108,14 @@ export default function DashboardPage() {
                     ]}
                 />
 
+                <Tab onClick={(s: string) => {}} value={'test 2'} tabs={[{ title: 'test' }, { title: 'test 2' }]} />
+
                 <div className={'flex mt-2'}>
                     <div className={'mr-2'}>
                         <CardMember title={'Designer'} subtitle={'asd'} svg={<SvgAdd />} />
                     </div>
                     <div className={'mr-2'}>
-                        <CardMember title={'Designer'} svg={<SvgAdd />} />
+                        <CardMember title={'Designer'} svg={<SvgAdd />} onClick={() => {}} />
                     </div>
                     <div className={'mr-2'}>
                         <CardMember title={'Designer'} imgUrl={imgUrl} />
@@ -119,21 +125,34 @@ export default function DashboardPage() {
                     </div>
                 </div>
 
-                {/*<Button title={'open popup'} onClick={() => setPopupVisible(true)} />*/}
-                {/*<Button title={'open delete popup'} onClick={() => setPopupMessageDeleteVisible(true)} />*/}
+                <div className={style['demoContainer']}>
+                    <Button title={'open popup'} onClick={() => setPopupVisible(true)} />
+                    <Button title={'open delete popup'} onClick={() => setPopupMessageDeleteVisible(true)} />
+                </div>
 
-                {/*<ButtonCircle svg={<SvgAdd />} />*/}
-                {/*<ButtonCircle svg={<SvgAdd />} size={'small'} />*/}
-                {/*<ButtonCircle svg={<SvgAdd />} size={'large'}/>*/}
+                <div className={style['demoContainer']}>
+                    <ButtonLong title={'Submit'} />
+                    <ButtonLong title={'Submit'} status={'active'} />
+                    <ButtonLong title={'Submit'} status={'loading'} />
+                    <ButtonLong title={'Submit'} status={'disable'} />
+                </div>
 
-                {/*<Label title={'test'}/>*/}
-                {/*<Label title={'test'} color={'blue'}/>*/}
-                {/*<Label title={'test'} color={'red'}/>*/}
-                {/*<Label title={'test'} color={'gray'}/>*/}
-                {/*<Label title={'test'} color={'green'}/>*/}
-                {/*<Label title={'test'} color={'pink'}/>*/}
-                {/*<Label title={'test'} color={'orange'}/>*/}
-                {/*<Label title={'test'} color={'purple'}/>*/}
+                <div className={style['demoContainer']}>
+                    <ButtonCircle svg={<SvgAdd />} />
+                    <ButtonCircle svg={<SvgAdd />} size={'small'} />
+                    <ButtonCircle svg={<SvgAdd />} size={'large'} />
+                </div>
+
+                <div className={style['demoContainer']}>
+                    <Label title={'test'} />
+                    <Label title={'test'} color={'blue'} />
+                    <Label title={'test'} color={'red'} />
+                    <Label title={'test'} color={'gray'} />
+                    <Label title={'test'} color={'green'} />
+                    <Label title={'test'} color={'pink'} />
+                    <Label title={'test'} color={'orange'} />
+                    <Label title={'test'} color={'purple'} />
+                </div>
 
                 <div
                     style={{ width: '200px', height: '100px' }}

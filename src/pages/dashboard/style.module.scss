@@ -12,3 +12,13 @@
         margin-bottom: 8px;
     }
 }
+
+.demoContainer {
+    display: flex;
+    margin-top: 10px;
+    
+
+    & > * {
+        margin-right: 8px;
+    }
+}
