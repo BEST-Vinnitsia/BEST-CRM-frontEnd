@@ -13,6 +13,7 @@ import PopupForm from '../../components/popup/form/PopupForm';
 import PopupContent from '../../ui/popup/content/PopupContent';
 import PopupMessage from '../../components/popup/message/PopupMessage';
 import Label from '../../ui/label/Label';
+import ButtonCircle from '../../ui/buttons/circle/ButtonCircle';
 
 const breadcrumbsPath = [
     {
@@ -77,6 +78,10 @@ export default function DashboardPage() {
 
                 <Button title={'open popup'} onClick={() => setPopupVisible(true)} />
                 <Button title={'open delete popup'} onClick={() => setPopupMessageDeleteVisible(true)} />
+
+                <ButtonCircle svg={<SvgAdd />} />
+                <ButtonCircle svg={<SvgAdd />} size={'small'} />
+                <ButtonCircle svg={<SvgAdd />} size={'large'}/>
 
                 <Label title={'test'}/>
                 <Label title={'test'} color={'blue'}/>
