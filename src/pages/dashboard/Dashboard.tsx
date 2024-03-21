@@ -14,6 +14,7 @@ import PopupContent from '../../ui/popup/content/PopupContent';
 import PopupMessage from '../../components/popup/message/PopupMessage';
 import Label from '../../ui/label/Label';
 import ButtonCircle from '../../ui/buttons/circle/ButtonCircle';
+import ButtonLong from '../../ui/buttons/long/ButtonLong';
 
 const breadcrumbsPath = [
     {
@@ -82,6 +83,11 @@ export default function DashboardPage() {
                 <ButtonCircle svg={<SvgAdd />} />
                 <ButtonCircle svg={<SvgAdd />} size={'small'} />
                 <ButtonCircle svg={<SvgAdd />} size={'large'}/>
+
+                <ButtonLong title={'Submit'} status={'default'} />
+                <ButtonLong title={'Submit'} status={'active'} />
+                <ButtonLong title={'Submit'} status={'disable'} />
+                <ButtonLong title={'Submit'} status={'loading'} />
 
                 <Label title={'test'}/>
                 <Label title={'test'} color={'blue'}/>

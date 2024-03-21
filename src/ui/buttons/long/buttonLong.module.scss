@@ -1,0 +1,158 @@
+.buttonLong {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100px;
+    width: 100%;
+    min-height: 40px;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+        5px 5px 20px 0px rgba(132, 189, 86, 0.15),
+        -5px -5px 20px 0px rgba(148, 218, 255, 0.15);
+    background-color: rgba(91, 91, 91, 0.19);
+    user-select: none;
+
+    &__bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+
+        &-itemBlue {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 50%;
+            height: 60%;
+            background-color: #94daff;
+        }
+
+        &-itemGreen {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 50%;
+            height: 60%;
+            background-color: #84bd56;
+        }
+
+        &-blur {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 2;
+            border-radius: 7px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+        }
+    }
+
+    &__title {
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        color: #000;
+        font-size: 16px;
+        z-index: 3;
+    }
+
+    &:hover {
+        .buttonLong {
+            &__bg {
+                &-blur {
+                    background: rgba(255, 255, 255, 0.5);
+                }
+            }
+        }
+    }
+}
+
+//
+// STATUS
+//
+
+.buttonLong--default {
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: none;
+
+    .buttonLong__bg {
+        &-itemBlue {
+            display: none;
+        }
+
+        &-itemGreen {
+            display: none;
+        }
+
+        &-blur {
+            background-color: rgba(240, 240, 240, 0.1);
+        }
+    }
+
+    .buttonLong__title {
+        color: #fff;
+    }
+
+    &:hover {
+        .buttonLong {
+            &__bg {
+                &-blur {
+                    background-color: rgba(240, 240, 240, 0.2);
+                }
+            }
+        }
+    }
+}
+
+.buttonLong--active {
+}
+
+.buttonLong--disable {
+    cursor: not-allowed;
+    border-color: rgba(163, 163, 163, 0.2);
+
+    .buttonLong__bg {
+        &-blur {
+            background: rgba(61, 61, 61, 0.9);
+        }
+    }
+
+    .buttonLong__title {
+        color: #282828;
+    }
+
+    &:hover {
+        .buttonLong {
+            &__bg {
+                &-blur {
+                    background: rgba(61, 61, 61, 0.9);
+                }
+            }
+        }
+    }
+}
+
+.buttonLong--loading {
+    cursor: wait;
+
+    .buttonLong__title {
+        color: #a1a1a1;
+    }
+
+    &:hover {
+        .buttonLong {
+            &__bg {
+                &-blur {
+                    background: rgba(255, 255, 255, 0.8);
+                }
+            }
+        }
+    }
+}
