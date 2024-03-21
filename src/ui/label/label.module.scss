@@ -1,0 +1,69 @@
+.label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    &__text {
+        font-size: 14px;
+    }
+}
+
+//
+// SIZE
+//
+
+.label--size-medium {
+    padding: 2px 8px;
+}
+
+.label--size-large {
+    padding: 4px 10px;
+}
+
+//
+// COLOR
+//
+
+.label--color-gray {
+    color: #fff;
+    border-color: #8c8c8c;
+    background: linear-gradient(99deg, rgba(68, 68, 68, 0.4) 0%, rgba(177, 177, 177, 0.4) 100%);
+}
+
+.label--color-blue {
+    color: #3D8BFF;
+    border-color: #06F;
+    background: linear-gradient(99deg, rgba(0, 34, 85, 0.40) 0%, rgba(0, 63, 158, 0.40) 100%);}
+
+.label--color-green {
+    color: #3BFF00;
+    border-color: #27A700;
+    background: linear-gradient(99deg, rgba(11, 49, 0, 0.40) 0%, rgba(38, 164, 0, 0.40) 100%);
+}
+
+.label--color-red {
+    color: #FFE500;
+    border-color: #A70000;
+    background: linear-gradient(99deg, rgba(49, 0, 0, 0.40) 0%, rgba(164, 0, 0, 0.40) 100%);
+}
+
+.label--color-purple {
+    color: #7C67FF;
+    border-color: #2C0288;
+    background: linear-gradient(99deg, rgba(22, 0, 68, 0.40) 0%, rgba(52, 0, 165, 0.40) 100%);
+}
+
+.label--color-orange {
+    color: #C53901;
+    border-color: #AA3404;
+    background: linear-gradient(99deg, rgba(66, 19, 0, 0.40) 0%, rgba(141, 43, 4, 0.40) 100%);
+}
+
+.label--color-pink {
+    color: #E164FF;
+    border-color: #A825C9;
+    background: linear-gradient(99deg, rgba(73, 0, 91, 0.40) 0%, rgba(151, 0, 189, 0.40) 100%);
+}

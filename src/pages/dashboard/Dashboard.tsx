@@ -12,6 +12,7 @@ import Switch from '../../ui/inputs/switch/Switch';
 import PopupForm from '../../components/popup/form/PopupForm';
 import PopupContent from '../../ui/popup/content/PopupContent';
 import PopupMessage from '../../components/popup/message/PopupMessage';
+import Label from '../../ui/label/Label';
 
 const breadcrumbsPath = [
     {
@@ -76,6 +77,15 @@ export default function DashboardPage() {
 
                 <Button title={'open popup'} onClick={() => setPopupVisible(true)} />
                 <Button title={'open delete popup'} onClick={() => setPopupMessageDeleteVisible(true)} />
+
+                <Label title={'test'}/>
+                <Label title={'test'} color={'blue'}/>
+                <Label title={'test'} color={'red'}/>
+                <Label title={'test'} color={'gray'}/>
+                <Label title={'test'} color={'green'}/>
+                <Label title={'test'} color={'pink'}/>
+                <Label title={'test'} color={'orange'}/>
+                <Label title={'test'} color={'purple'}/>
 
                 <div
                     style={{ width: '200px', height: '100px' }}
