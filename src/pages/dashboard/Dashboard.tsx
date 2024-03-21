@@ -211,6 +211,9 @@ export default function DashboardPage() {
                     />
                 </PopupForm>
             )}
+
+            {/*<Preloader loading={true} />*/}
+            {/*{<Loader loading={true} />}*/}
         </>
     );
 }

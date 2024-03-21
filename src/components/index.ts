@@ -32,7 +32,7 @@ export { default as LongButton } from './button/LongButton';
 export { default as SelectButton } from './button/SelectButton';
 
 // loader
-export { default as Loader } from './loader/Loader';
+export { default as Loader } from '../ui/loaders/loader/Loader';
 export { default as PreLoader } from './loader/PreLoader';
 
 // scroll

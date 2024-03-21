@@ -1,5 +1,5 @@
 .loader {
-    $bg-color: rgba(19, 19, 23, 0.15);
+    $bg-color: rgba(18, 18, 22, 0.8);
 
     position: absolute;
     top: 0;
@@ -10,13 +10,8 @@
     align-items: center;
     justify-content: center;
     background-color: $bg-color;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(10px);
     z-index: 4;
-
-    // background-image: url(../../assets/cyan-blur.png), url(../../assets/red-blur.png);
-    // background-repeat: no-repeat, no-repeat;
-    // background-position: right top, left bottom;
-    // background-size: 50%, 50%;
 
     &__box {
         padding: 0 10px;

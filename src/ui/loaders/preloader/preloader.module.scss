@@ -1,0 +1,82 @@
+.preloader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #121216;
+    z-index: 200;
+
+    &__content {
+        display: flex;
+        justify-content: center;
+        width: 386px;
+
+        &-logo {
+            width: 200px;
+            height: 200px;
+        }
+
+        &-text {
+            display: flex;
+            flex-direction: column;
+            width: 206px;
+            margin-top: 40px;
+            margin-left: -20px;
+
+            &-crm {
+                font-size: 56px;
+                font-family: 'SF-Pro';
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                background-clip: text;
+                background: linear-gradient(90deg, #fff 0%, #9292a9 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            &-loading {
+                font-size: 24px;
+                font-family: 'SF-Pro';
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                background-clip: text;
+                background: linear-gradient(90deg, #fff 0%, #9292a9 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+
+                display: inline-block;
+                width: 156px;
+                margin-left: 50px;
+                margin-top: -10px;
+                letter-spacing: 5px;
+                border-right: 1px solid #fff;
+                animation:
+                    typing-second 3s steps(3) infinite running,
+                    cursor 0.5s step-end infinite alternate;
+            }
+        }
+    }
+}
+
+@keyframes cursor {
+    50% {
+        border-color: transparent;
+    }
+}
+
+@keyframes typing-second {
+    0%,
+    5% {
+        width: 120px;
+    }
+    80%,
+    100% {
+        width: 156px;
+    }
+}
