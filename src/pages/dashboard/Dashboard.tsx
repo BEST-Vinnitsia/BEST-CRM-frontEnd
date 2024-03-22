@@ -18,6 +18,7 @@ import ButtonCircle from '../../ui/buttons/circle/ButtonCircle';
 import Label from '../../ui/label/Label';
 import style from './style.module.scss';
 import ButtonLong from '../../ui/buttons/long/ButtonLong';
+import CardContainer from '../../ui/cards/container/CardContainer';
 
 const breadcrumbsPath = [
     {
@@ -48,7 +49,8 @@ export default function DashboardPage() {
             .then((res) => res.blob())
             .then((blob) => {
                 setImg(blob);
-            });
+            })
+            .catch(() => setImgUrl('http://localhost:3000/img/user.jpg'));
     };
 
     useEffect(() => {
@@ -110,20 +112,15 @@ export default function DashboardPage() {
 
                 <Tab onClick={(s: string) => {}} value={'test 2'} tabs={[{ title: 'test' }, { title: 'test 2' }]} />
 
-                <div className={'flex mt-2'}>
-                    <div className={'mr-2'}>
-                        <CardMember title={'Designer'} subtitle={'asd'} svg={<SvgAdd />} />
-                    </div>
-                    <div className={'mr-2'}>
-                        <CardMember title={'Designer'} svg={<SvgAdd />} onClick={() => {}} />
-                    </div>
-                    <div className={'mr-2'}>
-                        <CardMember title={'Designer'} imgUrl={imgUrl} />
-                    </div>
-                    <div className={'mr-2'}>
-                        <CardMember title={'Designer'} subtitle={'demo'} imgUrl={imgUrl} />
-                    </div>
-                </div>
+                <CardContainer>
+                    <CardMember title={'Designer'} subtitle={'asd'} svg={<SvgAdd />} />
+                    <CardMember title={'Designer'} svg={<SvgAdd />} onClick={() => {}} />
+                    <CardMember title={'Designer'} imgUrl={imgUrl} />
+                    <CardMember title={'Designer'} subtitle={'demo'} imgUrl={imgUrl} />
+                    <CardMember title={'Designer'} subtitle={'demo'} imgUrl={imgUrl} />
+                    <CardMember title={'Designer'} subtitle={'demo'} imgUrl={imgUrl} />
+                    <CardMember title={'Designer'} subtitle={'demo'} imgUrl={imgUrl} />
+                </CardContainer>
 
                 <div className={style['demoContainer']}>
                     <Button title={'open popup'} onClick={() => setPopupVisible(true)} />

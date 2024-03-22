@@ -1,0 +1,17 @@
+.cardContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 8px 0;
+
+    & > * {
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: calc(25% - 16px);
+    }
+
+    & > *:not(:last-child) {
+        margin-right: 8px;
+        margin-bottom: 8px;
+    }
+}

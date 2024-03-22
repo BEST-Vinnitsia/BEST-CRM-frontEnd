@@ -1,11 +1,4 @@
-.globalImg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
 .demo {
-    width: 300px;
     margin: 20px;
 
     & > *:not(:last-child) {
@@ -16,7 +9,6 @@
 .demoContainer {
     display: flex;
     margin-top: 10px;
-    
 
     & > * {
         margin-right: 8px;
