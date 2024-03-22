@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import style from './styleEdit.module.scss';
-import { BreadcrumbsContainer, Button, Input, ScrollY, Select } from '../../components';
 import { PATH_MEMBER } from '../../routes/paths';
 import { useNavigate, useParams } from 'react-router-dom';
-import { clothingSize, pageNames } from '../../constants';
+import { pageNames } from '../../constants';
 import {
     boardService,
     boardToMemberService,
@@ -35,15 +34,11 @@ import { IBoardToMemberGetByMemberIdRes } from '../../interfaces/board/boardToMe
 import { ICoordinatorToMemberGetByMemberIdRes } from '../../interfaces/coordinator/coordinatorToMemberRes';
 import { ICommitteeToMemberGetByMemberIdRes } from '../../interfaces/committee/committeeToMemberRes';
 import { INewEventToMemberGetListRes } from '../../interfaces/event/newEventToMemberRes';
-import SelectBoardAndCadence from '../../components/select/SelectBoardAndCadence';
-import SelectCommitteeAndCadence from '../../components/select/SelectCommitteeAndCadence';
-import SelectCoordinatorAndCadence from '../../components/select/SelectCoordinatorAndCadence';
-import SelectEventAndResp from '../../components/select/SelectEventAndResp';
 import { IBoardToMemberCreateReq } from '../../interfaces/board/boardToMemberReq';
 import { ICommitteeToMemberCreateReq } from '../../interfaces/committee/committeeToMemberReq';
 import { ICoordinatorToMemberCreateReq } from '../../interfaces/coordinator/coordinatorToMemberReq';
 import { INewEventToMemberCreateReq } from '../../interfaces/event/newEventToMemberReq';
-import { clothingSizeConst } from '../../constants/membership';
+import { Button, ScrollY } from '../../ui';
 // import { ICommittee } from '../../interfaces/committee/committee';
 // import { IResponsible } from '../../interfaces/event/responsible';
 // import { INewEvent } from '../../interfaces/event/newEvent';
@@ -487,71 +482,71 @@ export default function MemberEditPage() {
                         {/*<div></div>*/}
                         <div className={style['boxContainer__formBlock']}>
                             <div className={style['boxContainer__formBlock-inner']}>
-                                <Input placeholder={'Name'} hookProps={form.name} />
-                                <Input placeholder={'Surname'} hookProps={form.surname} />
-                                <Input placeholder={'Middle name'} hookProps={form.middleName} />
-                                <Select
-                                    placeholder={'Membership'}
-                                    hookProps={form.membership}
-                                    data={clothingSizeConst.map((item) => ({ id: item, name: item }))}
-                                />
+                                {/*<Input placeholder={'Name'} hookProps={form.name} />*/}
+                                {/*<Input placeholder={'Surname'} hookProps={form.surname} />*/}
+                                {/*<Input placeholder={'Middle name'} hookProps={form.middleName} />*/}
+                                {/*<Select*/}
+                                {/*    placeholder={'Membership'}*/}
+                                {/*    hookProps={form.membership}*/}
+                                {/*    data={clothingSizeConst.map((item) => ({ id: item, name: item }))}*/}
+                                {/*/>*/}
                             </div>
 
                             <div className={style['boxContainer__formBlock-inner']}>
-                                <Input placeholder={'Email'} hookProps={form.email} />
-                                <Input placeholder={'BEST email'} hookProps={form.bestEmail} />
-                                <Input placeholder={'Phone'} hookProps={form.phone} />
-                                <Input placeholder={'Message'} hookProps={form.socialNetwork} />
+                                {/*<Input placeholder={'Email'} hookProps={form.email} />*/}
+                                {/*<Input placeholder={'BEST email'} hookProps={form.bestEmail} />*/}
+                                {/*<Input placeholder={'Phone'} hookProps={form.phone} />*/}
+                                {/*<Input placeholder={'Message'} hookProps={form.socialNetwork} />*/}
                             </div>
 
-                            <div className={style['boxContainer__formBlock-inner']}>
-                                <Input placeholder={'Group'} hookProps={form.group} />
-                                <Input placeholder={'Faculty'} hookProps={form.faculty} />
-                            </div>
+                            {/*<div className={style['boxContainer__formBlock-inner']}>*/}
+                            {/*    <Input placeholder={'Group'} hookProps={form.group} />*/}
+                            {/*    <Input placeholder={'Faculty'} hookProps={form.faculty} />*/}
+                            {/*</div>*/}
 
-                            <div className={style['boxContainer__formBlock-inner']}>
-                                <Input placeholder={'Day of birth'} hookProps={form.birthday} />
-                                <Input placeholder={'Home address'} hookProps={form.homeAddress} />
-                                <Select
-                                    placeholder={'Clothing size'}
-                                    hookProps={form.clothingSize}
-                                    data={clothingSize.map((item) => ({ id: item, name: item }))}
-                                />
-                            </div>
+                            {/*<div className={style['boxContainer__formBlock-inner']}>*/}
+                            {/*    <Input placeholder={'Day of birth'} hookProps={form.birthday} />*/}
+                            {/*    <Input placeholder={'Home address'} hookProps={form.homeAddress} />*/}
+                            {/*    <Select*/}
+                            {/*        placeholder={'Clothing size'}*/}
+                            {/*        hookProps={form.clothingSize}*/}
+                            {/*        data={clothingSize.map((item) => ({ id: item, name: item }))}*/}
+                            {/*    />*/}
+                            {/*</div>*/}
 
-                            <SelectBoardAndCadence
-                                title={'Board'}
-                                boardList={boardList}
-                                cadenceList={cadenceList}
-                                selectArray={selectBoard}
-                                setSelectArray={setSelectBoard}
-                            />
+                            {/*<SelectBoardAndCadence*/}
+                            {/*    title={'Board'}*/}
+                            {/*    boardList={boardList}*/}
+                            {/*    cadenceList={cadenceList}*/}
+                            {/*    selectArray={selectBoard}*/}
+                            {/*    setSelectArray={setSelectBoard}*/}
+                            {/*/>*/}
 
-                            <SelectCommitteeAndCadence
-                                title={'Committee'}
-                                committeeList={committeeList}
-                                cadenceList={cadenceList}
-                                selectArray={selectCommittee}
-                                setSelectArray={setSelectCommittee}
-                            />
+                            {/*<SelectCommitteeAndCadence*/}
+                            {/*    title={'Committee'}*/}
+                            {/*    committeeList={committeeList}*/}
+                            {/*    cadenceList={cadenceList}*/}
+                            {/*    selectArray={selectCommittee}*/}
+                            {/*    setSelectArray={setSelectCommittee}*/}
+                            {/*/>*/}
 
-                            <SelectCoordinatorAndCadence
-                                title={'Coordinator'}
-                                coordinatorList={coordinatorList}
-                                cadenceList={cadenceList}
-                                selectArray={selectCoordinator}
-                                setSelectArray={setSelectCoordinator}
-                            />
+                            {/*<SelectCoordinatorAndCadence*/}
+                            {/*    title={'Coordinator'}*/}
+                            {/*    coordinatorList={coordinatorList}*/}
+                            {/*    cadenceList={cadenceList}*/}
+                            {/*    selectArray={selectCoordinator}*/}
+                            {/*    setSelectArray={setSelectCoordinator}*/}
+                            {/*/>*/}
 
-                            <SelectEventAndResp
-                                title={'New event to member'}
-                                cadenceList={cadenceList}
-                                respList={responsibleList}
-                                eventList={eventList}
-                                newEventList={newEventList}
-                                selectArray={selectEvent}
-                                setSelectArray={setSelectEvent}
-                            />
+                            {/*<SelectEventAndResp*/}
+                            {/*    title={'New event to member'}*/}
+                            {/*    cadenceList={cadenceList}*/}
+                            {/*    respList={responsibleList}*/}
+                            {/*    eventList={eventList}*/}
+                            {/*    newEventList={newEventList}*/}
+                            {/*    selectArray={selectEvent}*/}
+                            {/*    setSelectArray={setSelectEvent}*/}
+                            {/*/>*/}
 
                             <div className={style['boxContainer__formBlock-button']}>
                                 <Button title={'Submit'} onClick={submit} />

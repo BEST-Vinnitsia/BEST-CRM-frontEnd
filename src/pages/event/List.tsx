@@ -2,11 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { PATH_EVENT } from '../../routes/paths';
 import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
-import { BreadcrumbsContainer, CardContainer, SmallCard, TitleContainer } from '../../components';
 import { eventService } from '../../services';
 import { utilsActions } from '../../redux/actions/utilsActions';
-import Title from '../../components/title/Title';
-import { SvgEventSidebar } from '../../assets/svg';
 import { IEventGetListRes } from '../../interfaces/event/eventRes';
 
 const pathMap = [
@@ -49,21 +46,21 @@ export default function EventListPage() {
             <div className="p-4">
                 {/*<BreadcrumbsContainer path={pathMap} buttons={[{ title: 'Create', path: PATH_EVENT.CREATE }]} />*/}
 
-                <TitleContainer position={'center'}>
-                    <Title title={'Events'} color={'whiteGray'} size={'32'} />
-                </TitleContainer>
+                {/*<TitleContainer position={'center'}>*/}
+                {/*    <Title title={'Events'} color={'whiteGray'} size={'32'} />*/}
+                {/*</TitleContainer>*/}
 
-                <CardContainer>
-                    {eventList.map((item) => (
-                        <SmallCard
-                            key={item.id}
-                            title={item.name}
-                            subtitle={`Is ${item.isActive ? 'active' : 'close'}`}
-                            onClick={() => toDetails(item.id)}
-                            svg={<SvgEventSidebar />}
-                        />
-                    ))}
-                </CardContainer>
+                {/*<CardContainer>*/}
+                {/*    {eventList.map((item) => (*/}
+                {/*        <SmallCard*/}
+                {/*            key={item.id}*/}
+                {/*            title={item.name}*/}
+                {/*            subtitle={`Is ${item.isActive ? 'active' : 'close'}`}*/}
+                {/*            onClick={() => toDetails(item.id)}*/}
+                {/*            svg={<SvgEventSidebar />}*/}
+                {/*        />*/}
+                {/*    ))}*/}
+                {/*</CardContainer>*/}
             </div>
         </>
     );

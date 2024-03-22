@@ -1,9 +1,9 @@
 import React from 'react';
 import style from './error.page.module.scss';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
-import { PATH_ERROR, PATH_DASHBOARD } from '../../routes/paths';
+import { PATH_DASHBOARD, PATH_ERROR } from '../../routes/paths';
 import { SvgArrow } from '../../assets/svg';
-import { Button } from '../../components';
+import { Button } from '../../ui';
 import { joinStyle } from '../../utils/';
 
 const text = {

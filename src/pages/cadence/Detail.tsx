@@ -24,10 +24,10 @@ import { ICadenceGetByIdRes } from '../../interfaces/cadence/cadenceRes';
 import { ICommitteeToMemberGetByCadenceIdRes } from '../../interfaces/committee/committeeToMemberRes';
 import { INewEventGetByCadenceIdRes } from '../../interfaces/event/newEventRes';
 import { ICommitteeGetListRes } from '../../interfaces/committee/committeeRes';
-import { BreadcrumbsContainer, Card, CardContainer, PageHeader, ScrollY } from '../../components';
 import { ImgCrmHome, UserAvatar } from '../../assets/img';
 import { intToRoman, joinStyle } from '../../utils';
 import { IMemberGetListRes } from '../../interfaces/member/memberRes';
+import { ScrollY } from '../../ui';
 
 const pathMap = [
     { url: PATH_CADENCE.ROOT, title: pageNames.pages.cadence },
@@ -130,13 +130,13 @@ export default function CadenceDetailPage() {
                 {/*    ]}*/}
                 {/*/>*/}
 
-                {cadenceInfo && (
-                    <PageHeader
-                        title={`Cadence ${intToRoman(cadenceInfo.number)}`}
-                        subtitle={`Cadence is ${cadenceInfo.isEnd ? 'end' : 'active'}`}
-                        img={UserAvatar}
-                    />
-                )}
+                {/*{cadenceInfo && (*/}
+                {/*    <PageHeader*/}
+                {/*        title={`Cadence ${intToRoman(cadenceInfo.number)}`}*/}
+                {/*        subtitle={`Cadence is ${cadenceInfo.isEnd ? 'end' : 'active'}`}*/}
+                {/*        img={UserAvatar}*/}
+                {/*    />*/}
+                {/*)}*/}
 
                 <div className={style['tobContainer']}>
                     <span
@@ -168,43 +168,43 @@ export default function CadenceDetailPage() {
                     </span>
                 </div>
 
-                {openTab === 'board' && (
-                    <CardContainer>
-                        {boardToMemberList.map((boardToMember) => (
-                            <Card
-                                key={boardToMember.id}
-                                title={getMemberName(boardToMember.memberId)}
-                                subtitle={boardList.find((board) => board.id === boardToMember.boardId)?.name}
-                                img={ImgCrmHome}
-                            />
-                        ))}
-                    </CardContainer>
-                )}
+                {/*{openTab === 'board' && (*/}
+                {/*    <CardContainer>*/}
+                {/*        {boardToMemberList.map((boardToMember) => (*/}
+                {/*            <Card*/}
+                {/*                key={boardToMember.id}*/}
+                {/*                title={getMemberName(boardToMember.memberId)}*/}
+                {/*                subtitle={boardList.find((board) => board.id === boardToMember.boardId)?.name}*/}
+                {/*                img={ImgCrmHome}*/}
+                {/*            />*/}
+                {/*        ))}*/}
+                {/*    </CardContainer>*/}
+                {/*)}*/}
 
-                {openTab === 'coordinator' && (
-                    <CardContainer>
-                        {coordinatorToMemberList.map((coordinatorToMember) => (
-                            <Card
-                                key={coordinatorToMember.id}
-                                title={getMemberName(coordinatorToMember.memberId)}
-                                subtitle={
-                                    coordinatorList.find(
-                                        (coordinator) => coordinator.id === coordinatorToMember.coordinatorId,
-                                    )?.name
-                                }
-                                img={ImgCrmHome}
-                            />
-                        ))}
-                    </CardContainer>
-                )}
+                {/*{openTab === 'coordinator' && (*/}
+                {/*    <CardContainer>*/}
+                {/*        {coordinatorToMemberList.map((coordinatorToMember) => (*/}
+                {/*            <Card*/}
+                {/*                key={coordinatorToMember.id}*/}
+                {/*                title={getMemberName(coordinatorToMember.memberId)}*/}
+                {/*                subtitle={*/}
+                {/*                    coordinatorList.find(*/}
+                {/*                        (coordinator) => coordinator.id === coordinatorToMember.coordinatorId,*/}
+                {/*                    )?.name*/}
+                {/*                }*/}
+                {/*                img={ImgCrmHome}*/}
+                {/*            />*/}
+                {/*        ))}*/}
+                {/*    </CardContainer>*/}
+                {/*)}*/}
 
-                {openTab === 'event' && (
-                    <CardContainer>
-                        {newEventList.map((newEvent) => (
-                            <Card key={newEvent.id} title={newEvent.name} img={ImgCrmHome} />
-                        ))}
-                    </CardContainer>
-                )}
+                {/*{openTab === 'event' && (*/}
+                {/*    <CardContainer>*/}
+                {/*        {newEventList.map((newEvent) => (*/}
+                {/*            <Card key={newEvent.id} title={newEvent.name} img={ImgCrmHome} />*/}
+                {/*        ))}*/}
+                {/*    </CardContainer>*/}
+                {/*)}*/}
             </div>
         </ScrollY>
     );

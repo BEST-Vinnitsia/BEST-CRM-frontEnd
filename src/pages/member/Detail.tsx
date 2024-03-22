@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import style from './style.module.scss';
-import { BreadcrumbsContainer, PageHeader, ScrollY, Text } from '../../components';
 import { PATH_MEMBER } from '../../routes/paths';
 import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
@@ -33,11 +32,7 @@ import {
     newEventToMemberService,
     responsibleService,
 } from '../../services';
-import { formatDate, intToRoman } from '../../utils';
-import { UserAvatar } from '../../assets/img';
-import CardContainer from '../../components/card/CardContainer';
-import SmallCard from '../../components/card/SmallCard';
-import { SvgBoardAndCoordinatorsSidebar, SvgCommitteeSidebar, SvgEventSidebar } from '../../assets/svg';
+import { ScrollY } from '../../ui';
 
 const pathMap = [
     { url: PATH_MEMBER.ROOT, title: pageNames.pages.member },
@@ -148,11 +143,11 @@ export default function MemberDetailPage() {
 
                 {member && (
                     <div className="mt-1">
-                        <PageHeader
-                            title={`${member.name} ${member.surname} ${member.middleName}`}
-                            subtitle={member.membership}
-                            img={UserAvatar}
-                        />
+                        {/*<PageHeader*/}
+                        {/*    title={`${member.name} ${member.surname} ${member.middleName}`}*/}
+                        {/*    subtitle={member.membership}*/}
+                        {/*    img={UserAvatar}*/}
+                        {/*/>*/}
 
                         <div className={style['boxContainer']}>
                             <div className={style['boxContainer__block']}>
@@ -160,25 +155,25 @@ export default function MemberDetailPage() {
                                     <h3 className={style['boxContainer__block-header-firstTitle']}>Contacts</h3>
                                 </div>
 
-                                <div className={style['boxContainer__block-segment']}>
-                                    <Text text={`Email`} />
-                                    <Text text={member.email} color={'gray'} />
-                                </div>
+                                {/*<div className={style['boxContainer__block-segment']}>*/}
+                                {/*    <Text text={`Email`} />*/}
+                                {/*    <Text text={member.email} color={'gray'} />*/}
+                                {/*</div>*/}
 
-                                <div className={style['boxContainer__block-segment']}>
-                                    <Text text={`BEST email`} />
-                                    <Text text={member.bestEmail ? member.bestEmail : 'Not specified'} color={'gray'} />
-                                </div>
+                                {/*<div className={style['boxContainer__block-segment']}>*/}
+                                {/*    <Text text={`BEST email`} />*/}
+                                {/*    <Text text={member.bestEmail ? member.bestEmail : 'Not specified'} color={'gray'} />*/}
+                                {/*</div>*/}
 
-                                <div className={style['boxContainer__block-segment']}>
-                                    <Text text={`Phone`} />
-                                    <Text text={member.phone} color={'gray'} />
-                                </div>
+                                {/*<div className={style['boxContainer__block-segment']}>*/}
+                                {/*    <Text text={`Phone`} />*/}
+                                {/*    <Text text={member.phone} color={'gray'} />*/}
+                                {/*</div>*/}
 
-                                <div className={style['boxContainer__block-segment']}>
-                                    <Text text={`Message`} />
-                                    <Text text={member.socialNetwork} color={'gray'} />
-                                </div>
+                                {/*<div className={style['boxContainer__block-segment']}>*/}
+                                {/*    <Text text={`Message`} />*/}
+                                {/*    <Text text={member.socialNetwork} color={'gray'} />*/}
+                                {/*</div>*/}
                             </div>
 
                             <div className={style['boxContainer__block']}>
@@ -186,129 +181,129 @@ export default function MemberDetailPage() {
                                     <h3 className={style['boxContainer__block-header-secondTitle']}>Info</h3>
                                 </div>
 
-                                <div className={style['boxContainer__block-segment']}>
-                                    <Text text={`Faculty`} />
-                                    <Text text={member.faculty} color={'gray'} />
-                                </div>
+                                {/*<div className={style['boxContainer__block-segment']}>*/}
+                                {/*    <Text text={`Faculty`} />*/}
+                                {/*    <Text text={member.faculty} color={'gray'} />*/}
+                                {/*</div>*/}
 
-                                <div className={style['boxContainer__block-segment']}>
-                                    <Text text={`Group`} />
-                                    <Text text={member.group} color={'gray'} />
-                                </div>
+                                {/*<div className={style['boxContainer__block-segment']}>*/}
+                                {/*    <Text text={`Group`} />*/}
+                                {/*    <Text text={member.group} color={'gray'} />*/}
+                                {/*</div>*/}
 
-                                <div className={style['boxContainer__block-segment']}>
-                                    <Text text={`Clothing size`} />
-                                    <Text
-                                        text={member.clothingSize ? member.clothingSize : 'Not specified'}
-                                        color={'gray'}
-                                    />
-                                </div>
+                                {/*<div className={style['boxContainer__block-segment']}>*/}
+                                {/*    <Text text={`Clothing size`} />*/}
+                                {/*    <Text*/}
+                                {/*        text={member.clothingSize ? member.clothingSize : 'Not specified'}*/}
+                                {/*        color={'gray'}*/}
+                                {/*    />*/}
+                                {/*</div>*/}
 
-                                <div className={style['boxContainer__block-segment']}>
-                                    <Text text={`Home address`} />
-                                    <Text
-                                        text={member.homeAddress ? member.homeAddress : 'Not specified'}
-                                        color={'gray'}
-                                    />
-                                </div>
+                                {/*<div className={style['boxContainer__block-segment']}>*/}
+                                {/*    <Text text={`Home address`} />*/}
+                                {/*    <Text*/}
+                                {/*        text={member.homeAddress ? member.homeAddress : 'Not specified'}*/}
+                                {/*        color={'gray'}*/}
+                                {/*    />*/}
+                                {/*</div>*/}
 
-                                <div className={style['boxContainer__block-segment']}>
-                                    <Text text={`Birthday`} />
-                                    <Text text={formatDate(new Date(member.birthday))} color={'gray'} />
-                                </div>
+                                {/*<div className={style['boxContainer__block-segment']}>*/}
+                                {/*    <Text text={`Birthday`} />*/}
+                                {/*    <Text text={formatDate(new Date(member.birthday))} color={'gray'} />*/}
+                                {/*</div>*/}
                             </div>
                         </div>
 
                         <h2 className={style['title']}>Active in BEST</h2>
 
-                        <CardContainer>
-                            {/**/}
-                            {boardToMemberList.map((boardToMember, i) => {
-                                const cadence = cadenceList.find((cadence) => cadence.id === boardToMember.cadenceId);
-                                const board = boardList.find((board) => board.id === boardToMember.boardId);
+                        {/*<CardContainer>*/}
+                        {/*    /!**!/*/}
+                        {/*    {boardToMemberList.map((boardToMember, i) => {*/}
+                        {/*        const cadence = cadenceList.find((cadence) => cadence.id === boardToMember.cadenceId);*/}
+                        {/*        const board = boardList.find((board) => board.id === boardToMember.boardId);*/}
 
-                                if (!board || !cadence) return <React.Fragment key={i} />;
+                        {/*        if (!board || !cadence) return <React.Fragment key={i} />;*/}
 
-                                return (
-                                    <SmallCard
-                                        key={i}
-                                        title={`${board.name}`}
-                                        subtitle={`Cadence: ${intToRoman(cadence.number)}`}
-                                        svg={<SvgBoardAndCoordinatorsSidebar />}
-                                    />
-                                );
-                            })}
+                        {/*        return (*/}
+                        {/*            <SmallCard*/}
+                        {/*                key={i}*/}
+                        {/*                title={`${board.name}`}*/}
+                        {/*                subtitle={`Cadence: ${intToRoman(cadence.number)}`}*/}
+                        {/*                svg={<SvgBoardAndCoordinatorsSidebar />}*/}
+                        {/*            />*/}
+                        {/*        );*/}
+                        {/*    })}*/}
 
-                            {/**/}
-                            {coordinatorToMemberList.map((coordinatorToMember, i) => {
-                                const cadence = cadenceList.find(
-                                    (cadence) => cadence.id === coordinatorToMember.cadenceId,
-                                );
-                                const coordinator = coordinatorList.find(
-                                    (coordinator) => coordinator.id === coordinatorToMember.coordinatorId,
-                                );
+                        {/*    /!**!/*/}
+                        {/*    {coordinatorToMemberList.map((coordinatorToMember, i) => {*/}
+                        {/*        const cadence = cadenceList.find(*/}
+                        {/*            (cadence) => cadence.id === coordinatorToMember.cadenceId,*/}
+                        {/*        );*/}
+                        {/*        const coordinator = coordinatorList.find(*/}
+                        {/*            (coordinator) => coordinator.id === coordinatorToMember.coordinatorId,*/}
+                        {/*        );*/}
 
-                                if (!coordinator || !cadence) return <React.Fragment key={i} />;
+                        {/*        if (!coordinator || !cadence) return <React.Fragment key={i} />;*/}
 
-                                return (
-                                    <SmallCard
-                                        key={i}
-                                        title={`${coordinator.name}`}
-                                        subtitle={`Cadence: ${intToRoman(cadence.number)}`}
-                                        svg={<SvgBoardAndCoordinatorsSidebar />}
-                                    />
-                                );
-                            })}
+                        {/*        return (*/}
+                        {/*            <SmallCard*/}
+                        {/*                key={i}*/}
+                        {/*                title={`${coordinator.name}`}*/}
+                        {/*                subtitle={`Cadence: ${intToRoman(cadence.number)}`}*/}
+                        {/*                svg={<SvgBoardAndCoordinatorsSidebar />}*/}
+                        {/*            />*/}
+                        {/*        );*/}
+                        {/*    })}*/}
 
-                            {/**/}
-                            {committeeToMemberList.map((committeeToMember, i) => {
-                                const cadence = cadenceList.find(
-                                    (cadence) => cadence.id === committeeToMember.cadenceId,
-                                );
-                                const committee = committeeList.find(
-                                    (committee) => committee.id === committeeToMember.committeeId,
-                                );
+                        {/*    /!**!/*/}
+                        {/*    {committeeToMemberList.map((committeeToMember, i) => {*/}
+                        {/*        const cadence = cadenceList.find(*/}
+                        {/*            (cadence) => cadence.id === committeeToMember.cadenceId,*/}
+                        {/*        );*/}
+                        {/*        const committee = committeeList.find(*/}
+                        {/*            (committee) => committee.id === committeeToMember.committeeId,*/}
+                        {/*        );*/}
 
-                                if (!committee || !cadence) return <React.Fragment key={i} />;
+                        {/*        if (!committee || !cadence) return <React.Fragment key={i} />;*/}
 
-                                return (
-                                    <SmallCard
-                                        key={i}
-                                        title={`${committee.name}`}
-                                        subtitle={`Cadence: ${intToRoman(cadence.number)}`}
-                                        svg={<SvgCommitteeSidebar />}
-                                    />
-                                );
-                            })}
+                        {/*        return (*/}
+                        {/*            <SmallCard*/}
+                        {/*                key={i}*/}
+                        {/*                title={`${committee.name}`}*/}
+                        {/*                subtitle={`Cadence: ${intToRoman(cadence.number)}`}*/}
+                        {/*                svg={<SvgCommitteeSidebar />}*/}
+                        {/*            />*/}
+                        {/*        );*/}
+                        {/*    })}*/}
 
-                            {/**/}
-                            {newEventToMemberList.map((newEventToMember, i) => {
-                                const newEvent = newEventList.find(
-                                    (newEvent) => newEvent.id === newEventToMember.newEventId,
-                                );
-                                if (!newEvent) return <React.Fragment key={i} />;
+                        {/*    /!**!/*/}
+                        {/*    {newEventToMemberList.map((newEventToMember, i) => {*/}
+                        {/*        const newEvent = newEventList.find(*/}
+                        {/*            (newEvent) => newEvent.id === newEventToMember.newEventId,*/}
+                        {/*        );*/}
+                        {/*        if (!newEvent) return <React.Fragment key={i} />;*/}
 
-                                const event = eventList.find((event) => event.id === newEvent.eventId);
-                                if (!event) return <React.Fragment key={i} />;
+                        {/*        const event = eventList.find((event) => event.id === newEvent.eventId);*/}
+                        {/*        if (!event) return <React.Fragment key={i} />;*/}
 
-                                const cadence = cadenceList.find((cadence) => cadence.id === newEvent.cadenceId);
-                                if (!cadence) return <React.Fragment key={i} />;
+                        {/*        const cadence = cadenceList.find((cadence) => cadence.id === newEvent.cadenceId);*/}
+                        {/*        if (!cadence) return <React.Fragment key={i} />;*/}
 
-                                const responsible = responsibleList.find(
-                                    (resp) => resp.id === newEventToMember.responsibleId,
-                                );
-                                if (!responsible) return <React.Fragment key={i} />;
+                        {/*        const responsible = responsibleList.find(*/}
+                        {/*            (resp) => resp.id === newEventToMember.responsibleId,*/}
+                        {/*        );*/}
+                        {/*        if (!responsible) return <React.Fragment key={i} />;*/}
 
-                                return (
-                                    <SmallCard
-                                        key={i}
-                                        title={`${newEvent.name}`}
-                                        subtitle={`Position: ${responsible.name} - ${responsible.role}`}
-                                        svg={<SvgEventSidebar />}
-                                    />
-                                );
-                            })}
-                        </CardContainer>
+                        {/*        return (*/}
+                        {/*            <SmallCard*/}
+                        {/*                key={i}*/}
+                        {/*                title={`${newEvent.name}`}*/}
+                        {/*                subtitle={`Position: ${responsible.name} - ${responsible.role}`}*/}
+                        {/*                svg={<SvgEventSidebar />}*/}
+                        {/*            />*/}
+                        {/*        );*/}
+                        {/*    })}*/}
+                        {/*</CardContainer>*/}
                     </div>
                 )}
             </div>

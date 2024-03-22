@@ -1,11 +1,7 @@
 import React from 'react';
 import style from './popupMessage.module.scss';
 import { createPortal } from 'react-dom';
-import Title from '../../../ui/text/title/Title';
-import Button from '../../../ui/buttons/default/Button';
-import PopupBg from '../../../ui/popup/bg/PopupBG';
-import PopupClose from '../../../ui/popup/close/PopupClose';
-import PopupButtonContainer from '../../../ui/popup/buttonContainer/PopupButtonContainer';
+import { Button, PopupBg, PopupButtonContainer, PopupClose, Title } from '../../../ui';
 import { AnimatePresence, motion } from 'framer-motion';
 import { js } from '../../../helpers';
 
@@ -30,15 +26,17 @@ export default function PopupMessage({ type = 'message', text, title, onClose, o
             <motion.div className={style['popupBlock']} {...animationOpacity}>
                 <PopupBg onClick={onClose} />
 
-                <div className={js(
-                    style['popup'],
-                    type === 'error' ? style['popup--red'] : ''
-                )}>
+                <div className={js(style['popup'], type === 'error' ? style['popup--red'] : '')}>
                     <div className={style['popup__inner']}>
                         <PopupClose onClick={onClose} />
 
                         <div className={style['popup__inner-titleBlock']}>
-                            <Title title={title} color={type === 'error' ? 'red' : 'whiteGray'} size={'24'} position={'center'} />
+                            <Title
+                                title={title}
+                                color={type === 'error' ? 'red' : 'whiteGray'}
+                                size={'24'}
+                                position={'center'}
+                            />
                         </div>
 
                         <div className={style['popup__inner-contentBlock']}>

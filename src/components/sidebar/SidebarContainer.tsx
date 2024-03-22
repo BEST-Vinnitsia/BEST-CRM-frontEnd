@@ -1,14 +1,12 @@
 import React from 'react';
 import style from './sidebarContainer.module.scss';
 import { ImgLogoWithText } from '../../assets/img';
-import SidebarToggle from '../../ui/sidebar/toggle/SidebarToggle';
 import { sidebarConfig } from '../../routes/sidebarConfig';
-import SidebarButton from '../../ui/sidebar/button/SidebarButton';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { checkRoutePath, js } from '../../helpers';
 import { utilsActions } from '../../redux/actions/utilsActions';
-import SidebarButtonSmall from '../../ui/sidebar/button/SidebarButtonSmall';
 import { SvgLogo } from '../../assets/svg';
+import { SidebarButton, SidebarButtonSmall, SidebarToggle } from '../../ui';
 
 interface IProps {
     smallSidebar: boolean;

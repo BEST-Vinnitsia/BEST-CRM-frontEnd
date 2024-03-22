@@ -7,14 +7,19 @@ interface IProps {
     onClick?: () => void;
     elementRef?: React.LegacyRef<HTMLButtonElement>;
     size?: 'small' | 'medium' | 'large';
+    color?: 'default' | 'transparent';
 }
 
-export default function ButtonCircle({ onClick, svg, elementRef, size = 'medium' }: IProps) {
+export default function ButtonCircle({ onClick, svg, elementRef, size = 'medium', color = 'default' }: IProps) {
     return (
         <button
             ref={elementRef} //
             onClick={onClick}
-            className={js(style['buttonCircle'], style[`buttonCircle--size-${size}`])}
+            className={js(
+                style['buttonCircle'], //
+                style[`buttonCircle--size-${size}`],
+                style[`buttonCircle--color-${color}`],
+            )}
         >
             <div className={style['buttonCircle__inner']}>
                 <span className={style['buttonCircle__inner-svg']}>{svg}</span>

@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router';
 import { utilsActions } from '../../redux/actions/utilsActions';
 import { Navigate, useParams } from 'react-router-dom';
 import { eventService, responsibleService } from '../../services';
-import { BreadcrumbsContainer, PageHeader, Text } from '../../components';
 import { UserAvatar } from '../../assets/img';
 import { IEventGetByIdRes } from '../../interfaces/event/eventRes';
 import { IResponsibleGetByIdRes } from '../../interfaces/event/responsibleRes';
@@ -61,40 +60,40 @@ export default function ResponsibleDetailPage() {
                 {/*    ]}*/}
                 {/*/>*/}
 
-                {respInfo && (
-                    <PageHeader
-                        title={respInfo.name}
-                        subtitle={`${respInfo.fullName} / ${respInfo.isActive ? 'active' : 'close'}`}
-                        img={UserAvatar}
-                    />
-                )}
+                {/*{respInfo && (*/}
+                {/*    // <PageHeader*/}
+                {/*    //     title={respInfo.name}*/}
+                {/*    //     subtitle={`${respInfo.fullName} / ${respInfo.isActive ? 'active' : 'close'}`}*/}
+                {/*    //     img={UserAvatar}*/}
+                {/*    // />*/}
+                {/*)}*/}
 
                 {respInfo && (
                     <div className={style['infoBlock']}>
                         <div className={style['infoBlock__info']}>
-                            <div className={style['infoBlock__info-segment']}>
-                                <Text text={`Name`} />
-                                <Text text={respInfo.name} color={'gray'} />
-                            </div>
+                            {/*<div className={style['infoBlock__info-segment']}>*/}
+                            {/*    <Text text={`Name`} />*/}
+                            {/*    <Text text={respInfo.name} color={'gray'} />*/}
+                            {/*</div>*/}
 
-                            <div className={style['infoBlock__info-segment']}>
-                                <Text text={`Full name`} />
-                                <Text text={respInfo.fullName} color={'gray'} />
-                            </div>
+                            {/*<div className={style['infoBlock__info-segment']}>*/}
+                            {/*    <Text text={`Full name`} />*/}
+                            {/*    <Text text={respInfo.fullName} color={'gray'} />*/}
+                            {/*</div>*/}
 
-                            <div className={style['infoBlock__info-segment']}>
-                                <Text text={`Is active`} />
-                                <Text text={respInfo.isActive ? 'Active' : 'Inactive'} color={'gray'} />
-                            </div>
+                            {/*<div className={style['infoBlock__info-segment']}>*/}
+                            {/*    <Text text={`Is active`} />*/}
+                            {/*    <Text text={respInfo.isActive ? 'Active' : 'Inactive'} color={'gray'} />*/}
+                            {/*</div>*/}
 
-                            {eventInfo && (
-                                <>
-                                    <div className={style['infoBlock__info-segment']}>
-                                        <Text text={`Event name`} />
-                                        <Text text={eventInfo.name} color={'gray'} />
-                                    </div>
-                                </>
-                            )}
+                            {/*{eventInfo && (*/}
+                            {/*    <>*/}
+                            {/*        <div className={style['infoBlock__info-segment']}>*/}
+                            {/*            <Text text={`Event name`} />*/}
+                            {/*            <Text text={eventInfo.name} color={'gray'} />*/}
+                            {/*        </div>*/}
+                            {/*    </>*/}
+                            {/*)}*/}
                         </div>
                     </div>
                 )}

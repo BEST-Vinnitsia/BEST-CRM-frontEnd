@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { BreadcrumbsContainer, Button, Input, LongButton } from '../../components';
 import { PATH_BaC } from '../../routes/paths';
 import { useNavigate, useParams } from 'react-router-dom';
 import { pageNames } from '../../constants';
@@ -164,23 +163,23 @@ export default function BoardAndCoordinatorsEditPage() {
                 <div className={style['boxContainer']}>
                     <div className={style['boxContainer__formBlock']}>
                         <div className={style['boxContainer__formBlock-inner']}>
-                            {!id && !who && (
-                                <LongButton color={'dark'} title={`Create ${toggleForm}`} onClick={toggleFormFunc} />
-                            )}
-                            <LongButton
-                                color={'dark'}
-                                title={`Active: ${activePosition ? 'Yes' : 'No'}`}
-                                onClick={() => setActivePosition((prev) => !prev)}
-                            />
+                            {/*{!id && !who && (*/}
+                            {/*    <LongButton color={'dark'} title={`Create ${toggleForm}`} onClick={toggleFormFunc} />*/}
+                            {/*)}*/}
+                            {/*<LongButton*/}
+                            {/*    color={'dark'}*/}
+                            {/*    title={`Active: ${activePosition ? 'Yes' : 'No'}`}*/}
+                            {/*    onClick={() => setActivePosition((prev) => !prev)}*/}
+                            {/*/>*/}
                         </div>
 
                         <div className={style['boxContainer__formBlock-inner']}>
-                            <Input placeholder={'Name'} hookProps={form.name} />
-                            <Input placeholder={'Full name'} hookProps={form.fullName} />
+                            {/*<Input placeholder={'Name'} hookProps={form.name} />*/}
+                            {/*<Input placeholder={'Full name'} hookProps={form.fullName} />*/}
                         </div>
 
                         <div className={style['boxContainer__formBlock-button']}>
-                            <Button title={'Submit'} onClick={submit} />
+                            {/*<Button title={'Submit'} onClick={submit} />*/}
                         </div>
                     </div>
                 </div>

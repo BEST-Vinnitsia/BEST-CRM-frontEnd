@@ -1,5 +1,4 @@
 import React from 'react';
-import { BreadcrumbsContainer, Button } from '../../components';
 import { PATH_MEETING } from '../../routes/paths';
 import { useNavigate, useParams } from 'react-router-dom';
 import { pageNames } from '../../constants';
@@ -21,13 +20,13 @@ export default function MeetingEditPage() {
     return (
         <>
             <div className="p-4">
-                <BreadcrumbsContainer path={pathMapEdit}>
-                    <div className="flex">
-                        <Button onClick={() => navigate(PATH_MEETING.CREATE)} title="Create" />
-                        <Button onClick={() => navigate(`${PATH_MEETING.DETAILS}/id`)} title="Details" />
-                        <Button onClick={() => navigate(PATH_MEETING.LIST)} title="List" />
-                    </div>
-                </BreadcrumbsContainer>
+                {/*<BreadcrumbsContainer path={pathMapEdit}>*/}
+                {/*    <div className="flex">*/}
+                {/*        <Button onClick={() => navigate(PATH_MEETING.CREATE)} title="Create" />*/}
+                {/*        <Button onClick={() => navigate(`${PATH_MEETING.DETAILS}/id`)} title="Details" />*/}
+                {/*        <Button onClick={() => navigate(PATH_MEETING.LIST)} title="List" />*/}
+                {/*    </div>*/}
+                {/*</BreadcrumbsContainer>*/}
             </div>
         </>
     );

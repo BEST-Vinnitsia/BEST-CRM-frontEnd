@@ -2,7 +2,7 @@ import React from 'react';
 import style from './sidebarContainerMobile.module.scss';
 import { ImgLogoWithText } from '../../assets/img';
 import { sidebarConfig } from '../../routes/sidebarConfig';
-import SidebarButton from '../../ui/sidebar/button/SidebarButton';
+import { SidebarButton } from '../../ui';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { checkRoutePath } from '../../helpers';
 import { motion } from 'framer-motion';

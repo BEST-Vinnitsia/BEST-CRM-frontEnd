@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-    BreadcrumbsContainer,
-    Card,
-    CardContainer,
-    PageHeader,
-    ScrollY,
-    Title,
-    TitleContainer,
-} from '../../components';
+import { PageHeader } from '../../components';
 import { PATH_BaC } from '../../routes/paths';
 import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
@@ -23,12 +15,12 @@ import {
 } from '../../services';
 import { IBoardGetByIdRes } from '../../interfaces/board/boardRes';
 import { ICoordinatorGetByIdRes } from '../../interfaces/coordinator/coordinatorRes';
-import { ImgCrmHome, UserAvatar } from '../../assets/img';
+import { UserAvatar } from '../../assets/img';
 import { IBoardToMemberGetByBoardIdRes } from '../../interfaces/board/boardToMemberRes';
 import { ICadenceGetListRes } from '../../interfaces/cadence/cadenceRes';
-import { intToRoman } from '../../utils';
 import { IMemberGetListRes } from '../../interfaces/member/memberRes';
 import { ICoordinatorToMemberGetByCoordinatorIdRes } from '../../interfaces/coordinator/coordinatorToMemberRes';
+import { ScrollY } from '../../ui';
 // import { IBoardAllInfo } from '../../interfaces/board/boardAllInfo';
 // import { ICoordinatorAllInfo } from '../../interfaces/coordinator/coordinatorAllInfo';
 
@@ -128,22 +120,22 @@ export default function BoardAndCoordinatorsDetailPage() {
                                 img={UserAvatar}
                             />
 
-                            <TitleContainer position={'center'}>
-                                <Title title={'History'} color={'whiteGray'} size={'40'} />
-                            </TitleContainer>
+                            {/*<TitleContainer position={'center'}>*/}
+                            {/*    <Title title={'History'} color={'whiteGray'} size={'40'} />*/}
+                            {/*</TitleContainer>*/}
 
                             {boardToMemberList.length > 0 && (
                                 <>
-                                    <CardContainer>
-                                        {boardToMemberList.map((item) => (
-                                            <Card
-                                                key={item.id}
-                                                title={getMemberName(item.memberId)}
-                                                subtitle={`Cadence ${intToRoman(getCadence(item.cadenceId))}`}
-                                                img={ImgCrmHome}
-                                            />
-                                        ))}
-                                    </CardContainer>
+                                    {/*<CardContainer>*/}
+                                    {/*    {boardToMemberList.map((item) => (*/}
+                                    {/*        <Card*/}
+                                    {/*            key={item.id}*/}
+                                    {/*            title={getMemberName(item.memberId)}*/}
+                                    {/*            subtitle={`Cadence ${intToRoman(getCadence(item.cadenceId))}`}*/}
+                                    {/*            img={ImgCrmHome}*/}
+                                    {/*        />*/}
+                                    {/*    ))}*/}
+                                    {/*</CardContainer>*/}
                                 </>
                             )}
                         </>
@@ -161,22 +153,22 @@ export default function BoardAndCoordinatorsDetailPage() {
                                 img={UserAvatar}
                             />
 
-                            <TitleContainer position={'center'}>
-                                <Title title={'History'} color={'whiteGray'} size={'40'} />
-                            </TitleContainer>
+                            {/*<TitleContainer position={'center'}>*/}
+                            {/*    <Title title={'History'} color={'whiteGray'} size={'40'} />*/}
+                            {/*</TitleContainer>*/}
 
                             {coordinatorToMemberList.length > 0 && (
                                 <>
-                                    <CardContainer>
-                                        {coordinatorToMemberList.map((item) => (
-                                            <Card
-                                                key={item.id}
-                                                title={getMemberName(item.memberId)}
-                                                subtitle={`Cadence ${intToRoman(getCadence(item.cadenceId))}`}
-                                                img={ImgCrmHome}
-                                            />
-                                        ))}
-                                    </CardContainer>
+                                    {/*<CardContainer>*/}
+                                    {/*    {coordinatorToMemberList.map((item) => (*/}
+                                    {/*        <Card*/}
+                                    {/*            key={item.id}*/}
+                                    {/*            title={getMemberName(item.memberId)}*/}
+                                    {/*            subtitle={`Cadence ${intToRoman(getCadence(item.cadenceId))}`}*/}
+                                    {/*            img={ImgCrmHome}*/}
+                                    {/*        />*/}
+                                    {/*    ))}*/}
+                                    {/*</CardContainer>*/}
                                 </>
                             )}
                         </>

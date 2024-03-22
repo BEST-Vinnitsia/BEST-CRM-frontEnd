@@ -12,7 +12,6 @@ import {
     newEventToMemberService,
     responsibleService,
 } from '../../services';
-import { BreadcrumbsContainer, Card, CardContainer, PageHeader, Text, Title, TitleContainer } from '../../components';
 import { ImgCrmHome, UserAvatar } from '../../assets/img';
 import { IEventGetByIdRes } from '../../interfaces/event/eventRes';
 import { INewEventGetByIdRes } from '../../interfaces/event/newEventRes';
@@ -81,49 +80,49 @@ export default function NewEventDetailPage() {
                 {/*    ]}*/}
                 {/*/>*/}
 
-                {newEventInfo && <PageHeader title={newEventInfo.name} img={UserAvatar} />}
+                {/*{newEventInfo && <PageHeader title={newEventInfo.name} img={UserAvatar} />}*/}
 
                 {newEventInfo && (
                     <div className={style['infoBlock']}>
                         <div className={style['infoBlock__info']}>
-                            <div className={style['infoBlock__info-segment']}>
-                                <Text text={`Name`} />
-                                <Text text={newEventInfo.name} color={'gray'} />
-                            </div>
+                            {/*<div className={style['infoBlock__info-segment']}>*/}
+                            {/*    <Text text={`Name`} />*/}
+                            {/*    <Text text={newEventInfo.name} color={'gray'} />*/}
+                            {/*</div>*/}
 
-                            {eventInfo && (
-                                <>
-                                    <div className={style['infoBlock__info-segment']}>
-                                        <Text text={`Event name`} />
-                                        <Text text={eventInfo.name} color={'gray'} />
-                                    </div>
-                                </>
-                            )}
+                            {/*{eventInfo && (*/}
+                            {/*    <>*/}
+                            {/*        <div className={style['infoBlock__info-segment']}>*/}
+                            {/*            <Text text={`Event name`} />*/}
+                            {/*            <Text text={eventInfo.name} color={'gray'} />*/}
+                            {/*        </div>*/}
+                            {/*    </>*/}
+                            {/*)}*/}
                         </div>
                     </div>
                 )}
 
-                <TitleContainer>
-                    <Title title={'Team'} color={'whiteGray'} />
-                </TitleContainer>
+                {/*<TitleContainer>*/}
+                {/*    <Title title={'Team'} color={'whiteGray'} />*/}
+                {/*</TitleContainer>*/}
 
-                <CardContainer>
-                    {memberToNewEventList.map((newEventToMember, i) => {
-                        const member = memberList.find((item) => item.id === newEventToMember.memberId);
-                        const resp = respList.find((item) => item.id === newEventToMember.responsibleId);
+                {/*<CardContainer>*/}
+                {/*    {memberToNewEventList.map((newEventToMember, i) => {*/}
+                {/*        const member = memberList.find((item) => item.id === newEventToMember.memberId);*/}
+                {/*        const resp = respList.find((item) => item.id === newEventToMember.responsibleId);*/}
 
-                        if (!member || !resp) return <React.Fragment key={i} />;
+                {/*        if (!member || !resp) return <React.Fragment key={i} />;*/}
 
-                        return (
-                            <Card
-                                key={i}
-                                title={`${member.name} ${member.surname}`}
-                                subtitle={`${resp.name} - ${resp.role}`}
-                                img={ImgCrmHome}
-                            />
-                        );
-                    })}
-                </CardContainer>
+                {/*        return (*/}
+                {/*            <Card*/}
+                {/*                key={i}*/}
+                {/*                title={`${member.name} ${member.surname}`}*/}
+                {/*                subtitle={`${resp.name} - ${resp.role}`}*/}
+                {/*                img={ImgCrmHome}*/}
+                {/*            />*/}
+                {/*        );*/}
+                {/*    })}*/}
+                {/*</CardContainer>*/}
             </div>
         </>
     );

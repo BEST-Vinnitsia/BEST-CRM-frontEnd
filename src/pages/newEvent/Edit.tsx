@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { BreadcrumbsContainer, Button, Input, ScrollY, Select } from '../../components';
 import { PATH_EVENT, PATH_NEW_EVENT } from '../../routes/paths';
 import { useNavigate, useParams } from 'react-router-dom';
 import { pageNames } from '../../constants';
@@ -9,7 +8,7 @@ import { cadenceService, eventService, newEventService } from '../../services';
 import style from '../member/styleEdit.module.scss';
 import { IEventGetListRes } from '../../interfaces/event/eventRes';
 import { ICadenceGetListRes } from '../../interfaces/cadence/cadenceRes';
-import { intToRoman } from '../../utils';
+import { ScrollY } from '../../ui';
 
 const pathMapEdit = [
     { url: PATH_EVENT.ROOT, title: pageNames.pages.newEvent },
@@ -139,26 +138,26 @@ export default function NewEventEditPage() {
                 <div className={style['boxContainer']}>
                     <div className={style['boxContainer__formBlock']}>
 
-                        <div className={style['boxContainer__formBlock-inner']}>
-                            <Select
-                                placeholder={'Event'}
-                                hookProps={form.eventId}
-                                data={eventList.map((item) => ({ id: item.id, name: item.name }))}
-                            />
-                            <Select
-                                placeholder={'Cadence'}
-                                hookProps={form.cadenceId}
-                                data={cadenceList.map((item) => ({
-                                    id: item.id,
-                                    name: `Cadence: ${intToRoman(item.number)}`,
-                                }))}
-                            />
-                            <Input placeholder={'Name'} hookProps={form.name} />
-                        </div>
+                        {/*<div className={style['boxContainer__formBlock-inner']}>*/}
+                        {/*    <Select*/}
+                        {/*        placeholder={'Event'}*/}
+                        {/*        hookProps={form.eventId}*/}
+                        {/*        data={eventList.map((item) => ({ id: item.id, name: item.name }))}*/}
+                        {/*    />*/}
+                        {/*    <Select*/}
+                        {/*        placeholder={'Cadence'}*/}
+                        {/*        hookProps={form.cadenceId}*/}
+                        {/*        data={cadenceList.map((item) => ({*/}
+                        {/*            id: item.id,*/}
+                        {/*            name: `Cadence: ${intToRoman(item.number)}`,*/}
+                        {/*        }))}*/}
+                        {/*    />*/}
+                        {/*    <Input placeholder={'Name'} hookProps={form.name} />*/}
+                        {/*</div>*/}
 
-                        <div className={style['boxContainer__formBlock-button']}>
-                            <Button title={'Submit'} onClick={submit} />
-                        </div>
+                        {/*<div className={style['boxContainer__formBlock-button']}>*/}
+                        {/*    <Button title={'Submit'} onClick={submit} />*/}
+                        {/*</div>*/}
                     </div>
                 </div>
             </div>

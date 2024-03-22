@@ -6,22 +6,12 @@ import { useNavigate } from 'react-router';
 import { utilsActions } from '../../redux/actions/utilsActions';
 // import { ICommitteeAllInfo } from '../../interfaces/committee/committeeAllInfo';
 import { Navigate, useParams } from 'react-router-dom';
-import {
-    BreadcrumbsContainer,
-    Card,
-    CardContainer,
-    PageHeader,
-    ScrollY,
-    Title,
-    TitleContainer,
-} from '../../components';
 import { ICommitteeGetByIdRes } from '../../interfaces/committee/committeeRes';
 import { cadenceService, committeeService, committeeToMemberService, memberService } from '../../services';
 import { ICommitteeToMemberGetByCommitteeIdRes } from '../../interfaces/committee/committeeToMemberRes';
 import { ICadenceGetListRes } from '../../interfaces/cadence/cadenceRes';
-import { ImgCrmHome, UserAvatar } from '../../assets/img';
-import { intToRoman } from '../../utils';
 import { IMemberGetListRes } from '../../interfaces/member/memberRes';
+import { ScrollY } from '../../ui';
 
 const pathMap = [
     { url: PATH_COMMITTEE.ROOT, title: pageNames.pages.committee },
@@ -119,34 +109,34 @@ export default function CommitteeDetailPage() {
 
                 {committeeInfo && (
                     <>
-                        <PageHeader
-                            title={`${committeeInfo.name}`}
-                            subtitle={`${committeeInfo.fullName} / ${committeeInfo.isActive ? 'Active' : 'Disable'}`}
-                            img={UserAvatar}
-                        />
+                        {/*<PageHeader*/}
+                        {/*    title={`${committeeInfo.name}`}*/}
+                        {/*    subtitle={`${committeeInfo.fullName} / ${committeeInfo.isActive ? 'Active' : 'Disable'}`}*/}
+                        {/*    img={UserAvatar}*/}
+                        {/*/>*/}
 
                         {cadenceList.map((cadence) => (
                             <div key={cadence.id} className={style['cadenceBlock']}>
-                                <TitleContainer position={'center'}>
-                                    <Title
-                                        title={`Cadence ${intToRoman(cadence.number)}`}
-                                        color={cadence.number % 2 === 0 ? 'green' : 'blue'}
-                                        size={'40'}
-                                    />
-                                </TitleContainer>
+                                {/*<TitleContainer position={'center'}>*/}
+                                {/*    <Title*/}
+                                {/*        title={`Cadence ${intToRoman(cadence.number)}`}*/}
+                                {/*        color={cadence.number % 2 === 0 ? 'green' : 'blue'}*/}
+                                {/*        size={'40'}*/}
+                                {/*    />*/}
+                                {/*</TitleContainer>*/}
 
-                                <CardContainer>
-                                    {memberToCommitteeList
-                                        .filter((memberToCommittee) => memberToCommittee.cadenceId === cadence.id)
-                                        .map((memberToCommittee) => (
-                                            <Card
-                                                key={memberToCommittee.id}
-                                                title={getMemberName(memberToCommittee.memberId)}
-                                                subtitle={memberToCommittee.isLeader ? 'Coordinator' : 'Member'}
-                                                img={ImgCrmHome}
-                                            />
-                                        ))}
-                                </CardContainer>
+                                {/*<CardContainer>*/}
+                                {/*    {memberToCommitteeList*/}
+                                {/*        .filter((memberToCommittee) => memberToCommittee.cadenceId === cadence.id)*/}
+                                {/*        .map((memberToCommittee) => (*/}
+                                {/*            <Card*/}
+                                {/*                key={memberToCommittee.id}*/}
+                                {/*                title={getMemberName(memberToCommittee.memberId)}*/}
+                                {/*                subtitle={memberToCommittee.isLeader ? 'Coordinator' : 'Member'}*/}
+                                {/*                img={ImgCrmHome}*/}
+                                {/*            />*/}
+                                {/*        ))}*/}
+                                {/*</CardContainer>*/}
                             </div>
                         ))}
                     </>

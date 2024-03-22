@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { PATH_BaC } from '../../routes/paths';
-import { BreadcrumbsContainer, CardContainer, ScrollY, SmallCard, TitleContainer } from '../../components';
 import { useNavigate } from 'react-router-dom';
 import { pageNames } from '../../constants';
 // import { ICoordinator } from '../../interfaces/coordinator/coordinator';
 import { boardService, coordinatorService } from '../../services';
 import { utilsActions } from '../../redux/actions/utilsActions';
 import { IBoardGetListRes } from '../../interfaces/board/boardRes';
-import Title from '../../components/title/Title';
 import { ICoordinatorGetListRes } from '../../interfaces/coordinator/coordinatorRes';
-import { SvgBoardAndCoordinatorsSidebar } from '../../assets/svg';
+import { ScrollY } from '../../ui';
 
 const pathMap = [
     { url: PATH_BaC.ROOT, title: pageNames.pages.BaC },
@@ -56,43 +54,43 @@ export default function BoardAndCoordinatorsListPage() {
             <div className="p-4">
                 {/*<BreadcrumbsContainer path={pathMap} buttons={[{ title: 'Create', path: PATH_BaC.CREATE }]} />*/}
 
-                <TitleContainer position={'center'}>
-                    <Title title={'Board'} color={'whiteGray'} size={'32'} />
-                </TitleContainer>
+                {/*<TitleContainer position={'center'}>*/}
+                {/*    <Title title={'Board'} color={'whiteGray'} size={'32'} />*/}
+                {/*</TitleContainer>*/}
 
-                <CardContainer>
-                    {boardList.map((item) => (
-                        <SmallCard
-                            key={item.id}
-                            title={item.name}
-                            // subtitle={item.isActive ? 'Active' : 'Disable'}
-                            subtitle={item.fullName}
-                            onClick={() => toDetails(item.id, 'board')}
-                            svg={<SvgBoardAndCoordinatorsSidebar />}
-                        />
-                    ))}
-                </CardContainer>
+                {/*<CardContainer>*/}
+                {/*    {boardList.map((item) => (*/}
+                {/*        <SmallCard*/}
+                {/*            key={item.id}*/}
+                {/*            title={item.name}*/}
+                {/*            // subtitle={item.isActive ? 'Active' : 'Disable'}*/}
+                {/*            subtitle={item.fullName}*/}
+                {/*            onClick={() => toDetails(item.id, 'board')}*/}
+                {/*            svg={<SvgBoardAndCoordinatorsSidebar />}*/}
+                {/*        />*/}
+                {/*    ))}*/}
+                {/*</CardContainer>*/}
 
                 {/*  */}
 
                 <div className={'h-8'} />
 
-                <TitleContainer position={'center'}>
-                    <Title title={'Coordinators'} color={'whiteGray'} size={'32'} />
-                </TitleContainer>
+                {/*<TitleContainer position={'center'}>*/}
+                {/*    <Title title={'Coordinators'} color={'whiteGray'} size={'32'} />*/}
+                {/*</TitleContainer>*/}
 
-                <CardContainer>
-                    {coordinatorList.map((item) => (
-                        <SmallCard
-                            key={item.id}
-                            title={item.name}
-                            // subtitle={item.isActive ? 'Active' : 'Disable'}
-                            subtitle={item.fullName}
-                            onClick={() => toDetails(item.id, 'coordinator')}
-                            svg={<SvgBoardAndCoordinatorsSidebar />}
-                        />
-                    ))}
-                </CardContainer>
+                {/*<CardContainer>*/}
+                {/*    {coordinatorList.map((item) => (*/}
+                {/*        <SmallCard*/}
+                {/*            key={item.id}*/}
+                {/*            title={item.name}*/}
+                {/*            // subtitle={item.isActive ? 'Active' : 'Disable'}*/}
+                {/*            subtitle={item.fullName}*/}
+                {/*            onClick={() => toDetails(item.id, 'coordinator')}*/}
+                {/*            svg={<SvgBoardAndCoordinatorsSidebar />}*/}
+                {/*        />*/}
+                {/*    ))}*/}
+                {/*</CardContainer>*/}
             </div>
         </ScrollY>
     );

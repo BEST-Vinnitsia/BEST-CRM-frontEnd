@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import style from '../member/styleEdit.module.scss';
-import { BreadcrumbsContainer, Button, Input, LongButton } from '../../components';
 import { PATH_COMMITTEE } from '../../routes/paths';
 import { useNavigate, useParams } from 'react-router-dom';
 import { pageNames } from '../../constants';
@@ -129,22 +128,22 @@ export default function CommitteeEditPage() {
 
                 <div className={style['boxContainer']}>
                     <div className={style['boxContainer__formBlock']}>
-                        <div className={style['boxContainer__formBlock-inner']}>
-                            <LongButton
-                                color={'dark'}
-                                title={`Active: ${activePosition ? 'Yes' : 'No'}`}
-                                onClick={() => setActivePosition((prev) => !prev)}
-                            />
-                        </div>
+                        {/*<div className={style['boxContainer__formBlock-inner']}>*/}
+                        {/*    <LongButton*/}
+                        {/*        color={'dark'}*/}
+                        {/*        title={`Active: ${activePosition ? 'Yes' : 'No'}`}*/}
+                        {/*        onClick={() => setActivePosition((prev) => !prev)}*/}
+                        {/*    />*/}
+                        {/*</div>*/}
 
-                        <div className={style['boxContainer__formBlock-inner']}>
-                            <Input placeholder={'Name'} hookProps={form.name} />
-                            <Input placeholder={'Full name'} hookProps={form.fullName} />
-                        </div>
+                        {/*<div className={style['boxContainer__formBlock-inner']}>*/}
+                        {/*    <Input placeholder={'Name'} hookProps={form.name} />*/}
+                        {/*    <Input placeholder={'Full name'} hookProps={form.fullName} />*/}
+                        {/*</div>*/}
 
-                        <div className={style['boxContainer__formBlock-button']}>
-                            <Button title={'Submit'} onClick={submit} />
-                        </div>
+                        {/*<div className={style['boxContainer__formBlock-button']}>*/}
+                        {/*    <Button title={'Submit'} onClick={submit} />*/}
+                        {/*</div>*/}
                     </div>
                 </div>
             </div>

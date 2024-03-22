@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { BreadcrumbsContainer, Button, Input, LongButton, ScrollY } from '../../components';
 import { PATH_CADENCE, PATH_EVENT } from '../../routes/paths';
 import { useNavigate, useParams } from 'react-router-dom';
 import { pageNames } from '../../constants';
 import { useForm, useInput } from '../../hooks';
 import { utilsActions } from '../../redux/actions/utilsActions';
 import { eventService } from '../../services';
-import style from '../member/styleEdit.module.scss';
+import { ScrollY } from '../../ui';
 
 const pathMapEdit = [
     { url: PATH_EVENT.ROOT, title: pageNames.pages.event },
@@ -126,26 +125,26 @@ export default function EventEditPage() {
                 {/*    {id && <Button title={'Delete'} onClick={deleteEvent} />}*/}
                 {/*</BreadcrumbsContainer>*/}
 
-                <div className={style['boxContainer']}>
-                    <div className={style['boxContainer__formBlock']}>
-                        <div className={style['boxContainer__formBlock-inner']}>
-                            <LongButton
-                                color={'dark'}
-                                title={`Is ${isActive ? 'active' : 'disable'}`}
-                                onClick={() => setIsActive((prev) => !prev)}
-                            />
-                        </div>
+                {/*<div className={style['boxContainer']}>*/}
+                {/*    <div className={style['boxContainer__formBlock']}>*/}
+                {/*        <div className={style['boxContainer__formBlock-inner']}>*/}
+                {/*            <LongButton*/}
+                {/*                color={'dark'}*/}
+                {/*                title={`Is ${isActive ? 'active' : 'disable'}`}*/}
+                {/*                onClick={() => setIsActive((prev) => !prev)}*/}
+                {/*            />*/}
+                {/*        </div>*/}
 
-                        <div className={style['boxContainer__formBlock-inner']}>
-                            <Input placeholder={'Name'} hookProps={form.name} />
-                            <Input placeholder={'Full name'} hookProps={form.fullName} />
-                        </div>
+                {/*        <div className={style['boxContainer__formBlock-inner']}>*/}
+                {/*            <Input placeholder={'Name'} hookProps={form.name} />*/}
+                {/*            <Input placeholder={'Full name'} hookProps={form.fullName} />*/}
+                {/*        </div>*/}
 
-                        <div className={style['boxContainer__formBlock-button']}>
-                            <Button title={'Submit'} onClick={submit} />
-                        </div>
-                    </div>
-                </div>
+                {/*        <div className={style['boxContainer__formBlock-button']}>*/}
+                {/*            <Button title={'Submit'} onClick={submit} />*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
             </div>
         </ScrollY>
     );

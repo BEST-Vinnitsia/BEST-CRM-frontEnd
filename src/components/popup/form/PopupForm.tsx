@@ -1,12 +1,7 @@
 import React from 'react';
 import style from './popupForm.module.scss';
 import { createPortal } from 'react-dom';
-import Title from '../../../ui/text/title/Title';
-import Button from '../../../ui/buttons/default/Button';
-import PopupBg from '../../../ui/popup/bg/PopupBG';
-import PopupClose from '../../../ui/popup/close/PopupClose';
-import PopupButtonContainer from '../../../ui/popup/buttonContainer/PopupButtonContainer';
-import ScrollY from '../../../ui/scroll/sctollY/ScrollY';
+import { Button, PopupBg, PopupButtonContainer, PopupClose, ScrollY, Title } from '../../../ui';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const animationOpacity = {

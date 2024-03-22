@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { PATH_CADENCE } from '../../routes/paths';
 import { useNavigate, useParams } from 'react-router-dom';
 import { pageNames } from '../../constants';
-import { BreadcrumbsContainer, Button, Input, LongButton } from '../../components';
 import { useForm, useInput } from '../../hooks';
 import style from '../member/styleEdit.module.scss';
 import { utilsActions } from '../../redux/actions/utilsActions';
@@ -129,19 +128,19 @@ export default function CadenceEditPage() {
                 <div className={style['boxContainer']}>
                     <div className={style['boxContainer__formBlock']}>
                         <div className={style['boxContainer__formBlock-inner']}>
-                            <LongButton
-                                color={'dark'}
-                                title={`Cadence is end: ${isEnd ? 'yes' : 'no'}`}
-                                onClick={() => setIsEnd((prev) => !prev)}
-                            />
+                            {/*<LongButton*/}
+                            {/*    color={'dark'}*/}
+                            {/*    title={`Cadence is end: ${isEnd ? 'yes' : 'no'}`}*/}
+                            {/*    onClick={() => setIsEnd((prev) => !prev)}*/}
+                            {/*/>*/}
                         </div>
 
                         <div className={style['boxContainer__formBlock-inner']}>
-                            <Input placeholder={'Cadence number'} hookProps={form.number} />
+                            {/*<Input placeholder={'Cadence number'} hookProps={form.number} />*/}
                         </div>
 
                         <div className={style['boxContainer__formBlock-button']}>
-                            <Button title={'Submit'} onClick={submit} />
+                            {/*<Button title={'Submit'} onClick={submit} />*/}
                         </div>
                     </div>
                 </div>

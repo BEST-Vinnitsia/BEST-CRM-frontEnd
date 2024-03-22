@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import style from './dashboard.module.scss';
-import { Loader, PreLoader } from '../components';
+import { SidebarContainer, SidebarContainerMobile } from '../components';
 import { useUtilsContext } from '../contexts';
 import { js } from '../helpers';
-import SidebarContainer from '../components/sidebar/SidebarContainer';
 import { SvgMenu } from '../assets/svg';
-import SidebarContainerMobile from '../components/sidebar/SidebarContainerMobile';
-import CircleButton from '../components/button/CircleButton';
+import { ButtonCircle } from '../ui';
 import { useSelector } from '../redux/store';
 import { IStore } from '../interfaces/redux/store';
 import { AnimatePresence } from 'framer-motion';
@@ -71,7 +69,13 @@ export default function DashboardLayout() {
                 >
                     <header className={style['layout__header']}>
                         <div className={style['start']}>
-                            {mobileLayout && <CircleButton svg={<SvgMenu />} onClick={() => setMobileSidebar(true)} />}
+                            {mobileLayout && (
+                                <ButtonCircle
+                                    svg={<SvgMenu />}
+                                    onClick={() => setMobileSidebar(true)}
+                                    color={'transparent'}
+                                />
+                            )}
                         </div>
                         <div className={style['end']}></div>
                     </header>

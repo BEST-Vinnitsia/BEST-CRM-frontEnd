@@ -1,26 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { utilsActions } from '../../redux/actions/utilsActions';
-import { Button, ScrollY } from '../../components';
-import Breadcrumbs from '../../ui/breadcrumbs/Breadcrumbs';
+import {
+    Breadcrumbs,
+    Button,
+    ButtonCircle,
+    ButtonLong,
+    CardAdd,
+    CardContainer,
+    CardEvent,
+    CardMember,
+    Input,
+    InputDate,
+    InputPassword,
+    Label,
+    PopupContent,
+    ScrollY,
+    Select,
+    Switch,
+    Tab,
+} from '../../ui';
+import { PopupForm, PopupMessage } from '../../components';
 import { PATH_EVENT } from '../../routes/paths';
-import Select from '../../ui/inputs/select/Select';
-import Input from '../../ui/inputs/text/Input';
-import InputPassword from '../../ui/inputs/password/InputPassword';
-import InputDate from '../../ui/inputs/date/InputDate';
 import { SvgAdd, SvgInfo } from '../../assets/svg';
-import Switch from '../../ui/inputs/switch/Switch';
-import PopupForm from '../../components/popup/form/PopupForm';
-import PopupContent from '../../ui/popup/content/PopupContent';
-import PopupMessage from '../../components/popup/message/PopupMessage';
-import Tab from '../../ui/tab/Tab';
-import CardMember from '../../ui/cards/member/CardMember';
-import ButtonCircle from '../../ui/buttons/circle/ButtonCircle';
-import Label from '../../ui/label/Label';
 import style from './style.module.scss';
-import ButtonLong from '../../ui/buttons/long/ButtonLong';
-import CardContainer from '../../ui/cards/container/CardContainer';
-import CardAdd from '../../ui/cards/add/CardAdd';
-import CardEvent from '../../ui/cards/event/CardEvent';
 import { ImgJFLogo } from '../../assets/img';
 
 const breadcrumbsPath = [

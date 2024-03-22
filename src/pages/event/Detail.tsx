@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { PATH_EVENT, PATH_NEW_EVENT, PATH_RESP } from '../../routes/paths';
+import { PATH_EVENT } from '../../routes/paths';
 import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
 import { utilsActions } from '../../redux/actions/utilsActions';
 import { Navigate, useParams } from 'react-router-dom';
 import { eventService, newEventService, responsibleService } from '../../services';
-import { BreadcrumbsContainer, Card, CardContainer, PageHeader } from '../../components';
-import { intToRoman, joinStyle } from '../../utils';
-import { ImgCrmHome, UserAvatar } from '../../assets/img';
+import { PageHeader } from '../../components';
+import { joinStyle } from '../../utils';
+import { UserAvatar } from '../../assets/img';
 import style from '../cadence/details.module.scss';
 import { IEventGetByIdRes } from '../../interfaces/event/eventRes';
 import { IResponsibleGetByEventIdRes } from '../../interfaces/event/responsibleRes';
@@ -109,36 +109,36 @@ export default function EventDetailPage() {
                     </span>
                 </div>
 
-                {openTab === 'resp' && (
-                    <CardContainer>
-                        {respList
-                            .filter((resp) => resp.role === 'Resp')
-                            .filter((resp) => resp.isActive)
-                            .map((resp) => (
-                                <Card
-                                    key={resp.id}
-                                    title={`${resp.name}`}
-                                    subtitle={resp.fullName}
-                                    img={ImgCrmHome}
-                                    onClick={() => navigate(`${PATH_RESP.DETAILS}/${resp.id}`)}
-                                />
-                            ))}
-                    </CardContainer>
-                )}
+                {/*{openTab === 'resp' && (*/}
+                {/*    // <CardContainer>*/}
+                {/*    //     {respList*/}
+                {/*    //         .filter((resp) => resp.role === 'Resp')*/}
+                {/*    //         .filter((resp) => resp.isActive)*/}
+                {/*    //         .map((resp) => (*/}
+                {/*    //             <Card*/}
+                {/*    //                 key={resp.id}*/}
+                {/*    //                 title={`${resp.name}`}*/}
+                {/*    //                 subtitle={resp.fullName}*/}
+                {/*    //                 img={ImgCrmHome}*/}
+                {/*    //                 onClick={() => navigate(`${PATH_RESP.DETAILS}/${resp.id}`)}*/}
+                {/*    //             />*/}
+                {/*    //         ))}*/}
+                {/*    // </CardContainer>*/}
+                {/*)}*/}
 
-                {openTab === 'history' && (
-                    <CardContainer>
-                        {newEventList.map((newEvent) => (
-                            <Card
-                                key={newEvent.id}
-                                title={`${newEvent.name}`}
-                                subtitle={`Cadence: ${intToRoman(newEvent.cadenceId)}`}
-                                onClick={() => navigate(`${PATH_NEW_EVENT.DETAILS}/${newEvent.id}`)}
-                                img={ImgCrmHome}
-                            />
-                        ))}
-                    </CardContainer>
-                )}
+                {/*{openTab === 'history' && (*/}
+                {/*    <CardContainer>*/}
+                {/*        {newEventList.map((newEvent) => (*/}
+                {/*            <Card*/}
+                {/*                key={newEvent.id}*/}
+                {/*                title={`${newEvent.name}`}*/}
+                {/*                subtitle={`Cadence: ${intToRoman(newEvent.cadenceId)}`}*/}
+                {/*                onClick={() => navigate(`${PATH_NEW_EVENT.DETAILS}/${newEvent.id}`)}*/}
+                {/*                img={ImgCrmHome}*/}
+                {/*            />*/}
+                {/*        ))}*/}
+                {/*    </CardContainer>*/}
+                {/*)}*/}
             </div>
         </>
     );

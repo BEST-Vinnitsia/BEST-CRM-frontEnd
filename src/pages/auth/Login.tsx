@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Input, Button, LongButton, InputPassword } from '../../components';
 import { useForm, useInput } from '../../hooks';
 import { regex } from '../../constants';
 import { authService } from '../../services/auth';
@@ -50,9 +49,9 @@ export default function LoginPage() {
         <>
             <div className="flex w-full mt-40 justify-center items-center">
                 <div className="block max-w-md min-w-80 w-full px-2">
-                    <Input placeholder="Login" hookProps={form.login} />
-                    <InputPassword placeholder="Password" hookProps={form.password} />
-                    <LongButton title="Login" onClick={submit} disable={!valid} loading={loading} />
+                    {/*<Input label="Login" hookProps={form.login} />*/}
+                    {/*<InputPassword label="Password" hookProps={form.password} />*/}
+                    {/*<ButtonLong title="Login" onClick={submit} disable={!valid} loading={loading} />*/}
                 </div>
             </div>
         </>

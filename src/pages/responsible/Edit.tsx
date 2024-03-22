@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { BreadcrumbsContainer, Button, Input, LongButton, ScrollY, Select } from '../../components';
 import { PATH_EVENT, PATH_RESP } from '../../routes/paths';
 import { useNavigate, useParams } from 'react-router-dom';
 import { pageNames } from '../../constants';
@@ -8,6 +7,7 @@ import { utilsActions } from '../../redux/actions/utilsActions';
 import { eventService, responsibleService } from '../../services';
 import style from '../member/styleEdit.module.scss';
 import { IEventGetListRes } from '../../interfaces/event/eventRes';
+import { ScrollY } from '../../ui';
 
 const pathMapEdit = [
     { url: PATH_EVENT.ROOT, title: pageNames.pages.event },
@@ -146,29 +146,29 @@ export default function ResponsibleEditPage() {
 
                 <div className={style['boxContainer']}>
                     <div className={style['boxContainer__formBlock']}>
-                        <div className={style['boxContainer__formBlock-inner']}>
-                            <LongButton
-                                color={'dark'}
-                                title={`Is ${isActive ? 'active' : 'disable'}`}
-                                onClick={() => setIsActive((prev) => !prev)}
-                            />
-                        </div>
+                        {/*<div className={style['boxContainer__formBlock-inner']}>*/}
+                        {/*    <LongButton*/}
+                        {/*        color={'dark'}*/}
+                        {/*        title={`Is ${isActive ? 'active' : 'disable'}`}*/}
+                        {/*        onClick={() => setIsActive((prev) => !prev)}*/}
+                        {/*    />*/}
+                        {/*</div>*/}
 
-                        <div className={style['boxContainer__formBlock-inner']}>
-                            <Select
-                                placeholder={'Event'}
-                                hookProps={form.eventId}
-                                data={eventList.map((item) => ({ id: item.id, name: item.name }))}
-                            />
-                            <Input placeholder={'Name'} hookProps={form.name} />
-                            <Input placeholder={'Full name'} hookProps={form.fullName} />
-                            <Input placeholder={'Role'} hookProps={form.role} />
-                            <Input placeholder={'Description'} hookProps={form.description} />
-                        </div>
+                        {/*<div className={style['boxContainer__formBlock-inner']}>*/}
+                        {/*    <Select*/}
+                        {/*        placeholder={'Event'}*/}
+                        {/*        hookProps={form.eventId}*/}
+                        {/*        data={eventList.map((item) => ({ id: item.id, name: item.name }))}*/}
+                        {/*    />*/}
+                        {/*    <Input placeholder={'Name'} hookProps={form.name} />*/}
+                        {/*    <Input placeholder={'Full name'} hookProps={form.fullName} />*/}
+                        {/*    <Input placeholder={'Role'} hookProps={form.role} />*/}
+                        {/*    <Input placeholder={'Description'} hookProps={form.description} />*/}
+                        {/*</div>*/}
 
-                        <div className={style['boxContainer__formBlock-button']}>
-                            <Button title={'Submit'} onClick={submit} />
-                        </div>
+                        {/*<div className={style['boxContainer__formBlock-button']}>*/}
+                        {/*    <Button title={'Submit'} onClick={submit} />*/}
+                        {/*</div>*/}
                     </div>
                 </div>
             </div>
