@@ -21,6 +21,7 @@ import ButtonLong from '../../ui/buttons/long/ButtonLong';
 import CardContainer from '../../ui/cards/container/CardContainer';
 import CardAdd from '../../ui/cards/add/CardAdd';
 import CardEvent from '../../ui/cards/event/CardEvent';
+import { ImgJFLogo } from '../../assets/img';
 
 const breadcrumbsPath = [
     {
@@ -115,21 +116,21 @@ export default function DashboardPage() {
                 <Tab onClick={(s: string) => {}} value={'test 2'} tabs={[{ title: 'test' }, { title: 'test 2' }]} />
 
                 <CardContainer>
-                    <CardMember title={'Designer'} subtitle={'asd'} svg={<SvgAdd />} />
+                    <CardMember title={'Designer'} subtitle={'asd'} svg={<SvgAdd />} onClick={() => {}} />
                     <CardMember title={'Designer'} svg={<SvgAdd />} onClick={() => {}} />
-                    <CardMember title={'Designer'} imgUrl={imgUrl} />
-                    <CardMember title={'Designer'} subtitle={'demo'} imgUrl={imgUrl} />
-                    <CardMember title={'Designer'} subtitle={'demo'} imgUrl={imgUrl} />
-                    <CardMember title={'Designer'} subtitle={'demo'} imgUrl={imgUrl} />
-                    <CardMember title={'Designer'} subtitle={'demo'} imgUrl={imgUrl} />
+                    <CardMember title={'Designer'} imgUrl={imgUrl} onClick={() => {}} />
+                    <CardMember title={'Designer'} subtitle={'demo'} imgUrl={imgUrl} onClick={() => {}} />
+                    <CardMember title={'Designer'} subtitle={'demo'} imgUrl={imgUrl} onClick={() => {}} />
+                    <CardMember title={'Designer'} subtitle={'demo'} imgUrl={imgUrl} onClick={() => {}} />
+                    <CardMember title={'Designer'} subtitle={'demo'} imgUrl={imgUrl} onClick={() => {}} />
                     <CardAdd />
                 </CardContainer>
 
                 <CardContainer>
-                    <CardEvent />
-                    <CardEvent />
-                    <CardEvent />
-                    <CardEvent />
+                    <CardEvent title={'Job Fair'} imgUrl={ImgJFLogo} onClick={() => {}} subtitle={'Active'} />
+                    <CardEvent title={'Job Fair'} imgUrl={ImgJFLogo} onClick={() => {}} subtitle={'Active'} />
+                    <CardEvent title={'Job Fair'} imgUrl={ImgJFLogo} onClick={() => {}} subtitle={'Active'} />
+                    <CardEvent title={'Job Fair'} imgUrl={ImgJFLogo} onClick={() => {}} subtitle={'Active'} />
                 </CardContainer>
 
                 <div className={style['demoContainer']}>
@@ -161,15 +162,7 @@ export default function DashboardPage() {
                     <Label title={'test'} color={'purple'} />
                 </div>
 
-                <div
-                    style={{ width: '200px', height: '100px' }}
-                    className={'bg-amber-800 p-10 m-10'}
-                    onClick={() => setToggle((prev) => !prev)}
-                ></div>
-
-                {toggle && (
-                    <div style={{ width: '200px', height: '1000px' }} className={'bg-amber-800 p-10 m-10'}></div>
-                )}
+                <div style={{ width: '200px', height: '100px' }} className={'p-10 m-10'}></div>
             </ScrollY>
 
             {popupMessageDeleteVisible && (

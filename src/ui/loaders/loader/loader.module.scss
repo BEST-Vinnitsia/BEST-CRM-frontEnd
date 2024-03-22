@@ -11,7 +11,7 @@
     justify-content: center;
     background-color: $bg-color;
     backdrop-filter: blur(10px);
-    z-index: 4;
+    z-index: 100;
 
     &__box {
         padding: 0 10px;
