@@ -1,21 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import style from './dashboard.module.scss';
-import { SidebarContainer, SidebarContainerMobile } from '../components';
+import { SidebarContainer, SidebarContainerMobile, Snackbar } from '../components';
 import { useUtilsContext } from '../contexts';
 import { js } from '../helpers';
 import { SvgMenu } from '../assets/svg';
-import { ButtonCircle } from '../ui';
+import { ButtonCircle, Loader, Preloader } from '../ui';
 import { useSelector } from '../redux/store';
 import { IStore } from '../interfaces/redux/store';
 import { AnimatePresence } from 'framer-motion';
+import { utilsActions } from '../redux/actions/utilsActions';
 
 export default function DashboardLayout() {
     const utilsContext = useUtilsContext();
-    const smallSidebar = useSelector((state: IStore) => state.utils.smallSidebar);
-
+    const { smallSidebar, isLoadingApp, isLoading } = useSelector((state: IStore) => state.utils);
     const [mobileSidebar, setMobileSidebar] = useState(false);
     const [mobileLayout, setMobileLayout] = useState(false);
+
+    useEffect(() => {
+        if (isLoadingApp) return;
+        const timer = setTimeout(() => utilsActions.loadingApp(true), 3000);
+
+        return () => {
+            clearTimeout(timer);
+        };
+    }, []);
 
     useEffect(() => {
         if (utilsContext?.windowSize) {
@@ -35,6 +44,10 @@ export default function DashboardLayout() {
 
     return (
         <>
+            <Preloader loading={false} />
+            {/*<Preloader loading={!isLoadingApp} />*/}
+            <Snackbar />
+
             <div className={style['container']}>
                 <div className={style['bg']}>
                     <div
@@ -88,6 +101,8 @@ export default function DashboardLayout() {
 
                     <main className={style['layout__main']}>
                         <div className={style['layout__main-content']}>
+                            <Loader loading={isLoading} />
+
                             <Outlet />
                         </div>
                     </main>
