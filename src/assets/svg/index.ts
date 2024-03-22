@@ -44,11 +44,10 @@ export { ReactComponent as SvgHomeSidebar } from './sidebar svg/home.svg';
 export { ReactComponent as SvgMembershipSidebar } from './sidebar svg/membership.svg';
 export { ReactComponent as SvgBoardAndCoordinatorsSidebar } from './sidebar svg/boardAndCoordinators.svg';
 
-
 //
 //
 //
 
 export { ReactComponent as SvgTrash } from './trash.svg';
 export { ReactComponent as SvgAdd } from './add.svg';
-
+export { ReactComponent as SvgAddLine } from './addLine.svg';
