@@ -20,6 +20,7 @@ import style from './style.module.scss';
 import ButtonLong from '../../ui/buttons/long/ButtonLong';
 import CardContainer from '../../ui/cards/container/CardContainer';
 import CardAdd from '../../ui/cards/add/CardAdd';
+import CardEvent from '../../ui/cards/event/CardEvent';
 
 const breadcrumbsPath = [
     {
@@ -122,6 +123,13 @@ export default function DashboardPage() {
                     <CardMember title={'Designer'} subtitle={'demo'} imgUrl={imgUrl} />
                     <CardMember title={'Designer'} subtitle={'demo'} imgUrl={imgUrl} />
                     <CardAdd />
+                </CardContainer>
+
+                <CardContainer>
+                    <CardEvent />
+                    <CardEvent />
+                    <CardEvent />
+                    <CardEvent />
                 </CardContainer>
 
                 <div className={style['demoContainer']}>
