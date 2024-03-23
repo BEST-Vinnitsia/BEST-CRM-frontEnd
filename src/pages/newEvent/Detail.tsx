@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import style from './details.module.scss';
 import { PATH_EVENT, PATH_NEW_EVENT } from '../../routes/paths';
 import { pageNames } from '../../constants';
 import { useNavigate } from 'react-router';
@@ -12,12 +11,12 @@ import {
     newEventToMemberService,
     responsibleService,
 } from '../../services';
-import { ImgCrmHome, UserAvatar } from '../../assets/img';
 import { IEventGetByIdRes } from '../../interfaces/event/eventRes';
 import { INewEventGetByIdRes } from '../../interfaces/event/newEventRes';
 import { INewEventToMemberGetByNewEventIdRes } from '../../interfaces/event/newEventToMemberRes';
 import { IMemberGetListRes } from '../../interfaces/member/memberRes';
 import { IResponsibleGetByEventIdRes } from '../../interfaces/event/responsibleRes';
+import { ScrollY } from '../../ui';
 
 const pathMap = [
     { url: PATH_EVENT.ROOT, title: pageNames.pages.event },
@@ -71,59 +70,9 @@ export default function NewEventDetailPage() {
 
     return (
         <>
-            <div className="p-4">
-                {/*<BreadcrumbsContainer*/}
-                {/*    path={pathMap}*/}
-                {/*    buttons={[*/}
-                {/*        { title: 'Edit', path: `${PATH_NEW_EVENT.EDIT}/${id}` },*/}
-                {/*        { title: 'List', path: PATH_EVENT.LIST },*/}
-                {/*    ]}*/}
-                {/*/>*/}
+           <ScrollY>
 
-                {/*{newEventInfo && <PageHeader title={newEventInfo.name} img={UserAvatar} />}*/}
-
-                {newEventInfo && (
-                    <div className={style['infoBlock']}>
-                        <div className={style['infoBlock__info']}>
-                            {/*<div className={style['infoBlock__info-segment']}>*/}
-                            {/*    <Text text={`Name`} />*/}
-                            {/*    <Text text={newEventInfo.name} color={'gray'} />*/}
-                            {/*</div>*/}
-
-                            {/*{eventInfo && (*/}
-                            {/*    <>*/}
-                            {/*        <div className={style['infoBlock__info-segment']}>*/}
-                            {/*            <Text text={`Event name`} />*/}
-                            {/*            <Text text={eventInfo.name} color={'gray'} />*/}
-                            {/*        </div>*/}
-                            {/*    </>*/}
-                            {/*)}*/}
-                        </div>
-                    </div>
-                )}
-
-                {/*<TitleContainer>*/}
-                {/*    <Title title={'Team'} color={'whiteGray'} />*/}
-                {/*</TitleContainer>*/}
-
-                {/*<CardContainer>*/}
-                {/*    {memberToNewEventList.map((newEventToMember, i) => {*/}
-                {/*        const member = memberList.find((item) => item.id === newEventToMember.memberId);*/}
-                {/*        const resp = respList.find((item) => item.id === newEventToMember.responsibleId);*/}
-
-                {/*        if (!member || !resp) return <React.Fragment key={i} />;*/}
-
-                {/*        return (*/}
-                {/*            <Card*/}
-                {/*                key={i}*/}
-                {/*                title={`${member.name} ${member.surname}`}*/}
-                {/*                subtitle={`${resp.name} - ${resp.role}`}*/}
-                {/*                img={ImgCrmHome}*/}
-                {/*            />*/}
-                {/*        );*/}
-                {/*    })}*/}
-                {/*</CardContainer>*/}
-            </div>
+           </ScrollY>
         </>
     );
 }
