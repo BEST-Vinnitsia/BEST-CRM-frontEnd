@@ -1,5 +1,5 @@
 import React from 'react';
-import { PATH_BaC, PATH_CADENCE, PATH_COMMITTEE, PATH_DASHBOARD, PATH_EVENT, PATH_MEMBER } from './paths';
+import { PATH_BaC, PATH_CADENCE, PATH_DASHBOARD, PATH_EVENT, PATH_MEMBER, PATH_NEW_EVENT } from './paths';
 import { SvgCommitteeSidebar, SvgDashboard, SvgEventSidebar, SvgInfoSidebar, SvgMembers } from '../assets/svg';
 
 export const sidebarConfig = [
@@ -15,12 +15,12 @@ export const sidebarConfig = [
     },
     {
         title: 'Event',
-        path: PATH_COMMITTEE.ROOT,
+        path: PATH_EVENT.ROOT,
         svg: <SvgEventSidebar />,
     },
     {
         title: 'Event Categories',
-        path: PATH_EVENT.ROOT,
+        path: PATH_NEW_EVENT.ROOT,
         svg: <SvgEventSidebar />,
     },
     {

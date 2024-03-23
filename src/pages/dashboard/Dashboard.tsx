@@ -75,32 +75,6 @@ export default function DashboardPage() {
 
     return (
         <>
-            {/*<buttonContainer onClick={handler} className="p-2 m-4 bg-cyan-800 rounded-lg">*/}
-            {/*    loading*/}
-            {/*</buttonContainer>*/}
-            {/*<buttonContainer*/}
-            {/*    onClick={() => userActions.setAccessToken(new Date().toISOString())}*/}
-            {/*    className="p-2 m-4 bg-cyan-800 rounded-lg"*/}
-            {/*>*/}
-            {/*    access*/}
-            {/*</buttonContainer>*/}
-
-            {/*<buttonContainer*/}
-            {/*    onClick={() => userActions.setRefreshToken(new Date().toISOString())}*/}
-            {/*    className="p-2 m-4 bg-cyan-800 rounded-lg"*/}
-            {/*>*/}
-            {/*    refresh*/}
-            {/*</buttonContainer>*/}
-
-            {/*<buttonContainer onClick={() => userActions.logout()} className="p-2 m-4 bg-cyan-800 rounded-lg">*/}
-            {/*    delete*/}
-            {/*</buttonContainer>*/}
-
-            {/*<div className={'h-96'}>*/}
-
-            {/*<img src={ImgCrmHome} className={style['globalImg']} />*/}
-            {/*</div>*/}
-
             <ScrollY>
                 <Breadcrumbs column={true} path={breadcrumbsPath}>
                     <Button title={'asd'} />
