@@ -6,15 +6,12 @@ import { Breadcrumbs, Button, CardContainer, CardEvent, ScrollY, Title } from '.
 import { ImgJFLogo } from '../../assets/img';
 
 const breadcrumbsPath = [
-    {
-        url: PATH_EVENT.ROOT,
-        title: 'Event',
-    },
+    { url: PATH_EVENT.ROOT, title: 'Event' }, //
 ];
 
 const eventListArr = [
-    { title: 'Job Fair', subtitle: 'Active', img: ImgJFLogo },
-    { title: 'IT-Revolution', subtitle: 'Active', img: ImgJFLogo },
+    { title: 'Job Fair', subtitle: 'Active', img: ImgJFLogo, color: 'blue-radial' },
+    { title: 'IT-Revolution', subtitle: 'Active', img: ImgJFLogo, color: 'red-line' },
 ];
 
 export default function EventListPage() {
@@ -37,7 +34,13 @@ export default function EventListPage() {
                 <div className={'px-4'}>
                     <CardContainer>
                         {eventListArr.map((item, i) => (
-                            <CardEvent key={i} title={item.title} imgUrl={item.img} subtitle={item.subtitle} />
+                            <CardEvent
+                                key={i}
+                                title={item.title}
+                                imgUrl={item.img}
+                                subtitle={item.subtitle}
+                                color={item.color}
+                            />
                         ))}
                     </CardContainer>
                 </div>
