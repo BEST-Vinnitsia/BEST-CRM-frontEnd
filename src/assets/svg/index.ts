@@ -1,53 +1,53 @@
-// best
-export { ReactComponent as SvgLogo } from './best/logo.svg';
-export { ReactComponent as SvgBESTLogo } from './best/bestLogo.svg';
-export { ReactComponent as SvgVinny } from './best/vinny.svg';
+// logo
+export { ReactComponent as SvgLogo } from './logo/logo.svg';
+export { ReactComponent as SvgLogoColor } from './logo/bestLogo.svg';
+export { ReactComponent as SvgVinny } from './logo/vinny.svg';
 
-// alerts
+// alert
 export { ReactComponent as SvgError } from './alerts/error.svg';
 export { ReactComponent as SvgWarn } from './alerts/warn.svg';
 export { ReactComponent as SvgSuccess } from './alerts/success.svg';
 export { ReactComponent as SvgInfo } from './alerts/info.svg';
 
-// arrows
+// arrow
 export { ReactComponent as SvgArrow } from './arrows/arrow.svg';
 export { ReactComponent as SvgArrowRight } from './arrows/arrowRight.svg';
 export { ReactComponent as SvgArrowLeft } from './arrows/arrowLeft.svg';
 export { ReactComponent as SvgArrowTop } from './arrows/arrowTop.svg';
 export { ReactComponent as SvgArrowBottom } from './arrows/arrowBottom.svg';
 
-// checkbox
-export { ReactComponent as SvgCheckboxInactive } from './checkbox/inactive.svg';
-export { ReactComponent as SvgCheckboxActive } from './checkbox/active.svg';
-export { ReactComponent as SvgCheckboxClear } from './checkbox/clear.svg';
-
-// loaders
-export { default as SvgCircle } from './loaders/SvgCircle';
-
 // password
 export { ReactComponent as SvgHiddenPassword } from './password/hiddenPassword.svg';
 export { ReactComponent as SvgVisiblePassword } from './password/visiblePassword.svg';
 
 // other
-export { ReactComponent as SvgMenu } from './menu.svg';
-export { ReactComponent as SvgUser } from './user.svg';
-export { ReactComponent as SvgClose } from './close.svg';
+export { ReactComponent as SvgAdd } from './other/add.svg';
+export { ReactComponent as SvgClose } from './other/close.svg';
+export { ReactComponent as SvgMenu } from './other/menu.svg';
+export { ReactComponent as SvgTrash } from './other/trash.svg';
+export { ReactComponent as SvgUser } from './other/user.svg';
+
+//
+// COMPONENTS
+//
+
+// checkbox
+export { ReactComponent as SvgCheckboxInactive } from './components/checkbox/inactive.svg';
+export { ReactComponent as SvgCheckboxActive } from './components/checkbox/active.svg';
+export { ReactComponent as SvgCheckboxClear } from './components/checkbox/clear.svg';
+
+// loaders
+export { default as SvgCircleLoader } from './components/loaders/SvgCircle';
 
 // sidebar
-export { ReactComponent as SvgDashboard } from './sidebar svg/dashboard.svg';
-export { ReactComponent as SvgInfoSidebar } from './sidebar svg/info.svg';
-export { ReactComponent as SvgMembers } from './sidebar svg/members.svg';
-export { ReactComponent as SvgUserSidebar } from './sidebar svg/user.svg';
-export { ReactComponent as SvgCommitteeSidebar } from './sidebar svg/committee.svg';
-export { ReactComponent as SvgEventSidebar } from './sidebar svg/event.svg';
-export { ReactComponent as SvgHomeSidebar } from './sidebar svg/home.svg';
-export { ReactComponent as SvgMembershipSidebar } from './sidebar svg/membership.svg';
-export { ReactComponent as SvgBoardAndCoordinatorsSidebar } from './sidebar svg/boardAndCoordinators.svg';
+export { ReactComponent as SvgDashboard } from './components/sidebar/dashboard.svg';
+export { ReactComponent as SvgCommittee } from './components/sidebar/committee.svg';
+export { ReactComponent as SvgEvent } from './components/sidebar/event.svg';
+export { ReactComponent as SvgEventCategory } from './components/sidebar/event.svg';
+export { ReactComponent as SvgHome } from './components/sidebar/home.svg';
+export { ReactComponent as SvgInfoSidebar } from './components/sidebar/info.svg';
+export { ReactComponent as SvgMembers } from './components/sidebar/members.svg';
+export { ReactComponent as SvgMembership } from './components/sidebar/membership.svg';
 
-//
-//
-//
-
-export { ReactComponent as SvgTrash } from './trash.svg';
-export { ReactComponent as SvgAdd } from './add.svg';
-export { ReactComponent as SvgAddLine } from './addLine.svg';
+// card
+export { ReactComponent as SvgAddLine } from './components/cards/addLine.svg';
