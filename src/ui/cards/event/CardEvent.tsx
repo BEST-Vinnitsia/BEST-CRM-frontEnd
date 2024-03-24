@@ -7,15 +7,16 @@ interface IProps {
     subtitle?: string;
     imgUrl?: string;
     onClick?: () => void;
+    color?: 'blue-radial' | 'red-line' | string;
 }
 
-export default function CardEvent({ title, subtitle, imgUrl, onClick }: IProps) {
+export default function CardEvent({ title, subtitle, imgUrl, onClick, color='blue-radial' }: IProps) {
     return (
         <div
             className={js(
                 style['cardEvent'], //
                 onClick ? style['cardEvent--click'] : '',
-                style['cardEvent--blue-radial'],
+                style[`cardEvent--${color}`],
             )}
             onClick={onClick}
         >
