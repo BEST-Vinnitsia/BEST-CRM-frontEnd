@@ -1,96 +1,74 @@
-const dashboard = (root: string) => ({
-    ROOT: `${root}`,
-});
+export const PATH_AUTH = {
+    ROOT: '/auth',
+    LOGIN: '/auth/login',
+    RESET: '/auth/reset-password',
+};
 
-const boardAndCoordinators = (root: string) => ({
-    ROOT: `${root}`,
-    LIST: `${root}`,
-    CREATE: `${root}/create`,
-    EDIT: `${root}/edit`,
-    DETAILS: `${root}/details`,
-});
+export const PATH_ERROR = {
+    403: '/error/403',
+    404: '/error/404',
+    500: '/error/500',
+};
 
-const committee = (root: string) => ({
-    ROOT: `${root}`,
-    LIST: `${root}`,
-    CREATE: `${root}/create`,
-    EDIT: `${root}/edit`,
-    DETAILS: `${root}/details`,
-});
+export const PATH_DASHBOARD = {
+    ROOT: '/dashboard',
+};
 
-const member = (root: string) => ({
-    ROOT: `${root}`,
-    LIST: `${root}`,
-    CREATE: `${root}/create`,
-    EDIT: `${root}/edit`,
-    DETAILS: `${root}/details`,
-});
+export const PATH_INFO = {
+    ROOT: '/info',
+};
 
-const cadence = (root: string) => ({
-    ROOT: `${root}`,
-    LIST: `${root}`,
-    CREATE: `${root}/create`,
-    EDIT: `${root}/edit`,
-    DETAILS: `${root}/details`,
-});
-
-const event = (root: string) => ({
-    ROOT: `${root}`,
-    LIST: `${root}`,
-    CREATE: `${root}/create`,
-    EDIT: `${root}/edit`,
-    DETAILS: `${root}/details`,
-});
-
-const newEvent = (root: string) => ({
-    ROOT: `${root}`,
-    LIST: `${root}`,
-    CREATE: `${root}/create`,
-    EDIT: `${root}/edit`,
-    DETAILS: `${root}/details`,
-});
-
-const resp = (root: string) => ({
-    ROOT: `${root}`,
-    LIST: `${root}`,
-    CREATE: `${root}/create`,
-    EDIT: `${root}/edit`,
-    DETAILS: `${root}/details`,
-});
-
-const meeting = (root: string) => ({
-    ROOT: `${root}`,
-    LIST: `${root}`,
-    CREATE: `${root}/create`,
-    EDIT: `${root}/edit`,
-    DETAILS: `${root}/details`,
-});
-
-const account = (root: string) => ({
-    PROFILE: `${root}/profile`,
-});
-
-const auth = (root: string) => ({
-    ROOT: `${root}`,
-    LOGIN: `${root}/login`,
-});
-
-const error = (root: string) => ({
-    403: `${root}/403`,
-    404: `${root}/404`,
-    500: `${root}/500`,
-});
-
-export const PATH_DASHBOARD = dashboard('/');
-export const PATH_BaC = boardAndCoordinators('/boardAndCoordinators');
-export const PATH_COMMITTEE = committee('/committee');
-export const PATH_EVENT = event('/event');
-export const PATH_NEW_EVENT = event('/new-event');
-export const PATH_RESP = resp('/resp');
-export const PATH_MEMBER = member('/member');
-export const PATH_CADENCE = cadence('/cadence');
-export const PATH_MEETING = meeting('/meeting');
 //
-export const PATH_ACCOUNT = account('/account');
-export const PATH_AUTH = auth('/auth');
-export const PATH_ERROR = error('/error');
+//
+//
+
+export const PATH_EVENT = {
+    ROOT: '/event',
+    LIST: '/event/list',
+    CREATE: '/event/create',
+    EDIT: '/event/edit',
+    DETAILS: '/event/details',
+
+    CATEGORY: {
+        ROOT: '/event/category',
+        LIST: '/event/category/list',
+        CREATE: '/event/category/create',
+        EDIT: '/event/category/edit',
+        DETAILS: '/event/category/details',
+    },
+};
+
+export const PATH_MEMBER = {
+    LIST: '/member/list',
+    CREATE: '/member/create',
+    EDIT: '/member/edit',
+    DETAILS: '/member/details',
+};
+
+export const PATH_CADENCE = {
+    LIST: '/cadence/list',
+    CREATE: '/cadence/create',
+    EDIT: '/cadence/edit',
+    DETAILS: '/cadence/details',
+};
+
+export const PATH_COMMITTEE = {
+    LIST: '/committee/list',
+    CREATE: '/committee/create',
+    EDIT: '/committee/edit',
+    DETAILS: '/committee/details',
+};
+
+export const PATH_BOARD = {
+    LIST: '/board/list',
+    CREATE: '/board/create',
+    EDIT: '/board/edit',
+    DETAILS: '/board/details',
+};
+
+export const PATH_COORDINATOR = {
+    LIST: '/coordinator/list',
+    CREATE: '/coordinator/create',
+    EDIT: '/coordinator/edit',
+    DETAILS: '/coordinator/details',
+};
