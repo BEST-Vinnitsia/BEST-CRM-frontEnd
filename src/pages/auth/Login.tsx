@@ -3,8 +3,8 @@ import { useForm, useInput } from '../../hooks';
 import { regex } from '../../constants';
 import { authService } from '../../services/auth';
 import { userActions } from '../../redux/actions/userActions';
-import { session } from '../../auth/session';
-import { delay, checkErrorType } from '../../utils';
+import { session } from '../../utils/session';
+import { checkErrorType, delay } from '../../utils';
 import { utilsActions } from '../../redux/actions/utilsActions';
 
 export default function LoginPage() {

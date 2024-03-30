@@ -3,8 +3,16 @@ import style from './cardContainer.module.scss';
 
 interface IProps {
     children: React.ReactNode;
+    p?: string;
 }
 
-export default function CardContainer({ children }: IProps) {
-    return <div className={style['cardContainer']}>{children}</div>;
+export default function CardContainer({ children, p }: IProps) {
+    return (
+        <div
+            className={style['cardContainer']} //
+            style={{ padding: p }}
+        >
+            {children}
+        </div>
+    );
 }

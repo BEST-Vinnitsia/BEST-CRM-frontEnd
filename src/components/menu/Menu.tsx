@@ -1,9 +1,9 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useOutsideClick } from '../../hooks';
 import { createPortal } from 'react-dom';
 import style from './menu.module.scss';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useUtilsContext } from '../../contexts';
+import { useUtilsContext } from '../../contexts/UtilsContext';
 import { animationOpacity } from '../../styles/animationConfig';
 
 interface IProps {

@@ -7,19 +7,27 @@ interface IProps {
     size?: '14' | '16' | '18' | '20' | '24' | '32' | '40' | '48';
     color?: 'white' | 'whiteGray' | 'blue' | 'green' | 'red';
     position?: 'start' | 'center' | 'end';
+    p?: string;
 }
 
-export default function Title({ title, size = '24', color = 'white', position = 'start' }: IProps) {
+export default function Title({ title, size = '24', color = 'white', position = 'start', p }: IProps) {
     return (
-        <h2
+        <div
             className={js(
-                style['title'], //
-                style[`title--color-${color}`],
-                style[`title--size-${size}`],
-                style[`title--position-${position}`],
+                style['title-container'], //
+                style[`title-container--position-${position}`],
             )}
+            style={{ padding: p }}
         >
-            {title}
-        </h2>
+            <h2
+                className={js(
+                    style['title'], //
+                    style[`title--color-${color}`],
+                    style[`title--size-${size}`],
+                )}
+            >
+                {title}
+            </h2>
+        </div>
     );
 }

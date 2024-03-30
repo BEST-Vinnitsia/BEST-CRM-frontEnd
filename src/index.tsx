@@ -5,8 +5,9 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { store } from './redux/store';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-import AuthContainer from './auth/AuthContainer';
-import { UtilsProvider } from './contexts';
+import { UtilsProvider } from './contexts/UtilsContext';
+import { AuthProvider } from './contexts/AuthContext';
+import { ProfileProvider } from './contexts/ProfileContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
@@ -19,11 +20,13 @@ root.render(
     <StrictModeContainer status={false}>
         <ReduxProvider store={store}>
             <UtilsProvider>
-                <AuthContainer>
-                    <BrowserRouter>
-                        <App />
-                    </BrowserRouter>
-                </AuthContainer>
+                <AuthProvider>
+                    <ProfileProvider>
+                        <BrowserRouter>
+                            <App />
+                        </BrowserRouter>
+                    </ProfileProvider>
+                </AuthProvider>
             </UtilsProvider>
         </ReduxProvider>
     </StrictModeContainer>,
