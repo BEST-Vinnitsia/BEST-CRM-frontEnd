@@ -1,3 +1,28 @@
+.title-container {
+    display: flex;
+    width: 100%;
+}
+
+//
+// POSITION
+//
+
+.title-container--position-start {
+    justify-content: flex-start;
+}
+
+.title-container--position-center {
+    justify-content: center;
+}
+
+.title-container--position-end {
+    justify-content: flex-end;
+}
+
+//
+// TITLE
+//
+
 .title {
     display: flex;
     font-family: 'SF-Pro';
@@ -5,22 +30,6 @@
     font-weight: 700;
     line-height: normal;
     background-clip: text;
-}
-
-//
-// POSITION
-//
-
-.title--position-start {
-    justify-content: flex-start;
-}
-
-.title--position-center {
-    justify-content: center;
-}
-
-.title--position-end {
-    justify-content: flex-end;
 }
 
 //

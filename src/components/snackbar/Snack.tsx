@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import style from './snackbar.module.scss';
-import { SvgClose, SvgError, SvgInfo, SvgSuccess, SvgWarn } from '../../assets/svg';
+import { SvgClose, SvgError, SvgInfoAlert, SvgSuccess, SvgWarn } from '../../assets/svg';
 import { IUtilsStoreMessage } from '../../interfaces/redux/store';
 import { joinStyle } from '../../utils/';
 import { motion } from 'framer-motion';
@@ -32,7 +32,7 @@ export default function Snack({ message, status, onClose }: IProps) {
     }, []);
 
     const setSvg = () => {
-        if (status === 'info') return <SvgInfo />;
+        if (status === 'info') return <SvgInfoAlert />;
         if (status === 'success') return <SvgSuccess />;
         if (status === 'warn') return <SvgWarn />;
         if (status === 'error') return <SvgError />;

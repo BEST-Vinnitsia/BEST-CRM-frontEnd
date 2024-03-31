@@ -7,7 +7,7 @@ export { ReactComponent as SvgVinny } from './logo/vinny.svg';
 export { ReactComponent as SvgError } from './alerts/error.svg';
 export { ReactComponent as SvgWarn } from './alerts/warn.svg';
 export { ReactComponent as SvgSuccess } from './alerts/success.svg';
-export { ReactComponent as SvgInfo } from './alerts/info.svg';
+export { ReactComponent as SvgInfoAlert } from './alerts/info.svg';
 
 // arrow
 export { ReactComponent as SvgArrow } from './arrows/arrow.svg';
@@ -26,6 +26,16 @@ export { ReactComponent as SvgClose } from './other/close.svg';
 export { ReactComponent as SvgMenu } from './other/menu.svg';
 export { ReactComponent as SvgTrash } from './other/trash.svg';
 export { ReactComponent as SvgUser } from './other/user.svg';
+export { ReactComponent as SvgInfo } from './other/info.svg';
+export { ReactComponent as SvgResponsible } from './other/responsible.svg';
+export { ReactComponent as SvgWg } from './other/wg.svg';
+
+// positions
+export { ReactComponent as SvgMo } from './positions/mo.svg';
+export { ReactComponent as SvgFr } from './positions/fr.svg';
+export { ReactComponent as SvgHr } from './positions/hr.svg';
+export { ReactComponent as SvgPr } from './positions/pr.svg';
+export { ReactComponent as SvgDesigner } from './positions/designer.svg';
 
 //
 // COMPONENTS

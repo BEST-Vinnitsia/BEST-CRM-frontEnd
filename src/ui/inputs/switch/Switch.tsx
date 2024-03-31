@@ -4,13 +4,13 @@ import { js } from '../../../helpers';
 
 interface IProps {
     label?: string;
-    onClick: () => void;
+    onClick: (data: boolean) => void;
     value: boolean;
 }
 
 export default function Switch({ label, onClick, value }: IProps) {
     return (
-        <div className={style['switch-container']} onClick={onClick}>
+        <div className={style['switch-container']} onClick={() => onClick(!value)}>
             {label && <span className={style['switch-container__label']}>{label}</span>}
 
             <button className={js(style['switch'], value ? style['switch--active'] : '')}>

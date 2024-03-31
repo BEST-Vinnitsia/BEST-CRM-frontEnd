@@ -154,39 +154,31 @@ export default function DashboardPage() {
                 />
             )}
 
-            {popupVisible && (
-                <PopupForm title={'Update'} onClose={() => setPopupVisible(false)}>
-                    <PopupContent sx={{ mb: '8px' }}>
-                        <Input
-                            label={'Event category'}
-                            value={test}
-                            error={false}
-                            setValue={setTest}
-                            svg={<SvgAdd />}
-                        />
-                        <InputPassword label={'Password'} value={test} error={false} setValue={setTest} />
-                        <InputDate label={'Date'} value={testDate} error={false} setValue={setTestDate} />
-                        <Select
-                            label={'Select data'}
-                            value={test}
-                            setValue={setTest}
-                            arr={[
-                                { title: 'IT-Revolution', value: '1' },
-                                { title: 'Anniversary', value: '2' },
-                                { title: 'MW', value: '3' },
-                            ]}
-                        />
-                    </PopupContent>
-
-                    <Switch
-                        onClick={() => {
-                            setToggle((prev) => !prev);
-                        }}
-                        value={toggle}
-                        label={'Test switch'}
+            <PopupForm title={'Update'} isOpen={popupVisible} onClose={() => setPopupVisible(false)}>
+                <PopupContent sx={{ mb: '8px' }}>
+                    <Input label={'Event category'} value={test} error={false} setValue={setTest} svg={<SvgAdd />} />
+                    <InputPassword label={'Password'} value={test} error={false} setValue={setTest} />
+                    <InputDate label={'Date'} value={testDate} error={false} setValue={setTestDate} />
+                    <Select
+                        label={'Select data'}
+                        value={test}
+                        setValue={setTest}
+                        arr={[
+                            { title: 'IT-Revolution', value: '1' },
+                            { title: 'Anniversary', value: '2' },
+                            { title: 'MW', value: '3' },
+                        ]}
                     />
-                </PopupForm>
-            )}
+                </PopupContent>
+
+                <Switch
+                    onClick={() => {
+                        setToggle((prev) => !prev);
+                    }}
+                    value={toggle}
+                    label={'Test switch'}
+                />
+            </PopupForm>
 
             {/*<Preloader loading={true} />*/}
             {/*{<Loader loading={true} />}*/}
