@@ -50,7 +50,7 @@ export default function EventCategoryListPage() {
                 <Title title={'Local'} color={'whiteGray'} p={'0 16px'} />
                 <CardContainer p={'0 16px'}>
                     {eventCategories.map((item) => {
-                        if (item.type !== 'Local') return null;
+                        if (item.type !== 'local') return null;
 
                         return (
                             <CardEvent
@@ -67,7 +67,7 @@ export default function EventCategoryListPage() {
                 <Title title={'External'} color={'whiteGray'} p={'0 16px'} />
                 <CardContainer p={'0 16px'}>
                     {eventCategories.map((item) => {
-                        if (item.type !== 'External') return null;
+                        if (item.type !== 'external') return null;
 
                         return (
                             <CardEvent
@@ -84,7 +84,7 @@ export default function EventCategoryListPage() {
                 <Title title={'Internal'} color={'whiteGray'} p={'0 16px'} />
                 <CardContainer p={'0 16px'}>
                     {eventCategories.map((item) => {
-                        if (item.type !== 'Internal') return null;
+                        if (item.type !== 'internal') return null;
 
                         return (
                             <CardEvent

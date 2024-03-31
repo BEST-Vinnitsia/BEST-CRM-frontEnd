@@ -17,24 +17,31 @@ import { useEventCategoryContext } from '../../../contexts/EventCategoryContext'
 import { SvgInfo, SvgResponsible, SvgWg } from '../../../assets/svg';
 import PopupForm from '../../../components/popup/form/PopupForm';
 import { getSvg } from '../../../utils/getSvg';
-import { IEventCategoryNewPosition, IEventCategoryPosition } from '../../../interfaces/eventCategory';
 
 export default function EventCategoryEditPage() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [openTab, setOpenTab] = useState<string>('Info');
 
-    const [isOpenEditPopupPosition, setIsOpenEditPopupPosition] = useState(false);
-    const [isOpenPopupPosition, setIsOpenPopupPosition] = useState(false);
-    const [newPositionId, setNewPositionId] = useState<number | null>(null);
-    const [newPositionIndex, setNewPositionIndex] = useState<number | null>(null);
-    const [newPositionName, setNewPositionName] = useState('');
-    const [newPositionStatus, setNewPositionStatus] = useState(true);
+    const [isOpenPopupEditPosition, setIsOpenPopupEditPosition] = useState(false);
+    const [isOpenPopupNewPosition, setIsOpenPopupNewPosition] = useState(false);
+
+    const [positionId, setPositionId] = useState<number | null>(null);
+    const [positionIndex, setPositionIndex] = useState<number | null>(null);
+
+    const [positionName, setPositionName] = useState('');
+    const [positionStatus, setPositionStatus] = useState(true);
 
     const {
-        initEventCategoryEdit, //
+        initEventCategoryEdit,
         eventCategoryEditData,
-        editPosition,
+        editOldPosition,
+        deleteOldPosition,
+        addNewPosition,
+        editNewPosition,
+        deleteNewPosition,
+        submitEventCategoryEdit,
+        discardEventCategoryEdit,
     } = useEventCategoryContext();
 
     useEffect(() => {
@@ -42,69 +49,100 @@ export default function EventCategoryEditPage() {
         initEventCategoryEdit(id);
     }, []);
 
-    const openPopup = (data?: IEventCategoryPosition | IEventCategoryNewPosition, index?: number) => {
+    const handlerOpenAddNewPosition = () => {
+        setPositionId(null);
+        setPositionIndex(null);
+
+        setPositionName('');
+        setPositionStatus(true);
+
+        setIsOpenPopupEditPosition(false);
+        setIsOpenPopupNewPosition(true);
+    };
+    const handlerOpenEditNewPosition = (index: number) => {
+        if (!eventCategoryEditData) return;
+        const findPosition = eventCategoryEditData.newPositions.find((item, i) => i === index);
+        if (!findPosition) return;
+
+        setPositionId(null);
+        setPositionIndex(index);
+
+        setPositionName(findPosition.name);
+        setPositionStatus(findPosition.status);
+
+        setIsOpenPopupEditPosition(true);
+        setIsOpenPopupNewPosition(false);
+    };
+    const handlerOpenEditOldPosition = (id: number) => {
+        if (!eventCategoryEditData) return;
+        const findPosition = eventCategoryEditData.positions.find((item) => item.id === id);
+        if (!findPosition) return;
+
+        setPositionId(id);
+        setPositionIndex(null);
+
+        setPositionName(findPosition.name);
+        setPositionStatus(findPosition.status);
+
+        setIsOpenPopupEditPosition(true);
+        setIsOpenPopupNewPosition(false);
+    };
+
+    const handlerPopupSave = () => {
         if (!eventCategoryEditData) return;
 
-        if (!data && !index) {
-            setNewPositionId(null);
-            setNewPositionIndex(null);
-
-            setNewPositionName('');
-            setNewPositionStatus(true);
-            setIsOpenPopupPosition(true);
-        }
-
-        if (data && index !== undefined) {
-            const newPosition = eventCategoryEditData.newPositions.find((item, i) => index === i);
-            if (!newPosition) return;
-            setNewPositionId(null);
-            setNewPositionIndex(index);
-
-            setNewPositionName(newPosition.name);
-            setNewPositionStatus(newPosition.status);
-            setIsOpenEditPopupPosition(true);
-        }
-
-        if (data !== undefined && !index && 'id' in data) {
-            const position = eventCategoryEditData.positions.find((item) => item.id === data.id);
-            if (!position) return;
-            setNewPositionId(position.id);
-            setNewPositionIndex(null);
-
-            setNewPositionName(position.name);
-            setNewPositionStatus(position.status);
-            setIsOpenEditPopupPosition(true);
-        }
-    };
-
-    const handlerUpdatePositionSubmit = () => {
-        if (newPositionId !== null) {
-            editPosition({
-                id: newPositionId,
-                name: newPositionName,
-                role: openTab,
-                status: newPositionStatus,
-            });
-        } else if (newPositionIndex !== null) {
-            editPosition(
-                {
-                    name: newPositionName,
+        if (isOpenPopupEditPosition) {
+            if (positionId !== null) {
+                editOldPosition({
+                    id: positionId,
+                    name: positionName,
                     role: openTab,
-                    status: newPositionStatus,
-                },
-                newPositionIndex,
-            );
-        } else {
-            editPosition({
-                name: newPositionName,
+                    status: positionStatus,
+                });
+            } else if (positionIndex !== null) {
+                editNewPosition(
+                    {
+                        name: positionName,
+                        role: openTab,
+                        status: positionStatus,
+                    },
+                    positionIndex,
+                );
+            }
+        } else if (isOpenPopupNewPosition) {
+            addNewPosition({
+                name: positionName,
                 role: openTab,
-                status: newPositionStatus,
+                status: positionStatus,
             });
         }
 
-        setIsOpenEditPopupPosition(false);
-        setIsOpenPopupPosition(false);
+        handlerClosePopup();
     };
+    const handlerPopupDelete = () => {
+        if (positionId !== null) {
+            deleteOldPosition(positionId);
+        } else if (positionIndex !== null) {
+            deleteNewPosition(positionIndex);
+        }
+
+        handlerClosePopup();
+    };
+    const handlerClosePopup = () => {
+        setIsOpenPopupNewPosition(false);
+        setIsOpenPopupEditPosition(false);
+    };
+
+    const handlerDiscard = () => {
+        if (!id) return;
+        discardEventCategoryEdit();
+        navigate(`${PATH_EVENT.CATEGORY.DETAILS}/${id}`);
+    };
+
+    const handlerSubmit = () => {
+        submitEventCategoryEdit();
+    };
+    const handlerDelete = () => {};
 
     const breadcrumbsPath = () => {
         if (!id || !eventCategoryEditData) {
@@ -131,16 +169,8 @@ export default function EventCategoryEditPage() {
         <>
             <ScrollY>
                 <Breadcrumbs column={true} path={breadcrumbsPath()}>
-                    <Button
-                        title={'Discard'}
-                        color={'red'}
-                        onClick={() => navigate(`${PATH_EVENT.CATEGORY.EDIT}/${id}`)}
-                    />
-                    <Button
-                        title={'Save'}
-                        color={'green'}
-                        onClick={() => navigate(`${PATH_EVENT.CATEGORY.EDIT}/${id}`)}
-                    />
+                    <Button title={'Discard'} color={'red'} onClick={handlerDiscard} />
+                    <Button title={'Save'} color={'green'} onClick={handlerSubmit} />
                 </Breadcrumbs>
 
                 <Tab onClick={setOpenTab} value={openTab} tabs={tabs} />
@@ -158,7 +188,7 @@ export default function EventCategoryEditPage() {
                                             key={item.id}
                                             title={item.name}
                                             svg={getSvg(item.name)}
-                                            onClick={() => openPopup(item)}
+                                            onClick={() => handlerOpenEditOldPosition(item.id)}
                                         />
                                     );
                                 })}
@@ -171,12 +201,12 @@ export default function EventCategoryEditPage() {
                                             key={i}
                                             title={item.name}
                                             svg={getSvg(item.name)}
-                                            onClick={() => openPopup(item, i)}
+                                            onClick={() => handlerOpenEditNewPosition(i)}
                                         />
                                     );
                                 })}
 
-                            <CardAdd onClick={() => openPopup()} />
+                            <CardAdd onClick={handlerOpenAddNewPosition} />
                         </CardContainer>
                     </>
                 )}
@@ -192,7 +222,7 @@ export default function EventCategoryEditPage() {
                                             key={item.id}
                                             title={item.name}
                                             svg={getSvg(item.name)}
-                                            onClick={() => openPopup(item)}
+                                            onClick={() => handlerOpenEditOldPosition(item.id)}
                                         />
                                     );
                                 })}
@@ -205,30 +235,28 @@ export default function EventCategoryEditPage() {
                                             key={i}
                                             title={item.name}
                                             svg={getSvg(item.name)}
-                                            onClick={() => openPopup(item, i)}
+                                            onClick={() => handlerOpenEditNewPosition(i)}
                                         />
                                     );
                                 })}
 
-                            <CardAdd onClick={() => openPopup()} />
+                            <CardAdd onClick={handlerOpenAddNewPosition} />
                         </CardContainer>
                     </>
                 )}
             </ScrollY>
 
             <PopupForm
-                title={`${isOpenPopupPosition ? 'Add new' : 'Edit'} ${openTab}`} //
-                isOpen={isOpenPopupPosition || isOpenEditPopupPosition}
-                onClose={() => {
-                    setIsOpenPopupPosition(false);
-                    setIsOpenEditPopupPosition(false);
-                }}
-                onSubmit={() => handlerUpdatePositionSubmit()}
+                title={`${isOpenPopupNewPosition ? 'Add new' : 'Edit'} ${openTab}`} //
+                isOpen={isOpenPopupNewPosition || isOpenPopupEditPosition}
+                onClose={handlerClosePopup}
+                onSubmit={handlerPopupSave}
+                onDelete={isOpenPopupEditPosition ? handlerPopupDelete : undefined}
                 w={'500px'}
             >
                 <PopupContent sx={{ mb: '8px' }} onOne>
-                    <Input label={'Name'} value={newPositionName} setValue={setNewPositionName} />
-                    <Switch label={'Is active'} value={newPositionStatus} onClick={setNewPositionStatus} />
+                    <Input label={'Name'} value={positionName} setValue={setPositionName} />
+                    <Switch label={'Is active'} value={positionStatus} onClick={setPositionStatus} />
                 </PopupContent>
             </PopupForm>
         </>
