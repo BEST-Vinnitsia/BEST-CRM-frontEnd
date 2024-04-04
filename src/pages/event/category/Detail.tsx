@@ -7,76 +7,66 @@ import { useEventCategoryContext } from '../../../contexts/EventCategoryContext'
 import { SvgInfo, SvgResponsible, SvgWg } from '../../../assets/svg';
 import { getSvg } from '../../../utils/getSvg';
 
+const breadcrumbsPath = (id: string, eventCategoryName?: string) => {
+    return [
+        { url: PATH_EVENT.CATEGORY.LIST, title: 'Event categories' },
+        { url: `${PATH_EVENT.CATEGORY.DETAILS}/${id}`, title: eventCategoryName || 'Event' },
+    ];
+};
+
+const breadcrumbsPathEdit = (id: string) => {
+    return `${PATH_EVENT.CATEGORY.EDIT}/${id}`;
+};
+
+const tabs = [
+    { title: 'Info', svg: <SvgInfo /> },
+    { title: 'Responsible', svg: <SvgResponsible /> },
+    { title: 'WG', svg: <SvgWg /> },
+];
+
+const positions = ['Responsible', 'WG'];
+
 export default function EventCategoryDetailPage() {
     const navigate = useNavigate();
     const { id } = useParams();
     const [openTab, setOpenTab] = useState<string>('Info');
 
     const {
-        getEventCategoryDetails,
         eventCategoryDetails, //
+        getEventCategory,
     } = useEventCategoryContext();
 
     useEffect(() => {
         if (!id) return;
-        getEventCategoryDetails(id);
+        getEventCategory.details(id);
     }, []);
 
-    if (!id) <Navigate to={PATH_EVENT.CATEGORY.LIST} />;
-
-    const breadcrumbsPath = () => {
-        if (eventCategoryDetails) {
-            return [
-                { url: PATH_EVENT.CATEGORY.LIST, title: 'Event categories' },
-                { url: `${PATH_EVENT.CATEGORY.DETAILS}/${id}`, title: eventCategoryDetails.name },
-            ];
-        }
-
-        return [
-            { url: PATH_EVENT.CATEGORY.LIST, title: 'Event categories' },
-            { url: `${PATH_EVENT.CATEGORY.DETAILS}/${id}`, title: 'Event' },
-        ];
-    };
-
-    const tabs = [
-        { title: 'Info', svg: <SvgInfo /> },
-        { title: 'Responsible', svg: <SvgResponsible /> },
-        { title: 'WG', svg: <SvgWg /> },
-    ];
+    if (!id) return <Navigate to={PATH_EVENT.CATEGORY.LIST} />;
 
     return (
         <ScrollY>
-            <Breadcrumbs column={true} path={breadcrumbsPath()}>
-                <Button title={'Edit'} onClick={() => navigate(`${PATH_EVENT.CATEGORY.EDIT}/${id}`)} />
+            <Breadcrumbs column={true} path={breadcrumbsPath(id, eventCategoryDetails?.name)}>
+                <Button title={'Edit'} onClick={() => navigate(breadcrumbsPathEdit(id))} />
             </Breadcrumbs>
 
             <Tab onClick={setOpenTab} value={openTab} tabs={tabs} />
 
             {openTab === 'Info' && <div>Info</div>}
 
-            {openTab === 'Responsible' && (
-                <>
-                    <CardContainer p={'0 16px'}>
-                        {eventCategoryDetails &&
-                            eventCategoryDetails.positions.map((item) => {
-                                if (item.role !== 'Responsible') return null;
-                                return <CardMember key={item.id} title={item.name} svg={getSvg(item.name)} />;
-                            })}
-                    </CardContainer>
-                </>
-            )}
-
-            {openTab === 'WG' && (
-                <>
-                    <CardContainer p={'0 16px'}>
-                        {eventCategoryDetails &&
-                            eventCategoryDetails.positions.map((item) => {
-                                if (item.role !== 'WG') return null;
-                                return <CardMember key={item.id} title={item.name} svg={getSvg(item.name)} />;
-                            })}
-                    </CardContainer>
-                </>
-            )}
+            {positions.map((pos, i) => (
+                <React.Fragment key={i}>
+                    {openTab === pos && (
+                        <CardContainer p={'0 16px'}>
+                            {eventCategoryDetails &&
+                                eventCategoryDetails.positions
+                                    .filter((item) => item.role.toLowerCase() === pos.toLowerCase())
+                                    .map((item) => (
+                                        <CardMember key={item.id} title={item.name} svg={getSvg(item.name)} />
+                                    ))}
+                        </CardContainer>
+                    )}
+                </React.Fragment>
+            ))}
         </ScrollY>
     );
 }

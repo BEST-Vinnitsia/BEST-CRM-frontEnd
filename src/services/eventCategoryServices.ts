@@ -43,7 +43,7 @@ class EventCategoryServices {
     public delete = (data: any) => {
         return new Promise<any>((resolve, reject) => {
             axios
-                .delete(`${API}/${this.root}/delete`, { data })
+                .delete(`${API}/${this.root}/delete`, { params: data })
                 .then((response) => response.data && resolve(response.data))
                 .catch((error) => reject(error));
         });

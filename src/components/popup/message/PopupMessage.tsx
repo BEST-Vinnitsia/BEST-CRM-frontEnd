@@ -18,48 +18,60 @@ interface IProps {
     type?: 'error' | 'message';
     onClose?: () => void;
     onSubmit?: () => void;
+    submitButtonName?: string;
+    isOpen?: boolean;
 }
 
-export default function PopupMessage({ type = 'message', text, title, onClose, onSubmit }: IProps) {
+export default function PopupMessage({
+    type = 'message',
+    text,
+    title,
+    onClose,
+    onSubmit,
+    submitButtonName,
+    isOpen,
+}: IProps) {
     return createPortal(
         <AnimatePresence>
-            <motion.div className={style['popupBlock']} {...animationOpacity}>
-                <PopupBg onClick={onClose} />
+            {isOpen && (
+                <motion.div className={style['popupBlock']} {...animationOpacity}>
+                    <PopupBg onClick={onClose} />
 
-                <div className={js(style['popup'], type === 'error' ? style['popup--red'] : '')}>
-                    <div className={style['popup__inner']}>
-                        <PopupClose onClick={onClose} />
+                    <div className={js(style['popup'], type === 'error' ? style['popup--red'] : '')}>
+                        <div className={style['popup__inner']}>
+                            <PopupClose onClick={onClose} />
 
-                        <div className={style['popup__inner-titleBlock']}>
-                            <Title
-                                title={title}
-                                color={type === 'error' ? 'red' : 'whiteGray'}
-                                size={'24'}
-                                position={'center'}
-                            />
-                        </div>
-
-                        <div className={style['popup__inner-contentBlock']}>
-                            {text &&
-                                text.map((item, i) => (
-                                    <p key={i} className={style['popup__inner-contentBlock-item']}>
-                                        {item}
-                                    </p>
-                                ))}
-                        </div>
-
-                        <PopupButtonContainer>
-                            {onSubmit && (
-                                <Button
-                                    title={type === 'error' ? 'Delete' : 'Submit'}
-                                    color={type === 'error' ? 'red' : 'green'}
-                                    onClick={onSubmit}
+                            <div className={style['popup__inner-titleBlock']}>
+                                <Title
+                                    title={title}
+                                    color={type === 'error' ? 'red' : 'whiteGray'}
+                                    size={'24'}
+                                    position={'center'}
                                 />
-                            )}
-                        </PopupButtonContainer>
+                            </div>
+
+                            <div className={style['popup__inner-contentBlock']}>
+                                {text &&
+                                    text.map((item, i) => (
+                                        <p key={i} className={style['popup__inner-contentBlock-item']}>
+                                            {item}
+                                        </p>
+                                    ))}
+                            </div>
+
+                            <PopupButtonContainer>
+                                {onSubmit && (
+                                    <Button
+                                        title={submitButtonName || 'Submit'}
+                                        color={type === 'error' ? 'red' : 'green'}
+                                        onClick={onSubmit}
+                                    />
+                                )}
+                            </PopupButtonContainer>
+                        </div>
                     </div>
-                </div>
-            </motion.div>
+                </motion.div>
+            )}
         </AnimatePresence>,
         document.body,
     );

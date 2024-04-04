@@ -16,8 +16,29 @@ import { useEventCategoryContext } from '../../../contexts/EventCategoryContext'
 import { ImgJFLogo } from '../../../assets/img';
 import PopupForm from '../../../components/popup/form/PopupForm';
 
+const breadcrumbsPath = [
+    { url: PATH_EVENT.CATEGORY.ROOT, title: 'Event categories' }, //
+];
+
+const eventTypes = [
+    { value: 'Local', title: 'Local' },
+    { value: 'Internal', title: 'Internal' },
+    { value: 'External', title: 'External' },
+];
+
+const eventStatus = [
+    { value: 'active', title: 'Active' },
+    { value: 'in active', title: 'In active' },
+    { value: 'completed', title: 'Completed' },
+    { value: 'in progress', title: 'In progress' },
+    { value: 'is relevant', title: 'Is relevant' },
+];
+
+const eventKind = ['Local', 'External', 'Internal'];
+
 export default function EventCategoryListPage() {
     const navigate = useNavigate();
+
     const [isOpenCreatePopup, setIsOpenCreatePopup] = useState(false);
     const [newEventCategoryType, setNewEventCategoryType] = useState('');
     const [newEventCategoryName, setNewEventCategoryName] = useState('');
@@ -25,20 +46,38 @@ export default function EventCategoryListPage() {
 
     const {
         eventCategories, //
-        getEventCategories,
+        getEventCategory,
+        createEventCategory,
     } = useEventCategoryContext();
 
     useEffect(() => {
-        getEventCategories();
+        getEventCategory.list();
     }, []);
+
+    const dropStates = () => {
+        setIsOpenCreatePopup(false);
+        setNewEventCategoryType('');
+        setNewEventCategoryName('');
+        setNewEventCategoryStatus('');
+    };
 
     const handlerClickAddEventCategory = () => {
         setIsOpenCreatePopup(true);
     };
 
-    const breadcrumbsPath = [
-        { url: PATH_EVENT.CATEGORY.ROOT, title: 'Event categories' }, //
-    ];
+    const handlerSubmitAddEventCategory = async () => {
+        try {
+            await createEventCategory.submit({
+                name: newEventCategoryName,
+                status: newEventCategoryStatus,
+                type: newEventCategoryType,
+            });
+            
+            dropStates();
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
     return (
         <>
@@ -47,78 +86,46 @@ export default function EventCategoryListPage() {
                     <Button title={'Add'} onClick={handlerClickAddEventCategory} />
                 </Breadcrumbs>
 
-                <Title title={'Local'} color={'whiteGray'} p={'0 16px'} />
-                <CardContainer p={'0 16px'}>
-                    {eventCategories.map((item) => {
-                        if (item.type !== 'local') return null;
-
-                        return (
-                            <CardEvent
-                                key={item.id} //
-                                title={item.name}
-                                subtitle={item.status}
-                                imgUrl={ImgJFLogo}
-                                onClick={() => navigate(`${PATH_EVENT.CATEGORY.DETAILS}/${item.id}`)}
-                            />
-                        );
-                    })}
-                </CardContainer>
-
-                <Title title={'External'} color={'whiteGray'} p={'0 16px'} />
-                <CardContainer p={'0 16px'}>
-                    {eventCategories.map((item) => {
-                        if (item.type !== 'external') return null;
-
-                        return (
-                            <CardEvent
-                                key={item.id} //
-                                title={item.name}
-                                subtitle={item.status}
-                                imgUrl={ImgJFLogo}
-                                onClick={() => navigate(`${PATH_EVENT.CATEGORY.DETAILS}/${item.id}`)}
-                            />
-                        );
-                    })}
-                </CardContainer>
-
-                <Title title={'Internal'} color={'whiteGray'} p={'0 16px'} />
-                <CardContainer p={'0 16px'}>
-                    {eventCategories.map((item) => {
-                        if (item.type !== 'internal') return null;
-
-                        return (
-                            <CardEvent
-                                key={item.id} //
-                                title={item.name}
-                                subtitle={item.status}
-                                imgUrl={ImgJFLogo}
-                                onClick={() => navigate(`${PATH_EVENT.CATEGORY.DETAILS}/${item.id}`)}
-                            />
-                        );
-                    })}
-                </CardContainer>
+                {eventKind.map((event,i) => (
+                    <React.Fragment key={i}>
+                        <Title title={event} color={'whiteGray'} p={'0 16px'} />
+                        <CardContainer p={'0 16px'}>
+                            {eventCategories
+                                .filter((item) => item.type.toLowerCase() === event.toLowerCase())
+                                .map((item) => (
+                                    <CardEvent
+                                        key={item.id}
+                                        title={item.name}
+                                        subtitle={item.status}
+                                        imgUrl={ImgJFLogo}
+                                        onClick={() => navigate(`${PATH_EVENT.CATEGORY.DETAILS}/${item.id}`)}
+                                    />
+                                ))}
+                        </CardContainer>
+                    </React.Fragment>
+                ))}
             </ScrollY>
 
             <PopupForm
-                title={'Add new'} //
+                title={'Add new'}
                 isOpen={isOpenCreatePopup}
                 onClose={() => setIsOpenCreatePopup(false)}
+                onSubmit={handlerSubmitAddEventCategory}
                 w={'500px'}
             >
                 <PopupContent sx={{ mb: '8px' }} onOne>
-                    <Input label={'Type'} value={newEventCategoryType} setValue={setNewEventCategoryType} />
+                    <Select
+                        label={'Type'}
+                        value={newEventCategoryType}
+                        setValue={setNewEventCategoryType}
+                        arr={eventTypes}
+                    />
                     <Input label={'Name'} value={newEventCategoryName} setValue={setNewEventCategoryName} />
                     <Select
                         label={'Status'}
                         value={newEventCategoryStatus}
                         setValue={setNewEventCategoryStatus}
-                        arr={[
-                            { value: 'Active', title: 'Active' },
-                            { value: 'In active', title: 'In active' },
-                            { value: 'Completed', title: 'Completed' },
-                            { value: 'in progress', title: 'in progress' },
-                            { value: 'Is relevant', title: 'Is relevant' },
-                        ]}
+                        arr={eventStatus}
                     />
                 </PopupContent>
             </PopupForm>

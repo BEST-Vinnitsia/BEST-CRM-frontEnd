@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { PATH_EVENT } from '../../../routes/paths';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import {
     Breadcrumbs,
     Button,
@@ -10,6 +10,7 @@ import {
     Input,
     PopupContent,
     ScrollY,
+    Select,
     Switch,
     Tab,
 } from '../../../ui';
@@ -17,165 +18,238 @@ import { useEventCategoryContext } from '../../../contexts/EventCategoryContext'
 import { SvgInfo, SvgResponsible, SvgWg } from '../../../assets/svg';
 import PopupForm from '../../../components/popup/form/PopupForm';
 import { getSvg } from '../../../utils/getSvg';
+import { PopupMessage } from '../../../components';
+
+interface IPositionForm {
+    id: number | null;
+    index: number | null;
+    name: string;
+    status: boolean;
+}
+
+interface IFormsPopups {
+    editPosition: boolean;
+    newPosition: boolean;
+}
+
+interface IMessagesPopups {
+    discard: boolean;
+    delete: boolean;
+}
+
+interface IFormInfo {
+    type: string;
+    name: string;
+    status: string;
+}
+
+const breadcrumbsPath = (id: string, eventCategoryName?: string) => {
+    return [
+        { url: PATH_EVENT.CATEGORY.LIST, title: 'Event categories' },
+        { url: `${PATH_EVENT.CATEGORY.DETAILS}/${id}`, title: eventCategoryName || 'Event' },
+        { url: `${PATH_EVENT.CATEGORY.EDIT}/${id}`, title: 'Edit' },
+    ];
+};
+
+const tabs = [
+    { title: 'Info', svg: <SvgInfo /> },
+    { title: 'Responsible', svg: <SvgResponsible /> },
+    { title: 'WG', svg: <SvgWg /> },
+];
+
+const eventTypes = [
+    { value: 'local', title: 'Local' },
+    { value: 'internal', title: 'Internal' },
+    { value: 'external', title: 'External' },
+];
+
+const statusArr = [
+    { value: 'active', title: 'Active' },
+    { value: 'in active', title: 'In active' },
+    { value: 'completed', title: 'Completed' },
+    { value: 'in progress', title: 'In progress' },
+    { value: 'is relevant', title: 'Is relevant' },
+];
 
 export default function EventCategoryEditPage() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [openTab, setOpenTab] = useState<string>('Info');
-
-    const [isOpenPopupEditPosition, setIsOpenPopupEditPosition] = useState(false);
-    const [isOpenPopupNewPosition, setIsOpenPopupNewPosition] = useState(false);
-
-    const [positionId, setPositionId] = useState<number | null>(null);
-    const [positionIndex, setPositionIndex] = useState<number | null>(null);
-
-    const [positionName, setPositionName] = useState('');
-    const [positionStatus, setPositionStatus] = useState(true);
+    const [messagePopup, setMessagePopup] = useState<IMessagesPopups>({ discard: false, delete: false });
+    const [formsPopups, setFormsPopups] = useState<IFormsPopups>({ editPosition: false, newPosition: false });
+    const [formInfo, setFormInfo] = useState<IFormInfo | null>(null);
+    const [positionForm, setPositionForm] = useState<IPositionForm | null>(null);
 
     const {
-        initEventCategoryEdit,
-        eventCategoryEditData,
-        editOldPosition,
-        deleteOldPosition,
-        addNewPosition,
-        editNewPosition,
-        deleteNewPosition,
-        submitEventCategoryEdit,
-        discardEventCategoryEdit,
+        eventCategoryEditData, //
+        editEventCategory,
+        deleteEventCategory,
     } = useEventCategoryContext();
 
     useEffect(() => {
+        setMessagePopup({ discard: false, delete: false });
+        setFormsPopups({ editPosition: false, newPosition: false });
+
         if (!id) return;
-        initEventCategoryEdit(id);
+
+        editEventCategory.init(id);
     }, []);
 
+    useEffect(() => {
+        if (!id || !eventCategoryEditData) return;
+
+        setFormInfo({
+            type: eventCategoryEditData.type,
+            name: eventCategoryEditData.name,
+            status: eventCategoryEditData.status,
+        });
+    }, [eventCategoryEditData]);
+
     const handlerOpenAddNewPosition = () => {
-        setPositionId(null);
-        setPositionIndex(null);
-
-        setPositionName('');
-        setPositionStatus(true);
-
-        setIsOpenPopupEditPosition(false);
-        setIsOpenPopupNewPosition(true);
+        setPositionForm({ id: null, index: null, name: '', status: true });
+        setFormsPopups({ editPosition: false, newPosition: true });
     };
+
     const handlerOpenEditNewPosition = (index: number) => {
         if (!eventCategoryEditData) return;
         const findPosition = eventCategoryEditData.newPositions.find((item, i) => i === index);
         if (!findPosition) return;
 
-        setPositionId(null);
-        setPositionIndex(index);
-
-        setPositionName(findPosition.name);
-        setPositionStatus(findPosition.status);
-
-        setIsOpenPopupEditPosition(true);
-        setIsOpenPopupNewPosition(false);
+        setPositionForm({ id: null, index, name: findPosition.name, status: findPosition.status });
+        setFormsPopups({ editPosition: true, newPosition: false });
     };
+
     const handlerOpenEditOldPosition = (id: number) => {
         if (!eventCategoryEditData) return;
         const findPosition = eventCategoryEditData.positions.find((item) => item.id === id);
         if (!findPosition) return;
 
-        setPositionId(id);
-        setPositionIndex(null);
-
-        setPositionName(findPosition.name);
-        setPositionStatus(findPosition.status);
-
-        setIsOpenPopupEditPosition(true);
-        setIsOpenPopupNewPosition(false);
+        setPositionForm({ id, index: null, name: findPosition.name, status: findPosition.status });
+        setFormsPopups({ editPosition: true, newPosition: false });
     };
 
     const handlerPopupSave = () => {
         if (!eventCategoryEditData) return;
 
-        if (isOpenPopupEditPosition) {
-            if (positionId !== null) {
-                editOldPosition({
-                    id: positionId,
-                    name: positionName,
-                    role: openTab,
-                    status: positionStatus,
-                });
-            } else if (positionIndex !== null) {
-                editNewPosition(
-                    {
-                        name: positionName,
-                        role: openTab,
-                        status: positionStatus,
-                    },
-                    positionIndex,
-                );
+        if (formsPopups.editPosition) {
+            if (!positionForm) return;
+
+            if (positionForm.id) {
+                const { id, status, name } = positionForm;
+                editEventCategory.position.updateOld({ id, status, name, role: openTab });
+            } else if (positionForm.index) {
+                const { index, status, name } = positionForm;
+                editEventCategory.position.updateNew({ index, name, status, role: openTab });
             }
-        } else if (isOpenPopupNewPosition) {
-            addNewPosition({
-                name: positionName,
-                role: openTab,
-                status: positionStatus,
-            });
+        } else if (formsPopups.newPosition) {
+            if (!positionForm) return;
+
+            const { status, name } = positionForm;
+            editEventCategory.position.addNew({ name, status, role: openTab });
         }
 
-        handlerClosePopup();
+        setFormsPopups({ editPosition: false, newPosition: false });
     };
+
     const handlerPopupDelete = () => {
-        if (positionId !== null) {
-            deleteOldPosition(positionId);
-        } else if (positionIndex !== null) {
-            deleteNewPosition(positionIndex);
+        if (!positionForm) return;
+
+        if (positionForm.id) {
+            editEventCategory.position.deleteOld(positionForm.id);
+        } else if (positionForm.index) {
+            editEventCategory.position.deleteNew(positionForm.index);
         }
 
-        handlerClosePopup();
+        setFormsPopups({ editPosition: false, newPosition: false });
     };
-    const handlerClosePopup = () => {
-        setIsOpenPopupNewPosition(false);
-        setIsOpenPopupEditPosition(false);
-    };
+    const handlerClosePopup = () => setFormsPopups({ editPosition: false, newPosition: false });
 
+    const handlerOpenDiscard = () => setMessagePopup({ delete: false, discard: true });
+    const handlerOpenDelete = () => setMessagePopup({ delete: true, discard: false });
+    const handlerCloseMessagePopup = () => setMessagePopup({ delete: false, discard: false });
     const handlerDiscard = () => {
-        if (!id) return;
-        discardEventCategoryEdit();
-        navigate(`${PATH_EVENT.CATEGORY.DETAILS}/${id}`);
+        if (!id || !eventCategoryEditData) return;
+
+        editEventCategory.discard();
+
+        const paths = breadcrumbsPath(id, eventCategoryEditData.name);
+        navigate(paths[1].url);
     };
 
-    const handlerSubmit = () => {
-        submitEventCategoryEdit();
+    const handlerChangeInfo = (value: unknown, name: string) => {
+        if (!formInfo) return;
+        setFormInfo({ ...formInfo, [name]: value });
     };
-    const handlerDelete = () => {};
 
-    const breadcrumbsPath = () => {
-        if (!id || !eventCategoryEditData) {
-            return [
-                { url: PATH_EVENT.CATEGORY.LIST, title: 'Event categories' },
-                { url: PATH_EVENT.CATEGORY.CREATE, title: 'New category' },
-            ];
+    const handlerChangePosition = (value: unknown, name: string) => {
+        setPositionForm(prev => (
+            !prev ? null : { ...prev, [name]: value }
+        ));
+    };
+
+    const handlerSubmit = async () => {
+        try {
+            if (!id || !eventCategoryEditData || !formInfo) return;
+
+            await editEventCategory.submit(formInfo);
+
+            const paths = breadcrumbsPath(id, eventCategoryEditData.name);
+            navigate(paths[1].url);
+        } catch (err) {
+            console.error(err);
         }
+    };
+    const handlerDelete = async () => {
+        try {
+            if (!id) return;
 
-        return [
-            { url: PATH_EVENT.CATEGORY.LIST, title: 'Event categories' },
-            { url: `${PATH_EVENT.CATEGORY.DETAILS}/${id}`, title: eventCategoryEditData.name },
-            { url: `${PATH_EVENT.CATEGORY.EDIT}/${id}`, title: 'Edit' },
-        ];
+            await deleteEventCategory.submit(id);
+
+            navigate(breadcrumbsPath(id, eventCategoryEditData?.name)[0].url);
+        } catch (err) {
+            console.error(err);
+        }
     };
 
-    const tabs = [
-        { title: 'Info', svg: <SvgInfo /> },
-        { title: 'Responsible', svg: <SvgResponsible /> },
-        { title: 'WG', svg: <SvgWg /> },
-    ];
+    if (!id) return <Navigate to={PATH_EVENT.CATEGORY.LIST} />;
 
     return (
         <>
             <ScrollY>
-                <Breadcrumbs column={true} path={breadcrumbsPath()}>
-                    <Button title={'Discard'} color={'red'} onClick={handlerDiscard} />
+                <Breadcrumbs column={true} path={breadcrumbsPath(id, eventCategoryEditData?.name)}>
+                    <Button title={'Discard'} color={'red'} onClick={handlerOpenDiscard} />
                     <Button title={'Save'} color={'green'} onClick={handlerSubmit} />
                 </Breadcrumbs>
 
                 <Tab onClick={setOpenTab} value={openTab} tabs={tabs} />
 
-                {openTab === 'Info' && <div>Info</div>}
+                {openTab === 'Info' && (
+                    <div className={'w-[400px] absolute top-[50%] left-0 right-0 mx-auto'}>
+                        {formInfo && (
+                            <>
+                                <Select
+                                    label={'Type'}
+                                    value={formInfo.type}
+                                    setValue={(value: string) => handlerChangeInfo(value, 'type')}
+                                    arr={eventTypes}
+                                />
+
+                                <Input
+                                    label={'Name'}
+                                    value={formInfo.name}
+                                    setValue={(value: string) => handlerChangeInfo(value, 'name')}
+                                />
+                                <Select
+                                    label={'Status'}
+                                    value={formInfo.status}
+                                    setValue={(value: string) => handlerChangeInfo(value, 'status')}
+                                    arr={statusArr}
+                                />
+                                <Button title={'Delete category'} color={'red'} onClick={handlerOpenDelete} />
+                            </>
+                        )}
+                    </div>
+                )}
 
                 {openTab === 'Responsible' && (
                     <>
@@ -247,18 +321,48 @@ export default function EventCategoryEditPage() {
             </ScrollY>
 
             <PopupForm
-                title={`${isOpenPopupNewPosition ? 'Add new' : 'Edit'} ${openTab}`} //
-                isOpen={isOpenPopupNewPosition || isOpenPopupEditPosition}
+                title={`${formsPopups.newPosition ? 'Add new' : 'Edit'} ${openTab}`} //
+                isOpen={formsPopups.editPosition || formsPopups.newPosition}
                 onClose={handlerClosePopup}
                 onSubmit={handlerPopupSave}
-                onDelete={isOpenPopupEditPosition ? handlerPopupDelete : undefined}
+                onDelete={formsPopups.editPosition ? handlerPopupDelete : undefined}
                 w={'500px'}
             >
-                <PopupContent sx={{ mb: '8px' }} onOne>
-                    <Input label={'Name'} value={positionName} setValue={setPositionName} />
-                    <Switch label={'Is active'} value={positionStatus} onClick={setPositionStatus} />
-                </PopupContent>
+                {positionForm && (
+                    <PopupContent sx={{ mb: '8px' }} onOne>
+                        <Input
+                            label={'Name'}
+                            value={positionForm.name}
+                            setValue={(value) => handlerChangePosition(value, 'name')}
+                        />
+                        <Switch
+                            label={'Is active'}
+                            value={positionForm.status}
+                            onClick={(value) => handlerChangePosition(value, 'status')}
+                        />
+                    </PopupContent>
+                )}
             </PopupForm>
+
+            <PopupMessage
+                title={'Discard changes'}
+                type={'error'}
+                text={['You want discard changes?']}
+                onSubmit={handlerDiscard}
+                submitButtonName={'Discard'}
+                isOpen={messagePopup.discard}
+                onClose={handlerCloseMessagePopup}
+            />
+
+            <PopupMessage
+                title={'Delete category'}
+                type={'error'}
+                text={[`You want delete ${eventCategoryEditData?.name || 'this event'}?`]}
+                onSubmit={handlerDelete}
+                submitButtonName={'Delete'}
+                isOpen={messagePopup.delete}
+                onClose={handlerCloseMessagePopup}
+            />
         </>
     );
 }

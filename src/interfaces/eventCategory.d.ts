@@ -1,20 +1,30 @@
 import { EventStatusType, EventTypesType } from './event';
 
+export interface IEventCategoryCreate {
+    type: string;
+    name: string;
+    status: string;
+}
+
 export interface IEventCategories {
     id: number;
-    type: EventTypesType;
+    type: EventTypesType | string;
     name: string;
-    status: EventStatusType;
+    status: EventStatusType | string;
 }
 
 export interface IEventCategoryPosition {
     id: number;
     name: string;
     role: string;
-    status: boolean
+    status: boolean;
 }
 
-export interface IEventCategoryNewPosition extends Omit<IEventCategoryPosition, 'id'> {}
+export interface IEventCategoryAddNewPosition extends Omit<IEventCategoryPosition, 'id'> {}
+
+export interface IEventCategoryNewPosition extends Omit<IEventCategoryPosition, 'id'> {
+    index: number;
+}
 
 export interface IEventCategoryDetails {
     id: number;
@@ -30,5 +40,5 @@ export interface IEventCategoryEdit {
     name: string;
     status: EventStatusType;
     positions: IEventCategoryPosition[];
-    newPositions: IEventCategoryNewPosition[];
+    newPositions: IEventCategoryAddNewPosition[];
 }
