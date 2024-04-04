@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router';
 import { Navigate, useParams } from 'react-router-dom';
 import { Breadcrumbs, Button, CardContainer, CardMember, ScrollY, Tab } from '../../../ui';
 import { useEventCategoryContext } from '../../../contexts/EventCategoryContext';
-import { SvgInfo, SvgResponsible, SvgWg } from '../../../assets/svg';
 import { getSvg } from '../../../utils/getSvg';
+import { eventTabs } from '../../../constants/event';
 
 const breadcrumbsPath = (id: string, eventCategoryName?: string) => {
     return [
@@ -17,12 +17,6 @@ const breadcrumbsPath = (id: string, eventCategoryName?: string) => {
 const breadcrumbsPathEdit = (id: string) => {
     return `${PATH_EVENT.CATEGORY.EDIT}/${id}`;
 };
-
-const tabs = [
-    { title: 'Info', svg: <SvgInfo /> },
-    { title: 'Responsible', svg: <SvgResponsible /> },
-    { title: 'WG', svg: <SvgWg /> },
-];
 
 const positions = ['Responsible', 'WG'];
 
@@ -49,7 +43,7 @@ export default function EventCategoryDetailPage() {
                 <Button title={'Edit'} onClick={() => navigate(breadcrumbsPathEdit(id))} />
             </Breadcrumbs>
 
-            <Tab onClick={setOpenTab} value={openTab} tabs={tabs} />
+            <Tab onClick={setOpenTab} value={openTab} tabs={eventTabs} />
 
             {openTab === 'Info' && <div>Info</div>}
 

@@ -15,10 +15,10 @@ import {
     Tab,
 } from '../../../ui';
 import { useEventCategoryContext } from '../../../contexts/EventCategoryContext';
-import { SvgInfo, SvgResponsible, SvgWg } from '../../../assets/svg';
 import PopupForm from '../../../components/popup/form/PopupForm';
 import { getSvg } from '../../../utils/getSvg';
 import { PopupMessage } from '../../../components';
+import { eventStatus, eventTabs, eventTypes } from '../../../constants/event';
 
 interface IPositionForm {
     id: number | null;
@@ -50,26 +50,6 @@ const breadcrumbsPath = (id: string, eventCategoryName?: string) => {
         { url: `${PATH_EVENT.CATEGORY.EDIT}/${id}`, title: 'Edit' },
     ];
 };
-
-const tabs = [
-    { title: 'Info', svg: <SvgInfo /> },
-    { title: 'Responsible', svg: <SvgResponsible /> },
-    { title: 'WG', svg: <SvgWg /> },
-];
-
-const eventTypes = [
-    { value: 'local', title: 'Local' },
-    { value: 'internal', title: 'Internal' },
-    { value: 'external', title: 'External' },
-];
-
-const statusArr = [
-    { value: 'active', title: 'Active' },
-    { value: 'in active', title: 'In active' },
-    { value: 'completed', title: 'Completed' },
-    { value: 'in progress', title: 'In progress' },
-    { value: 'is relevant', title: 'Is relevant' },
-];
 
 export default function EventCategoryEditPage() {
     const { id } = useParams();
@@ -182,9 +162,7 @@ export default function EventCategoryEditPage() {
     };
 
     const handlerChangePosition = (value: unknown, name: string) => {
-        setPositionForm(prev => (
-            !prev ? null : { ...prev, [name]: value }
-        ));
+        setPositionForm((prev) => (!prev ? null : { ...prev, [name]: value }));
     };
 
     const handlerSubmit = async () => {
@@ -221,7 +199,7 @@ export default function EventCategoryEditPage() {
                     <Button title={'Save'} color={'green'} onClick={handlerSubmit} />
                 </Breadcrumbs>
 
-                <Tab onClick={setOpenTab} value={openTab} tabs={tabs} />
+                <Tab onClick={setOpenTab} value={openTab} tabs={eventTabs} />
 
                 {openTab === 'Info' && (
                     <div className={'w-[400px] absolute top-[50%] left-0 right-0 mx-auto'}>
@@ -243,7 +221,7 @@ export default function EventCategoryEditPage() {
                                     label={'Status'}
                                     value={formInfo.status}
                                     setValue={(value: string) => handlerChangeInfo(value, 'status')}
-                                    arr={statusArr}
+                                    arr={eventStatus}
                                 />
                                 <Button title={'Delete category'} color={'red'} onClick={handlerOpenDelete} />
                             </>

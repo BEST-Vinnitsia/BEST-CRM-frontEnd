@@ -1,14 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
 import { eventCategoryServices } from '../services/eventCategoryServices';
-import {
-    IEventCategories,
-    IEventCategoryAddNewPosition,
-    IEventCategoryCreate,
-    IEventCategoryDetails,
-    IEventCategoryEdit,
-    IEventCategoryNewPosition,
-    IEventCategoryPosition,
-} from '../interfaces/eventCategory';
 
 interface IEventCategoryInfo {
     type: string;
@@ -137,11 +128,16 @@ export const EventCategoryProvider = (props: IEventCategoryProviderProps) => {
                 if (!eventCategoryEditData) return;
 
                 const updateRes = await eventCategoryServices.update({ ...eventCategoryEditData, ...data });
-                setEventCategoriesDetails((prev) => prev.filter((item) => item.id !== updateRes.id));
+                const getDetailsRes = await eventCategoryServices.getById({ id: updateRes.id });
+                const getListRes = await eventCategoryServices.getList();
 
-                const getRes = await eventCategoryServices.getById({ id: updateRes.id });
-                setEventCategoriesDetails((prev) => [...prev, getRes]);
-                setEventCategoryDetails(getRes);
+                setEventCategoriesDetails((prev) => [
+                    ...prev.filter((item) => item.id !== updateRes.id), //
+                    getDetailsRes,
+                ]);
+
+                setEventCategoryDetails(getDetailsRes);
+                setEventCategories(getListRes);
             } catch (err) {
                 console.error(err);
             }
@@ -201,9 +197,10 @@ export const EventCategoryProvider = (props: IEventCategoryProviderProps) => {
                 const id = parseInt(idStr);
 
                 const deleteRes = await eventCategoryServices.delete({ id });
+                const getListRes = await eventCategoryServices.getList();
+
                 setEventCategoriesDetails((prev) => prev.filter((item) => item.id !== deleteRes.id));
-                const getRes = await eventCategoryServices.getList();
-                setEventCategories(getRes);
+                setEventCategories(getListRes);
                 setEventCategoryDetails(undefined);
                 setEventCategoryEditData(undefined);
             } catch (err) {

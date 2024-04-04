@@ -15,26 +15,11 @@ import {
 import { useEventCategoryContext } from '../../../contexts/EventCategoryContext';
 import { ImgJFLogo } from '../../../assets/img';
 import PopupForm from '../../../components/popup/form/PopupForm';
+import { eventKinds, eventStatus, eventTypes } from '../../../constants/event';
 
 const breadcrumbsPath = [
     { url: PATH_EVENT.CATEGORY.ROOT, title: 'Event categories' }, //
 ];
-
-const eventTypes = [
-    { value: 'Local', title: 'Local' },
-    { value: 'Internal', title: 'Internal' },
-    { value: 'External', title: 'External' },
-];
-
-const eventStatus = [
-    { value: 'active', title: 'Active' },
-    { value: 'in active', title: 'In active' },
-    { value: 'completed', title: 'Completed' },
-    { value: 'in progress', title: 'In progress' },
-    { value: 'is relevant', title: 'Is relevant' },
-];
-
-const eventKind = ['Local', 'External', 'Internal'];
 
 export default function EventCategoryListPage() {
     const navigate = useNavigate();
@@ -72,7 +57,7 @@ export default function EventCategoryListPage() {
                 status: newEventCategoryStatus,
                 type: newEventCategoryType,
             });
-            
+
             dropStates();
         } catch (err) {
             console.error(err);
@@ -86,7 +71,7 @@ export default function EventCategoryListPage() {
                     <Button title={'Add'} onClick={handlerClickAddEventCategory} />
                 </Breadcrumbs>
 
-                {eventKind.map((event,i) => (
+                {eventKinds.map((event, i) => (
                     <React.Fragment key={i}>
                         <Title title={event} color={'whiteGray'} p={'0 16px'} />
                         <CardContainer p={'0 16px'}>
